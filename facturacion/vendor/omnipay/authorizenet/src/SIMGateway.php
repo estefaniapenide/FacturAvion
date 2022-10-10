@@ -15,42 +15,19 @@ class SIMGateway extends AIMGateway
     public function getDefaultParameters()
     {
         $parameters = parent::getDefaultParameters();
-        $parameters = array_merge($parameters, array(
-            'hashSecret' => '',
-            'liveEndpoint' => 'https://secure2.authorize.net/gateway/transact.dll',
-            'developerEndpoint' => 'https://test.authorize.net/gateway/transact.dll'
-        ));
+        $parameters['hashSecret'] = '';
+
         return $parameters;
     }
 
-    public function getApiLoginId()
+    public function getHashSecret()
     {
-        return $this->getParameter('apiLoginId');
+        return $this->getParameter('hashSecret');
     }
 
-    public function setApiLoginId($value)
+    public function setHashSecret($value)
     {
-        return $this->setParameter('apiLoginId', $value);
-    }
-
-    public function getTransactionKey()
-    {
-        return $this->getParameter('transactionKey');
-    }
-
-    public function setTransactionKey($value)
-    {
-        return $this->setParameter('transactionKey', $value);
-    }
-
-    public function getDeveloperMode()
-    {
-        return $this->getParameter('developerMode');
-    }
-
-    public function setDeveloperMode($value)
-    {
-        return $this->setParameter('developerMode', $value);
+        return $this->setParameter('hashSecret', $value);
     }
 
     public function authorize(array $parameters = array())
@@ -63,11 +40,6 @@ class SIMGateway extends AIMGateway
         return $this->createRequest('\Omnipay\AuthorizeNet\Message\SIMCompleteAuthorizeRequest', $parameters);
     }
 
-    public function capture(array $parameters = array())
-    {
-        return $this->createRequest('\Omnipay\AuthorizeNet\Message\SIMCaptureRequest', $parameters);
-    }
-
     public function purchase(array $parameters = array())
     {
         return $this->createRequest('\Omnipay\AuthorizeNet\Message\SIMPurchaseRequest', $parameters);
@@ -76,10 +48,5 @@ class SIMGateway extends AIMGateway
     public function completePurchase(array $parameters = array())
     {
         return $this->completeAuthorize($parameters);
-    }
-
-    public function void(array $parameters = array())
-    {
-        return $this->createRequest('\Omnipay\AuthorizeNet\Message\SIMVoidRequest', $parameters);
     }
 }

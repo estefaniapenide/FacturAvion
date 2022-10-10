@@ -1,7 +1,4 @@
 <?php
-/**
- * Base payment gateway class
- */
 
 namespace Omnipay\Common;
 
@@ -12,35 +9,6 @@ use Symfony\Component\HttpFoundation\Request as HttpRequest;
 
 /**
  * Base payment gateway class
- *
- * This abstract class should be extended by all payment gateways
- * throughout the Omnipay system.  It enforces implementation of
- * the GatewayInterface interface and defines various common attibutes
- * and methods that all gateways should have.
- *
- * Example:
- *
- * <code>
- *   // Initialise the gateway
- *   $gateway->initialize(...);
- *
- *   // Get the gateway parameters.
- *   $parameters = $gateway->getParameters();
- *
- *   // Create a credit card object
- *   $card = new CreditCard(...);
- *
- *   // Do an authorisation transaction on the gateway
- *   if ($gateway->supportsAuthorize()) {
- *       $gateway->authorize(...);
- *   } else {
- *       throw new \Exception('Gateway does not support authorize()');
- *   }
- * </code>
- *
- * For further code examples see the *omnipay-example* repository on github.
- *
- * @see GatewayInterface
  */
 abstract class AbstractGateway implements GatewayInterface
 {
@@ -93,11 +61,6 @@ abstract class AbstractGateway implements GatewayInterface
         Helper::initialize($this, $parameters);
 
         return $this;
-    }
-
-    public function getDefaultParameters()
-    {
-        return array();
     }
 
     public function getParameters()
@@ -168,16 +131,6 @@ abstract class AbstractGateway implements GatewayInterface
     }
 
     /**
-     * Supports Purchase
-     *
-     * @return boolean True if this gateway supports the purchase() method
-     */
-    public function supportsPurchase()
-    {
-        return method_exists($this, 'purchase');
-    }
-
-    /**
      * Supports Complete Purchase
      *
      * @return boolean True if this gateway supports the completePurchase() method
@@ -238,34 +191,7 @@ abstract class AbstractGateway implements GatewayInterface
     }
 
     /**
-     * Create and initialize a request object
-     *
-     * This function is usually used to create objects of type
-     * Omnipay\Common\Message\AbstractRequest (or a non-abstract subclass of it)
-     * and initialise them with using existing parameters from this gateway.
-     *
-     * Example:
-     *
-     * <code>
-     *   class MyRequest extends \Omnipay\Common\Message\AbstractRequest {};
-     *
-     *   class MyGateway extends \Omnipay\Common\AbstractGateway {
-     *     function myRequest($parameters) {
-     *       $this->createRequest('MyRequest', $parameters);
-     *     }
-     *   }
-     *
-     *   // Create the gateway object
-     *   $gw = Omnipay::create('MyGateway');
-     *
-     *   // Create the request object
-     *   $myRequest = $gw->myRequest($someParameters);
-     * </code>
-     *
-     * @see \Omnipay\Common\Message\AbstractRequest
-     * @param string $class The request class name
-     * @param array $parameters
-     * @return \Omnipay\Common\Message\AbstractRequest
+     * Create and initialize a request object using existing parameters from this gateway
      */
     protected function createRequest($class, array $parameters)
     {
@@ -274,11 +200,6 @@ abstract class AbstractGateway implements GatewayInterface
         return $obj->initialize(array_replace($this->getParameters(), $parameters));
     }
 
-    /**
-     * Get the global default HTTP client.
-     *
-     * @return HttpClient
-     */
     protected function getDefaultHttpClient()
     {
         return new HttpClient(
@@ -289,11 +210,6 @@ abstract class AbstractGateway implements GatewayInterface
         );
     }
 
-    /**
-     * Get the global default HTTP request.
-     *
-     * @return HttpRequest
-     */
     protected function getDefaultHttpRequest()
     {
         return HttpRequest::createFromGlobals();

@@ -5,17 +5,16 @@ namespace Omnipay\AuthorizeNet\Message;
 /**
  * Authorize.Net AIM Void Request
  */
-class AIMVoidRequest extends AIMAbstractRequest
+class AIMVoidRequest extends AbstractRequest
 {
-    protected $action = 'voidTransaction';
+    protected $action = 'VOID';
 
     public function getData()
     {
         $this->validate('transactionReference');
 
         $data = $this->getBaseData();
-        $data->transactionRequest->refTransId = $this->getTransactionReference()->getTransId();
-        $this->addTransactionSettings($data);
+        $data['x_trans_id'] = $this->getTransactionReference();
 
         return $data;
     }

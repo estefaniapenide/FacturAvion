@@ -10,7 +10,7 @@
         "payment",
         "purchase"
     ],
-    "homepage": "https://github.com/thephpleague/omnipay-common",
+    "homepage": "https://github.com/omnipay/common",
     "license": "MIT",
     "authors": [
         {
@@ -19,7 +19,7 @@
         },
         {
             "name": "Omnipay Contributors",
-            "homepage": "https://github.com/thephpleague/omnipay-common/contributors"
+            "homepage": "https://github.com/omnipay/common/contributors"
         }
     ],
     "autoload": {
@@ -28,7 +28,7 @@
     },
     "require": {
         "php": ">=5.3.2",
-        "guzzle/guzzle": "~3.9",
+        "guzzle/http": "~3.1",
         "symfony/http-foundation": "~2.1"
     },
     "require-dev": {
@@ -45,7 +45,6 @@
             "Buckaroo_Ideal",
             "Buckaroo_PayPal",
             "CardSave",
-            "Coinbase",
             "Dummy",
             "Eway_Rapid",
             "FirstData_Connect",
@@ -72,25 +71,7 @@
             "TargetPay_Ideal",
             "TargetPay_Mrcash",
             "TwoCheckout",
-            "WorldPay",
-            "Alipay Bank",
-            "AliPay Dual Func",
-            "Alipay Express",
-            "Alipay Mobile Express",
-            "Alipay Secured",
-            "Alipay Wap Express",
-            "Cybersource",
-            "DataCash",
-            "Ecopayz",
-            "Neteller",
-            "Pacnet",
-            "PaymentSense",
-            "Realex Remote",
-            "SecPay (PayPoint.net)",
-            "Sisow",
-            "Skrill",
-            "YandexMoney",
-            "YandexMoneyIndividual"
+            "WorldPay"
         ]
     }
 }

@@ -16,7 +16,6 @@ class SIMAuthorizeRequestTest extends TestCase
                 'returnUrl' => 'https://www.example.com/return',
                 'liveEndpoint'      => 'https://secure.authorize.net/gateway/transact.dll',
                 'developerEndpoint' => 'https://test.authorize.net/gateway/transact.dll',
-                'invoiceNumber' => 'INVOICE_NUM',
             )
         );
     }
@@ -37,7 +36,6 @@ class SIMAuthorizeRequestTest extends TestCase
         $data = $this->request->getData();
 
         $this->assertSame('TRUE', $data['x_test_request']);
-        $this->assertSame('INVOICE_NUM', $data['x_invoice_num']);
     }
 
     public function testGetHash()

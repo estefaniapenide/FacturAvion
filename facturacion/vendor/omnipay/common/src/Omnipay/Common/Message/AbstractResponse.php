@@ -1,7 +1,4 @@
 <?php
-/**
- * Abstract Response
- */
 
 namespace Omnipay\Common\Message;
 
@@ -11,57 +8,18 @@ use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 /**
  * Abstract Response
- *
- * This abstract class implements ResponseInterface and defines a basic
- * set of functions that all Omnipay Requests are intended to include.
- *
- * Objects of this class or a subclass are usually created in the Request
- * object (subclass of AbstractRequest) as the return parameters from the
- * send() function.
- *
- * Example -- validating and sending a request:
- *
- * <code>
- *   $myResponse = $myRequest->send();
- *   // now do something with the $myResponse object, test for success, etc.
- * </code>
- *
- * @see ResponseInterface
  */
 abstract class AbstractResponse implements ResponseInterface
 {
-
-    /**
-     * The embodied request object.
-     *
-     * @var RequestInterface
-     */
     protected $request;
-    
-    /**
-     * The data contained in the response.
-     *
-     * @var mixed
-     */
     protected $data;
 
-    /**
-     * Constructor
-     *
-     * @param RequestInterface $request the initiating request.
-     * @param mixed $data
-     */
     public function __construct(RequestInterface $request, $data)
     {
         $this->request = $request;
         $this->data = $data;
     }
 
-    /**
-     * Get the initiating request object.
-     *
-     * @return RequestInterface
-     */
     public function getRequest()
     {
         return $this->request;
@@ -72,21 +30,6 @@ abstract class AbstractResponse implements ResponseInterface
         return false;
     }
 
-    public function isTransparentRedirect()
-    {
-        return false;
-    }
-
-    public function isCancelled()
-    {
-        return false;
-    }
-
-    /**
-     * Get the response data.
-     *
-     * @return mixed
-     */
     public function getData()
     {
         return $this->data;
@@ -112,8 +55,6 @@ abstract class AbstractResponse implements ResponseInterface
      *
      * This method is meant to be a helper for simple scenarios. If you want to customize the
      * redirection page, just call the getRedirectUrl() and getRedirectData() methods directly.
-     *
-     * @codeCoverageIgnore
      */
     public function redirect()
     {
@@ -134,8 +75,8 @@ abstract class AbstractResponse implements ResponseInterface
             foreach ($this->getRedirectData() as $key => $value) {
                 $hiddenFields .= sprintf(
                     '<input type="hidden" name="%1$s" value="%2$s" />',
-                    htmlentities($key, ENT_QUOTES, 'UTF-8', false),
-                    htmlentities($value, ENT_QUOTES, 'UTF-8', false)
+                    htmlspecialchars($key, ENT_QUOTES, 'UTF-8'),
+                    htmlspecialchars($value, ENT_QUOTES, 'UTF-8')
                 )."\n";
             }
 
@@ -154,11 +95,7 @@ abstract class AbstractResponse implements ResponseInterface
         </form>
     </body>
 </html>';
-            $output = sprintf(
-                $output,
-                htmlentities($this->getRedirectUrl(), ENT_QUOTES, 'UTF-8', false),
-                $hiddenFields
-            );
+            $output = sprintf($output, htmlspecialchars($this->getRedirectUrl(), ENT_QUOTES, 'UTF-8'), $hiddenFields);
 
             return HttpResponse::create($output);
         }

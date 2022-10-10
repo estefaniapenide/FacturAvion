@@ -1,15 +1,9 @@
 <?php
-/**
- * Cart Item interface
- */
 
 namespace Omnipay\Common;
 
 /**
  * Cart Item interface
- *
- * This interface defines the functionality that all cart items in
- * the Omnipay system are to have.
  */
 interface ItemInterface
 {

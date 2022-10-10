@@ -3,14 +3,10 @@
 namespace Omnipay\AuthorizeNet;
 
 use Omnipay\Tests\GatewayTestCase;
+//use Omnipay\AuthorizeNet\SIMGatewayTest;
 
-class DPMGatewayTest extends GatewayTestCase
+class DPMGatewayTest extends GatewayTestCase //SIMGatewayTest
 {
-    /** @var DPMGateway */
-    protected $gateway;
-    /** @var array */
-    private $options;
-
     public function setUp()
     {
         parent::setUp();
@@ -24,22 +20,6 @@ class DPMGatewayTest extends GatewayTestCase
             'amount' => '10.00',
             'transactionId' => '99',
             'returnUrl' => 'https://www.example.com/return',
-        );
-    }
-
-    public function testLiveEndpoint()
-    {
-        $this->assertEquals(
-            'https://secure2.authorize.net/gateway/transact.dll',
-            $this->gateway->getLiveEndpoint()
-        );
-    }
-
-    public function testDeveloperEndpoint()
-    {
-        $this->assertEquals(
-            'https://test.authorize.net/gateway/transact.dll',
-            $this->gateway->getDeveloperEndpoint()
         );
     }
 

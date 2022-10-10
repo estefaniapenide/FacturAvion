@@ -7,5 +7,5 @@ namespace Omnipay\AuthorizeNet\Message;
  */
 class AIMPurchaseRequest extends AIMAuthorizeRequest
 {
-    protected $action = 'authCaptureTransaction';
+    protected $action = 'AUTH_CAPTURE';
 }

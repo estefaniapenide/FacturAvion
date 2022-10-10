@@ -1,17 +1,9 @@
 <?php
-/**
- * Response interface
- */
 
 namespace Omnipay\Common\Message;
 
 /**
- * Response Interface
- *
- * This interface class defines the standard functions that any Omnipay response
- * interface needs to be able to provide.  It is an extension of MessageInterface.
- *
- * @see MessageInterface
+ * Response interface
  */
 interface ResponseInterface extends MessageInterface
 {
@@ -35,13 +27,6 @@ interface ResponseInterface extends MessageInterface
      * @return boolean
      */
     public function isRedirect();
-
-    /**
-     * Is the transaction cancelled by the user?
-     *
-     * @return boolean
-     */
-    public function isCancelled();
 
     /**
      * Response Message

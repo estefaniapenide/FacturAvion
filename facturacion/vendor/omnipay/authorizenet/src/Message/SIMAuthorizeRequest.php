@@ -5,7 +5,7 @@ namespace Omnipay\AuthorizeNet\Message;
 /**
  * Authorize.Net SIM Authorize Request
  */
-class SIMAuthorizeRequest extends SIMAbstractRequest
+class SIMAuthorizeRequest extends AbstractRequest
 {
     protected $action = 'AUTH_ONLY';
 

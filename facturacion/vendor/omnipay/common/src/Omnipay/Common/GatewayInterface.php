@@ -1,17 +1,9 @@
 <?php
-/**
- * Payment gateway interface
- */
 
 namespace Omnipay\Common;
 
 /**
  * Payment gateway interface
- *
- * This interface class defines the standard functions that any
- * Omnipay gateway needs to define.
- *
- * @see AbstractGateway
  */
 interface GatewayInterface
 {
@@ -52,4 +44,13 @@ interface GatewayInterface
      * @return array
      */
     public function getParameters();
+
+    /**
+     * Create a new charge (combined authorize + capture).
+     *
+     * @param array $parameters An array of options
+     *
+     * @return \Omnipay\Common\Message\RequestInterface
+     */
+    public function purchase(array $parameters = array());
 }
