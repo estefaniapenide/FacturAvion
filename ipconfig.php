@@ -18,11 +18,11 @@ DISABLE_SETUP=false
 REMOVE_INDEXPHP=false
 
 # These database settings are set during the initial setup
-DB_HOSTNAME=
-DB_USERNAME=
+DB_HOSTNAME=localhost
+DB_USERNAME=root
 DB_PASSWORD=
-DB_DATABASE=
-DB_PORT=
+DB_DATABASE=mtoffice
+DB_PORT=3306
 
 # If you want to be logged out after closing your browser window, set this setting to 0 (ZERO).
 # The number represents the amount of minutes after that IP will automatically log out users,
@@ -41,8 +41,8 @@ DISABLE_READ_ONLY=false
 ##
 
 # This key is automatically set after the first setup. Do not change it manually!
-ENCRYPTION_KEY=
+ENCRYPTION_KEY=base64:SRp8vmtaN/7k9wumkddIdtKe0iVTSti1wLQoz2ZneWo=
 ENCRYPTION_CIPHER=AES-256
 
 # Set to true after the initial setup
-SETUP_COMPLETED=false
+SETUP_COMPLETED=true
