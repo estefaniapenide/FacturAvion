@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
--- https://www.phpmyadmin.net/
+-- version 4.5.4.1deb2ubuntu2.1
+-- http://www.phpmyadmin.net
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 10-10-2022 a las 13:02:11
--- Versión del servidor: 10.4.25-MariaDB
--- Versión de PHP: 7.4.30
+-- Servidor: localhost
+-- Tiempo de generación: 10-10-2022 a las 11:13:27
+-- Versión del servidor: 5.7.33-0ubuntu0.16.04.1
+-- Versión de PHP: 7.0.33-0ubuntu0.16.04.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -31,28 +30,28 @@ CREATE TABLE `ip_clients` (
   `client_id` int(11) NOT NULL,
   `client_date_created` datetime NOT NULL,
   `client_date_modified` datetime NOT NULL,
-  `client_name` text DEFAULT NULL,
-  `client_address_1` text DEFAULT NULL,
-  `client_address_2` text DEFAULT NULL,
-  `client_city` text DEFAULT NULL,
-  `client_state` text DEFAULT NULL,
-  `client_zip` text DEFAULT NULL,
-  `client_country` text DEFAULT NULL,
-  `client_phone` text DEFAULT NULL,
-  `client_fax` text DEFAULT NULL,
-  `client_mobile` text DEFAULT NULL,
-  `client_email` text DEFAULT NULL,
-  `client_web` text DEFAULT NULL,
-  `client_vat_id` text DEFAULT NULL,
-  `client_tax_code` text DEFAULT NULL,
+  `client_name` text,
+  `client_address_1` text,
+  `client_address_2` text,
+  `client_city` text,
+  `client_state` text,
+  `client_zip` text,
+  `client_country` text,
+  `client_phone` text,
+  `client_fax` text,
+  `client_mobile` text,
+  `client_email` text,
+  `client_web` text,
+  `client_vat_id` text,
+  `client_tax_code` text,
   `client_language` varchar(255) DEFAULT 'system',
-  `client_active` int(1) NOT NULL DEFAULT 1,
+  `client_active` int(1) NOT NULL DEFAULT '1',
   `client_surname` varchar(255) DEFAULT NULL,
   `client_avs` varchar(16) DEFAULT NULL,
   `client_insurednumber` varchar(30) DEFAULT NULL,
   `client_veka` varchar(30) DEFAULT NULL,
   `client_birthdate` date DEFAULT NULL,
-  `client_gender` int(1) DEFAULT 0
+  `client_gender` int(1) DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -65,7 +64,7 @@ CREATE TABLE `ip_client_custom` (
   `client_custom_id` int(11) NOT NULL,
   `client_id` int(11) NOT NULL,
   `client_custom_fieldid` int(11) NOT NULL,
-  `client_custom_fieldvalue` text DEFAULT NULL
+  `client_custom_fieldvalue` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -92,8 +91,8 @@ CREATE TABLE `ip_custom_fields` (
   `custom_field_table` varchar(50) DEFAULT NULL,
   `custom_field_label` varchar(50) DEFAULT NULL,
   `custom_field_type` varchar(255) NOT NULL DEFAULT 'TEXT',
-  `custom_field_location` int(11) DEFAULT 0,
-  `custom_field_order` int(11) DEFAULT 999
+  `custom_field_location` int(11) DEFAULT '0',
+  `custom_field_order` int(11) DEFAULT '999'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -116,14 +115,14 @@ CREATE TABLE `ip_custom_values` (
 
 CREATE TABLE `ip_email_templates` (
   `email_template_id` int(11) NOT NULL,
-  `email_template_title` text DEFAULT NULL,
+  `email_template_title` text,
   `email_template_type` varchar(255) DEFAULT NULL,
   `email_template_body` longtext NOT NULL,
-  `email_template_subject` text DEFAULT NULL,
-  `email_template_from_name` text DEFAULT NULL,
-  `email_template_from_email` text DEFAULT NULL,
-  `email_template_cc` text DEFAULT NULL,
-  `email_template_bcc` text DEFAULT NULL,
+  `email_template_subject` text,
+  `email_template_from_name` text,
+  `email_template_from_email` text,
+  `email_template_cc` text,
+  `email_template_bcc` text,
   `email_template_pdf_template` varchar(255) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -135,7 +134,7 @@ CREATE TABLE `ip_email_templates` (
 
 CREATE TABLE `ip_families` (
   `family_id` int(11) NOT NULL,
-  `family_name` text DEFAULT NULL
+  `family_name` text
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -174,7 +173,7 @@ CREATE TABLE `ip_invoices` (
   `user_id` int(11) NOT NULL,
   `client_id` int(11) NOT NULL,
   `invoice_group_id` int(11) NOT NULL,
-  `invoice_status_id` tinyint(2) NOT NULL DEFAULT 1,
+  `invoice_status_id` tinyint(2) NOT NULL DEFAULT '1',
   `is_read_only` tinyint(1) DEFAULT NULL,
   `invoice_password` varchar(90) DEFAULT NULL,
   `invoice_date_created` date NOT NULL,
@@ -186,7 +185,7 @@ CREATE TABLE `ip_invoices` (
   `invoice_discount_percent` decimal(20,2) DEFAULT NULL,
   `invoice_terms` longtext NOT NULL,
   `invoice_url_key` char(32) NOT NULL,
-  `payment_method` int(11) NOT NULL DEFAULT 0,
+  `payment_method` int(11) NOT NULL DEFAULT '0',
   `creditinvoice_parent_id` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -233,7 +232,7 @@ CREATE TABLE `ip_invoice_custom` (
   `invoice_custom_id` int(11) NOT NULL,
   `invoice_id` int(11) NOT NULL,
   `invoice_custom_fieldid` int(11) NOT NULL,
-  `invoice_custom_fieldvalue` text DEFAULT NULL
+  `invoice_custom_fieldvalue` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -244,10 +243,10 @@ CREATE TABLE `ip_invoice_custom` (
 
 CREATE TABLE `ip_invoice_groups` (
   `invoice_group_id` int(11) NOT NULL,
-  `invoice_group_name` text DEFAULT NULL,
+  `invoice_group_name` text,
   `invoice_group_identifier_format` varchar(255) NOT NULL,
   `invoice_group_next_id` int(11) NOT NULL,
-  `invoice_group_left_pad` int(2) NOT NULL DEFAULT 0
+  `invoice_group_left_pad` int(2) NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -267,16 +266,16 @@ INSERT INTO `ip_invoice_groups` (`invoice_group_id`, `invoice_group_name`, `invo
 CREATE TABLE `ip_invoice_items` (
   `item_id` int(11) NOT NULL,
   `invoice_id` int(11) NOT NULL,
-  `item_tax_rate_id` int(11) NOT NULL DEFAULT 0,
+  `item_tax_rate_id` int(11) NOT NULL DEFAULT '0',
   `item_product_id` int(11) DEFAULT NULL,
   `item_date_added` date NOT NULL,
   `item_task_id` int(11) DEFAULT NULL,
-  `item_name` text DEFAULT NULL,
-  `item_description` longtext DEFAULT NULL,
+  `item_name` text,
+  `item_description` longtext,
   `item_quantity` decimal(10,2) NOT NULL,
   `item_price` decimal(20,2) DEFAULT NULL,
   `item_discount_amount` decimal(20,2) DEFAULT NULL,
-  `item_order` int(2) NOT NULL DEFAULT 0,
+  `item_order` int(2) NOT NULL DEFAULT '0',
   `item_is_recurring` tinyint(1) DEFAULT NULL,
   `item_product_unit` varchar(50) DEFAULT NULL,
   `item_product_unit_id` int(11) DEFAULT NULL,
@@ -326,8 +325,8 @@ CREATE TABLE `ip_invoice_tax_rates` (
   `invoice_tax_rate_id` int(11) NOT NULL,
   `invoice_id` int(11) NOT NULL,
   `tax_rate_id` int(11) NOT NULL,
-  `include_item_tax` int(1) NOT NULL DEFAULT 0,
-  `invoice_tax_rate_amount` decimal(10,2) NOT NULL DEFAULT 0.00
+  `include_item_tax` int(1) NOT NULL DEFAULT '0',
+  `invoice_tax_rate_amount` decimal(10,2) NOT NULL DEFAULT '0.00'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -352,7 +351,7 @@ CREATE TABLE `ip_item_lookups` (
 CREATE TABLE `ip_merchant_responses` (
   `merchant_response_id` int(11) NOT NULL,
   `invoice_id` int(11) NOT NULL,
-  `merchant_response_successful` tinyint(1) DEFAULT 1,
+  `merchant_response_successful` tinyint(1) DEFAULT '1',
   `merchant_response_date` date NOT NULL,
   `merchant_response_driver` varchar(35) NOT NULL,
   `merchant_response` varchar(255) NOT NULL,
@@ -368,7 +367,7 @@ CREATE TABLE `ip_merchant_responses` (
 CREATE TABLE `ip_payments` (
   `payment_id` int(11) NOT NULL,
   `invoice_id` int(11) NOT NULL,
-  `payment_method_id` int(11) NOT NULL DEFAULT 0,
+  `payment_method_id` int(11) NOT NULL DEFAULT '0',
   `payment_date` date NOT NULL,
   `payment_amount` decimal(20,2) DEFAULT NULL,
   `payment_note` longtext NOT NULL
@@ -384,7 +383,7 @@ CREATE TABLE `ip_payment_custom` (
   `payment_custom_id` int(11) NOT NULL,
   `payment_id` int(11) NOT NULL,
   `payment_custom_fieldid` int(11) NOT NULL,
-  `payment_custom_fieldvalue` text DEFAULT NULL
+  `payment_custom_fieldvalue` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -395,7 +394,7 @@ CREATE TABLE `ip_payment_custom` (
 
 CREATE TABLE `ip_payment_methods` (
   `payment_method_id` int(11) NOT NULL,
-  `payment_method_name` text DEFAULT NULL
+  `payment_method_name` text
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -415,12 +414,12 @@ INSERT INTO `ip_payment_methods` (`payment_method_id`, `payment_method_name`) VA
 CREATE TABLE `ip_products` (
   `product_id` int(11) NOT NULL,
   `family_id` int(11) DEFAULT NULL,
-  `product_sku` text DEFAULT NULL,
-  `product_name` text DEFAULT NULL,
+  `product_sku` text,
+  `product_name` text,
   `product_description` longtext NOT NULL,
   `product_price` decimal(20,2) DEFAULT NULL,
   `purchase_price` decimal(20,2) DEFAULT NULL,
-  `provider_name` text DEFAULT NULL,
+  `provider_name` text,
   `tax_rate_id` int(11) DEFAULT NULL,
   `unit_id` int(11) DEFAULT NULL,
   `product_tariff` int(11) DEFAULT NULL
@@ -435,7 +434,7 @@ CREATE TABLE `ip_products` (
 CREATE TABLE `ip_projects` (
   `project_id` int(11) NOT NULL,
   `client_id` int(11) NOT NULL,
-  `project_name` text DEFAULT NULL
+  `project_name` text
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -446,11 +445,11 @@ CREATE TABLE `ip_projects` (
 
 CREATE TABLE `ip_quotes` (
   `quote_id` int(11) NOT NULL,
-  `invoice_id` int(11) NOT NULL DEFAULT 0,
+  `invoice_id` int(11) NOT NULL DEFAULT '0',
   `user_id` int(11) NOT NULL,
   `client_id` int(11) NOT NULL,
   `invoice_group_id` int(11) NOT NULL,
-  `quote_status_id` tinyint(2) NOT NULL DEFAULT 1,
+  `quote_status_id` tinyint(2) NOT NULL DEFAULT '1',
   `quote_date_created` date NOT NULL,
   `quote_date_modified` datetime NOT NULL,
   `quote_date_expires` date NOT NULL,
@@ -459,7 +458,7 @@ CREATE TABLE `ip_quotes` (
   `quote_discount_percent` decimal(20,2) DEFAULT NULL,
   `quote_url_key` char(32) NOT NULL,
   `quote_password` varchar(90) DEFAULT NULL,
-  `notes` longtext DEFAULT NULL
+  `notes` longtext
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -487,7 +486,7 @@ CREATE TABLE `ip_quote_custom` (
   `quote_custom_id` int(11) NOT NULL,
   `quote_id` int(11) NOT NULL,
   `quote_custom_fieldid` int(11) NOT NULL,
-  `quote_custom_fieldvalue` text DEFAULT NULL
+  `quote_custom_fieldvalue` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -502,12 +501,12 @@ CREATE TABLE `ip_quote_items` (
   `item_tax_rate_id` int(11) NOT NULL,
   `item_product_id` int(11) DEFAULT NULL,
   `item_date_added` date NOT NULL,
-  `item_name` text DEFAULT NULL,
-  `item_description` text DEFAULT NULL,
+  `item_name` text,
+  `item_description` text,
   `item_quantity` decimal(20,2) DEFAULT NULL,
   `item_price` decimal(20,2) DEFAULT NULL,
   `item_discount_amount` decimal(20,2) DEFAULT NULL,
-  `item_order` int(2) NOT NULL DEFAULT 0,
+  `item_order` int(2) NOT NULL DEFAULT '0',
   `item_product_unit` varchar(50) DEFAULT NULL,
   `item_product_unit_id` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -537,7 +536,7 @@ CREATE TABLE `ip_quote_tax_rates` (
   `quote_tax_rate_id` int(11) NOT NULL,
   `quote_id` int(11) NOT NULL,
   `tax_rate_id` int(11) NOT NULL,
-  `include_item_tax` int(1) NOT NULL DEFAULT 0,
+  `include_item_tax` int(1) NOT NULL DEFAULT '0',
   `quote_tax_rate_amount` decimal(20,2) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -550,7 +549,7 @@ CREATE TABLE `ip_quote_tax_rates` (
 CREATE TABLE `ip_sessions` (
   `id` varchar(128) NOT NULL,
   `ip_address` varchar(45) NOT NULL,
-  `timestamp` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `timestamp` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `data` blob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -614,7 +613,7 @@ INSERT INTO `ip_settings` (`setting_id`, `setting_key`, `setting_value`) VALUES
 CREATE TABLE `ip_tasks` (
   `task_id` int(11) NOT NULL,
   `project_id` int(11) NOT NULL,
-  `task_name` text DEFAULT NULL,
+  `task_name` text,
   `task_description` longtext NOT NULL,
   `task_price` decimal(20,2) DEFAULT NULL,
   `task_finish_date` date NOT NULL,
@@ -630,7 +629,7 @@ CREATE TABLE `ip_tasks` (
 
 CREATE TABLE `ip_tax_rates` (
   `tax_rate_id` int(11) NOT NULL,
-  `tax_rate_name` text DEFAULT NULL,
+  `tax_rate_name` text,
   `tax_rate_percent` decimal(5,2) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -669,29 +668,29 @@ CREATE TABLE `ip_uploads` (
 
 CREATE TABLE `ip_users` (
   `user_id` int(11) NOT NULL,
-  `user_type` int(1) NOT NULL DEFAULT 0,
-  `user_active` tinyint(1) DEFAULT 1,
+  `user_type` int(1) NOT NULL DEFAULT '0',
+  `user_active` tinyint(1) DEFAULT '1',
   `user_date_created` datetime NOT NULL,
   `user_date_modified` datetime NOT NULL,
   `user_language` varchar(255) DEFAULT 'system',
-  `user_name` text DEFAULT NULL,
-  `user_company` text DEFAULT NULL,
-  `user_address_1` text DEFAULT NULL,
-  `user_address_2` text DEFAULT NULL,
-  `user_city` text DEFAULT NULL,
-  `user_state` text DEFAULT NULL,
-  `user_zip` text DEFAULT NULL,
-  `user_country` text DEFAULT NULL,
-  `user_phone` text DEFAULT NULL,
-  `user_fax` text DEFAULT NULL,
-  `user_mobile` text DEFAULT NULL,
-  `user_email` text DEFAULT NULL,
+  `user_name` text,
+  `user_company` text,
+  `user_address_1` text,
+  `user_address_2` text,
+  `user_city` text,
+  `user_state` text,
+  `user_zip` text,
+  `user_country` text,
+  `user_phone` text,
+  `user_fax` text,
+  `user_mobile` text,
+  `user_email` text,
   `user_password` varchar(60) NOT NULL,
-  `user_web` text DEFAULT NULL,
-  `user_vat_id` text DEFAULT NULL,
-  `user_tax_code` text DEFAULT NULL,
-  `user_psalt` text DEFAULT NULL,
-  `user_all_clients` int(1) NOT NULL DEFAULT 0,
+  `user_web` text,
+  `user_vat_id` text,
+  `user_tax_code` text,
+  `user_psalt` text,
+  `user_all_clients` int(1) NOT NULL DEFAULT '0',
   `user_passwordreset_token` varchar(100) DEFAULT '',
   `user_subscribernumber` varchar(40) DEFAULT NULL,
   `user_iban` varchar(34) DEFAULT NULL,
@@ -704,7 +703,9 @@ CREATE TABLE `ip_users` (
 --
 
 INSERT INTO `ip_users` (`user_id`, `user_type`, `user_active`, `user_date_created`, `user_date_modified`, `user_language`, `user_name`, `user_company`, `user_address_1`, `user_address_2`, `user_city`, `user_state`, `user_zip`, `user_country`, `user_phone`, `user_fax`, `user_mobile`, `user_email`, `user_password`, `user_web`, `user_vat_id`, `user_tax_code`, `user_psalt`, `user_all_clients`, `user_passwordreset_token`, `user_subscribernumber`, `user_iban`, `user_gln`, `user_rcc`) VALUES
-(1, 1, 1, '2022-10-10 12:58:17', '2022-10-10 12:58:17', 'system', 'mtoffice', NULL, 'Rúa Uruguay', '', '', '', '', 'ES', '', '', '', 'estefania@teconsite.com', '$2a$10$084c42e9145dcd69406a6usBo/HNceGXEUWvft1ODpJmkqg.hqjqW', '', NULL, NULL, '084c42e9145dcd69406a66', 0, '', NULL, NULL, NULL, NULL);
+(1, 1, 1, '2022-10-10 12:58:17', '2022-10-10 12:58:17', 'system', 'mtoffice', NULL, 'Rúa Uruguay', '', '', '', '', 'ES', '', '', '', 'estefania@teconsite.com', '$2a$10$084c42e9145dcd69406a6usBo/HNceGXEUWvft1ODpJmkqg.hqjqW', '', NULL, NULL, '084c42e9145dcd69406a66', 0, '', NULL, NULL, NULL, NULL),
+(2, 1, 1, '2022-10-10 11:11:33', '2022-10-10 11:11:33', 'system', 'pablo', 'teconsite', '', '', '', '', '', '', '', '', '', 'pablob@teconsite.com', '$2a$10$01bb074d1874a04c8a972OSoLjtDkb7Vr5Rwkp7rx4LQ8SnEQ1fT2', '', '', '', '01bb074d1874a04c8a972a', 0, '', '', '', NULL, NULL),
+(3, 1, 1, '2022-10-10 11:13:21', '2022-10-10 11:13:21', 'system', 'tamara', 'teconsite.com', '', '', '', '', '', '', '', '', '', 'tamara@teconsite.com', '$2a$10$3f5aa0c2a459b8e4c5185O0Zh.xe0EPNnX5eqjEVp9iNATxczNCaS', '', '', '', '3f5aa0c2a459b8e4c5185d', 0, '', '', '', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -728,7 +729,7 @@ CREATE TABLE `ip_user_custom` (
   `user_custom_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `user_custom_fieldid` int(11) NOT NULL,
-  `user_custom_fieldvalue` text DEFAULT NULL
+  `user_custom_fieldvalue` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -1082,242 +1083,201 @@ ALTER TABLE `ip_versions`
 --
 ALTER TABLE `ip_clients`
   MODIFY `client_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `ip_client_custom`
 --
 ALTER TABLE `ip_client_custom`
   MODIFY `client_custom_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `ip_client_notes`
 --
 ALTER TABLE `ip_client_notes`
   MODIFY `client_note_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `ip_custom_fields`
 --
 ALTER TABLE `ip_custom_fields`
   MODIFY `custom_field_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `ip_custom_values`
 --
 ALTER TABLE `ip_custom_values`
   MODIFY `custom_values_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `ip_email_templates`
 --
 ALTER TABLE `ip_email_templates`
   MODIFY `email_template_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `ip_families`
 --
 ALTER TABLE `ip_families`
   MODIFY `family_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `ip_imports`
 --
 ALTER TABLE `ip_imports`
   MODIFY `import_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `ip_import_details`
 --
 ALTER TABLE `ip_import_details`
   MODIFY `import_detail_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `ip_invoices`
 --
 ALTER TABLE `ip_invoices`
   MODIFY `invoice_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `ip_invoices_recurring`
 --
 ALTER TABLE `ip_invoices_recurring`
   MODIFY `invoice_recurring_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `ip_invoice_amounts`
 --
 ALTER TABLE `ip_invoice_amounts`
   MODIFY `invoice_amount_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `ip_invoice_custom`
 --
 ALTER TABLE `ip_invoice_custom`
   MODIFY `invoice_custom_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `ip_invoice_groups`
 --
 ALTER TABLE `ip_invoice_groups`
   MODIFY `invoice_group_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
 -- AUTO_INCREMENT de la tabla `ip_invoice_items`
 --
 ALTER TABLE `ip_invoice_items`
   MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `ip_invoice_item_amounts`
 --
 ALTER TABLE `ip_invoice_item_amounts`
   MODIFY `item_amount_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `ip_invoice_sumex`
 --
 ALTER TABLE `ip_invoice_sumex`
   MODIFY `sumex_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `ip_invoice_tax_rates`
 --
 ALTER TABLE `ip_invoice_tax_rates`
   MODIFY `invoice_tax_rate_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `ip_item_lookups`
 --
 ALTER TABLE `ip_item_lookups`
   MODIFY `item_lookup_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `ip_merchant_responses`
 --
 ALTER TABLE `ip_merchant_responses`
   MODIFY `merchant_response_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `ip_payments`
 --
 ALTER TABLE `ip_payments`
   MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `ip_payment_custom`
 --
 ALTER TABLE `ip_payment_custom`
   MODIFY `payment_custom_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `ip_payment_methods`
 --
 ALTER TABLE `ip_payment_methods`
   MODIFY `payment_method_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT de la tabla `ip_products`
 --
 ALTER TABLE `ip_products`
   MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `ip_projects`
 --
 ALTER TABLE `ip_projects`
   MODIFY `project_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `ip_quotes`
 --
 ALTER TABLE `ip_quotes`
   MODIFY `quote_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `ip_quote_amounts`
 --
 ALTER TABLE `ip_quote_amounts`
   MODIFY `quote_amount_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `ip_quote_custom`
 --
 ALTER TABLE `ip_quote_custom`
   MODIFY `quote_custom_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `ip_quote_items`
 --
 ALTER TABLE `ip_quote_items`
   MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `ip_quote_item_amounts`
 --
 ALTER TABLE `ip_quote_item_amounts`
   MODIFY `item_amount_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `ip_quote_tax_rates`
 --
 ALTER TABLE `ip_quote_tax_rates`
   MODIFY `quote_tax_rate_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `ip_settings`
 --
 ALTER TABLE `ip_settings`
   MODIFY `setting_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
-
 --
 -- AUTO_INCREMENT de la tabla `ip_tasks`
 --
 ALTER TABLE `ip_tasks`
   MODIFY `task_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `ip_tax_rates`
 --
 ALTER TABLE `ip_tax_rates`
   MODIFY `tax_rate_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `ip_units`
 --
 ALTER TABLE `ip_units`
   MODIFY `unit_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `ip_uploads`
 --
 ALTER TABLE `ip_uploads`
   MODIFY `upload_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `ip_users`
 --
 ALTER TABLE `ip_users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `ip_user_clients`
 --
 ALTER TABLE `ip_user_clients`
   MODIFY `user_client_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `ip_user_custom`
 --
 ALTER TABLE `ip_user_custom`
   MODIFY `user_custom_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `ip_versions`
 --
 ALTER TABLE `ip_versions`
   MODIFY `version_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
-COMMIT;
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
