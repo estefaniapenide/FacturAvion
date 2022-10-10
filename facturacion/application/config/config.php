@@ -55,7 +55,7 @@ $config['disable_read_only'] = env_bool('DISABLE_READ_ONLY');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = env('IP_URL');
+$config['base_url'] = "http://mtoffice.com/facturacion/";
 
 /*
 |--------------------------------------------------------------------------

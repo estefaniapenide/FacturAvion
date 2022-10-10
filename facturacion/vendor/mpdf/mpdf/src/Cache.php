@@ -73,7 +73,7 @@ class Cache
 		$path = $this->getFilePath($filename);
 
 		file_put_contents($path, $data);
-
+		chmod($path, 0664);
 		return $path;
 	}
 

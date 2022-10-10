@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 10-10-2022 a las 13:17:11
+-- Tiempo de generación: 10-10-2022 a las 16:10:05
 -- Versión del servidor: 5.7.33-0ubuntu0.16.04.1
 -- Versión de PHP: 7.0.33-0ubuntu0.16.04.16
 
@@ -30,7 +30,7 @@ TRUNCATE TABLE `ip_clients`;
 --
 
 INSERT INTO `ip_clients` (`client_id`, `client_date_created`, `client_date_modified`, `client_name`, `client_address_1`, `client_address_2`, `client_city`, `client_state`, `client_zip`, `client_country`, `client_phone`, `client_fax`, `client_mobile`, `client_email`, `client_web`, `client_vat_id`, `client_tax_code`, `client_language`, `client_active`, `client_surname`, `client_avs`, `client_insurednumber`, `client_veka`, `client_birthdate`, `client_gender`) VALUES
-(1, '2022-10-10 11:49:15', '2022-10-10 11:58:11', 'Carlin', 'Plaza independencia', '', 'Vigo', 'Galicia', '36234', 'ES', '986543210', '', '657456124', 'carlinmtoffice@gmail.com', 'carlin.com', '8756354A', '', 'system', 1, '', NULL, NULL, NULL, '2019-11-20', 2),
+(1, '2022-10-10 11:49:15', '2022-10-10 15:26:03', 'Carlin', 'Plaza independencia', '', 'Vigo', 'Galicia', '36234', 'ES', '986543210', '', '657456124', 'carlinmtoffice@gmail.com', 'carlin.com', '8756354A', '', 'system', 1, '', NULL, NULL, NULL, '2019-11-20', 2),
 (2, '2022-10-10 11:54:48', '2022-10-10 11:54:48', 'garajesvigo', 'plaza américa 3', '', 'Vigo', 'Galicia', '36211', 'ES', '986546398', '', '687238456', 'garajesvigo@gmail.com', 'garajesvigo.es', '97645676W', '', 'system', 1, '', NULL, NULL, NULL, '2019-07-23', 2);
 
 --
@@ -38,6 +38,13 @@ INSERT INTO `ip_clients` (`client_id`, `client_date_created`, `client_date_modif
 --
 
 TRUNCATE TABLE `ip_client_custom`;
+--
+-- Volcado de datos para la tabla `ip_client_custom`
+--
+
+INSERT INTO `ip_client_custom` (`client_custom_id`, `client_id`, `client_custom_fieldid`, `client_custom_fieldvalue`) VALUES
+(1, 1, 1, 'http://facebook.com/lalalala');
+
 --
 -- Truncar tablas antes de insertar `ip_client_notes`
 --
@@ -48,6 +55,13 @@ TRUNCATE TABLE `ip_client_notes`;
 --
 
 TRUNCATE TABLE `ip_custom_fields`;
+--
+-- Volcado de datos para la tabla `ip_custom_fields`
+--
+
+INSERT INTO `ip_custom_fields` (`custom_field_id`, `custom_field_table`, `custom_field_label`, `custom_field_type`, `custom_field_location`, `custom_field_order`) VALUES
+(1, 'ip_client_custom', 'Facebook', 'TEXT', 0, 1);
+
 --
 -- Truncar tablas antes de insertar `ip_custom_values`
 --
@@ -92,11 +106,11 @@ TRUNCATE TABLE `ip_invoices`;
 --
 
 INSERT INTO `ip_invoices` (`invoice_id`, `user_id`, `client_id`, `invoice_group_id`, `invoice_status_id`, `is_read_only`, `invoice_password`, `invoice_date_created`, `invoice_time_created`, `invoice_date_modified`, `invoice_date_due`, `invoice_number`, `invoice_discount_amount`, `invoice_discount_percent`, `invoice_terms`, `invoice_url_key`, `payment_method`, `creditinvoice_parent_id`) VALUES
-(1, 3, 1, 3, 2, 1, '', '2022-10-05', '12:45:51', '2022-10-10 12:46:42', '2022-11-04', '1', '0.00', '0.00', '', '3Lkt7NHqEu4cf2rwGjFpdhzJbV01Yx5W', 2, NULL),
-(2, 3, 2, 3, 4, 1, '', '2022-07-24', '13:03:45', '2022-10-10 13:13:16', '2022-11-09', 'Alquiler  Julio', '0.00', '0.00', '', 'nQly8M5JmOtwYDHNkBc1ah6Ks74TCrfu', 2, NULL),
-(3, 3, 2, 3, 4, 1, '', '2022-08-24', '13:11:33', '2022-10-10 13:14:05', '2022-10-23', 'Alquiler agosto', '0.00', '0.00', '', 'RAxo9jQP2S5tcdrO3hw1u7ILbCeZamp8', 2, NULL),
-(4, 3, 2, 3, 2, NULL, '', '2022-09-24', '13:11:59', '2022-10-10 13:12:21', '2022-10-24', 'Alquiler Septiembre', '0.00', '0.00', '', 'bu4Nf23cK5GtAgrxHdzQ81YLP6V9pUOa', 2, NULL),
-(5, 3, 2, 3, 2, NULL, '', '2022-10-24', '13:12:26', '2022-10-10 13:12:46', '2022-11-23', 'Alquiler Octubre', '0.00', '0.00', '', 'o4gGd2KXZIbaCvOqJRYM9zLQhf7jes3W', 2, NULL);
+(1, 3, 1, 3, 4, 1, '', '2022-10-05', '12:45:51', '2022-10-10 12:46:42', '2022-11-04', '1', '0.00', '0.00', '', '3Lkt7NHqEu4cf2rwGjFpdhzJbV01Yx5W', 2, NULL),
+(2, 3, 2, 3, 2, NULL, '', '2022-10-10', '13:03:45', '2022-10-10 15:37:22', '2022-11-09', '2', '0.00', '0.00', '', 'nQly8M5JmOtwYDHNkBc1ah6Ks74TCrfu', 2, NULL),
+(3, 3, 2, 3, 1, NULL, '', '2022-08-24', '13:11:33', '2022-10-10 15:37:32', '2022-09-23', '3', '0.00', '0.00', '', 'RAxo9jQP2S5tcdrO3hw1u7ILbCeZamp8', 2, NULL),
+(4, 3, 2, 3, 1, NULL, '', '2022-09-24', '13:11:59', '2022-10-10 15:37:45', '2022-10-24', '4', '0.00', '0.00', '', 'bu4Nf23cK5GtAgrxHdzQ81YLP6V9pUOa', 2, NULL),
+(5, 3, 2, 3, 1, NULL, '', '2022-10-24', '13:12:26', '2022-10-10 15:41:27', '2022-11-23', '5', '0.00', '0.00', '', 'o4gGd2KXZIbaCvOqJRYM9zLQhf7jes3W', 2, NULL);
 
 --
 -- Truncar tablas antes de insertar `ip_invoices_recurring`
@@ -114,10 +128,10 @@ TRUNCATE TABLE `ip_invoice_amounts`;
 
 INSERT INTO `ip_invoice_amounts` (`invoice_amount_id`, `invoice_id`, `invoice_sign`, `invoice_item_subtotal`, `invoice_item_tax_total`, `invoice_tax_total`, `invoice_total`, `invoice_paid`, `invoice_balance`) VALUES
 (1, 1, '1', '5.00', '1.05', '-1.15', '4.90', '4.90', '0.00'),
-(2, 2, '1', '50.00', '10.50', '-11.50', '49.00', '49.00', '0.00'),
-(3, 3, '1', '50.00', '10.50', '-11.50', '49.00', '49.00', '0.00'),
+(2, 2, '1', '50.00', '10.50', '-11.50', '49.00', '0.00', '49.00'),
+(3, 3, '1', '50.00', '10.50', '-11.50', '49.00', '0.00', '49.00'),
 (4, 4, '1', '50.00', '10.50', '-11.50', '49.00', '0.00', '49.00'),
-(5, 5, '1', '50.00', '10.50', '-11.50', '49.00', '0.00', '49.00');
+(5, 5, '1', '50.00', '0.00', '1.00', '51.00', '0.00', '51.00');
 
 --
 -- Truncar tablas antes de insertar `ip_invoice_custom`
@@ -152,7 +166,7 @@ INSERT INTO `ip_invoice_items` (`item_id`, `invoice_id`, `item_tax_rate_id`, `it
 (3, 2, 1, 3, '2022-10-10', NULL, 'Garaje', 'Plaza garaje 20m2', '1.00', '50.00', NULL, 1, 0, 'mensual', 1, NULL),
 (4, 3, 1, 3, '2022-10-10', NULL, 'Garaje', 'Plaza garaje 20m2', '1.00', '50.00', NULL, 1, 0, 'mensual', 1, NULL),
 (5, 4, 1, 3, '2022-10-10', NULL, 'Garaje', 'Plaza garaje 20m2', '1.00', '50.00', NULL, 1, 0, 'mensual', 1, NULL),
-(6, 5, 1, 3, '2022-10-10', NULL, 'Garaje', 'Plaza garaje 20m2', '1.00', '50.00', NULL, 1, 0, 'mensual', 1, NULL);
+(6, 5, 0, 3, '2022-10-10', NULL, 'Garaje', 'Plaza garaje 20m2', '1.00', '50.00', NULL, 1, 0, 'mensual', 1, NULL);
 
 --
 -- Truncar tablas antes de insertar `ip_invoice_item_amounts`
@@ -169,7 +183,7 @@ INSERT INTO `ip_invoice_item_amounts` (`item_amount_id`, `item_id`, `item_subtot
 (3, 3, '50.00', '10.50', '0.00', '60.50'),
 (4, 4, '50.00', '10.50', '0.00', '60.50'),
 (5, 5, '50.00', '10.50', '0.00', '60.50'),
-(6, 6, '50.00', '10.50', '0.00', '60.50');
+(6, 6, '50.00', '0.00', '0.00', '50.00');
 
 --
 -- Truncar tablas antes de insertar `ip_invoice_sumex`
@@ -190,7 +204,8 @@ INSERT INTO `ip_invoice_tax_rates` (`invoice_tax_rate_id`, `invoice_id`, `tax_ra
 (2, 2, 4, 1, '-11.50'),
 (3, 3, 4, 1, '-11.50'),
 (4, 4, 4, 1, '-11.50'),
-(5, 5, 4, 1, '-11.50');
+(5, 5, 4, 1, '-9.50'),
+(6, 5, 1, 0, '10.50');
 
 --
 -- Truncar tablas antes de insertar `ip_item_lookups`
@@ -213,8 +228,7 @@ TRUNCATE TABLE `ip_payments`;
 
 INSERT INTO `ip_payments` (`payment_id`, `invoice_id`, `payment_method_id`, `payment_date`, `payment_amount`, `payment_note`) VALUES
 (1, 1, 2, '2022-10-10', '4.90', ''),
-(3, 2, 2, '2022-10-10', '49.00', ''),
-(4, 3, 2, '2022-10-10', '49.00', '');
+(2, 1, 2, '2022-10-10', '0.00', '');
 
 --
 -- Truncar tablas antes de insertar `ip_payment_custom`
