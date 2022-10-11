@@ -63,6 +63,7 @@ foreach ($custom_fields as $custom_field) {
 
 <ul id="submenu" class="nav nav-tabs nav-tabs-noborder">
     <li class="active"><a data-toggle="tab" href="#providerDetails"><?php _trans('details'); ?></a></li>
+    <li><a data-toggle="tab" href="#providerInvoices"><?php _trans('invoices'); ?></a></li>
     <li><a data-toggle="tab" href="#providerPayments"><?php _trans('payments'); ?></a></li>
 </ul>
 
@@ -269,7 +270,9 @@ foreach ($custom_fields as $custom_field) {
             </div>
 
         </div>
-
+        <div id="providerInvoices" class="tab-pane table-content">
+            <?php echo $invoice_table; ?>
+        </div>
         <div id="providerPayments" class="tab-pane table-content">
             <?php echo $payment_table; ?>
         </div>

@@ -37,15 +37,9 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#" class="provider-create-quote"
+                                <a href="#" class="add_pdf"
                                    data-provider-id="<?php echo $provider->provider_id; ?>">
-                                    <i class="fa fa-file fa-margin"></i> <?php _trans('create_quote'); ?>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="provider-create-invoice"
-                                   data-provider-id="<?php echo $provider->provider_id; ?>">
-                                    <i class="fa fa-file-text fa-margin"></i> <?php _trans('create_invoice'); ?>
+                                    <i class="fa fa-file-text fa-margin"></i> <?php _trans('add_invoice'); ?>
                                 </a>
                             </li>
                             <li>
@@ -65,4 +59,77 @@
         <?php endforeach; ?>
         </tbody>
     </table>
+</div>
+
+<script>
+    $(function () {
+        $('.add_pdf').click(function () {
+        // Display the create quote modal
+        $('#add_pdf').modal('show');
+
+        $('.simple-select').select2();
+
+        <?php $this->layout->load_view('providers/script_select2_provider_id.js'); ?>
+
+        // Toggle on/off permissive search on providers names
+        $('span#toggle_permissive_search_providers').click(function () {
+            if ($('input#input_permissive_search_providers').val() == ('1')) {
+                $.get("<?php echo site_url('providers/ajax/save_preference_permissive_search_providers'); ?>", {
+                    permissive_search_providers: '0'
+                });
+                $('input#input_permissive_search_providers').val('0');
+                $('span#toggle_permissive_search_providers i').removeClass('fa-toggle-on');
+                $('span#toggle_permissive_search_providers i').addClass('fa-toggle-off');
+            } else {
+                $.get("<?php echo site_url('providers/ajax/save_preference_permissive_search_providers'); ?>", {
+                    permissive_search_providers: '1'
+                });
+                $('input#input_permissive_search_providers').val('1');
+                $('span#toggle_permissive_search_providers i').removeClass('fa-toggle-off');
+                $('span#toggle_permissive_search_providers i').addClass('fa-toggle-on');
+            }
+        });
+    });        
+    })
+</script>
+
+<div id="add_pdf" class="modal modal-lg" role="dialog" aria-labelledby="modal_addpdf" aria-hidden="true">
+<form action='<?php echo site_url() . "/providers/subirpdf";?>' method="post" class="modal-content" enctype="multipart/form-data">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
+            <h4 class="panel-title"><?php _trans('addpdf'); ?></h4>
+        </div>
+        <div class="modal-body">
+        
+            <input class="hidden" id="input_permissive_search_providers"
+                   value="<?php echo get_setting('enable_permissive_search_providers'); ?>">
+
+            <div class="form-group has-feedback">
+                <label for="addpdf_provider_id"><?php _trans('provider'); ?></label>
+                <div class="input-group">
+                            <p value="<?php echo $provider->provider_id; ?>"><?php _htmlsc($provider->provider_name); ?></p>
+                
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="archivo_id"><?php _trans('archive'); ?>: </label>
+                <input type="file" name="archivo_id" id="archivo_id">
+            </div>
+            <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
+        </div>
+
+        <div class="modal-footer">
+            <div class="btn-group">
+                <button class="btn btn-success" id="subir" type="submit">
+                    <i class="fa fa-check"></i> <?php _trans('submit'); ?>
+                </button>
+                <button class="btn btn-danger" type="button" data-dismiss="modal">
+                    <i class="fa fa-times"></i> <?php _trans('cancel'); ?>
+                </button>
+            </div>
+        </div>
+
+    </form>
+
 </div>

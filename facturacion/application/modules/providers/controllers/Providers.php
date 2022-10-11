@@ -246,4 +246,30 @@ class Providers extends Admin_Controller
         redirect('providers');
     }
 
+    public function subirpdf()
+        {
+                $config['upload_path']          = './uploads/archive/';
+                $config['allowed_types']        = 'pdf';
+                $config['max_size']             = 100;
+                $config['max_width']            = 1024;
+                $config['max_height']           = 768;
+
+                $this->load->library('upload', $config);
+               
+                    if ( ! $this->upload->do_upload('archivo_id'))
+                    {
+                            $error = array('error' => $this->upload->display_errors());
+
+                            $this->load->view('upload_form', $error);
+                    }
+                    else
+                    {
+                        $data = ['upload_data' => $this->upload->data()]; // get data
+                        $ruta = $data['upload_data']['full_path']; // get file path
+                        chmod($ruta,0777); // CHMOD file or any other permission level(s)
+                        redirect("providers");
+                    }
+            
+        }
+
 }
