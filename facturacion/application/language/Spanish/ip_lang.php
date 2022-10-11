@@ -119,6 +119,7 @@ $lang = array(
     'create_credit_invoice'                        => 'Crear Factura de Abono',
     'create_credit_invoice_alert'                  => 'Al crear una factura de abono hará que la factura actual sea <em>sólo lectura</em> lo cual significa que no se podrá editar la factura. La factura de abono contendrá el estado actual de todos los artículos pero con cantidades negativas.',
     'create_invoice'                               => 'Crear factura',
+    'create_invoice_provider'                      => 'Crear factura de proveedor',
     'create_product'                               => 'Crear producto',
     'create_quote'                                 => 'Crear Presupuesto',
     'create_recurring'                             => 'Crear recurrente',
@@ -169,12 +170,13 @@ $lang = array(
     'delete_attachment_warning'                    => '¿Está seguro que desea eliminar este archivo adjunto?',
     'delete_client'                                => 'Eliminar cliente',
     'delete_client_warning'                        => 'Si eliminas este cliente de igual manera eliminaras cualquier documento relacionado, ¿Está seguro que desea eliminar este cliente permanentemente?',
-    
+
     'delete_provider'                                => 'Eliminar proveedor',
     'delete_provider_warning'                        => 'Si eliminas este proveedor de igual manera eliminaras cualquier documento relacionado, ¿Está seguro que desea eliminar este cliente permanentemente?',
-    
-    
+
+
     'delete_invoice'                               => 'Eliminar factura',
+    'delete_invoice_provider'                      => 'Eliminar factura de proveedor',
     'delete_invoice_warning'                       => 'Si eliminas esta factura, no podrás recuperarla más adelante. ¿Está seguro que desea eliminar permanentemente esta factura?',
     'delete_quote'                                 => 'Eliminar Presupuesto',
     'delete_quote_warning'                         => 'Si eliminas este Presupuesto, no podrás recuperarla más adelante. ¿Está seguro que desea eliminar permanentemente este Presupuesto?',
@@ -240,6 +242,7 @@ $lang = array(
     'filter_clients'                               => 'Filtro de clientes',
     'filter_providers'                             => 'Filtro de proveedores',
     'filter_invoices'                              => 'Filtro facturas',
+    'filter_invoices_provider'                     => 'Filtro facturas de proveedores',
     'filter_payments'                              => 'Filtro de pagos',
     'filter_quotes'                                => 'Filtrar Presupuesto',
     'first'                                        => 'Primero',
@@ -269,6 +272,7 @@ $lang = array(
     'inactive'                                     => 'Inactivo',
     'interface'                                    => 'Interfaz',
     'invoice'                                      => 'Factura',
+    'invoice_provider'                             => 'Factura de proveedor',
     'invoice_aging'                                => 'Vencimiento de factura',
     'invoice_aging_16_30'                          => '16 - 30 Días',
     'invoice_aging_1_15'                           => '1 - 15 Días',
@@ -303,6 +307,7 @@ $lang = array(
     'invoiceplane_news'                            => 'InvoicePlane News',
     'invoices'                                     => 'Facturas',
     'invoices_due_after'                           => 'Facturas Vencidas días después',
+    'invoices_provider'                            => 'Facturas de proveedores',
     'is_not_writable'                              => 'No se puede editar',
     'is_writable'                                  => 'Se puede editar',
     'item'                                         => 'Artículo',
