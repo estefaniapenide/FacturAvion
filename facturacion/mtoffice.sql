@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.4.1deb2ubuntu2.1
--- http://www.phpmyadmin.net
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Tiempo de generación: 11-10-2022 a las 10:05:08
--- Versión del servidor: 5.7.33-0ubuntu0.16.04.1
--- Versión de PHP: 7.0.33-0ubuntu0.16.04.16
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 11-10-2022 a las 13:21:05
+-- Versión del servidor: 10.4.25-MariaDB
+-- Versión de PHP: 7.4.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -119,23 +120,18 @@ INSERT INTO `ip_invoices` (`invoice_id`, `user_id`, `client_id`, `invoice_group_
 --
 
 CREATE TABLE `ip_invoices_provider` (
-  `invoice_id` int(11) NOT NULL,
+  `invoice_provider_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `provider_id` int(11) NOT NULL,
-  `invoice_group_id` int(11) NOT NULL,
-  `invoice_status_id` tinyint(2) NOT NULL DEFAULT '1',
+  `invoice_provider_status_id` tinyint(2) NOT NULL DEFAULT 1,
   `is_read_only` tinyint(1) DEFAULT NULL,
-  `invoice_password` varchar(90) DEFAULT NULL,
-  `invoice_date_created` date NOT NULL,
-  `invoice_time_created` time NOT NULL DEFAULT '00:00:00',
-  `invoice_date_modified` datetime NOT NULL,
-  `invoice_date_due` date NOT NULL,
-  `invoice_number` varchar(100) DEFAULT NULL,
-  `invoice_discount_amount` decimal(20,2) DEFAULT NULL,
-  `invoice_discount_percent` decimal(20,2) DEFAULT NULL,
+  `invoice_provider_date_created` date NOT NULL,
+  `invoice_provider_date_modified` datetime NOT NULL,
+  `invoice_provider_date_due` date NOT NULL,
+  `invoice_provider_number` varchar(200) NOT NULL,
   `invoice_terms` longtext NOT NULL,
-  `invoice_url_key` char(32) NOT NULL,
-  `payment_method` int(11) NOT NULL DEFAULT '0',
+  `invoice_provider_url_key` char(32) NOT NULL,
+  `invoice_provider_pdf` varchar(100) DEFAULT NULL,
   `creditinvoice_parent_id` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -217,6 +213,106 @@ INSERT INTO `ip_invoice_item_amounts` (`item_amount_id`, `item_id`, `item_subtot
 (5, 5, '50.00', '10.50', '0.00', '60.50'),
 (6, 6, '50.00', '0.00', '0.00', '50.00');
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ip_invoice_provider_amounts`
+--
+
+CREATE TABLE `ip_invoice_provider_amounts` (
+  `invoice_provider_amount_id` int(11) NOT NULL,
+  `invoice_provider_id` int(11) NOT NULL,
+  `invoice_provider_sign` enum('1','-1') NOT NULL DEFAULT '1',
+  `invoice_provider_item_subtotal` decimal(20,2) DEFAULT 0.00,
+  `invoice_provider_item_tax_total` decimal(20,2) DEFAULT 0.00,
+  `invoice_provider_tax_total` decimal(20,2) DEFAULT 0.00,
+  `invoice_provider_total` decimal(20,2) DEFAULT 0.00,
+  `invoice_provider_paid` decimal(20,2) DEFAULT 0.00,
+  `invoice_provider_balance` decimal(20,2) DEFAULT 0.00
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Truncar tablas antes de insertar `ip_invoice_provider_amounts`
+--
+
+TRUNCATE TABLE `ip_invoice_provider_amounts`;
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ip_invoice_provider_custom`
+--
+
+CREATE TABLE `ip_invoice_provider_custom` (
+  `invoice_provider_custom_id` int(11) NOT NULL,
+  `invoice_provider_id` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Truncar tablas antes de insertar `ip_invoice_provider_custom`
+--
+
+TRUNCATE TABLE `ip_invoice_provider_custom`;
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ip_invoice_provider_items`
+--
+
+CREATE TABLE `ip_invoice_provider_items` (
+  `item_id` int(11) NOT NULL,
+  `invoice_provider_id` int(11) NOT NULL,
+  `item_tax_rate_id` int(11) NOT NULL DEFAULT 0,
+  `item_date_added` date NOT NULL,
+  `item_name` text DEFAULT NULL,
+  `item_description` longtext DEFAULT NULL,
+  `item_quantity` decimal(10,2) NOT NULL,
+  `item_price` decimal(20,2) DEFAULT NULL,
+  `item_order` int(2) NOT NULL DEFAULT 0
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Truncar tablas antes de insertar `ip_invoice_provider_items`
+--
+
+TRUNCATE TABLE `ip_invoice_provider_items`;
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ip_invoice_provider_item_amounts`
+--
+
+CREATE TABLE `ip_invoice_provider_item_amounts` (
+  `item_amount_id` int(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `item_subtotal` decimal(20,2) NOT NULL,
+  `item_tax_total` decimal(20,2) NOT NULL,
+  `item_total` decimal(20,2) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Truncar tablas antes de insertar `ip_invoice_provider_item_amounts`
+--
+
+TRUNCATE TABLE `ip_invoice_provider_item_amounts`;
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ip_invoice_provider_tax_rates`
+--
+
+CREATE TABLE `ip_invoice_provider_tax_rates` (
+  `invoice_provider_tax_rate_id` int(11) NOT NULL,
+  `invoice_provider_id` int(11) NOT NULL,
+  `tax_rate_id` int(11) NOT NULL,
+  `include_item_tax` int(1) NOT NULL DEFAULT 0,
+  `invoice_providere_tax_rate_amount` decimal(10,2) NOT NULL DEFAULT 0.00
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Truncar tablas antes de insertar `ip_invoice_provider_tax_rates`
+--
+
+TRUNCATE TABLE `ip_invoice_provider_tax_rates`;
 --
 -- Truncar tablas antes de insertar `ip_invoice_sumex`
 --
@@ -299,69 +395,16 @@ INSERT INTO `ip_products` (`product_id`, `family_id`, `product_sku`, `product_na
 --
 
 TRUNCATE TABLE `ip_projects`;
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `ip_providers`
---
-
-CREATE TABLE `ip_providers` (
-  `provider_id` int(11) NOT NULL,
-  `provider_date_created` datetime NOT NULL,
-  `provider_date_modified` datetime NOT NULL,
-  `provider_name` text,
-  `provider_comercial_name` text,
-  `provider_address_1` text,
-  `provider_address_2` text,
-  `provider_city` text,
-  `provider_state` text,
-  `provider_zip` text,
-  `provider_country` text,
-  `provider_phone` text,
-  `provider_mobile` text,
-  `provider_email` text,
-  `provider_web` text,
-  `provider_vat_id` text,
-  `provider_language` varchar(255) DEFAULT 'system',
-  `provider_active` int(1) NOT NULL DEFAULT '1'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
 --
 -- Truncar tablas antes de insertar `ip_providers`
 --
 
 TRUNCATE TABLE `ip_providers`;
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `ip_provider_custom`
---
-
-CREATE TABLE `ip_provider_custom` (
-  `provider_custom_id` int(11) NOT NULL,
-  `provider_id` int(11) NOT NULL,
-  `provider_custom_fieldid` int(11) NOT NULL,
-  `provider_custom_fieldvalue` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
 --
 -- Truncar tablas antes de insertar `ip_provider_custom`
 --
 
 TRUNCATE TABLE `ip_provider_custom`;
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `ip_provider_notes`
---
-
-CREATE TABLE `ip_provider_notes` (
-  `provider_note_id` int(11) NOT NULL,
-  `provider_id` int(11) NOT NULL,
-  `provider_note_date` date NOT NULL,
-  `provider_note` longtext NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
 --
 -- Truncar tablas antes de insertar `ip_provider_notes`
 --
@@ -808,31 +851,46 @@ INSERT INTO `ip_versions` (`version_id`, `version_date_applied`, `version_file`,
 -- Indices de la tabla `ip_invoices_provider`
 --
 ALTER TABLE `ip_invoices_provider`
-  ADD PRIMARY KEY (`invoice_id`),
-  ADD UNIQUE KEY `invoice_url_key` (`invoice_url_key`),
-  ADD KEY `user_id` (`user_id`,`provider_id`,`invoice_group_id`,`invoice_date_created`,`invoice_date_due`,`invoice_number`),
-  ADD KEY `invoice_status_id` (`invoice_status_id`);
+  ADD PRIMARY KEY (`invoice_provider_id`),
+  ADD UNIQUE KEY `invoice_provider_url_key` (`invoice_provider_url_key`),
+  ADD KEY `user_id` (`user_id`,`provider_id`,`invoice_provider_date_created`,`invoice_provider_date_due`,`invoice_provider_number`),
+  ADD KEY `invoice_provider_status_id` (`invoice_provider_status_id`);
 
 --
--- Indices de la tabla `ip_providers`
+-- Indices de la tabla `ip_invoice_provider_amounts`
 --
-ALTER TABLE `ip_providers`
-  ADD PRIMARY KEY (`provider_id`),
-  ADD KEY `provider_active` (`provider_active`);
+ALTER TABLE `ip_invoice_provider_amounts`
+  ADD PRIMARY KEY (`invoice_provider_amount_id`),
+  ADD KEY `invoice_provider_id` (`invoice_provider_id`),
+  ADD KEY `invoice_provider_paid` (`invoice_provider_paid`,`invoice_provider_balance`);
 
 --
--- Indices de la tabla `ip_provider_custom`
+-- Indices de la tabla `ip_invoice_provider_custom`
 --
-ALTER TABLE `ip_provider_custom`
-  ADD PRIMARY KEY (`provider_custom_id`),
-  ADD UNIQUE KEY `provider_id` (`provider_id`,`provider_custom_fieldid`);
+ALTER TABLE `ip_invoice_provider_custom`
+  ADD PRIMARY KEY (`invoice_provider_custom_id`),
+  ADD KEY `invoice_provider_id` (`invoice_provider_id`);
 
 --
--- Indices de la tabla `ip_provider_notes`
+-- Indices de la tabla `ip_invoice_provider_items`
 --
-ALTER TABLE `ip_provider_notes`
-  ADD PRIMARY KEY (`provider_note_id`),
-  ADD KEY `provider_id` (`provider_id`,`provider_note_date`);
+ALTER TABLE `ip_invoice_provider_items`
+  ADD PRIMARY KEY (`item_id`),
+  ADD KEY `invoice_provider_id` (`invoice_provider_id`,`item_tax_rate_id`,`item_date_added`,`item_order`);
+
+--
+-- Indices de la tabla `ip_invoice_provider_item_amounts`
+--
+ALTER TABLE `ip_invoice_provider_item_amounts`
+  ADD PRIMARY KEY (`item_amount_id`),
+  ADD KEY `item_id` (`item_id`);
+
+--
+-- Indices de la tabla `ip_invoice_provider_tax_rates`
+--
+ALTER TABLE `ip_invoice_provider_tax_rates`
+  ADD PRIMARY KEY (`invoice_provider_tax_rate_id`),
+  ADD KEY `invoice_provider_id` (`invoice_provider_id`,`tax_rate_id`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -842,22 +900,39 @@ ALTER TABLE `ip_provider_notes`
 -- AUTO_INCREMENT de la tabla `ip_invoices_provider`
 --
 ALTER TABLE `ip_invoices_provider`
-  MODIFY `invoice_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `invoice_provider_id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT de la tabla `ip_providers`
+-- AUTO_INCREMENT de la tabla `ip_invoice_provider_amounts`
 --
-ALTER TABLE `ip_providers`
-  MODIFY `provider_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `ip_invoice_provider_amounts`
+  MODIFY `invoice_provider_amount_id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT de la tabla `ip_provider_custom`
+-- AUTO_INCREMENT de la tabla `ip_invoice_provider_custom`
 --
-ALTER TABLE `ip_provider_custom`
-  MODIFY `provider_custom_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `ip_invoice_provider_custom`
+  MODIFY `invoice_provider_custom_id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT de la tabla `ip_provider_notes`
+-- AUTO_INCREMENT de la tabla `ip_invoice_provider_items`
 --
-ALTER TABLE `ip_provider_notes`
-  MODIFY `provider_note_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `ip_invoice_provider_items`
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `ip_invoice_provider_item_amounts`
+--
+ALTER TABLE `ip_invoice_provider_item_amounts`
+  MODIFY `item_amount_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `ip_invoice_provider_tax_rates`
+--
+ALTER TABLE `ip_invoice_provider_tax_rates`
+  MODIFY `invoice_provider_tax_rate_id` int(11) NOT NULL AUTO_INCREMENT;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
