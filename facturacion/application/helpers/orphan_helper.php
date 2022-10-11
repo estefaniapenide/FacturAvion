@@ -35,19 +35,7 @@ function delete_orphans()
         'DELETE FROM ip_client_notes WHERE client_id NOT IN (SELECT client_id FROM ip_clients)',
         'DELETE FROM ip_quote_tax_rates WHERE quote_id NOT IN (SELECT quote_id FROM ip_quotes)',
         'DELETE FROM ip_invoice_tax_rates WHERE invoice_id NOT IN (SELECT invoice_id FROM ip_invoices)',
-        'DELETE FROM ip_invoices_recurring WHERE invoice_id NOT IN (SELECT invoice_id FROM ip_invoices)',
-
-        'DELETE FROM ip_invoices_provider WHERE invoice_provider_id NOT IN (SELECT provider_id FROM ip_providers)',
-        'DELETE FROM ip_invoice_provider_amounts WHERE invoice_provider_id NOT IN (SELECT invoice_provider_id FROM ip_invoices_provider)',
-        'DELETE FROM ip_payments_provider WHERE invoice_id NOT IN (SELECT invoice_provider_id FROM ip_invoices_provider)',
-        'DELETE FROM ip_provider_custom WHERE provider_id NOT IN (SELECT provider_id FROM ip_providers)',
-        'DELETE FROM ip_invoice_provider_custom WHERE invoice_provider_id NOT IN (SELECT invoice_provider_id FROM ip_invoices_provider)'.
-        'DELETE FROM ip_user_custom WHERE user_id NOT IN (SELECT user_id FROM ip_users)',
-        'DELETE FROM ip_payment_custom WHERE payment_id NOT IN (SELECT payment_id FROM ip_payments)',
-        'DELETE FROM ip_invoice_provider_items WHERE invoice_provider_id NOT IN (SELECT invoice_provider_id FROM ip_invoices_provider)',
-        'DELETE FROM ip_invoice_provider_item_amounts WHERE item_provider_id NOT IN (SELECT item_id FROM ip_invoice_provider_items)',
-        'DELETE FROM ip_provider_notes WHERE provider_id NOT IN (SELECT provider_id FROM ip_providers)',
-        'DELETE FROM ip_invoice_provider_tax_rates WHERE invoice_provider_id NOT IN (SELECT invoice_provider_id FROM ip_invoices_provider)',
+        'DELETE FROM ip_invoices_recurring WHERE invoice_id NOT IN (SELECT invoice_id FROM ip_invoices)'
     );
 
     foreach ($queries as $query) {

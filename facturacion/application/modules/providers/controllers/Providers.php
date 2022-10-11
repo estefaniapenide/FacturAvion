@@ -243,6 +243,7 @@ class Providers extends Admin_Controller
     public function delete($provider_id)
     {
         $this->mdl_providers->delete($provider_id);
+        redirect('providers');
     }
 
 }
