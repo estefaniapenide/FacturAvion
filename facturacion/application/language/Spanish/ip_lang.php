@@ -169,11 +169,11 @@ $lang = array(
     'delete_attachment_warning'                    => '¿Está seguro que desea eliminar este archivo adjunto?',
     'delete_client'                                => 'Eliminar cliente',
     'delete_client_warning'                        => 'Si eliminas este cliente de igual manera eliminaras cualquier documento relacionado, ¿Está seguro que desea eliminar este cliente permanentemente?',
-    
+
     'delete_provider'                                => 'Eliminar proveedor',
     'delete_provider_warning'                        => 'Si eliminas este proveedor de igual manera eliminaras cualquier documento relacionado, ¿Está seguro que desea eliminar este cliente permanentemente?',
-    
-    
+
+
     'delete_invoice'                               => 'Eliminar factura',
     'delete_invoice_warning'                       => 'Si eliminas esta factura, no podrás recuperarla más adelante. ¿Está seguro que desea eliminar permanentemente esta factura?',
     'delete_quote'                                 => 'Eliminar Presupuesto',
@@ -303,6 +303,7 @@ $lang = array(
     'invoiceplane_news'                            => 'InvoicePlane News',
     'invoices'                                     => 'Facturas',
     'invoices_due_after'                           => 'Facturas Vencidas días después',
+    'invoices_provider'                            => 'Facturas de proveedores',
     'is_not_writable'                              => 'No se puede editar',
     'is_writable'                                  => 'Se puede editar',
     'item'                                         => 'Artículo',
