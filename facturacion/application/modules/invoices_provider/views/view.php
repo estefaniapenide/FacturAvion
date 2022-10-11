@@ -195,7 +195,7 @@ if ($this->config->item('disable_read_only') == true) {
 <div id="headerbar">
     <h1 class="headerbar-title">
         <?php
-        echo trans('invoice') . ' ';
+        echo trans('invoice_provider') . ' ';
         echo($invoice->invoice_number ? '#' . $invoice->invoice_number : $invoice->invoice_id);
         ?>
     </h1>
@@ -357,7 +357,7 @@ if ($this->config->item('disable_read_only') == true) {
                             <div class="col-xs-12 col-md-6">
 
                                 <div class="invoice-properties">
-                                    <label><?php _trans('invoice'); ?> #</label>
+                                    <label><?php _trans('invoice_provider'); ?> #</label>
                                     <input type="text" id="invoice_number" class="form-control input-sm"
                                         <?php if ($invoice->invoice_number) : ?>
                                             value="<?php echo $invoice->invoice_number; ?>"

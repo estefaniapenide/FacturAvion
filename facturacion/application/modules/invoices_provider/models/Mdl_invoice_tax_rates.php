@@ -62,7 +62,7 @@ class Mdl_Invoice_Tax_Rates extends Response_Model
         return array(
             'invoice_id' => array(
                 'field' => 'invoice_id',
-                'label' => trans('invoice'),
+                'label' => trans('invoice_provider'),
                 'rules' => 'required'
             ),
             'tax_rate_id' => array(

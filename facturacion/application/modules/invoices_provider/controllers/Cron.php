@@ -103,7 +103,7 @@ class Cron extends Base_Controller
 
                 $subject = !empty($tpl->email_template_subject) ?
                     $tpl->email_template_subject :
-                    trans('invoice') . ' #' . $new_invoice->invoice_number;
+                    trans('invoice_provider') . ' #' . $new_invoice->invoice_number;
 
                 $pdf_template = $tpl->email_template_pdf_template;
                 $to = $invoice->client_email;

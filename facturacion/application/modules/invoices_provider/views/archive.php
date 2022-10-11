@@ -8,7 +8,7 @@
                 <input name="invoice_number" id="invoice_number" type="text" class="form-control input-sm">
                 <span class="input-group-btn">
                     <button class="btn btn-default btn-sm"
-                            type="submit"><?php _trans('filter_invoices'); ?></button>
+                            type="submit"><?php _trans('filter_invoices_provider'); ?></button>
                 </span>
             </div>
         </form>

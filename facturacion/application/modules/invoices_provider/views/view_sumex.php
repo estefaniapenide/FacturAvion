@@ -479,7 +479,7 @@ if ($this->config->item('disable_read_only') == true) {
                                 </div>
 
                                 <div class="invoice-properties">
-                                    <label><?php _trans('invoice'); ?> #</label>
+                                    <label><?php _trans('invoice_provider'); ?> #</label>
                                     <input type="text" id="invoice_number"
                                            class="input-sm form-control"
                                         <?php if ($invoice->invoice_number) : ?>

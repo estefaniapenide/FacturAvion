@@ -3,7 +3,7 @@
 
         <thead>
         <tr>
-            <th><?php _trans('invoice'); ?></th>
+            <th><?php _trans('invoice_provider'); ?></th>
             <th><?php _trans('created'); ?></th>
         </tr>
         </thead>
@@ -14,7 +14,7 @@
             <tr>
                 <td>
                     <a href="<?php echo site_url('invoices/download/' . basename($invoice)); ?>"
-                       title="<?php _trans('invoice'); ?>">
+                       title="<?php _trans('invoice_provider'); ?>">
                         <?php echo basename($invoice); ?>
                     </a>
                 </td>

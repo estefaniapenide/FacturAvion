@@ -49,7 +49,7 @@ class Mdl_Items extends Response_Model
         return [
             'invoice_id' => [
                 'field' => 'invoice_id',
-                'label' => trans('invoice'),
+                'label' => trans('invoice_provider'),
                 'rules' => 'required',
             ],
             'item_sku' => [
