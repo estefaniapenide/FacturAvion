@@ -31,7 +31,7 @@ class InvoicesProvider extends Admin_Controller
     public function index()
     {
         // Display all invoices by default
-        redirect('invoices/status/all');
+        redirect('invoicesProvider/status/all');
     }
 
     /**
@@ -59,21 +59,21 @@ class InvoicesProvider extends Admin_Controller
                 break;
         }
 
-        $this->mdl_invoices->paginate(site_url('invoices/status/' . $status), $page);
+        $this->mdl_invoices->paginate(site_url('invoicesProvider/status/' . $status), $page);
         $invoices = $this->mdl_invoices->result();
 
         $this->layout->set(
             [
-                'invoices' => $invoices,
+                'invoices_provider' => $invoices,
                 'status' => $status,
                 'filter_display' => true,
                 'filter_placeholder' => trans('filter_invoices_provider'),
                 'filter_method' => 'filter_invoices',
-                'invoice_statuses' => $this->mdl_invoices->statuses(),
+                'invoice_provider_statuses' => $this->mdl_invoices->statuses(),
             ]
         );
 
-        $this->layout->buffer('content', 'invoices/index');
+        $this->layout->buffer('content', 'invoicesProvider/index');
         $this->layout->render();
     }
 
@@ -81,14 +81,14 @@ class InvoicesProvider extends Admin_Controller
     {
         $invoice_array = [];
 
-        if (isset($_POST['invoice_number'])) {
-            $invoiceNumber = $_POST['invoice_number'];
+        if (isset($_POST['invoice_provider_number'])) {
+            $invoiceNumber = $_POST['invoice_provider_number'];
             $invoice_array = glob(UPLOADS_ARCHIVE_FOLDER . '*' . '_' . $invoiceNumber . '.pdf');
             $this->layout->set(
                 [
-                    'invoices_archive' => $invoice_array,
+                    'invoice_provider_archive' => $invoice_array,
                 ]);
-            $this->layout->buffer('content', 'invoices/archive');
+            $this->layout->buffer('content', 'invoicesProvider/archive');
             $this->layout->render();
 
         } else {
@@ -101,7 +101,7 @@ class InvoicesProvider extends Admin_Controller
                 [
                     'invoices_archive' => $invoice_array,
                 ]);
-            $this->layout->buffer('content', 'invoices/archive');
+            $this->layout->buffer('content', 'invoicesProvider/archive');
             $this->layout->render();
         }
     }
@@ -132,7 +132,7 @@ class InvoicesProvider extends Admin_Controller
         );
 
         $this->load->helper("custom_values");
-        $this->load->helper("client");
+        //$this->load->helper("client");
         $this->load->model('units/mdl_units');
         $this->load->module('payments');
 
@@ -160,7 +160,7 @@ class InvoicesProvider extends Admin_Controller
             show_404();
         }
 
-        $custom_fields = $this->mdl_custom_fields->by_table('ip_invoice_custom')->get()->result();
+        $custom_fields = $this->mdl_custom_fields->by_table('ip_invoice_provider_custom')->get()->result();
         $custom_values = [];
         foreach ($custom_fields as $custom_field) {
             if (in_array($custom_field->custom_field_type, $this->mdl_custom_values->custom_value_fields())) {
@@ -188,11 +188,11 @@ class InvoicesProvider extends Admin_Controller
 
         $this->layout->set(
             [
-                'invoice' => $invoice,
-                'items' => $this->mdl_items->where('invoice_id', $invoice_id)->get()->result(),
-                'invoice_id' => $invoice_id,
+                'invoice_provider' => $invoice,
+                'items' => $this->mdl_items->where('invoice_provider_id', $invoice_id)->get()->result(),
+                'invoice_provider_id' => $invoice_id,
                 'tax_rates' => $this->mdl_tax_rates->get()->result(),
-                'invoice_tax_rates' => $this->mdl_invoice_tax_rates->where('invoice_id', $invoice_id)->get()->result(),
+                'invoice_tax_rates' => $this->mdl_invoice_tax_rates->where('invoice_provider_id', $invoice_id)->get()->result(),
                 'units' => $this->mdl_units->get()->result(),
                 'payment_methods' => $this->mdl_payment_methods->get()->result(),
                 'custom_fields' => $custom_fields,
@@ -207,25 +207,16 @@ class InvoicesProvider extends Admin_Controller
             ]
         );
 
-        if ($invoice->sumex_id != null) {
+
             $this->layout->buffer(
                 [
-                    ['modal_delete_invoice', 'invoices/modal_delete_invoice'],
-                    ['modal_add_invoice_tax', 'invoices/modal_add_invoice_tax'],
+                    ['modal_delete_invoice', 'invoicesProvider/modal_delete_invoice'],
+                    ['modal_add_invoice_tax', 'invoicesProvider/modal_add_invoice_tax'],
                     ['modal_add_payment', 'payments/modal_add_payment'],
-                    ['content', 'invoices/view_sumex'],
+                    ['content', 'invoicesProvider/view'],
                 ]
             );
-        } else {
-            $this->layout->buffer(
-                [
-                    ['modal_delete_invoice', 'invoices/modal_delete_invoice'],
-                    ['modal_add_invoice_tax', 'invoices/modal_add_invoice_tax'],
-                    ['modal_add_payment', 'payments/modal_add_payment'],
-                    ['content', 'invoices/view'],
-                ]
-            );
-        }
+
 
         $this->layout->render();
     }
@@ -252,7 +243,7 @@ class InvoicesProvider extends Admin_Controller
         }
 
         // Redirect to invoice index
-        redirect('invoices/index');
+        redirect('invoicesProvider/index');
     }
 
     /**
@@ -277,40 +268,16 @@ class InvoicesProvider extends Admin_Controller
      */
     public function generate_zugferd_xml($invoice_id)
     {
-        $this->load->model('invoices/mdl_items');
+        $this->load->model('invoicesProvider/mdl_items');
         $this->load->library('ZugferdXml', [
-            'invoice' => $this->mdl_invoices->get_by_id($invoice_id),
-            'items' => $this->mdl_items->where('invoice_id', $invoice_id)->get()->result(),
+            'invoice_provider' => $this->mdl_invoices->get_by_id($invoice_id),
+            'items' => $this->mdl_items->where('invoice_provider_id', $invoice_id)->get()->result(),
         ]);
 
         $this->output->set_content_type('text/xml');
         $this->output->set_output($this->zugferdxml->xml());
     }
 
-    public function generate_sumex_pdf($invoice_id)
-    {
-        $this->load->helper('pdf');
-
-        generate_invoice_sumex($invoice_id);
-    }
-
-    public function generate_sumex_copy($invoice_id)
-    {
-
-
-        $this->load->model('invoices/mdl_items');
-        $this->load->library('Sumex', [
-            'invoice' => $this->mdl_invoices->get_by_id($invoice_id),
-            'items' => $this->mdl_items->where('invoice_id', $invoice_id)->get()->result(),
-            'options' => [
-                'copy' => "1",
-                'storno' => "0",
-            ],
-        ]);
-
-        $this->output->set_content_type('application/pdf');
-        $this->output->set_output($this->sumex->pdf());
-    }
 
     /**
      * @param $invoice_id
@@ -324,13 +291,13 @@ class InvoicesProvider extends Admin_Controller
         $this->load->model('mdl_invoice_amounts');
         $this->mdl_invoice_amounts->calculate($invoice_id);
 
-        redirect('invoices/view/' . $invoice_id);
+        redirect('invoicesProvider/view/' . $invoice_id);
     }
 
     public function recalculate_all_invoices()
     {
-        $this->db->select('invoice_id');
-        $invoice_ids = $this->db->get('ip_invoices')->result();
+        $this->db->select('invoice_provider_id');
+        $invoice_ids = $this->db->get('ip_invoices_provider')->result();
 
         $this->load->model('mdl_invoice_amounts');
 
