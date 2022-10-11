@@ -28,6 +28,18 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-caret-down"></i> &nbsp;
+                        <span class="hidden-md"><?php _trans('providers'); ?></span>
+                        <i class="visible-md-inline fa fa-users"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><?php echo anchor('providers/form', trans('add_provider')); ?></li>
+                        <li><?php echo anchor('providers/index', trans('view_providers')); ?></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-caret-down"></i> &nbsp;
                         <span class="hidden-md"><?php _trans('quotes'); ?></span>
                         <i class="visible-md-inline fa fa-file"></i>
                     </a>
