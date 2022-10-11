@@ -66,7 +66,7 @@ $cv = $this->controller->view_data['custom_values'];
 
                         <div class="form-group">
                             <label for="provider_comercial_name">
-                                <?php _trans('provider_comercial_name_optional'); ?>
+                                <?php _trans('provider_comercial_name'); ?>
                             </label>
                             <input id="provider_comercial_name" name="provider_comercial_name" type="text" class="form-control"
                                    value="<?php echo $this->mdl_providers->form_value('provider_comercial_name', true); ?>">

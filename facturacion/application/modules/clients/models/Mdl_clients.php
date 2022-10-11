@@ -173,8 +173,8 @@ class Mdl_Clients extends Response_Model
      */
     public function delete($id)
     {
-        parent::delete($id);
-
+        $this->db->where($this->primary_key, $id);
+        $this->db->delete($this->table);
         $this->load->helper('orphan');
         delete_orphans();
     }

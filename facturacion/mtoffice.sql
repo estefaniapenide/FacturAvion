@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 11-10-2022 a las 15:42:41
+-- Tiempo de generación: 11-10-2022 a las 16:40:23
 -- Versión del servidor: 5.7.33-0ubuntu0.16.04.1
 -- Versión de PHP: 7.0.33-0ubuntu0.16.04.16
 
@@ -31,8 +31,7 @@ TRUNCATE TABLE `ip_clients`;
 
 INSERT INTO `ip_clients` (`client_id`, `client_date_created`, `client_date_modified`, `client_name`, `client_address_1`, `client_address_2`, `client_city`, `client_state`, `client_zip`, `client_country`, `client_phone`, `client_fax`, `client_mobile`, `client_email`, `client_web`, `client_vat_id`, `client_tax_code`, `client_language`, `client_active`, `client_surname`, `client_avs`, `client_insurednumber`, `client_veka`, `client_birthdate`, `client_gender`) VALUES
 (1, '2022-10-10 11:49:15', '2022-10-10 15:26:03', 'Carlin', 'Plaza independencia', '', 'Vigo', 'Galicia', '36234', 'ES', '986543210', '', '657456124', 'carlinmtoffice@gmail.com', 'carlin.com', '8756354A', '', 'system', 1, '', NULL, NULL, NULL, '2019-11-20', 2),
-(2, '2022-10-10 11:54:48', '2022-10-10 11:54:48', 'garajesvigo', 'plaza américa 3', '', 'Vigo', 'Galicia', '36211', 'ES', '986546398', '', '687238456', 'garajesvigo@gmail.com', 'garajesvigo.es', '97645676W', '', 'system', 1, '', NULL, NULL, NULL, '2019-07-23', 2),
-(8, '2022-10-11 14:31:58', '2022-10-11 14:31:58', 'asdsadas', 'kkjlkjlkjl', 'lkjlkjlkjlkjlk', 'lkjlkjlkj', 'lkjlkjlkj', '123123', 'AL', '123123123', '123123123', '123123123', 'assadsa@gmail.com', 'sdsadsadsa.com', 'asdsadsada', 'sadsadsadsa', 'Albanian', 1, 'ljlkjl', NULL, NULL, NULL, '2022-10-12', 0);
+(2, '2022-10-10 11:54:48', '2022-10-10 11:54:48', 'garajesvigo', 'plaza américa 3', '', 'Vigo', 'Galicia', '36211', 'ES', '986546398', '', '687238456', 'garajesvigo@gmail.com', 'garajesvigo.es', '97645676W', '', 'system', 1, '', NULL, NULL, NULL, '2019-07-23', 2);
 
 --
 -- Truncar tablas antes de insertar `ip_client_custom`
@@ -44,8 +43,7 @@ TRUNCATE TABLE `ip_client_custom`;
 --
 
 INSERT INTO `ip_client_custom` (`client_custom_id`, `client_id`, `client_custom_fieldid`, `client_custom_fieldvalue`) VALUES
-(1, 1, 1, 'http://facebook.com/lalalala'),
-(7, 8, 1, 'facebook');
+(1, 1, 1, 'http://facebook.com/lalalala');
 
 --
 -- Truncar tablas antes de insertar `ip_client_notes`
@@ -314,7 +312,7 @@ TRUNCATE TABLE `ip_providers`;
 --
 
 INSERT INTO `ip_providers` (`provider_id`, `provider_date_created`, `provider_date_modified`, `provider_name`, `provider_comercial_name`, `provider_address_1`, `provider_address_2`, `provider_city`, `provider_state`, `provider_zip`, `provider_country`, `provider_phone`, `provider_mobile`, `provider_email`, `provider_web`, `provider_vat_id`, `provider_language`, `provider_active`) VALUES
-(9, '2022-10-11 15:41:37', '2022-10-11 15:41:37', 'sffsdf', NULL, 'sadsadsda', 'sadsadadsa', 'asdsad', 'adsadsa', '123123', 'DE', '4323243', '131231323', 'sdsadsa@gmail.com', 'sadsasad.com', '12321313', 'Arabic', 1);
+(11, '2022-10-11 15:49:51', '2022-10-11 16:39:49', 'sffsdf', 'lalalala', 'sadsadsda', 'sadsadadsa', 'asdsad', 'adsadsa', '123123', 'DE', '4323243', '131231323', 'sdsadsa@gmail.com', 'sadsasad.com', '12321313', 'Arabic', 1);
 
 --
 -- Truncar tablas antes de insertar `ip_provider_custom`
@@ -713,18 +711,6 @@ TRUNCATE TABLE `ip_user_clients`;
 --
 
 TRUNCATE TABLE `ip_user_custom`;
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `ip_user_providers`
---
-
-CREATE TABLE `ip_user_providers` (
-  `user_provider_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `provider_id` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
 --
 -- Truncar tablas antes de insertar `ip_user_providers`
 --
@@ -776,26 +762,6 @@ INSERT INTO `ip_versions` (`version_id`, `version_date_applied`, `version_file`,
 (34, '1665399460', '033_1.5.10.sql', 0),
 (35, '1665399460', '034_1.5.11.sql', 0);
 
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `ip_user_providers`
---
-ALTER TABLE `ip_user_providers`
-  ADD PRIMARY KEY (`user_provider_id`),
-  ADD KEY `user_id` (`user_id`,`provider_id`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `ip_user_providers`
---
-ALTER TABLE `ip_user_providers`
-  MODIFY `user_provider_id` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

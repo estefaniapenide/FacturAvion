@@ -41,9 +41,9 @@ class Mdl_providers extends Response_Model
                 'label' => trans('provider_name'),
                 'rules' => 'required'
             ),
-            'provider_surname' => array(
-                'field' => 'provider_surname',
-                'label' => trans('provider_surname')
+            'provider_comercial_name' => array(
+                'field' => 'provider_comercial_name',
+                'label' => trans('provider_comercial_name')
             ),
             'provider_active' => array(
                 'field' => 'provider_active'
@@ -73,9 +73,6 @@ class Mdl_providers extends Response_Model
             'provider_phone' => array(
                 'field' => 'provider_phone'
             ),
-            'provider_fax' => array(
-                'field' => 'provider_fax'
-            ),
             'provider_mobile' => array(
                 'field' => 'provider_mobile'
             ),
@@ -87,30 +84,6 @@ class Mdl_providers extends Response_Model
             ),
             'provider_vat_id' => array(
                 'field' => 'provider_vat_id'
-            ),
-            'provider_tax_code' => array(
-                'field' => 'provider_tax_code'
-            ),
-            // SUMEX
-            'provider_birthdate' => array(
-                'field' => 'provider_birthdate',
-                'rules' => 'callback_convert_date'
-            ),
-            'provider_gender' => array(
-                'field' => 'provider_gender'
-            ),
-            'provider_avs' => array(
-                'field' => 'provider_avs',
-                'label' => trans('sumex_ssn'),
-                'rules' => 'callback_fix_avs'
-            ),
-            'provider_insurednumber' => array(
-                'field' => 'provider_insurednumber',
-                'label' => trans('sumex_insurednumber')
-            ),
-            'provider_veka' => array(
-                'field' => 'provider_veka',
-                'label' => trans('sumex_veka')
             ),
         );
     }

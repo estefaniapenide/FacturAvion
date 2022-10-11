@@ -59,11 +59,14 @@ foreach ($custom_fields as $custom_field) {
                class="btn btn-default">
                 <i class="fa fa-edit"></i> <?php _trans('edit'); ?>
             </a>
-            <a class="btn btn-danger"
-               href="<?php echo site_url('clients/delete/' . $client->client_id); ?>"
-               onclick="return confirm('<?php _trans('delete_client_warning'); ?>');">
-                <i class="fa fa-trash-o"></i> <?php _trans('delete'); ?>
-            </a>
+            <form action="<?php echo site_url('clients/delete/' . $client->client_id); ?>"
+                                      method="POST">
+                                    <?php _csrf_field(); ?>
+                                    <button type="submit" class="btn btn-danger"
+                                            onclick="return confirm('<?php _trans('delete_client_warning'); ?>');">
+                                        <i class="fa fa-trash-o fa-margin"></i> <?php _trans('delete'); ?>
+                                    </button>
+                                </form>
         </div>
     </div>
 

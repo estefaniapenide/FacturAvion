@@ -174,7 +174,7 @@ $lang = array(
     'delete_provider'                                => 'Eliminar proveedor',
     'delete_provider_warning'                        => 'Si eliminas este proveedor de igual manera eliminaras cualquier documento relacionado, ¿Está seguro que desea eliminar este cliente permanentemente?',
 
-    'provider_comercial_name_optional'          => 'Nombre Comercial del proveedor',
+    'provider_comercial_name'          => 'Nombre Comercial del proveedor',
     'delete_invoice'                               => 'Eliminar factura',
     'delete_invoice_provider'                      => 'Eliminar factura de proveedor',
     'delete_invoice_warning'                       => 'Si eliminas esta factura, no podrás recuperarla más adelante. ¿Está seguro que desea eliminar permanentemente esta factura?',
@@ -556,7 +556,7 @@ $lang = array(
     'smtp_verify_certs'                            => 'Verificar certificados de SMTP',
     'sql_file'                                     => 'Archivo SQL',
     'start_date'                                   => 'Fecha de inicio',
-    'state'                                        => 'Estado',
+    'state'                                        => 'Provincia',
     'status'                                       => 'Situación',
     'stop'                                         => 'Detener',
     'street_address'                               => 'Dirección Calle',

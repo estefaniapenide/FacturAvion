@@ -48,11 +48,14 @@ foreach ($custom_fields as $custom_field) {
 
     <div class="headerbar-item pull-right">
         <div class="btn-group btn-group-sm">
-            <a class="btn btn-danger"
-               href="<?php echo site_url('providers/delete/' . $provider->provider_id); ?>"
-               onclick="return confirm('<?php _trans('delete_provider_warning'); ?>');">
-                <i class="fa fa-trash-o"></i> <?php _trans('delete'); ?>
-            </a>
+            <form action="<?php echo site_url('providers/delete/' . $provider->provider_id); ?>"
+                                      method="POST">
+                                    <?php _csrf_field(); ?>
+                                    <button type="submit" class="btn btn-danger"
+                                            onclick="return confirm('<?php _trans('delete_provider_warning'); ?>');">
+                                        <i class="fa fa-trash-o fa-margin"></i> <?php _trans('delete'); ?>
+                                    </button>
+                                </form>
         </div>
     </div>
 
