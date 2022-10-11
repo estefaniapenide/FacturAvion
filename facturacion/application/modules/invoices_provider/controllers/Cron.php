@@ -28,9 +28,8 @@ class Cron extends Base_Controller
             exit('Wrong cron key!');
         }
 
-        $this->load->model('invoices/mdl_invoices_recurring');
-        $this->load->model('invoices/mdl_invoices');
-        $this->load->model('invoices/mdl_invoice_amounts');
+        $this->load->model('invoicesProvider/mdl_invoices');
+        $this->load->model('invoicesProvider/mdl_invoice_amounts');
         $this->load->helper('mailer');
 
         // Gather a list of recurring invoices to generate
@@ -45,14 +44,14 @@ class Cron extends Base_Controller
 
             // Create the new invoice
             $db_array = array(
-                'client_id' => $invoice->client_id,
-                'invoice_date_created' => $invoice_recurring->recur_next_date,
-                'invoice_date_due' => $this->mdl_invoices->get_date_due($invoice_recurring->recur_next_date),
-                'invoice_group_id' => $invoice->invoice_group_id,
+                'provider_id' => $invoice->client_id,
+                'invoice_provider_date_created' => $invoice_recurring->recur_next_date,
+                'invoice_provider_date_due' => $this->mdl_invoices->get_date_due($invoice_recurring->recur_next_date),
+                'invoice_provider_group_id' => $invoice->invoice_group_id,
                 'user_id' => $invoice->user_id,
-                'invoice_number' => $this->mdl_invoices->get_invoice_number($invoice->invoice_group_id),
-                'invoice_url_key' => $this->mdl_invoices->get_url_key(),
-                'invoice_terms' => $invoice->invoice_terms
+                'invoice_provider_number' => $this->mdl_invoices->get_invoice_number($invoice->invoice_group_id),
+                'invoice_provider_url_key' => $this->mdl_invoices->get_url_key(),
+                'invoice_provider_terms' => $invoice->invoice_terms
             );
 
             // This is the new invoice id
@@ -60,9 +59,6 @@ class Cron extends Base_Controller
 
             // Copy the original invoice to the new invoice
             $this->mdl_invoices->copy_invoice($source_id, $target_id, false);
-
-            // Update the next recur date for the recurring invoice
-            $this->mdl_invoices_recurring->set_next_recur_date($invoice_recurring->invoice_recurring_id);
 
             // Email the new invoice if applicable
             if (get_setting('automatic_email_on_recur') && mailer_configured()) {

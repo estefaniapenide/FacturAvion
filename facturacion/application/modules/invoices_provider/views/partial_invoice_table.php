@@ -7,7 +7,7 @@
             <th><?php _trans('invoice_provider'); ?></th>
             <th><?php _trans('created'); ?></th>
             <th><?php _trans('due_date'); ?></th>
-            <th><?php _trans('client_name'); ?></th>
+            <th><?php _trans('provider_name'); ?></th>
             <th style="text-align: right;"><?php _trans('amount'); ?></th>
             <th style="text-align: right;"><?php _trans('balance'); ?></th>
             <th><?php _trans('options'); ?></th>
@@ -29,45 +29,42 @@
             ?>
             <tr>
                 <td>
-                    <span class="label <?php echo $invoice_statuses[$invoice->invoice_status_id]['class']; ?>">
-                        <?php echo $invoice_statuses[$invoice->invoice_status_id]['label'];
-                        if ($invoice->invoice_sign == '-1') { ?>
+                    <span class="label <?php echo $invoice_statuses[$invoice->invoice_provider_status_id]['class']; ?>">
+                        <?php echo $invoice_statuses[$invoice->invoice_provider_status_id]['label'];
+                        if ($invoice->invoice_provider_sign == '-1') { ?>
                             &nbsp;<i class="fa fa-credit-invoice" title="<?php echo trans('credit_invoice') ?>"></i>
                         <?php } ?>
                         <?php if ($invoice->is_read_only) { ?>
                             &nbsp;<i class="fa fa-read-only" title="<?php _trans('read_only') ?>"></i>
                         <?php } ?>
-                        <?php if ($invoice->invoice_is_recurring) { ?>
-                            &nbsp;<i class="fa fa-refresh" title="<?php echo trans('recurring') ?>"></i>
-                        <?php } ?>
                     </span>
                 </td>
 
                 <td>
-                    <a href="<?php echo site_url('invoices/view/' . $invoice->invoice_id); ?>"
+                    <a href="<?php echo site_url('invoicesProvider/view/' . $invoice->invoice_provider_id); ?>"
                        title="<?php _trans('edit'); ?>">
-                        <?php echo($invoice->invoice_number ? $invoice->invoice_number : $invoice->invoice_id); ?>
+                        <?php echo($invoice->invoice_provider_number ? $invoice->invoice_provider_number : $invoice->invoice_id); ?>
                     </a>
                 </td>
 
                 <td>
-                    <?php echo date_from_mysql($invoice->invoice_date_created); ?>
+                    <?php echo date_from_mysql($invoice->invoice_provider_date_created); ?>
                 </td>
 
                 <td>
                     <span class="<?php if ($invoice->is_overdue) { ?>font-overdue<?php } ?>">
-                        <?php echo date_from_mysql($invoice->invoice_date_due); ?>
+                        <?php echo date_from_mysql($invoice->invoice_provider_date_due); ?>
                     </span>
                 </td>
 
                 <td>
-                    <a href="<?php echo site_url('clients/view/' . $invoice->client_id); ?>"
-                       title="<?php _trans('view_client'); ?>">
+                    <a href="<?php echo site_url('providers/view/' . $invoice->provider_id); ?>"
+                       title="<?php _trans('view_provider'); ?>">
                         <?php _htmlsc(format_client($invoice)); ?>
                     </a>
                 </td>
 
-                <td class="amount <?php if ($invoice->invoice_sign == '-1') {
+                <td class="amount <?php if ($invoice->invoice_provider_sign == '-1') {
                     echo 'text-danger';
                 }; ?>">
                     <?php echo format_currency($invoice->invoice_total); ?>
@@ -85,25 +82,25 @@
                         <ul class="dropdown-menu">
                             <?php if ($invoice->is_read_only != 1) { ?>
                                 <li>
-                                    <a href="<?php echo site_url('invoices/view/' . $invoice->invoice_id); ?>">
+                                    <a href="<?php echo site_url('invoicesProvider/view/' . $invoice->invoice_provider_id); ?>">
                                         <i class="fa fa-edit fa-margin"></i> <?php _trans('edit'); ?>
                                     </a>
                                 </li>
                             <?php } ?>
                             <li>
-                                <a href="<?php echo site_url('invoices/generate_pdf/' . $invoice->invoice_id); ?>"
+                                <a href="<?php echo site_url('invoicesProvider/generate_pdf/' . $invoice->invoice_provider_id); ?>"
                                    target="_blank">
                                     <i class="fa fa-print fa-margin"></i> <?php _trans('download_pdf'); ?>
                                 </a>
                             </li>
                             <li>
-                                <a href="<?php echo site_url('mailer/invoice/' . $invoice->invoice_id); ?>">
+                                <a href="<?php echo site_url('mailer/invoice/' . $invoice->invoice_provider_id); ?>">
                                     <i class="fa fa-send fa-margin"></i> <?php _trans('send_email'); ?>
                                 </a>
                             </li>
                             <li>
                                 <a href="#" class="invoice-add-payment"
-                                   data-invoice-id="<?php echo $invoice->invoice_id; ?>"
+                                   data-invoice-id="<?php echo $invoice->invoice_provider_id; ?>"
                                    data-invoice-balance="<?php echo $invoice->invoice_balance; ?>"
                                    data-invoice-payment-method="<?php echo $invoice->payment_method; ?>">
                                     <i class="fa fa-money fa-margin"></i>
@@ -115,7 +112,7 @@
                                 ($this->config->item('enable_invoice_deletion') === true && $invoice->is_read_only != 1)
                             ) { ?>
                                 <li>
-                                    <form action="<?php echo site_url('invoices/delete/' . $invoice->invoice_id); ?>"
+                                    <form action="<?php echo site_url('invoices/delete/' . $invoice->invoice_provider_id); ?>"
                                           method="POST">
                                         <?php _csrf_field(); ?>
                                         <button type="submit" class="dropdown-button"
