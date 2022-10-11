@@ -16,7 +16,7 @@
 				<td>
 					<?php echo ($provider->provider_active) ? '<span class="label active">' . trans('yes') . '</span>' : '<span class="label inactive">' . trans('no') . '</span>'; ?>
 				</td>
-                <td><?php echo anchor('providers/view/' . $provider->provider_id, htmlsc(format_provider($provider))); ?></td>
+                <td><?php echo anchor('providers/view/' . $provider->provider_id, htmlsc($provider->provider_name)); ?></td>
                 <td><?php _htmlsc($provider->provider_email); ?></td>
                 <td><?php _htmlsc($provider->provider_phone ? $provider->provider_phone : ($provider->provider_mobile ? $provider->provider_mobile : '')); ?></td>
                 <td class="amount"><?php echo format_currency($provider->provider_invoice_balance); ?></td>

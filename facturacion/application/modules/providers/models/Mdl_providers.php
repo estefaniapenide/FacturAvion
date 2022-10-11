@@ -175,7 +175,7 @@ class Mdl_providers extends Response_Model
     {
         parent::delete($id);
 
-        $this->load->helper('orphan');
+        $this->load->helper('orphan_provider');
         delete_orphans();
     }
 

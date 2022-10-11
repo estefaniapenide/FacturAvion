@@ -73,7 +73,7 @@ class Providers extends Admin_Controller
         if ($this->input->post('is_update') == 0 && $this->input->post('provider_name') != '') {
             $check = $this->db->get_where('ip_providers', array(
                 'provider_name' => $this->input->post('provider_name'),
-                'provider_surname' => $this->input->post('provider_surname')
+                'provider_comercial_name' => $this->input->post('provider_comercial_name')
             ))->result();
 
             if (!empty($check)) {
@@ -184,8 +184,7 @@ class Providers extends Admin_Controller
     {
         $this->load->model('providers/mdl_provider_notes');
         $this->load->model('invoices/mdl_invoices');
-        $this->load->model('quotes/mdl_quotes');
-        $this->load->model('payments/mdl_payments');
+        $this->load->model('payments_provider/mdl_payments');
         $this->load->model('custom_fields/mdl_custom_fields');
         $this->load->model('custom_fields/mdl_provider_custom');
 
@@ -208,11 +207,8 @@ class Providers extends Admin_Controller
             array(
                 'provider' => $provider,
                 'provider_notes' => $this->mdl_provider_notes->where('provider_id', $provider_id)->get()->result(),
-                'invoices' => $this->mdl_invoices->by_provider($provider_id)->limit(20)->get()->result(),
-                'quotes' => $this->mdl_quotes->by_provider($provider_id)->limit(20)->get()->result(),
                 'payments' => $this->mdl_payments->by_provider($provider_id)->limit(20)->get()->result(),
                 'custom_fields' => $custom_fields,
-                'quote_statuses' => $this->mdl_quotes->statuses(),
                 'invoice_statuses' => $this->mdl_invoices->statuses()
             )
         );
@@ -222,10 +218,6 @@ class Providers extends Admin_Controller
                 array(
                     'invoice_table',
                     'invoices/partial_invoice_table'
-                ),
-                array(
-                    'quote_table',
-                    'quotes/partial_quote_table'
                 ),
                 array(
                     'payment_table',
@@ -251,7 +243,6 @@ class Providers extends Admin_Controller
     public function delete($provider_id)
     {
         $this->mdl_providers->delete($provider_id);
-        redirect('providers');
     }
 
 }

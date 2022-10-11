@@ -44,21 +44,10 @@ foreach ($custom_fields as $custom_field) {
 ?>
 
 <div id="headerbar">
-    <h1 class="headerbar-title"><?php _htmlsc($provider); ?></h1>
+    <h1 class="headerbar-title"><?php _htmlsc($provider->provider_name); ?></h1>
 
     <div class="headerbar-item pull-right">
         <div class="btn-group btn-group-sm">
-            <a href="#" class="btn btn-default provider-create-quote"
-               data-provider-id="<?php echo $provider->provider_id; ?>">
-                <i class="fa fa-file"></i> <?php _trans('create_quote'); ?>
-            </a>
-            <a href="#" class="btn btn-default provider-create-invoice"
-               data-provider-id="<?php echo $provider->provider_id; ?>">
-                <i class="fa fa-file-text"></i> <?php _trans('create_invoice'); ?></a>
-            <a href="<?php echo site_url('providers/form/' . $provider->provider_id); ?>"
-               class="btn btn-default">
-                <i class="fa fa-edit"></i> <?php _trans('edit'); ?>
-            </a>
             <a class="btn btn-danger"
                href="<?php echo site_url('providers/delete/' . $provider->provider_id); ?>"
                onclick="return confirm('<?php _trans('delete_provider_warning'); ?>');">
@@ -71,8 +60,6 @@ foreach ($custom_fields as $custom_field) {
 
 <ul id="submenu" class="nav nav-tabs nav-tabs-noborder">
     <li class="active"><a data-toggle="tab" href="#providerDetails"><?php _trans('details'); ?></a></li>
-    <li><a data-toggle="tab" href="#providerQuotes"><?php _trans('quotes'); ?></a></li>
-    <li><a data-toggle="tab" href="#providerInvoices"><?php _trans('invoices'); ?></a></li>
     <li><a data-toggle="tab" href="#providerPayments"><?php _trans('payments'); ?></a></li>
 </ul>
 
@@ -86,7 +73,7 @@ foreach ($custom_fields as $custom_field) {
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-6">
 
-                    <h3><?php _htmlsc($provider); ?></h3>
+                    <h3><?php _htmlsc($provider->provider_name); ?></h3>
                     <p>
                         <?php $this->layout->load_view('providers/partial_provider_address'); ?>
                     </p>
@@ -159,12 +146,6 @@ foreach ($custom_fields as $custom_field) {
                                         <td><?php _htmlsc($provider->provider_mobile); ?></td>
                                     </tr>
                                 <?php endif; ?>
-                                <?php if ($provider->provider_fax) : ?>
-                                    <tr>
-                                        <th><?php _trans('fax'); ?></th>
-                                        <td><?php _htmlsc($provider->provider_fax); ?></td>
-                                    </tr>
-                                <?php endif; ?>
                                 <?php if ($provider->provider_web) : ?>
                                     <tr>
                                         <th><?php _trans('web'); ?></th>
@@ -202,12 +183,6 @@ foreach ($custom_fields as $custom_field) {
                                         <td><?php _htmlsc($provider->provider_vat_id); ?></td>
                                     </tr>
                                 <?php endif; ?>
-                                <?php if ($provider->provider_tax_code) : ?>
-                                    <tr>
-                                        <th><?php _trans('tax_code'); ?></th>
-                                        <td><?php _htmlsc($provider->provider_tax_code); ?></td>
-                                    </tr>
-                                <?php endif; ?>
 
                                 <?php foreach ($custom_fields as $custom_field) : ?>
                                     <?php if ($custom_field->custom_field_location != 4) {
@@ -228,65 +203,6 @@ foreach ($custom_fields as $custom_field) {
                     </div>
                 </div>
             </div>
-
-            <?php if ($provider->provider_surname != ""): //provider is not a company ?>
-                <hr>
-
-                <div class="row">
-                    <div class="col-xs-12 col-md-6">
-
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <?php _trans('personal_information'); ?>
-                            </div>
-
-                            <div class="panel-body table-content">
-                                <table class="table no-margin">
-                                    <tr>
-                                        <th><?php _trans('birthdate'); ?></th>
-                                        <td><?php echo format_date($provider->provider_birthdate); ?></td>
-                                    </tr>
-                                    <tr>
-                                        <th><?php _trans('gender'); ?></th>
-                                        <td><?php echo format_gender($provider->provider_gender) ?></td>
-                                    </tr>
-                                    <?php if ($this->mdl_settings->setting('sumex') == '1'): ?>
-                                        <tr>
-                                            <th><?php _trans('sumex_ssn'); ?></th>
-                                            <td><?php echo format_avs($provider->provider_avs) ?></td>
-                                        </tr>
-
-                                        <tr>
-                                            <th><?php _trans('sumex_insurednumber'); ?></th>
-                                            <td><?php _htmlsc($provider->provider_insurednumber) ?></td>
-                                        </tr>
-
-                                        <tr>
-                                            <th><?php _trans('sumex_veka'); ?></th>
-                                            <td><?php _htmlsc($provider->provider_veka) ?></td>
-                                        </tr>
-                                    <?php endif; ?>
-
-                                    <?php foreach ($custom_fields as $custom_field) : ?>
-                                        <?php if ($custom_field->custom_field_location != 3) {
-                                            continue;
-                                        } ?>
-                                        <tr>
-                                            <?php
-                                            $column = $custom_field->custom_field_label;
-                                            $value = $this->mdl_provider_custom->form_value('cf_' . $custom_field->custom_field_id);
-                                            ?>
-                                            <th><?php _htmlsc($column); ?></th>
-                                            <td><?php _htmlsc($value); ?></td>
-                                        </tr>
-                                    <?php endforeach; ?>
-                                </table>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            <?php endif; ?>
 
             <?php
             if ($custom_fields) : ?>
@@ -349,14 +265,6 @@ foreach ($custom_fields as $custom_field) {
                 </div>
             </div>
 
-        </div>
-
-        <div id="providerQuotes" class="tab-pane table-content">
-            <?php echo $quote_table; ?>
-        </div>
-
-        <div id="providerInvoices" class="tab-pane table-content">
-            <?php echo $invoice_table; ?>
         </div>
 
         <div id="providerPayments" class="tab-pane table-content">

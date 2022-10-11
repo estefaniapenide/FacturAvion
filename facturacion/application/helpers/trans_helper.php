@@ -26,7 +26,6 @@ function trans($line, $id = '', $default = null)
 {
     $CI = & get_instance();
     $lang_string = $CI->lang->line($line);
-
     // Fall back to default language if the current language has no translated string
     if (empty($lang_string)) {
         // Save the current application language (code borrowed from Base_Controller.php)

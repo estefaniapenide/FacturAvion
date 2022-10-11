@@ -13,7 +13,7 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * Class Mdl_Provider_Notes
  */
-class Mdl_Provider_Notes extends Response_Model
+class Mdl_provider_Notes extends Response_Model
 {
     public $table = 'ip_provider_notes';
     public $primary_key = 'ip_provider_notes.provider_note_id';

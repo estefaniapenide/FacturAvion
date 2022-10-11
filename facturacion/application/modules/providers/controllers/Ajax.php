@@ -43,7 +43,7 @@ class Ajax extends Admin_Controller
         $providers = $this->mdl_providers
             ->where('provider_active', 1)
             ->having('provider_name LIKE \'' . $moreprovidersQuery . $escapedQuery . '%\'')
-            ->or_having('provider_surname LIKE \'' . $moreprovidersQuery . $escapedQuery . '%\'')
+            ->or_having('provider_comercial_name LIKE \'' . $moreprovidersQuery . $escapedQuery . '%\'')
             ->or_having('provider_fullname LIKE \'' . $moreprovidersQuery . $escapedQuery . '%\'')
             ->order_by('provider_name')
             ->get()
