@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 10-10-2022 a las 16:10:05
+-- Tiempo de generación: 11-10-2022 a las 10:05:08
 -- Versión del servidor: 5.7.33-0ubuntu0.16.04.1
 -- Versión de PHP: 7.0.33-0ubuntu0.16.04.16
 
@@ -112,6 +112,38 @@ INSERT INTO `ip_invoices` (`invoice_id`, `user_id`, `client_id`, `invoice_group_
 (4, 3, 2, 3, 1, NULL, '', '2022-09-24', '13:11:59', '2022-10-10 15:37:45', '2022-10-24', '4', '0.00', '0.00', '', 'bu4Nf23cK5GtAgrxHdzQ81YLP6V9pUOa', 2, NULL),
 (5, 3, 2, 3, 1, NULL, '', '2022-10-24', '13:12:26', '2022-10-10 15:41:27', '2022-11-23', '5', '0.00', '0.00', '', 'o4gGd2KXZIbaCvOqJRYM9zLQhf7jes3W', 2, NULL);
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ip_invoices_provider`
+--
+
+CREATE TABLE `ip_invoices_provider` (
+  `invoice_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `provider_id` int(11) NOT NULL,
+  `invoice_group_id` int(11) NOT NULL,
+  `invoice_status_id` tinyint(2) NOT NULL DEFAULT '1',
+  `is_read_only` tinyint(1) DEFAULT NULL,
+  `invoice_password` varchar(90) DEFAULT NULL,
+  `invoice_date_created` date NOT NULL,
+  `invoice_time_created` time NOT NULL DEFAULT '00:00:00',
+  `invoice_date_modified` datetime NOT NULL,
+  `invoice_date_due` date NOT NULL,
+  `invoice_number` varchar(100) DEFAULT NULL,
+  `invoice_discount_amount` decimal(20,2) DEFAULT NULL,
+  `invoice_discount_percent` decimal(20,2) DEFAULT NULL,
+  `invoice_terms` longtext NOT NULL,
+  `invoice_url_key` char(32) NOT NULL,
+  `payment_method` int(11) NOT NULL DEFAULT '0',
+  `creditinvoice_parent_id` int(11) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Truncar tablas antes de insertar `ip_invoices_provider`
+--
+
+TRUNCATE TABLE `ip_invoices_provider`;
 --
 -- Truncar tablas antes de insertar `ip_invoices_recurring`
 --
@@ -267,6 +299,74 @@ INSERT INTO `ip_products` (`product_id`, `family_id`, `product_sku`, `product_na
 --
 
 TRUNCATE TABLE `ip_projects`;
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ip_providers`
+--
+
+CREATE TABLE `ip_providers` (
+  `provider_id` int(11) NOT NULL,
+  `provider_date_created` datetime NOT NULL,
+  `provider_date_modified` datetime NOT NULL,
+  `provider_name` text,
+  `provider_comercial_name` text,
+  `provider_address_1` text,
+  `provider_address_2` text,
+  `provider_city` text,
+  `provider_state` text,
+  `provider_zip` text,
+  `provider_country` text,
+  `provider_phone` text,
+  `provider_mobile` text,
+  `provider_email` text,
+  `provider_web` text,
+  `provider_vat_id` text,
+  `provider_language` varchar(255) DEFAULT 'system',
+  `provider_active` int(1) NOT NULL DEFAULT '1'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Truncar tablas antes de insertar `ip_providers`
+--
+
+TRUNCATE TABLE `ip_providers`;
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ip_provider_custom`
+--
+
+CREATE TABLE `ip_provider_custom` (
+  `provider_custom_id` int(11) NOT NULL,
+  `provider_id` int(11) NOT NULL,
+  `provider_custom_fieldid` int(11) NOT NULL,
+  `provider_custom_fieldvalue` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Truncar tablas antes de insertar `ip_provider_custom`
+--
+
+TRUNCATE TABLE `ip_provider_custom`;
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ip_provider_notes`
+--
+
+CREATE TABLE `ip_provider_notes` (
+  `provider_note_id` int(11) NOT NULL,
+  `provider_id` int(11) NOT NULL,
+  `provider_note_date` date NOT NULL,
+  `provider_note` longtext NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Truncar tablas antes de insertar `ip_provider_notes`
+--
+
+TRUNCATE TABLE `ip_provider_notes`;
 --
 -- Truncar tablas antes de insertar `ip_quotes`
 --
@@ -428,167 +528,167 @@ INSERT INTO `ip_settings` (`setting_id`, `setting_key`, `setting_value`) VALUES
 (92, 'gateway_authorizenet_aim_transactionKey', ''),
 (93, 'gateway_authorizenet_aim_testMode', '0'),
 (94, 'gateway_authorizenet_aim_developerMode', '0'),
-(95, 'gateway_authorizenet_aim_currency', 'ARS'),
+(95, 'gateway_authorizenet_aim_currency', 'AUD'),
 (96, 'gateway_authorizenet_aim_payment_method', ''),
 (97, 'gateway_authorizenet_sim_enabled', '0'),
 (98, 'gateway_authorizenet_sim_apiLoginId', ''),
 (99, 'gateway_authorizenet_sim_transactionKey', ''),
 (100, 'gateway_authorizenet_sim_testMode', '0'),
 (101, 'gateway_authorizenet_sim_developerMode', '0'),
-(102, 'gateway_authorizenet_sim_currency', 'ARS'),
+(102, 'gateway_authorizenet_sim_currency', 'AUD'),
 (103, 'gateway_authorizenet_sim_payment_method', ''),
 (104, 'gateway_buckaroo_ideal_enabled', '0'),
 (105, 'gateway_buckaroo_ideal_websiteKey', ''),
 (106, 'gateway_buckaroo_ideal_testMode', '0'),
-(107, 'gateway_buckaroo_ideal_currency', 'ARS'),
+(107, 'gateway_buckaroo_ideal_currency', 'AUD'),
 (108, 'gateway_buckaroo_ideal_payment_method', ''),
 (109, 'gateway_buckaroo_paypal_enabled', '0'),
 (110, 'gateway_buckaroo_paypal_websiteKey', ''),
 (111, 'gateway_buckaroo_paypal_testMode', '0'),
-(112, 'gateway_buckaroo_paypal_currency', 'ARS'),
+(112, 'gateway_buckaroo_paypal_currency', 'AUD'),
 (113, 'gateway_buckaroo_paypal_payment_method', ''),
 (114, 'gateway_cardsave_enabled', '0'),
 (115, 'gateway_cardsave_merchantId', ''),
-(116, 'gateway_cardsave_currency', 'ARS'),
+(116, 'gateway_cardsave_currency', 'AUD'),
 (117, 'gateway_cardsave_payment_method', ''),
 (118, 'gateway_coinbase_enabled', '0'),
 (119, 'gateway_coinbase_apiKey', ''),
 (120, 'gateway_coinbase_accountId', ''),
-(121, 'gateway_coinbase_currency', 'ARS'),
+(121, 'gateway_coinbase_currency', 'AUD'),
 (122, 'gateway_coinbase_payment_method', ''),
 (123, 'gateway_eway_rapid_enabled', '0'),
 (124, 'gateway_eway_rapid_apiKey', ''),
 (125, 'gateway_eway_rapid_testMode', '0'),
-(126, 'gateway_eway_rapid_currency', 'ARS'),
+(126, 'gateway_eway_rapid_currency', 'AUD'),
 (127, 'gateway_eway_rapid_payment_method', ''),
 (128, 'gateway_firstdata_connect_enabled', '0'),
 (129, 'gateway_firstdata_connect_storeId', ''),
 (130, 'gateway_firstdata_connect_testMode', '0'),
-(131, 'gateway_firstdata_connect_currency', 'ARS'),
+(131, 'gateway_firstdata_connect_currency', 'AUD'),
 (132, 'gateway_firstdata_connect_payment_method', ''),
 (133, 'gateway_gocardless_enabled', '0'),
 (134, 'gateway_gocardless_appId', ''),
 (135, 'gateway_gocardless_merchantId', ''),
 (136, 'gateway_gocardless_accessToken', ''),
 (137, 'gateway_gocardless_testMode', '0'),
-(138, 'gateway_gocardless_currency', 'ARS'),
+(138, 'gateway_gocardless_currency', 'AUD'),
 (139, 'gateway_gocardless_payment_method', ''),
 (140, 'gateway_migs_threeparty_enabled', '0'),
 (141, 'gateway_migs_threeparty_merchantId', ''),
 (142, 'gateway_migs_threeparty_merchantAccessCode', ''),
 (143, 'gateway_migs_threeparty_secureHash', ''),
-(144, 'gateway_migs_threeparty_currency', 'ARS'),
+(144, 'gateway_migs_threeparty_currency', 'AUD'),
 (145, 'gateway_migs_threeparty_payment_method', ''),
 (146, 'gateway_migs_twoparty_enabled', '0'),
 (147, 'gateway_migs_twoparty_merchantId', ''),
 (148, 'gateway_migs_twoparty_merchantAccessCode', ''),
 (149, 'gateway_migs_twoparty_secureHash', ''),
-(150, 'gateway_migs_twoparty_currency', 'ARS'),
+(150, 'gateway_migs_twoparty_currency', 'AUD'),
 (151, 'gateway_migs_twoparty_payment_method', ''),
 (152, 'gateway_mollie_enabled', '0'),
 (153, 'gateway_mollie_apiKey', ''),
-(154, 'gateway_mollie_currency', 'ARS'),
+(154, 'gateway_mollie_currency', 'AUD'),
 (155, 'gateway_mollie_payment_method', ''),
 (156, 'gateway_multisafepay_enabled', '0'),
 (157, 'gateway_multisafepay_accountId', ''),
 (158, 'gateway_multisafepay_siteId', ''),
 (159, 'gateway_multisafepay_siteCode', ''),
 (160, 'gateway_multisafepay_testMode', '0'),
-(161, 'gateway_multisafepay_currency', 'ARS'),
+(161, 'gateway_multisafepay_currency', 'AUD'),
 (162, 'gateway_multisafepay_payment_method', ''),
 (163, 'gateway_netaxept_enabled', '0'),
 (164, 'gateway_netaxept_merchantId', ''),
 (165, 'gateway_netaxept_testMode', '0'),
-(166, 'gateway_netaxept_currency', 'ARS'),
+(166, 'gateway_netaxept_currency', 'AUD'),
 (167, 'gateway_netaxept_payment_method', ''),
 (168, 'gateway_netbanx_enabled', '0'),
 (169, 'gateway_netbanx_accountNumber', ''),
 (170, 'gateway_netbanx_storeId', ''),
 (171, 'gateway_netbanx_testMode', '0'),
-(172, 'gateway_netbanx_currency', 'ARS'),
+(172, 'gateway_netbanx_currency', 'AUD'),
 (173, 'gateway_netbanx_payment_method', ''),
 (174, 'gateway_payfast_enabled', '0'),
 (175, 'gateway_payfast_merchantId', ''),
 (176, 'gateway_payfast_merchantKey', ''),
 (177, 'gateway_payfast_pdtKey', ''),
 (178, 'gateway_payfast_testMode', '0'),
-(179, 'gateway_payfast_currency', 'ARS'),
+(179, 'gateway_payfast_currency', 'AUD'),
 (180, 'gateway_payfast_payment_method', ''),
 (181, 'gateway_payflow_pro_enabled', '0'),
 (182, 'gateway_payflow_pro_username', ''),
 (183, 'gateway_payflow_pro_vendor', ''),
 (184, 'gateway_payflow_pro_partner', ''),
 (185, 'gateway_payflow_pro_testMode', '0'),
-(186, 'gateway_payflow_pro_currency', 'ARS'),
+(186, 'gateway_payflow_pro_currency', 'AUD'),
 (187, 'gateway_payflow_pro_payment_method', ''),
 (188, 'gateway_paymentexpress_pxpay_enabled', '0'),
 (189, 'gateway_paymentexpress_pxpay_username', ''),
 (190, 'gateway_paymentexpress_pxpay_pxPostUsername', ''),
 (191, 'gateway_paymentexpress_pxpay_testMode', '0'),
-(192, 'gateway_paymentexpress_pxpay_currency', 'ARS'),
+(192, 'gateway_paymentexpress_pxpay_currency', 'AUD'),
 (193, 'gateway_paymentexpress_pxpay_payment_method', ''),
 (194, 'gateway_paymentexpress_pxpost_enabled', '0'),
 (195, 'gateway_paymentexpress_pxpost_username', ''),
 (196, 'gateway_paymentexpress_pxpost_testMode', '0'),
-(197, 'gateway_paymentexpress_pxpost_currency', 'ARS'),
+(197, 'gateway_paymentexpress_pxpost_currency', 'AUD'),
 (198, 'gateway_paymentexpress_pxpost_payment_method', ''),
 (199, 'gateway_paypal_express_enabled', '0'),
 (200, 'gateway_paypal_express_username', ''),
 (201, 'gateway_paypal_express_testMode', '0'),
-(202, 'gateway_paypal_express_currency', 'ARS'),
+(202, 'gateway_paypal_express_currency', 'AUD'),
 (203, 'gateway_paypal_express_payment_method', ''),
 (204, 'gateway_paypal_pro_enabled', '0'),
 (205, 'gateway_paypal_pro_username', ''),
 (206, 'gateway_paypal_pro_signature', ''),
 (207, 'gateway_paypal_pro_testMode', '0'),
-(208, 'gateway_paypal_pro_currency', 'ARS'),
+(208, 'gateway_paypal_pro_currency', 'AUD'),
 (209, 'gateway_paypal_pro_payment_method', ''),
 (210, 'gateway_pin_enabled', '0'),
 (211, 'gateway_pin_testMode', '0'),
-(212, 'gateway_pin_currency', 'ARS'),
+(212, 'gateway_pin_currency', 'AUD'),
 (213, 'gateway_pin_payment_method', ''),
 (214, 'gateway_sagepay_direct_enabled', '0'),
 (215, 'gateway_sagepay_direct_vendor', ''),
 (216, 'gateway_sagepay_direct_testMode', '0'),
 (217, 'gateway_sagepay_direct_referrerId', ''),
-(218, 'gateway_sagepay_direct_currency', 'ARS'),
+(218, 'gateway_sagepay_direct_currency', 'AUD'),
 (219, 'gateway_sagepay_direct_payment_method', ''),
 (220, 'gateway_sagepay_server_enabled', '0'),
 (221, 'gateway_sagepay_server_vendor', ''),
 (222, 'gateway_sagepay_server_testMode', '0'),
 (223, 'gateway_sagepay_server_referrerId', ''),
-(224, 'gateway_sagepay_server_currency', 'ARS'),
+(224, 'gateway_sagepay_server_currency', 'AUD'),
 (225, 'gateway_sagepay_server_payment_method', ''),
 (226, 'gateway_securepay_directpost_enabled', '0'),
 (227, 'gateway_securepay_directpost_merchantId', ''),
 (228, 'gateway_securepay_directpost_testMode', '0'),
-(229, 'gateway_securepay_directpost_currency', 'ARS'),
+(229, 'gateway_securepay_directpost_currency', 'AUD'),
 (230, 'gateway_securepay_directpost_payment_method', ''),
 (231, 'gateway_stripe_enabled', '0'),
-(232, 'gateway_stripe_currency', 'ARS'),
+(232, 'gateway_stripe_currency', 'AUD'),
 (233, 'gateway_stripe_payment_method', ''),
 (234, 'gateway_targetpay_directebanking_enabled', '0'),
 (235, 'gateway_targetpay_directebanking_subAccountId', ''),
-(236, 'gateway_targetpay_directebanking_currency', 'ARS'),
+(236, 'gateway_targetpay_directebanking_currency', 'AUD'),
 (237, 'gateway_targetpay_directebanking_payment_method', ''),
 (238, 'gateway_targetpay_ideal_enabled', '0'),
 (239, 'gateway_targetpay_ideal_subAccountId', ''),
-(240, 'gateway_targetpay_ideal_currency', 'ARS'),
+(240, 'gateway_targetpay_ideal_currency', 'AUD'),
 (241, 'gateway_targetpay_ideal_payment_method', ''),
 (242, 'gateway_targetpay_mrcash_enabled', '0'),
 (243, 'gateway_targetpay_mrcash_subAccountId', ''),
-(244, 'gateway_targetpay_mrcash_currency', 'ARS'),
+(244, 'gateway_targetpay_mrcash_currency', 'AUD'),
 (245, 'gateway_targetpay_mrcash_payment_method', ''),
 (246, 'gateway_twocheckout_enabled', '0'),
 (247, 'gateway_twocheckout_accountNumber', ''),
 (248, 'gateway_twocheckout_testMode', '0'),
-(249, 'gateway_twocheckout_currency', 'ARS'),
+(249, 'gateway_twocheckout_currency', 'AUD'),
 (250, 'gateway_twocheckout_payment_method', ''),
 (251, 'gateway_worldpay_enabled', '0'),
 (252, 'gateway_worldpay_installationId', ''),
 (253, 'gateway_worldpay_accountId', ''),
 (254, 'gateway_worldpay_testMode', '0'),
-(255, 'gateway_worldpay_currency', 'ARS'),
+(255, 'gateway_worldpay_currency', 'AUD'),
 (256, 'gateway_worldpay_payment_method', ''),
 (257, 'smtp_password', 'Lo6MkH4WuO57W1GH9sKxu0+hsV1gZXvcQR8vo8HxEbz3YHvRxfRCLErx'),
 (258, 'enable_permissive_search_clients', '0');
@@ -700,6 +800,64 @@ INSERT INTO `ip_versions` (`version_id`, `version_date_applied`, `version_file`,
 (34, '1665399460', '033_1.5.10.sql', 0),
 (35, '1665399460', '034_1.5.11.sql', 0);
 
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `ip_invoices_provider`
+--
+ALTER TABLE `ip_invoices_provider`
+  ADD PRIMARY KEY (`invoice_id`),
+  ADD UNIQUE KEY `invoice_url_key` (`invoice_url_key`),
+  ADD KEY `user_id` (`user_id`,`provider_id`,`invoice_group_id`,`invoice_date_created`,`invoice_date_due`,`invoice_number`),
+  ADD KEY `invoice_status_id` (`invoice_status_id`);
+
+--
+-- Indices de la tabla `ip_providers`
+--
+ALTER TABLE `ip_providers`
+  ADD PRIMARY KEY (`provider_id`),
+  ADD KEY `provider_active` (`provider_active`);
+
+--
+-- Indices de la tabla `ip_provider_custom`
+--
+ALTER TABLE `ip_provider_custom`
+  ADD PRIMARY KEY (`provider_custom_id`),
+  ADD UNIQUE KEY `provider_id` (`provider_id`,`provider_custom_fieldid`);
+
+--
+-- Indices de la tabla `ip_provider_notes`
+--
+ALTER TABLE `ip_provider_notes`
+  ADD PRIMARY KEY (`provider_note_id`),
+  ADD KEY `provider_id` (`provider_id`,`provider_note_date`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `ip_invoices_provider`
+--
+ALTER TABLE `ip_invoices_provider`
+  MODIFY `invoice_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT de la tabla `ip_providers`
+--
+ALTER TABLE `ip_providers`
+  MODIFY `provider_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT de la tabla `ip_provider_custom`
+--
+ALTER TABLE `ip_provider_custom`
+  MODIFY `provider_custom_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `ip_provider_notes`
+--
+ALTER TABLE `ip_provider_notes`
+  MODIFY `provider_note_id` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
