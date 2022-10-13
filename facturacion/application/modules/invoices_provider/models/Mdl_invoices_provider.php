@@ -455,9 +455,9 @@ class Mdl_Invoices_Provider extends Response_Model
         return $this;
     }
 
-    public function by_client($client_id)
+    public function by_provider($provider_id)
     {
-        $this->filter_where('ip_invoices_provider.provider_id', $client_id);
+        $this->filter_where('ip_invoices_provider.provider_id', $provider_id);
         return $this;
     }
 

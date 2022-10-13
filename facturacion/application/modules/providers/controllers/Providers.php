@@ -208,7 +208,7 @@ class Providers extends Admin_Controller
                 'provider' => $provider,
                 'provider_notes' => $this->mdl_provider_notes->where('provider_id', $provider_id)->get()->result(),
                 'invoices' => $this->mdl_invoices_provider->by_provider($provider_id)->limit(20)->get()->result(),
-                'payments' => $this->mdl_payments_provider->by_provider($provider_id)->limit(20)->get()->result(),
+                'payments_provider' => $this->mdl_payments_provider->by_provider($provider_id)->limit(20)->get()->result(),
                 'custom_fields' => $custom_fields,
                 'invoice_statuses' => $this->mdl_invoices_provider->statuses()
             )
