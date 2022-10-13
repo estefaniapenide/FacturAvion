@@ -118,7 +118,7 @@ class Payments_provider extends Admin_Controller
             foreach ($fields as $fvalue) {
                 if ($fvalue->payment_custom_fieldid == $cfield->custom_field_id) {
                     // TODO: Hackish, may need a better optimization
-                    $this->mdl_payments->set_form_value(
+                    $this->mdl_payments_provider->set_form_value(
                         'custom[' . $cfield->custom_field_id . ']',
                         $fvalue->payment_custom_fieldvalue
                     );
@@ -147,10 +147,10 @@ class Payments_provider extends Admin_Controller
         );
 
         if ($id) {
-            $this->layout->set('payment', $this->mdl_payments->where('ip_payments.payment_id', $id)->get()->row());
+            $this->layout->set('payment', $this->mdl_payments_provider->where('ip_payments_provider.payment_id', $id)->get()->row());
         }
 
-        $this->layout->buffer('content', 'payments/form');
+        $this->layout->buffer('content', 'payments_provider/form');
         $this->layout->render();
     }
 
@@ -159,10 +159,10 @@ class Payments_provider extends Admin_Controller
      */
     public function online_logs($page = 0)
     {
-        $this->load->model('mdl_payment_logs');
+        $this->load->model('mdl_payment_provider_logs');
 
-        $this->mdl_payment_logs->paginate(site_url('payments/online_logs'), $page);
-        $payment_logs = $this->mdl_payment_logs->result();
+        $this->mdl_payment_provider_logs->paginate(site_url('payments_provider/online_logs'), $page);
+        $payment_logs = $this->mdl_payment_provider_logs->result();
 
         $this->layout->set(
             array(
@@ -170,7 +170,7 @@ class Payments_provider extends Admin_Controller
             )
         );
 
-        $this->layout->buffer('content', 'payments/online_logs');
+        $this->layout->buffer('content', 'payments_provider/online_logs');
         $this->layout->render();
     }
 
@@ -179,8 +179,8 @@ class Payments_provider extends Admin_Controller
      */
     public function delete($id)
     {
-        $this->mdl_payments->delete($id);
-        redirect('payments');
+        $this->mdl_payments_provider->delete($id);
+        redirect('payments_provider');
     }
 
 }

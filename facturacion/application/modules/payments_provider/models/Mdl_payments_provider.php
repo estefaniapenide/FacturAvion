@@ -13,10 +13,10 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * Class Mdl_Payments
  */
-class Mdl_Payments extends Response_Model
+class Mdl_Payments_provider extends Response_Model
 {
     public $table = 'ip_payments_provider';
-    public $primary_key = 'ip_payments.payment_id';
+    public $primary_key = 'ip_payments_provider.payment_id';
     public $validation_rules = 'validation_rules';
 
     public function default_select()
@@ -52,26 +52,26 @@ class Mdl_Payments extends Response_Model
     public function validation_rules()
     {
         return array(
-            'invoice_id' => array(
+            'invoice_provider_id' => array(
                 'field' => 'invoice_id',
                 'label' => trans('invoice'),
                 'rules' => 'required'
             ),
-            'payment_date' => array(
+            'payment_provider_date' => array(
                 'field' => 'payment_date',
                 'label' => trans('date'),
                 'rules' => 'required'
             ),
-            'payment_amount' => array(
+            'payment_provider_amount' => array(
                 'field' => 'payment_amount',
                 'label' => trans('payment'),
                 'rules' => 'required|callback_validate_payment_amount'
             ),
-            'payment_method_id' => array(
+            'payment_provider_method_id' => array(
                 'field' => 'payment_method_id',
                 'label' => trans('payment_method')
             ),
-            'payment_note' => array(
+            'payment_provider_note' => array(
                 'field' => 'payment_note',
                 'label' => trans('note')
             )
@@ -85,10 +85,10 @@ class Mdl_Payments extends Response_Model
     public function validate_payment_amount($amount)
     {
         $amount = (float)standardize_amount($amount);
-        $invoice_id = $this->input->post('invoice_id');
+        $invoice_id = $this->input->post('invoice_provider_id');
         $payment_id = $this->input->post('payment_id');
 
-        $invoice = $this->db->where('invoice_id', $invoice_id)->get('ip_invoice_provider_amounts')->row();
+        $invoice = $this->db->where('invoice_provider_id', $invoice_id)->get('ip_invoice_provider_amounts')->row();
 
         if ($invoice == null) {
             return false;
@@ -126,10 +126,10 @@ class Mdl_Payments extends Response_Model
         $id = parent::save($id, $db_array);
 
         // Recalculate invoice amounts
-        $this->mdl_invoice_amounts->calculate($db_array['invoice_id']);
+        $this->mdl_invoice_provider_amounts->calculate($db_array['invoice_provider_id']);
 
         // Set proper status for the invoice
-        $invoice = $this->db->where('invoice_id', $db_array['invoice_id'])->get('ip_invoice_provider_amounts')->row();
+        $invoice = $this->db->where('invoice_provider_id', $db_array['invoice_provider_id'])->get('ip_invoice_provider_amounts')->row();
 
         // Calculate sum for payments
         if ($invoice == null) {
@@ -140,13 +140,13 @@ class Mdl_Payments extends Response_Model
         $total = (float)$invoice->invoice_total;
 
         if ($paid >= $total) {
-            $this->db->where('invoice_id', $db_array['invoice_id']);
+            $this->db->where('invoice_provider_id', $db_array['invoice_provider_id']);
             $this->db->set('invoice_status_id', 4);
             $this->db->update('ip_invoices_provider');
         }
 
         // Recalculate invoice amounts
-        $this->mdl_invoice_amounts->calculate($db_array['invoice_id']);
+        $this->mdl_invoice_provider_amounts->calculate($db_array['invoice_provider_id']);
 
         return $id;
     }
@@ -158,8 +158,8 @@ class Mdl_Payments extends Response_Model
     {
         $db_array = parent::db_array();
 
-        $db_array['payment_date'] = date_to_mysql($db_array['payment_date']);
-        $db_array['payment_amount'] = standardize_amount($db_array['payment_amount']);
+        $db_array['payment_provider_date'] = date_to_mysql($db_array['payment_provider_date']);
+        $db_array['payment_provider_amount'] = standardize_amount($db_array['payment_provider_amount']);
 
         return $db_array;
     }
@@ -170,29 +170,29 @@ class Mdl_Payments extends Response_Model
     public function delete($id = null)
     {
         // Get the invoice id before deleting payment
-        $this->db->select('invoice_id');
-        $this->db->where('payment_id', $id);
+        $this->db->select('invoice_provider_id');
+        $this->db->where('payment_provider_id', $id);
         $invoice_id = $this->db->get('ip_payments_provider')->row()->invoice_id;
 
         // Delete the payment
         parent::delete($id);
 
         // Recalculate invoice amounts
-        $this->load->model('invoices/mdl_invoice_amounts');
+        $this->load->model('invoices_provider/mdl_invoice_provider_amounts');
         $this->mdl_invoice_amounts->calculate($invoice_id);
 
         // Change invoice status back to sent
-        $this->db->select('invoice_status_id');
-        $this->db->where('invoice_id', $invoice_id);
+        $this->db->select('invoice_provider_status_id');
+        $this->db->where('invoice_provider_id', $invoice_id);
         $invoice = $this->db->get('ip_invoices_provider')->row();
 
         if ($invoice->invoice_status_id == 4) {
-            $this->db->where('invoice_id', $invoice_id);
-            $this->db->set('invoice_status_id', 2);
+            $this->db->where('invoice_provider_id', $invoice_id);
+            $this->db->set('invoice_provider_status_id', 2);
             $this->db->update('ip_invoices_provider');
         }
 
-        $this->load->helper('orphan');
+        $this->load->helper('orphan_provider');
         delete_orphans();
     }
 
@@ -207,7 +207,7 @@ class Mdl_Payments extends Response_Model
         }
 
         if (!$id) {
-            parent::set_form_value('payment_date', date('Y-m-d'));
+            parent::set_form_value('payment_provider_date', date('Y-m-d'));
         }
 
         return true;

@@ -15,20 +15,20 @@
         </thead>
 
         <tbody>
-        <?php foreach ($payments as $payment) { ?>
+        <?php foreach ($payments_provider as $payment_provider) { ?>
             <tr>
-                <td><?php echo date_from_mysql($payment->payment_date); ?></td>
-                <td><?php echo date_from_mysql($payment->invoice_date_created); ?></td>
-                <td><?php echo anchor('invoices/view/' . $payment->invoice_id, $payment->invoice_number); ?></td>
+                <td><?php echo date_from_mysql($payment_provider->payment_date); ?></td>
+                <td><?php echo date_from_mysql($payment_provider->invoice_date_created); ?></td>
+                <td><?php echo anchor('invoices/view/' . $payment_provider->invoice_id, $payment_provider->invoice_number); ?></td>
                 <td>
-                    <a href="<?php echo site_url('clients/view/' . $payment->client_id); ?>"
+                    <a href="<?php echo site_url('clients/view/' . $payment_provider->client_id); ?>"
                        title="<?php _trans('view_client'); ?>">
-                        <?php _htmlsc(format_client($payment)); ?>
+                        <?php _htmlsc(format_client($payment_provider)); ?>
                     </a>
                 </td>
-                <td class="amount"><?php echo format_currency($payment->payment_amount); ?></td>
-                <td><?php _htmlsc($payment->payment_method_name); ?></td>
-                <td><?php _htmlsc($payment->payment_note); ?></td>
+                <td class="amount"><?php echo format_currency($payment_provider->payment_amount); ?></td>
+                <td><?php _htmlsc($payment_provider->payment_method_name); ?></td>
+                <td><?php _htmlsc($payment_provider->payment_note); ?></td>
                 <td>
                     <div class="options btn-group">
                         <a class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" href="#">
@@ -36,13 +36,13 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="<?php echo site_url('payments/form/' . $payment->payment_id); ?>">
+                                <a href="<?php echo site_url('payments/form/' . $payment_provider->payment_id); ?>">
                                     <i class="fa fa-edit fa-margin"></i>
                                     <?php _trans('edit'); ?>
                                 </a>
                             </li>
                             <li>
-                                <form action="<?php echo site_url('payments/delete/' . $payment->payment_id); ?>"
+                                <form action="<?php echo site_url('payments/delete/' . $payment_provider->payment_id); ?>"
                                       method="POST">
                                     <?php _csrf_field(); ?>
                                     <button type="submit" class="dropdown-button"
