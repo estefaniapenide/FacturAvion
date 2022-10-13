@@ -14,7 +14,9 @@ $lang = array(
     'payment_provider'                   => 'Proveedor de pagos',
     'add_payment_provider'               => 'Agregar un Proveedor de Pagos',
     'transaction_reference'              => 'Referencia de la transacción',
+    'transaction_successful'              => 'Transacción correcta',
     'payment_description'                => 'Pago de factura %s',
+    'provider_response'                 => 'Respuesta proveedor',
 
     // Credit card strings
     'creditcard_cvv'                     => 'CVV/CSC',

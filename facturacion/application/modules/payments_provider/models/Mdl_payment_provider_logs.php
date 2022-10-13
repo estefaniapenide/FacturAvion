@@ -21,7 +21,7 @@ class Mdl_Payment_provider_Logs extends Response_Model
     public function default_select()
     {
         $this->db->select("
-            ip_invoices.invoice_number,
+            ip_invoices_provider.invoice_provider_number,
             ip_merchant_responses.*", false);
     }
 
