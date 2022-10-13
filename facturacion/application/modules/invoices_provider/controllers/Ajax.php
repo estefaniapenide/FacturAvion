@@ -119,7 +119,7 @@ class Ajax extends Admin_Controller
             $this->mdl_invoices_provider->save($invoice_id, $db_array);
 
             // Recalculate for discounts
-            $this->load->model('invoicesProvider/mdl_invoice_povider_amounts');
+            $this->load->model('invoicesProvider/mdl_invoice_provider_amounts');
             $this->mdl_invoice__provider_amounts->calculate($invoice_id);
 
             $response = [
@@ -234,6 +234,7 @@ class Ajax extends Admin_Controller
             'provider' => $this->mdl_providers->get_by_id($this->input->post('provider_id')),
             'providers' => $this->mdl_providers->get_latest(),
         ];
+
 
         $this->layout->load_view('invoicesProvider/modal_create_invoice_provider', $data);
     }
