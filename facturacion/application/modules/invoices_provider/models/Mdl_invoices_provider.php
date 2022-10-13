@@ -87,7 +87,7 @@ class Mdl_Invoices_Provider extends Response_Model
         return array(
             'provider_id' => array(
                 'field' => 'provider_id',
-                'label' => trans('provider'),
+                'label' => trans('client'),
                 'rules' => 'required'
             ),
             'invoice_date_created' => array(
@@ -123,23 +123,23 @@ class Mdl_Invoices_Provider extends Response_Model
             'invoice_provider_number' => array(
                 'field' => 'invoice_provider_number',
                 'label' => trans('invoice_provider') . ' #',
-                'rules' => 'is_unique[ip_invoices_provider.invoices_provider_number' . (($this->id) ? '.invoices_provider_id.' . $this->id : '') . ']'
+                'rules' => 'is_unique[ip_invoices_provider.invoice_provider_number' . (($this->id) ? '.invoice_provider_id.' . $this->id : '') . ']'
             ),
-            'invoices_provider_date_created' => array(
+            'invoice_provider_date_created' => array(
                 'field' => 'invoices_provider_date_created',
                 'label' => trans('date'),
                 'rules' => 'required'
             ),
-            'invoices_providere_date_due' => array(
-                'field' => 'invoices_provider_date_due',
+            'invoice_provider_date_due' => array(
+                'field' => 'invoice_provider_date_due',
                 'label' => trans('due_date'),
                 'rules' => 'required'
             ),
-            'invoices_provider_time_created' => array(
+            'invoice_provider_time_created' => array(
                 'rules' => 'required'
             ),
-            'invoices_provider_password' => array(
-                'field' => 'invoices_provider_password',
+            'invoice_provider_password' => array(
+                'field' => 'invoice_provider_password',
                 'label' => trans('invoice_password')
             )
         );
@@ -155,27 +155,27 @@ class Mdl_Invoices_Provider extends Response_Model
 
         $invoice_id = parent::save(null, $db_array);
 
-        $inv = $this->where('ip_invoices_provider.invoices_provider_id', $invoice_id)->get()->row();
+        $inv = $this->where('ip_invoices_provider.invoice_provider_id', $invoice_id)->get()->row();
         //$invoice_group = $inv->invoice_group_id;
 
         // Create an invoice amount record
         $db_array = array(
-            'invoices_provider_id' => $invoice_id
+            'invoice_provider_id' => $invoice_id
         );
 
-        $this->db->insert('ip_invoices_provider_amounts', $db_array);
+        $this->db->insert('ip_invoice_provider_amounts', $db_array);
 
         if ($include_invoice_tax_rates) {
             // Create the default invoice tax record if applicable
             if (get_setting('default_invoice_tax_rate')) {
                 $db_array = array(
-                    'invoices_provider_id' => $invoice_id,
+                    'invoice_provider_id' => $invoice_id,
                     'tax_rate_id' => get_setting('default_invoice_tax_rate'),
                     'include_item_tax' => get_setting('default_include_item_tax', 0),
                     'invoices_provider_tax_rate_amount' => 0
                 );
 
-                $this->db->insert('ip_invoices_provider_tax_rates', $db_array);
+                $this->db->insert('ip_invoice_provider_tax_rates', $db_array);
             }
         }
 
@@ -198,7 +198,7 @@ class Mdl_Invoices_Provider extends Response_Model
 
         foreach ($invoice_items as $invoice_item) {
             $db_array = array(
-                'invoices_provider_id' => $target_id,
+                'invoice_provider_id' => $target_id,
                 'item_tax_rate_id' => $invoice_item->item_tax_rate_id,
                 'item_product_id' => $invoice_item->item_product_id,
                 'item_task_id' => $invoice_item->item_task_id,
@@ -219,14 +219,14 @@ class Mdl_Invoices_Provider extends Response_Model
         }
 
         // Copy the tax rates
-        $invoice_tax_rates = $this->mdl_invoice_provider_tax_rates->where('invoices_provider_id', $source_id)->get()->result();
+        $invoice_tax_rates = $this->mdl_invoice_provider_tax_rates->where('invoice_provider_id', $source_id)->get()->result();
 
         foreach ($invoice_tax_rates as $invoice_tax_rate) {
             $db_array = array(
-                'invoices_provider_id' => $target_id,
+                'invoice_provider_id' => $target_id,
                 'tax_rate_id' => $invoice_tax_rate->tax_rate_id,
                 'include_item_tax' => $invoice_tax_rate->include_item_tax,
-                'invoices_provider_tax_rate_amount' => $invoice_tax_rate->invoice_tax_rate_amount
+                'invoice_provider_tax_rate_amount' => $invoice_tax_rate->invoice_tax_rate_amount
             );
 
             $this->mdl_invoice_provider_tax_rates->save(null, $db_array);
@@ -234,7 +234,7 @@ class Mdl_Invoices_Provider extends Response_Model
 
         // Copy the custom fields
         $this->load->model('custom_fields/mdl_invoice_custom');
-        $custom_fields = $this->mdl_invoice_custom->where('invoices_provider_id', $source_id)->get()->result();
+        $custom_fields = $this->mdl_invoice_custom->where('invoice_provider_id', $source_id)->get()->result();
 
         $form_data = array();
         foreach ($custom_fields as $field) {
@@ -257,7 +257,7 @@ class Mdl_Invoices_Provider extends Response_Model
 
         foreach ($invoice_items as $invoice_item) {
             $db_array = array(
-                'invoices_provider_id' => $target_id,
+                'invoice_provider_id' => $target_id,
                 'item_tax_rate_id' => $invoice_item->item_tax_rate_id,
                 'item_product_id' => $invoice_item->item_product_id,
                 'item_task_id' => $invoice_item->item_task_id,
@@ -275,14 +275,14 @@ class Mdl_Invoices_Provider extends Response_Model
             $this->mdl_invoice_provider_items->save(null, $db_array);
         }
 
-        $invoice_tax_rates = $this->mdl_invoice_provider_tax_rates->where('invoices_provider_id', $source_id)->get()->result();
+        $invoice_tax_rates = $this->mdl_invoice_provider_tax_rates->where('invoice_provider_id', $source_id)->get()->result();
 
         foreach ($invoice_tax_rates as $invoice_tax_rate) {
             $db_array = array(
-                'invoices_provider_id' => $target_id,
+                'invoice_provider_id' => $target_id,
                 'tax_rate_id' => $invoice_tax_rate->tax_rate_id,
                 'include_item_tax' => $invoice_tax_rate->include_item_tax,
-                'invoices_provider_tax_rate_amount' => -$invoice_tax_rate->invoice_tax_rate_amount
+                'invoice_provider_tax_rate_amount' => -$invoice_tax_rate->invoice_tax_rate_amount
             );
 
             $this->mdl_invoice_provider_tax_rates->save(null, $db_array);
@@ -290,7 +290,7 @@ class Mdl_Invoices_Provider extends Response_Model
 
         // Copy the custom fields
         $this->load->model('custom_fields/mdl_invoice_custom');
-        $custom_fields = $this->mdl_invoice_custom->where('invoices_provider_id', $source_id)->get()->result();
+        $custom_fields = $this->mdl_invoice_custom->where('invoice_provider_id', $source_id)->get()->result();
 
         $form_data = array();
         foreach ($custom_fields as $field) {
@@ -310,12 +310,12 @@ class Mdl_Invoices_Provider extends Response_Model
         $this->load->model('providers/mdl_providers');
 
 
-        $db_array['invoices_provider_date_created'] = date_to_mysql($db_array['invoices_provider_date_created']);
-        $db_array['invoices_provider_date_due'] = $this->get_date_due($db_array['invoices_provider_date_created']);
-        $db_array['invoices_provider_terms'] = get_setting('default_invoice_terms');
+        $db_array['invoice_provider_date_created'] = date_to_mysql($db_array['invoice_provider_date_created']);
+        $db_array['invoice_provider_date_due'] = $this->get_date_due($db_array['invoice_provider_date_created']);
+        $db_array['invoice_terms'] = get_setting('default_invoice_terms');
 
-        if (!isset($db_array['invoices_provider_status_id'])) {
-            $db_array['invoices_provider_status_id'] = 1;
+        if (!isset($db_array['invoice_provider_status_id'])) {
+            $db_array['invoice_provider_status_id'] = 1;
         }
 
         $db_array['invoice_provider_number']=get_setting('generate_invoice_number_for_draft');
