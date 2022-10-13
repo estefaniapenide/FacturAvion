@@ -22,8 +22,8 @@ class Ajax extends Admin_Controller
 
     public function save()
     {
-        $this->load->model('invoicesProvider/mdl_invoice_provider_items');
-        $this->load->model('invoicesProvider/mdl_invoices_provider');
+        $this->load->model('invoices_provider/mdl_invoice_provider_items');
+        $this->load->model('invoices_provider/mdl_invoices_provider');
         $this->load->model('units/mdl_units');
 
 
@@ -119,7 +119,7 @@ class Ajax extends Admin_Controller
             $this->mdl_invoices_provider->save($invoice_id, $db_array);
 
             // Recalculate for discounts
-            $this->load->model('invoicesProvider/mdl_invoice_provider_amounts');
+            $this->load->model('invoices_provider/mdl_invoice_provider_amounts');
             $this->mdl_invoice__provider_amounts->calculate($invoice_id);
 
             $response = [
@@ -172,7 +172,7 @@ class Ajax extends Admin_Controller
 
     public function save_invoice_tax_rate()
     {
-        $this->load->model('invoicesProvider/mdl_invoice_provider_tax_rates');
+        $this->load->model('invoices_provider/mdl_invoice_provider_tax_rates');
 
         if ($this->mdl_invoice_provider_tax_rates->run_validation()) {
             $this->mdl_invoice_provider_tax_rates->save();
@@ -192,7 +192,7 @@ class Ajax extends Admin_Controller
 
     public function create()
     {
-        $this->load->model('invoicesProvider/mdl_invoices_provider');
+        $this->load->model('invoices_provider/mdl_invoices_provider');
 
         if ($this->mdl_invoices_provider->run_validation()) {
             $invoice_id = $this->mdl_invoices_provider->create();
@@ -214,14 +214,14 @@ class Ajax extends Admin_Controller
 
     public function get_item()
     {
-        $this->load->model('invoicesProvider/mdl_invoice_provider_items');
+        $this->load->model('invoices_provider/mdl_invoice_provider_items');
 
         $item = $this->mdl_invoice_provider_items->get_by_id($this->input->post('item_id'));
 
         echo json_encode($item);
     }
 
-    public function modal_create_invoice_provider()
+    public function modal_create_invoice()
     {
         $this->load->module('layout');
         $this->load->model('invoice_groups/mdl_invoice_groups');
@@ -236,7 +236,7 @@ class Ajax extends Admin_Controller
         ];
 
 
-        $this->layout->load_view('invoicesProvider/modal_create_invoice_provider', $data);
+        $this->layout->load_view('invoices_provider/modal_create_invoice', $data);
     }
 
 
@@ -260,12 +260,12 @@ class Ajax extends Admin_Controller
             'providers' => $this->mdl_providers->get_latest(),
         ];
 
-        $this->layout->load_view('invoicesProvider/modal_change_provider', $data);
+        $this->layout->load_view('invoices_provider/modal_change_provider', $data);
     }
 
     public function change_provider()
     {
-        $this->load->model('invoicesProvider/mdl_invoices_provider');
+        $this->load->model('invoices-provider/mdl_invoices_provider');
         $this->load->model('providers/mdl_providers');
 
         // Get the client ID
@@ -300,7 +300,7 @@ class Ajax extends Admin_Controller
     {
         $this->load->module('layout');
 
-        $this->load->model('invoicesProvider/mdl_invoices_provider');
+        $this->load->model('invoices_provider/mdl_invoices_provider');
         $this->load->model('invoice_groups/mdl_invoice_groups');
         $this->load->model('tax_rates/mdl_tax_rates');
 
@@ -312,14 +312,14 @@ class Ajax extends Admin_Controller
                 ->row(),
         ];
 
-        $this->layout->load_view('invoicesProvider/modal_copy_invoice', $data);
+        $this->layout->load_view('invoices_provider/modal_copy_invoice', $data);
     }
 
     public function copy_invoice()
     {
-        $this->load->model('invoicesProvider/mdl_invoices_provider');
-        $this->load->model('invoicesProvider/mdl_invoice_provider_items');
-        $this->load->model('invoicesProvider/mdl_invoice_provider_tax_rates');
+        $this->load->model('invoices_provider/mdl_invoices_provider');
+        $this->load->model('invoices_provider/mdl_invoice_provider_items');
+        $this->load->model('invoices_provider/mdl_invoice_provider_tax_rates');
 
         if ($this->mdl_invoices_provider->run_validation()) {
             $target_id = $this->mdl_invoices_provider->save();
@@ -346,7 +346,7 @@ class Ajax extends Admin_Controller
     {
         $this->load->module('layout');
 
-        $this->load->model('invoicesProvider/mdl_invoices_provider');
+        $this->load->model('invoices_provider/mdl_invoices_provider');
         $this->load->model('invoice_groups/mdl_invoice_groups');
         $this->load->model('tax_rates/mdl_tax_rates');
 
@@ -359,14 +359,14 @@ class Ajax extends Admin_Controller
                 ->row(),
         ];
 
-        $this->layout->load_view('invoicesProvider/modal_create_credit', $data);
+        $this->layout->load_view('invoices_provider/modal_create_credit', $data);
     }
 
     public function create_credit()
     {
-        $this->load->model('invoicesProvider/mdl_invoices_provider');
-        $this->load->model('invoicesProvider/mdl_invoice_provider_items');
-        $this->load->model('invoicesProvider/mdl_invoice_provider_tax_rates');
+        $this->load->model('invoices_provider/mdl_invoices_provider');
+        $this->load->model('invoices_provider/mdl_invoice_provider_items');
+        $this->load->model('invoices_provider/mdl_invoice_provider_tax_rates');
 
         if ($this->mdl_invoices_provider->run_validation()) {
             $target_id = $this->mdl_invoices_provider->save();

@@ -49,7 +49,7 @@
         });
 
         $(document).on('click', '.create-invoice-provider', function () {
-            $('#modal-placeholder').load("<?php echo site_url('invoicesProvider/ajax/modal_create_invoice_provider'); ?>");
+            $('#modal-placeholder').load("<?php echo site_url('invoices_provider/ajax/modal_create_invoice'); ?>");
         });
 
         $(document).on('click', '.create-quote', function () {
@@ -87,7 +87,7 @@
 
         $(document).on('click', '.provider-create-invoice', function () {
             var client_id = $(this).data('provider-id');
-            $('#modal-placeholder').load("<?php echo site_url('invoicesProvider/ajax/modal_create_invoice_provider'); ?>", {provider_id: provider_id});
+            $('#modal-placeholder').load("<?php echo site_url('invoices_provider/ajax/modal_create_invoice_provider'); ?>", {provider_id: provider_id});
         });
 
 
