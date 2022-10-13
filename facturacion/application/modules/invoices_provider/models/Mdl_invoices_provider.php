@@ -154,25 +154,14 @@ class Mdl_Invoices_Provider extends Response_Model
     {
 
         $invoice_id = parent::save(null, $db_array);
-<<<<<<< HEAD
         
         //$inv = $this->where('ip_invoices_provider.invoice_provider_id', $invoice_id)->get()->row();
-=======
-
-        $inv = $this->where('ip_invoices_provider.invoice_provider_id', $invoice_id)->get()->row();
->>>>>>> 22e49380edd1eb9863acd80001084a7e03585105
         //$invoice_group = $inv->invoice_group_id;
         // Create an invoice amount record
         $db_array = array(
             'invoice_provider_id' => $invoice_id
         );
-<<<<<<< HEAD
         $this->db->insert('ip_invoice_provider_amounts', $db_array);
-=======
-
-        $this->db->insert('ip_invoice_provider_amounts', $db_array);
-
->>>>>>> 22e49380edd1eb9863acd80001084a7e03585105
         if ($include_invoice_tax_rates) {
             // Create the default invoice tax record if applicable
             if (get_setting('default_invoice_tax_rate')) {
@@ -184,10 +173,6 @@ class Mdl_Invoices_Provider extends Response_Model
                 );
 
                 $this->db->insert('ip_invoice_provider_tax_rates', $db_array);
-<<<<<<< HEAD
-
-=======
->>>>>>> 22e49380edd1eb9863acd80001084a7e03585105
             }
         }
 
@@ -324,11 +309,7 @@ class Mdl_Invoices_Provider extends Response_Model
 
         $db_array['invoice_provider_date_created'] = date_to_mysql($db_array['invoice_provider_date_created']);
         $db_array['invoice_provider_date_due'] = $this->get_date_due($db_array['invoice_provider_date_created']);
-<<<<<<< HEAD
         $db_array['invoice_provider_terms'] = get_setting('default_invoice_terms');
-=======
-        $db_array['invoice_terms'] = get_setting('default_invoice_terms');
->>>>>>> 22e49380edd1eb9863acd80001084a7e03585105
 
         if (!isset($db_array['invoice_provider_status_id'])) {
             $db_array['invoice_provider_status_id'] = 1;
