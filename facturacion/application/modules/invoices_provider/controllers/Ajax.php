@@ -224,12 +224,10 @@ class Ajax extends Admin_Controller
     public function modal_create_invoice()
     {
         $this->load->module('layout');
-        $this->load->model('invoice_groups/mdl_invoice_groups');
         $this->load->model('tax_rates/mdl_tax_rates');
         $this->load->model('providers/mdl_providers');
 
         $data = [
-            'invoice_groups' => $this->mdl_invoice_groups->get()->result(),
             'tax_rates' => $this->mdl_tax_rates->get()->result(),
             'provider' => $this->mdl_providers->get_by_id($this->input->post('provider_id')),
             'providers' => $this->mdl_providers->get_latest(),

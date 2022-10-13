@@ -34,7 +34,7 @@ class Mdl_Invoices_Provider extends Response_Model
                 'label' => trans('sent'),
                 'class' => 'sent',
                 'href' => 'invoices_provider/status/sent'
-            ),
+            ),  
             '3' => array(
                 'label' => trans('viewed'),
                 'class' => 'viewed',
@@ -61,7 +61,7 @@ class Mdl_Invoices_Provider extends Response_Model
             IFnull(ip_invoice_provider_amounts.invoice_provider_total, '0.00') AS invoice_total,
             IFnull(ip_invoice_provider_amounts.invoice_provider_paid, '0.00') AS invoice_paid,
             IFnull(ip_invoice_provider_amounts.invoice_provider_balance, '0.00') AS invoice_balance,
-            ip_invoice_provider_amounts.invoice_provider_sign AS invoice_sign,
+            ip_invoice_provider_amounts.invoice_provider_sign AS invoice_provider_sign,
             (CASE WHEN ip_invoices_provider.invoice_provider_status_id NOT IN (1,4) AND DATEDIFF(NOW(), invoice_provider_date_due) > 0 THEN 1 ELSE 0 END) is_overdue,
             DATEDIFF(NOW(), invoice_provider_date_due) AS days_overdue,
             ip_invoices_provider.*", false);
@@ -90,7 +90,7 @@ class Mdl_Invoices_Provider extends Response_Model
                 'label' => trans('provider'),
                 'rules' => 'required'
             ),
-            'invoice_date_created' => array(
+            'invoice_provider_date_created' => array(
                 'field' => 'invoice_provider_date_created',
                 'label' => trans('invoice_date'),
                 'rules' => 'required'
@@ -154,28 +154,26 @@ class Mdl_Invoices_Provider extends Response_Model
     {
 
         $invoice_id = parent::save(null, $db_array);
-
-        $inv = $this->where('ip_invoices_provider.invoices_provider_id', $invoice_id)->get()->row();
+        
+        //$inv = $this->where('ip_invoices_provider.invoice_provider_id', $invoice_id)->get()->row();
         //$invoice_group = $inv->invoice_group_id;
-
         // Create an invoice amount record
         $db_array = array(
-            'invoices_provider_id' => $invoice_id
+            'invoice_provider_id' => $invoice_id
         );
-
-        $this->db->insert('ip_invoices_provider_amounts', $db_array);
-
+        $this->db->insert('ip_invoice_provider_amounts', $db_array);
         if ($include_invoice_tax_rates) {
             // Create the default invoice tax record if applicable
             if (get_setting('default_invoice_tax_rate')) {
                 $db_array = array(
-                    'invoices_provider_id' => $invoice_id,
+                    'invoice_provider_id' => $invoice_id,
                     'tax_rate_id' => get_setting('default_invoice_tax_rate'),
                     'include_item_tax' => get_setting('default_include_item_tax', 0),
-                    'invoices_provider_tax_rate_amount' => 0
+                    'invoice_provider_tax_rate_amount' => 0
                 );
 
-                $this->db->insert('ip_invoices_provider_tax_rates', $db_array);
+                $this->db->insert('ip_invoice_provider_tax_rates', $db_array);
+
             }
         }
 
@@ -310,12 +308,12 @@ class Mdl_Invoices_Provider extends Response_Model
         $this->load->model('providers/mdl_providers');
 
 
-        $db_array['invoices_provider_date_created'] = date_to_mysql($db_array['invoices_provider_date_created']);
-        $db_array['invoices_provider_date_due'] = $this->get_date_due($db_array['invoices_provider_date_created']);
-        $db_array['invoices_provider_terms'] = get_setting('default_invoice_terms');
+        $db_array['invoice_provider_date_created'] = date_to_mysql($db_array['invoice_provider_date_created']);
+        $db_array['invoice_provider_date_due'] = $this->get_date_due($db_array['invoice_provider_date_created']);
+        $db_array['invoice_provider_terms'] = get_setting('default_invoice_terms');
 
-        if (!isset($db_array['invoices_provider_status_id'])) {
-            $db_array['invoices_provider_status_id'] = 1;
+        if (!isset($db_array['invoice_provider_status_id'])) {
+            $db_array['invoice_provider_status_id'] = 1;
         }
 
         $db_array['invoice_provider_number']=get_setting('generate_invoice_number_for_draft');
@@ -407,7 +405,7 @@ class Mdl_Invoices_Provider extends Response_Model
     {
         parent::delete($invoice_id);
 
-        $this->load->helper('orphan');
+        $this->load->helper('orphan_provider');
         delete_orphans();
     }
 

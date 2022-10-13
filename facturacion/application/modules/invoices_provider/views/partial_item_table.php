@@ -300,8 +300,8 @@
             <tr>
                 <td><?php _trans('invoice_tax'); ?></td>
                 <td>
-                    <?php if ($invoice_tax_rates) {
-                        foreach ($invoice_tax_rates as $invoice_tax_rate) { ?>
+                    <?php if ($invoice_provider_tax_rates) {
+                        foreach ($invoice_provider_tax_rates as $invoice_tax_rate) { ?>
                             <form method="post"
                                 action="<?php echo site_url('invoices_provider/delete_invoice_tax/' . $invoice->invoice_provider_id . '/' . $invoice_tax_rate->invoice_provider_tax_rate_id) ?>">
                                 <?php _csrf_field(); ?>
@@ -351,17 +351,16 @@
             </tr>
             <tr>
                 <td><?php _trans('total'); ?></td>
-                <td class="amount"><b><?php echo format_currency($invoice->invoice_provider_total); ?></b></td>
+                <td class="amount"><b><?php echo format_currency($invoice->invoice_total); ?></b></td>
             </tr>
             <tr>
                 <td><?php _trans('paid'); ?></td>
-                <td class="amount"><b><?php echo format_currency($invoice->invoice_provider_paid); ?></b></td>
+                <td class="amount"><b><?php echo format_currency($invoice->invoice_paid); ?></b></td>
             </tr>
             <tr>
                 <td><b><?php _trans('balance'); ?></b></td>
-                <td class="amount"><b><?php echo format_currency($invoice->invoice_provider_balance); ?></b></td>
+                <td class="amount"><b><?php echo format_currency($invoice->invoice_balance); ?></b></td>
             </tr>
         </table>
     </div>
-
 </div>

@@ -29,8 +29,8 @@
             ?>
             <tr>
                 <td>
-                    <span class="label <?php echo $invoice_statuses[$invoice->invoice_provider_status_id]['class']; ?>">
-                        <?php echo $invoice_statuses[$invoice->invoice_provider_status_id]['label'];
+                    <span class="label <?php echo $invoice_provider_statuses[$invoice->invoice_provider_status_id]['class']; ?>">
+                        <?php echo $invoice_provider_statuses[$invoice->invoice_provider_status_id]['label'];
                         if ($invoice->invoice_provider_sign == '-1') { ?>
                             &nbsp;<i class="fa fa-credit-invoice" title="<?php echo trans('credit_invoice') ?>"></i>
                         <?php } ?>
@@ -60,7 +60,7 @@
                 <td>
                     <a href="<?php echo site_url('providers/view/' . $invoice->provider_id); ?>"
                        title="<?php _trans('view_provider'); ?>">
-                        <?php _htmlsc(format_client($invoice)); ?>
+                        <?php _htmlsc($invoice->provider_name); ?>
                     </a>
                 </td>
 

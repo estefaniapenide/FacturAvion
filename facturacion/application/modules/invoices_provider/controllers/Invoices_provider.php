@@ -134,7 +134,7 @@ class Invoices_provider extends Admin_Controller
         $this->load->helper("custom_values");
         //$this->load->helper("client");
         $this->load->model('units/mdl_units');
-        $this->load->module('payments');
+        $this->load->module('payments_provider');
 
         $this->load->model('custom_values/mdl_custom_values');
         $this->load->model('custom_fields/mdl_invoice_custom');
@@ -188,9 +188,9 @@ class Invoices_provider extends Admin_Controller
 
         $this->layout->set(
             [
-                'invoice_provider' => $invoice,
+                'invoice' => $invoice,
                 'items' => $this->mdl_invoice_provider_items->where('invoice_provider_id', $invoice_id)->get()->result(),
-                'invoice_provider_id' => $invoice_id,
+                'invoice_id' => $invoice_id,
                 'tax_rates' => $this->mdl_tax_rates->get()->result(),
                 'invoice_provider_tax_rates' => $this->mdl_invoice_provider_tax_rates->where('invoice_provider_id', $invoice_id)->get()->result(),
                 'units' => $this->mdl_units->get()->result(),

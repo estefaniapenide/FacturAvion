@@ -20,7 +20,7 @@ $cv = $this->controller->view_data["custom_values"];
 
         $('.btn_add_task').click(function () {
             $('#modal-placeholder').load(
-                "<?php echo site_url('tasks/ajax/modal_task_lookups/' . $invoice_id); ?>/" +
+                "<?php echo site_url('tasks/ajax/modal_task_lookups/' . $invoice_provider_id); ?>/" +
                 Math.floor(Math.random() * 1000)
             );
         });
@@ -33,18 +33,9 @@ $cv = $this->controller->view_data["custom_values"];
         $('#new_row').clone().appendTo('#item_table').removeAttr('id').addClass('item').show();
         <?php } ?>
 
-        $('#btn_create_recurring').click(function () {
-            $('#modal-placeholder').load(
-                "<?php echo site_url('invoices/ajax/modal_create_recurring'); ?>",
-                {
-                    invoice_id: <?php echo $invoice_id; ?>
-                }
-            );
-        });
-
         $('#invoice_change_provider').click(function () {
             $('#modal-placeholder').load("<?php echo site_url('invoices_provider/ajax/modal_change_provider'); ?>", {
-                invoice_provider_id: <?php echo $invoice_id; ?>,
+                invoice_provider_id: <?php echo $invoice_provider_id; ?>,
                 provider_id: "<?php echo $this->db->escape_str($invoice->provider_id); ?>",
             });
         });
@@ -221,7 +212,7 @@ if ($this->config->item('disable_read_only') == true) {
                     </a>
                 </li>
                 <li>
-                    <a href="<?php echo site_url('mailer/invoice/' . $invoice->invoice_id); ?>">
+                    <a href="<?php echo site_url('mailer/invoice/' . $invoice->invoice_provider_id); ?>">
                         <i class="fa fa-send fa-margin"></i>
                         <?php _trans('send_email'); ?>
                     </a>
@@ -274,7 +265,7 @@ if ($this->config->item('disable_read_only') == true) {
 
                     <h3>
                         <a href="<?php echo site_url('providers/view/' . $invoice->provider_id); ?>">
-                            <?php _htmlsc(format_client($invoice)) ?>
+                            <?php _htmlsc($invoice->provider_name) ?>
                         </a>
                         <?php if ($invoice->invoice_provider_status_id == 1 && !$invoice->creditinvoice_parent_id) { ?>
                             <span id="invoice_change_provider" class="fa fa-edit cursor-pointer small"
@@ -310,7 +301,7 @@ if ($this->config->item('disable_read_only') == true) {
                     <div class="details-box panel panel-default panel-body">
                         <div class="row">
 
-                            <?php if ($invoice->invoice_sign == -1) { ?>
+                            <?php if ($invoice->invoice_provider_sign == -1) { ?>
                                 <div class="col-xs-12">
                                     <div class="alert alert-warning small">
                                         <i class="fa fa-credit-invoice"></i>&nbsp;

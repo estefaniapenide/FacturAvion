@@ -59,7 +59,7 @@ class Mdl_Invoice_Provider_Amounts extends CI_Model
         // Get the amount already paid
         $query = $this->db->query("
           SELECT SUM(payment_amount) AS invoice_provider_paid
-          FROM ip_payments
+          FROM ip_payments_provider
           WHERE invoice_provider_id = " . $this->db->escape($invoice_id)
         );
 
@@ -131,8 +131,8 @@ class Mdl_Invoice_Provider_Amounts extends CI_Model
         $invoice_data = $this->db->get('ip_invoices_provider')->row();
 
         $total = (float)number_format($invoice_total, 2, '.', '');
-        $discount_amount = (float)number_format($invoice_data->invoice_discount_amount, 2, '.', '');
-        $discount_percent = (float)number_format($invoice_data->invoice_discount_percent, 2, '.', '');
+        $discount_amount = (float)number_format($invoice_data->invoice_provider_discount_amount, 2, '.', '');
+        $discount_percent = (float)number_format($invoice_data->invoice_provider_discount_percent, 2, '.', '');
 
         $total = $total - $discount_amount;
         $total = $total - round(($total / 100 * $discount_percent), 2);

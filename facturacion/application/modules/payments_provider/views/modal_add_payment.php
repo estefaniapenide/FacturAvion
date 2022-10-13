@@ -90,9 +90,9 @@
 
                         <?php
                         // Add a hidden input field if a payment method was set to pass the disabled attribute
-                        if ($this->mdl_payments->form_value('payment_method_id')) { ?>
+                        if ($this->mdl_payments_provider->form_value('payment_method_id')) { ?>
                             <input type="hidden" name="payment_method_id" class="hidden"
-                                   value="<?php echo $this->mdl_payments->form_value('payment_method_id'); ?>">
+                                   value="<?php echo $this->mdl_payments_provider->form_value('payment_method_id'); ?>">
                         <?php } ?>
 
                         <select name="payment_method_id" id="payment_method_id" class="form-control simple-select"
