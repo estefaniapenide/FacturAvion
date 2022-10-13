@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 11-10-2022 a las 19:27:16
+-- Tiempo de generación: 13-10-2022 a las 08:48:10
 -- Versión del servidor: 5.7.33-0ubuntu0.16.04.1
 -- Versión de PHP: 7.0.33-0ubuntu0.16.04.16
 
@@ -660,17 +660,18 @@ CREATE TABLE `ip_products` (
   `provider_name` text,
   `tax_rate_id` int(11) DEFAULT NULL,
   `unit_id` int(11) DEFAULT NULL,
-  `product_tariff` int(11) DEFAULT NULL
+  `product_tariff` int(11) DEFAULT NULL,
+  `provider_id` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `ip_products`
 --
 
-INSERT INTO `ip_products` (`product_id`, `family_id`, `product_sku`, `product_name`, `product_description`, `product_price`, `purchase_price`, `provider_name`, `tax_rate_id`, `unit_id`, `product_tariff`) VALUES
-(1, 1, '24324324324', 'boligrafo BIC', 'Un boligrafo, el titulo es muy claro, no?', '2.00', NULL, '', 1, NULL, 0),
-(2, 2, '5432654643', '100 folios DIN-A4', 'Paquete de folios de 100', '1.00', NULL, '', 1, NULL, 0),
-(3, 3, '4324232432', 'Garaje', 'Plaza garaje 20m2', '50.00', NULL, '', 1, 1, 0);
+INSERT INTO `ip_products` (`product_id`, `family_id`, `product_sku`, `product_name`, `product_description`, `product_price`, `purchase_price`, `provider_name`, `tax_rate_id`, `unit_id`, `product_tariff`, `provider_id`) VALUES
+(1, 1, '24324324324', 'boligrafo BIC', 'Un boligrafo, el titulo es muy claro, no?', '2.00', NULL, '', 1, NULL, 0, 11),
+(2, 2, '5432654643', '100 folios DIN-A4', 'Paquete de folios de 100', '1.00', NULL, '', 1, NULL, 0, 0),
+(3, 3, '4324232432', 'Garaje', 'Plaza garaje 20m2', '50.00', NULL, '', 1, 1, 0, 11);
 
 -- --------------------------------------------------------
 
@@ -718,7 +719,7 @@ CREATE TABLE `ip_providers` (
 --
 
 INSERT INTO `ip_providers` (`provider_id`, `provider_date_created`, `provider_date_modified`, `provider_name`, `provider_comercial_name`, `provider_address_1`, `provider_address_2`, `provider_city`, `provider_state`, `provider_zip`, `provider_country`, `provider_phone`, `provider_mobile`, `provider_email`, `provider_web`, `provider_vat_id`, `provider_language`, `provider_active`) VALUES
-(11, '2022-10-11 15:49:51', '2022-10-11 17:04:59', 'sffsdf', 'lalalala', 'sadsadsda', 'sadsadadsa', 'asdsad', 'adsadsa', '123123', 'DE', '4323243', '131231323', 'sdsadsa@gmail.com', 'sadsasad.com', '12321313', 'Arabic', 1);
+(11, '2022-10-11 15:49:51', '2022-10-13 08:46:59', 'empresa', 'lalalala', 'sadsadsda', 'sadsadadsa', 'asdsad', 'adsadsa', '123123', 'DE', '4323243', '131231323', 'sdsadsa@gmail.com', 'sadsasad.com', '12321313', 'Arabic', 1);
 
 -- --------------------------------------------------------
 
@@ -1781,7 +1782,7 @@ ALTER TABLE `ip_clients`
 -- AUTO_INCREMENT de la tabla `ip_client_custom`
 --
 ALTER TABLE `ip_client_custom`
-  MODIFY `client_custom_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `client_custom_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `ip_client_notes`
 --

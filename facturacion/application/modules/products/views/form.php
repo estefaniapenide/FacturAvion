@@ -126,7 +126,7 @@
                     </div>
                     <div class="panel-body">
                     <div class="form-group">
-                        <select name="provider_name" id="provider_name" class="form-control simple-select">
+                        <select name="provider_id" id="provider_id" class="form-control simple-select">
                                 <option value="0"><?php _trans('select_provider'); ?></option>
                                 <?php foreach ($providers as $provider) { ?>
                                     <option value="<?php echo $provider->provider_id; ?>"
@@ -135,15 +135,6 @@
                                 <?php } ?>
                             </select>
                     </div>
-                        <!-- <div class="form-group">
-                            <label for="provider_name">
-                                <?php _trans('provider_name'); ?>
-                            </label>
-
-                            <input type="text" name="provider_name" id="provider_name" class="form-control"
-                                   value="<?php echo $this->mdl_products->form_value('provider_name', true); ?>">
-                        </div> -->
-
                         <div class="form-group">
                             <label for="purchase_price">
                                 <?php _trans('purchase_price'); ?>

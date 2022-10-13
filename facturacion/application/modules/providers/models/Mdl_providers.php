@@ -89,6 +89,10 @@ class Mdl_providers extends Response_Model
     }
 
     /**
+     * @return array
+     */
+
+    /**
      * @param int $amount
      * @return mixed
      */

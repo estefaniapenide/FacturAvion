@@ -37,7 +37,7 @@ class Ajax extends Admin_Controller
 
         $products = $this->mdl_products->get()->result();
         $families = $this->mdl_families->get()->result();
-        $providers = $this->mdl_providers->get()->result();
+        $providers = $this->mdl_providers_products->get()->result();
         $default_item_tax_rate = get_setting('default_item_tax_rate');
         $default_item_tax_rate = $default_item_tax_rate !== '' ?: 0;
 

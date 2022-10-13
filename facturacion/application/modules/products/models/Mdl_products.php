@@ -97,8 +97,8 @@ class Mdl_Products extends Response_Model
                 'label' => trans('family'),
                 'rules' => 'numeric'
             ),
-            'provider_name' => array(
-                'field' => 'provider_name',
+            'provider_id' => array(
+                'field' => 'provider_id',
                 'label' => trans('provider'),
                 'rules' => 'numeric'
             ),
