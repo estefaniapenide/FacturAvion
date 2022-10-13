@@ -187,13 +187,13 @@ class Mdl_providers extends Response_Model
 
     public function with_total_paid()
     {
-        $this->filter_select('IFnull((SELECT SUM(invoice_provider_paid) FROM ip_invoice_amounts WHERE invoice_id IN (SELECT invoice_id FROM ip_invoices_provider WHERE ip_invoices_provider.provider_id = ip_providers.provider_id)), 0) AS provider_invoice_paid', false);
+        $this->filter_select('IFnull((SELECT SUM(invoice_provider_paid) FROM ip_invoice_provider_amounts WHERE invoice_provider_id IN (SELECT invoice_provider_id FROM ip_invoices_provider WHERE ip_invoices_provider.provider_id = ip_providers.provider_id)), 0) AS provider_invoice_paid', false);
         return $this;
     }
 
     public function with_total_balance()
     {
-        $this->filter_select('IFnull((SELECT SUM(invoice_provider_balance) FROM ip_invoice_amounts WHERE invoice_id IN (SELECT invoice_id FROM ip_invoices_provider WHERE ip_invoices_provider.provider_id = ip_providers.provider_id)), 0) AS provider_invoice_balance', false);
+        $this->filter_select('IFnull((SELECT SUM(invoice_provider_balance) FROM ip_invoice_provider_amounts WHERE invoice_provider_id IN (SELECT invoice_provider_id FROM ip_invoices_provider WHERE ip_invoices_provider.provider_id = ip_providers.provider_id)), 0) AS provider_invoice_balance', false);
         return $this;
     }
 
