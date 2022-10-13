@@ -602,6 +602,7 @@ $lang = array(
     'version_history'                              => 'Version History',
     'view'                                         => 'View',
     'view_all'                                     => 'View All',
+    'view_charge_logs'                            => ' View Online Charge Logs',
     'view_client'                                  => 'View Client',
     'view_clients'                                 => 'View Clients',
     'view_invoices'                                => 'View Invoices',
