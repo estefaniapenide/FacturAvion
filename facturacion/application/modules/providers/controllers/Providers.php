@@ -66,9 +66,9 @@ class Providers extends Admin_Controller
         if ($this->input->post('btn_cancel')) {
             redirect('providers');
         }
-        
+
         $new_provider = false;
-        
+
         // Set validation rule based on is_update
         if ($this->input->post('is_update') == 0 && $this->input->post('provider_name') != '') {
             $check = $this->db->get_where('ip_providers', array(
@@ -83,15 +83,15 @@ class Providers extends Admin_Controller
                 $new_provider = true;
             }
         }
-        
+
         if ($this->mdl_providers->run_validation()) {
             $id = $this->mdl_providers->save($id);
-            
+
             if ($new_provider) {
                 $this->load->model('user_providers/mdl_user_providers');
                 $this->mdl_user_providers->get_users_all_providers();
             }
-            
+
             $this->load->model('custom_fields/mdl_provider_custom');
             $result = $this->mdl_provider_custom->save_custom($id, $this->input->post('custom'));
 
@@ -207,6 +207,7 @@ class Providers extends Admin_Controller
             array(
                 'provider' => $provider,
                 'provider_notes' => $this->mdl_provider_notes->where('provider_id', $provider_id)->get()->result(),
+                'invoices' => $this->mdl_invoices_provider->by_provider($provider_id)->limit(20)->get()->result(),
                 'payments' => $this->mdl_payments_provider->by_provider($provider_id)->limit(20)->get()->result(),
                 'custom_fields' => $custom_fields,
                 'invoice_statuses' => $this->mdl_invoices_provider->statuses()
@@ -255,7 +256,7 @@ class Providers extends Admin_Controller
                 $config['max_height']           = 768;
 
                 $this->load->library('upload', $config);
-               
+
                     if ( ! $this->upload->do_upload('archivo_id'))
                     {
                             $error = array('error' => $this->upload->display_errors());
@@ -269,7 +270,7 @@ class Providers extends Admin_Controller
                         chmod($ruta,0777); // CHMOD file or any other permission level(s)
                         redirect("providers");
                     }
-            
+
         }
 
 }
