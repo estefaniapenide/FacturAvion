@@ -87,7 +87,7 @@ class Mdl_Invoices_Provider extends Response_Model
         return array(
             'provider_id' => array(
                 'field' => 'provider_id',
-                'label' => trans('client'),
+                'label' => trans('provider'),
                 'rules' => 'required'
             ),
             'invoice_date_created' => array(

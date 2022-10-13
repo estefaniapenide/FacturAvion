@@ -44,7 +44,6 @@ class Ajax extends Admin_Controller
             ->where('provider_active', 1)
             ->having('provider_name LIKE \'' . $moreprovidersQuery . $escapedQuery . '%\'')
             ->or_having('provider_comercial_name LIKE \'' . $moreprovidersQuery . $escapedQuery . '%\'')
-            ->or_having('provider_fullname LIKE \'' . $moreprovidersQuery . $escapedQuery . '%\'')
             ->order_by('provider_name')
             ->get()
             ->result();
@@ -52,7 +51,7 @@ class Ajax extends Admin_Controller
         foreach ($providers as $provider) {
             $response[] = [
                 'id' => $provider->provider_id,
-                'text' => htmlsc($provider),
+                'text' => htmlsc($provider->provider_name),
             ];
         }
 
