@@ -32,7 +32,7 @@
     });
 </script>
 
-<div id="change-provider" class="modal modal-lg" role="dialog" aria-labelledby="modal_create_invoice" aria-hidden="true">
+<div id="change-provider" class="modal modal-lg" role="dialog" aria-labelledby="modal_create_invoice_provider" aria-hidden="true">
     <form class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>

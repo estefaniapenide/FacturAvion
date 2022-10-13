@@ -605,6 +605,7 @@ $lang = array(
     'view_client'                                  => 'View Client',
     'view_clients'                                 => 'View Clients',
     'view_invoices'                                => 'View Invoices',
+    'view_invoices_provider'                       => "View Prodivers' Invoices",
     'view_payment_logs'                            => 'View Online Payment Logs',
     'view_payments'                                => 'View Payments',
     'view_products'                                => 'View Products',

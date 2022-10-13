@@ -221,7 +221,7 @@ class Ajax extends Admin_Controller
         echo json_encode($item);
     }
 
-    public function modal_create_invoice()
+    public function modal_create_invoice_provider()
     {
         $this->load->module('layout');
         $this->load->model('invoice_groups/mdl_invoice_groups');
@@ -235,7 +235,7 @@ class Ajax extends Admin_Controller
             'providers' => $this->mdl_providers->get_latest(),
         ];
 
-        $this->layout->load_view('invoicesProvider/modal_create_invoice', $data);
+        $this->layout->load_view('invoicesProvider/modal_create_invoice_provider', $data);
     }
 
 

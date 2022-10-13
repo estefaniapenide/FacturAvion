@@ -637,6 +637,7 @@ $lang = array(
     'view_provider'                                => 'Ver proveedor',
     'view_providers'                               => 'Ver proveedores',
     'view_invoices'                                => 'Ver facturas',
+    'view_invoices_provider'                       => 'Ver facturas de proveedores',
     'view_payment_logs'                            => 'Ver registros de pago en línea',
     'view_payments'                                => 'Ver los pagos',
     'view_charge_logs'                            => 'Ver registros de cobro en línea',

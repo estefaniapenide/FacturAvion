@@ -1,7 +1,7 @@
 <script>
     $(function () {
         // Display the create invoice modal
-        $('#create-invoice').modal('show');
+        $('#create-invoice-provider').modal('show');
 
         // Enable select2 for all selects
         $('.simple-select').select2();
@@ -28,7 +28,7 @@
         });
 
         // Creates the invoice
-        $('#invoice_create_confirm').click(function () {
+        $('#invoice_provider_create_confirm').click(function () {
             // Posts the data to validate and create the invoice;
             // will create the new client if necessar
             $.post("<?php echo site_url('invoicesProvider/ajax/create'); ?>", {
@@ -59,8 +59,8 @@
 
 </script>
 
-<div id="create-invoice" class="modal modal-lg"
-     role="dialog" aria-labelledby="modal_create_invoice" aria-hidden="true">
+<div id="create-invoice-provider" class="modal modal-lg"
+     role="dialog" aria-labelledby="modal_create_invoice_provider" aria-hidden="true">
     <form class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
@@ -91,7 +91,7 @@
             </div>
 
             <div class="form-group has-feedback">
-                <label for="invoice_date_created"><?php _trans('invoice_date'); ?></label>
+                <label for="invoice_provider_date_created"><?php _trans('invoice_date'); ?></label>
 
                 <div class="input-group">
                     <input name="invoice_provider_date_created" id="invoice_provider_date_created"
@@ -116,7 +116,7 @@
 
         <div class="modal-footer">
             <div class="btn-group">
-                <button class="btn btn-success ajax-loader" id="invoice_create_confirm" type="button">
+                <button class="btn btn-success ajax-loader" id="invoice_provider_create_confirm" type="button">
                     <i class="fa fa-check"></i> <?php _trans('submit'); ?>
                 </button>
                 <button class="btn btn-danger" type="button" data-dismiss="modal">
