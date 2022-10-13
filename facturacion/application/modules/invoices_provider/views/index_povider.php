@@ -9,7 +9,7 @@
     </div>
 
     <div class="headerbar-item pull-right">
-        <?php echo pager(site_url('invoices_provider/provider/' . $provider_id . '/' . $status), 'mdl_invoices'); ?>
+        <?php echo pager(site_url('invoices_provider/provider/' . $provider_id . '/' . $status), 'mdl_invoices_provider'); ?>
     </div>
 
     <div class="headerbar-item pull-right">
@@ -33,6 +33,6 @@
 
 <div id="content" class="table-content">
 
-    <?php $this->layout->load_view('invoices_provider/partial_invoice_table', array('invoices' => $invoices)); ?>
+    <?php $this->layout->load_view('invoices_provider/partial_invoice_table', array('invoices' => $invoices_provider)); ?>
 
 </div>

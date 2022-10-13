@@ -68,7 +68,7 @@ class Invoices_provider extends Admin_Controller
                 'status' => $status,
                 'filter_display' => true,
                 'filter_placeholder' => trans('filter_invoices_provider'),
-                'filter_method' => 'filter_invoices',
+                'filter_method' => 'filter_invoices_provider',
                 'invoice_provider_statuses' => $this->mdl_invoices_provider->statuses(),
             ]
         );

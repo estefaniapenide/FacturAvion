@@ -7,7 +7,7 @@
                 data-toggle="collapse" data-target="#ip-submenu-collapse">
             <i class="fa fa-bars"></i> <?php _trans('submenu'); ?>
         </button>
-        <a class="create-invoice btn btn-sm btn-primary" href="#">
+        <a class="create-invoice-provider btn btn-sm btn-primary" href="#">
             <i class="fa fa-plus"></i> <?php _trans('new'); ?>
         </a>
     </div>
@@ -51,7 +51,7 @@
     <div class="collapse clearfix" id="ip-submenu-collapse">
 
         <div class="submenu-row">
-            <?php echo pager(site_url('invoices_provider/status/' . $this->uri->segment(3)), 'mdl_invoices'); ?>
+            <?php echo pager(site_url('invoices_provider/status/' . $this->uri->segment(3)), 'mdl_invoices_provider'); ?>
         </div>
 
         <div class="submenu-row">
@@ -88,6 +88,6 @@
 
 <div id="content" class="table-content">
     <div id="filter_results">
-        <?php $this->layout->load_view('invoices_provider/partial_invoice_table', array('invoices' => $invoices)); ?>
+        <?php $this->layout->load_view('invoices_provider/partial_invoice_table', array('invoices' => $invoices_provider)); ?>
     </div>
 </div>

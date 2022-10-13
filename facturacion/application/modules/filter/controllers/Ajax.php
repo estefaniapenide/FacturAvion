@@ -39,6 +39,28 @@ class Ajax extends Admin_Controller
         $this->layout->load_view('invoices/partial_invoice_table', $data);
     }
 
+    public function filter_invoices_provider()
+    {
+        $this->load->model('invoices_provider/mdl_invoices_provider');
+
+        $query = $this->input->post('filter_query');
+        $keywords = explode(' ', $query);
+
+        foreach ($keywords as $keyword) {
+            if ($keyword) {
+                $keyword = strtolower($keyword);
+                $this->mdl_invoices_provider->like("CONCAT_WS('^',LOWER(invoice_provider_number),invoice_provider_date_created,invoice_provider_date_due,LOWER(client_name),invoice_provider_total,invoice_provider_balance)", $keyword);
+            }
+        }
+
+        $data = array(
+            'invoices_provider' => $this->mdl_invoices_provider->get()->result(),
+            'invoice_provider_statuses' => $this->mdl_invoices_provider->statuses()
+        );
+
+        $this->layout->load_view('invoices_provider/partial_invoice_table', $data);
+    }
+
     public function filter_quotes()
     {
         $this->load->model('quotes/mdl_quotes');
