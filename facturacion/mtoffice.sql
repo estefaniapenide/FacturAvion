@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 13-10-2022 a las 08:48:10
+-- Tiempo de generación: 13-10-2022 a las 18:43:45
 -- Versión del servidor: 5.7.33-0ubuntu0.16.04.1
 -- Versión de PHP: 7.0.33-0ubuntu0.16.04.16
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `mtoffice`
 --
+CREATE DATABASE IF NOT EXISTS `mtoffice` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `mtoffice`;
 
 -- --------------------------------------------------------
 
@@ -26,7 +28,6 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `ip_clients`
 --
 
-DROP TABLE IF EXISTS `ip_clients`;
 CREATE TABLE `ip_clients` (
   `client_id` int(11) NOT NULL,
   `client_date_created` datetime NOT NULL,
@@ -69,7 +70,6 @@ INSERT INTO `ip_clients` (`client_id`, `client_date_created`, `client_date_modif
 -- Estructura de tabla para la tabla `ip_client_custom`
 --
 
-DROP TABLE IF EXISTS `ip_client_custom`;
 CREATE TABLE `ip_client_custom` (
   `client_custom_id` int(11) NOT NULL,
   `client_id` int(11) NOT NULL,
@@ -90,7 +90,6 @@ INSERT INTO `ip_client_custom` (`client_custom_id`, `client_id`, `client_custom_
 -- Estructura de tabla para la tabla `ip_client_notes`
 --
 
-DROP TABLE IF EXISTS `ip_client_notes`;
 CREATE TABLE `ip_client_notes` (
   `client_note_id` int(11) NOT NULL,
   `client_id` int(11) NOT NULL,
@@ -104,7 +103,6 @@ CREATE TABLE `ip_client_notes` (
 -- Estructura de tabla para la tabla `ip_custom_fields`
 --
 
-DROP TABLE IF EXISTS `ip_custom_fields`;
 CREATE TABLE `ip_custom_fields` (
   `custom_field_id` int(11) NOT NULL,
   `custom_field_table` varchar(50) DEFAULT NULL,
@@ -127,7 +125,6 @@ INSERT INTO `ip_custom_fields` (`custom_field_id`, `custom_field_table`, `custom
 -- Estructura de tabla para la tabla `ip_custom_values`
 --
 
-DROP TABLE IF EXISTS `ip_custom_values`;
 CREATE TABLE `ip_custom_values` (
   `custom_values_id` int(11) NOT NULL,
   `custom_values_field` int(11) NOT NULL,
@@ -140,7 +137,6 @@ CREATE TABLE `ip_custom_values` (
 -- Estructura de tabla para la tabla `ip_email_templates`
 --
 
-DROP TABLE IF EXISTS `ip_email_templates`;
 CREATE TABLE `ip_email_templates` (
   `email_template_id` int(11) NOT NULL,
   `email_template_title` text,
@@ -160,7 +156,6 @@ CREATE TABLE `ip_email_templates` (
 -- Estructura de tabla para la tabla `ip_families`
 --
 
-DROP TABLE IF EXISTS `ip_families`;
 CREATE TABLE `ip_families` (
   `family_id` int(11) NOT NULL,
   `family_name` text
@@ -181,7 +176,6 @@ INSERT INTO `ip_families` (`family_id`, `family_name`) VALUES
 -- Estructura de tabla para la tabla `ip_imports`
 --
 
-DROP TABLE IF EXISTS `ip_imports`;
 CREATE TABLE `ip_imports` (
   `import_id` int(11) NOT NULL,
   `import_date` datetime NOT NULL
@@ -193,7 +187,6 @@ CREATE TABLE `ip_imports` (
 -- Estructura de tabla para la tabla `ip_import_details`
 --
 
-DROP TABLE IF EXISTS `ip_import_details`;
 CREATE TABLE `ip_import_details` (
   `import_detail_id` int(11) NOT NULL,
   `import_id` int(11) NOT NULL,
@@ -208,7 +201,6 @@ CREATE TABLE `ip_import_details` (
 -- Estructura de tabla para la tabla `ip_invoices`
 --
 
-DROP TABLE IF EXISTS `ip_invoices`;
 CREATE TABLE `ip_invoices` (
   `invoice_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -239,7 +231,8 @@ INSERT INTO `ip_invoices` (`invoice_id`, `user_id`, `client_id`, `invoice_group_
 (2, 3, 2, 3, 2, NULL, '', '2022-10-10', '13:03:45', '2022-10-10 15:37:22', '2022-11-09', '2', '0.00', '0.00', '', 'nQly8M5JmOtwYDHNkBc1ah6Ks74TCrfu', 2, NULL),
 (3, 3, 2, 3, 1, NULL, '', '2022-08-24', '13:11:33', '2022-10-10 15:37:32', '2022-09-23', '3', '0.00', '0.00', '', 'RAxo9jQP2S5tcdrO3hw1u7ILbCeZamp8', 2, NULL),
 (4, 3, 2, 3, 1, NULL, '', '2022-09-24', '13:11:59', '2022-10-10 15:37:45', '2022-10-24', '4', '0.00', '0.00', '', 'bu4Nf23cK5GtAgrxHdzQ81YLP6V9pUOa', 2, NULL),
-(5, 3, 2, 3, 1, NULL, '', '2022-10-24', '13:12:26', '2022-10-10 15:41:27', '2022-11-23', '5', '0.00', '0.00', '', 'o4gGd2KXZIbaCvOqJRYM9zLQhf7jes3W', 2, NULL);
+(5, 3, 2, 3, 1, NULL, '', '2022-10-24', '13:12:26', '2022-10-10 15:41:27', '2022-11-23', '5', '0.00', '0.00', '', 'o4gGd2KXZIbaCvOqJRYM9zLQhf7jes3W', 2, NULL),
+(6, 2, 1, 3, 1, NULL, '', '2022-10-13', '16:35:29', '2022-10-13 16:35:37', '2022-11-12', '6', NULL, NULL, '', '8FcG2ZMh6lfBpbN7OsxtQjCEaqgi5T0Y', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -247,20 +240,32 @@ INSERT INTO `ip_invoices` (`invoice_id`, `user_id`, `client_id`, `invoice_group_
 -- Estructura de tabla para la tabla `ip_invoices_provider`
 --
 
-DROP TABLE IF EXISTS `ip_invoices_provider`;
 CREATE TABLE `ip_invoices_provider` (
   `invoice_provider_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `provider_id` int(11) NOT NULL,
   `invoice_provider_status_id` tinyint(2) NOT NULL DEFAULT '1',
+  `is_read_only` tinyint(1) DEFAULT NULL,
+  `invoice_provider_password` varchar(90) DEFAULT NULL,
   `invoice_provider_date_created` date NOT NULL,
   `invoice_provider_date_modified` datetime NOT NULL,
   `invoice_provider_date_due` date NOT NULL,
   `invoice_provider_number` varchar(200) NOT NULL,
-  `invoice_terms` longtext NOT NULL,
+  `invoice_provider_discount_amount` decimal(20,2) DEFAULT NULL,
+  `invoice_provider_discount_percent` decimal(20,2) DEFAULT NULL,
+  `invoice_provider_terms` longtext NOT NULL,
   `invoice_provider_url_key` char(32) NOT NULL,
+  `payment_method` int(11) NOT NULL DEFAULT '0',
+  `creditinvoice_parent_id` int(11) DEFAULT NULL,
   `invoice_provider_pdf` varchar(100) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `ip_invoices_provider`
+--
+
+INSERT INTO `ip_invoices_provider` (`invoice_provider_id`, `user_id`, `provider_id`, `invoice_provider_status_id`, `is_read_only`, `invoice_provider_password`, `invoice_provider_date_created`, `invoice_provider_date_modified`, `invoice_provider_date_due`, `invoice_provider_number`, `invoice_provider_discount_amount`, `invoice_provider_discount_percent`, `invoice_provider_terms`, `invoice_provider_url_key`, `payment_method`, `creditinvoice_parent_id`, `invoice_provider_pdf`) VALUES
+(2, 2, 11, 1, NULL, NULL, '2022-10-13', '2022-10-13 18:10:27', '2022-11-12', '1', NULL, NULL, '', 'oMr6eKNE7jGbWZtVqgk1P3vudwsanXcY', 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -268,7 +273,6 @@ CREATE TABLE `ip_invoices_provider` (
 -- Estructura de tabla para la tabla `ip_invoices_recurring`
 --
 
-DROP TABLE IF EXISTS `ip_invoices_recurring`;
 CREATE TABLE `ip_invoices_recurring` (
   `invoice_recurring_id` int(11) NOT NULL,
   `invoice_id` int(11) NOT NULL,
@@ -284,7 +288,6 @@ CREATE TABLE `ip_invoices_recurring` (
 -- Estructura de tabla para la tabla `ip_invoice_amounts`
 --
 
-DROP TABLE IF EXISTS `ip_invoice_amounts`;
 CREATE TABLE `ip_invoice_amounts` (
   `invoice_amount_id` int(11) NOT NULL,
   `invoice_id` int(11) NOT NULL,
@@ -306,7 +309,8 @@ INSERT INTO `ip_invoice_amounts` (`invoice_amount_id`, `invoice_id`, `invoice_si
 (2, 2, '1', '50.00', '10.50', '-11.50', '49.00', '0.00', '49.00'),
 (3, 3, '1', '50.00', '10.50', '-11.50', '49.00', '0.00', '49.00'),
 (4, 4, '1', '50.00', '10.50', '-11.50', '49.00', '0.00', '49.00'),
-(5, 5, '1', '50.00', '0.00', '1.00', '51.00', '0.00', '51.00');
+(5, 5, '1', '50.00', '0.00', '1.00', '51.00', '0.00', '51.00'),
+(6, 6, '1', NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -314,7 +318,6 @@ INSERT INTO `ip_invoice_amounts` (`invoice_amount_id`, `invoice_id`, `invoice_si
 -- Estructura de tabla para la tabla `ip_invoice_custom`
 --
 
-DROP TABLE IF EXISTS `ip_invoice_custom`;
 CREATE TABLE `ip_invoice_custom` (
   `invoice_custom_id` int(11) NOT NULL,
   `invoice_id` int(11) NOT NULL,
@@ -328,7 +331,6 @@ CREATE TABLE `ip_invoice_custom` (
 -- Estructura de tabla para la tabla `ip_invoice_groups`
 --
 
-DROP TABLE IF EXISTS `ip_invoice_groups`;
 CREATE TABLE `ip_invoice_groups` (
   `invoice_group_id` int(11) NOT NULL,
   `invoice_group_name` text,
@@ -342,7 +344,7 @@ CREATE TABLE `ip_invoice_groups` (
 --
 
 INSERT INTO `ip_invoice_groups` (`invoice_group_id`, `invoice_group_name`, `invoice_group_identifier_format`, `invoice_group_next_id`, `invoice_group_left_pad`) VALUES
-(3, 'Invoice Default', '{{{id}}}', 6, 0),
+(3, 'Invoice Default', '{{{id}}}', 7, 0),
 (4, 'Quote Default', 'QUO{{{id}}}', 3, 0);
 
 -- --------------------------------------------------------
@@ -351,7 +353,6 @@ INSERT INTO `ip_invoice_groups` (`invoice_group_id`, `invoice_group_name`, `invo
 -- Estructura de tabla para la tabla `ip_invoice_items`
 --
 
-DROP TABLE IF EXISTS `ip_invoice_items`;
 CREATE TABLE `ip_invoice_items` (
   `item_id` int(11) NOT NULL,
   `invoice_id` int(11) NOT NULL,
@@ -389,7 +390,6 @@ INSERT INTO `ip_invoice_items` (`item_id`, `invoice_id`, `item_tax_rate_id`, `it
 -- Estructura de tabla para la tabla `ip_invoice_item_amounts`
 --
 
-DROP TABLE IF EXISTS `ip_invoice_item_amounts`;
 CREATE TABLE `ip_invoice_item_amounts` (
   `item_amount_id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
@@ -417,7 +417,6 @@ INSERT INTO `ip_invoice_item_amounts` (`item_amount_id`, `item_id`, `item_subtot
 -- Estructura de tabla para la tabla `ip_invoice_provider_amounts`
 --
 
-DROP TABLE IF EXISTS `ip_invoice_provider_amounts`;
 CREATE TABLE `ip_invoice_provider_amounts` (
   `invoice_provider_amount_id` int(11) NOT NULL,
   `invoice_provider_id` int(11) NOT NULL,
@@ -430,13 +429,20 @@ CREATE TABLE `ip_invoice_provider_amounts` (
   `invoice_provider_balance` decimal(20,2) DEFAULT '0.00'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `ip_invoice_provider_amounts`
+--
+
+INSERT INTO `ip_invoice_provider_amounts` (`invoice_provider_amount_id`, `invoice_provider_id`, `invoice_provider_sign`, `invoice_provider_item_subtotal`, `invoice_provider_item_tax_total`, `invoice_provider_tax_total`, `invoice_provider_total`, `invoice_provider_paid`, `invoice_provider_balance`) VALUES
+(1, 1, '1', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00'),
+(2, 2, '1', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00');
+
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `ip_invoice_provider_custom`
 --
 
-DROP TABLE IF EXISTS `ip_invoice_provider_custom`;
 CREATE TABLE `ip_invoice_provider_custom` (
   `invoice_provider_custom_id` int(11) NOT NULL,
   `invoice_provider_id` int(11) NOT NULL
@@ -448,11 +454,11 @@ CREATE TABLE `ip_invoice_provider_custom` (
 -- Estructura de tabla para la tabla `ip_invoice_provider_items`
 --
 
-DROP TABLE IF EXISTS `ip_invoice_provider_items`;
 CREATE TABLE `ip_invoice_provider_items` (
   `item_id` int(11) NOT NULL,
   `invoice_provider_id` int(11) NOT NULL,
   `item_tax_rate_id` int(11) NOT NULL DEFAULT '0',
+  `item_product_id` int(11) DEFAULT '0',
   `item_date_added` date NOT NULL,
   `item_name` text,
   `item_description` longtext,
@@ -467,7 +473,6 @@ CREATE TABLE `ip_invoice_provider_items` (
 -- Estructura de tabla para la tabla `ip_invoice_provider_item_amounts`
 --
 
-DROP TABLE IF EXISTS `ip_invoice_provider_item_amounts`;
 CREATE TABLE `ip_invoice_provider_item_amounts` (
   `item_amount_id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
@@ -482,7 +487,6 @@ CREATE TABLE `ip_invoice_provider_item_amounts` (
 -- Estructura de tabla para la tabla `ip_invoice_provider_tax_rates`
 --
 
-DROP TABLE IF EXISTS `ip_invoice_provider_tax_rates`;
 CREATE TABLE `ip_invoice_provider_tax_rates` (
   `invoice_provider_tax_rate_id` int(11) NOT NULL,
   `invoice_provider_id` int(11) NOT NULL,
@@ -497,7 +501,6 @@ CREATE TABLE `ip_invoice_provider_tax_rates` (
 -- Estructura de tabla para la tabla `ip_invoice_sumex`
 --
 
-DROP TABLE IF EXISTS `ip_invoice_sumex`;
 CREATE TABLE `ip_invoice_sumex` (
   `sumex_id` int(11) NOT NULL,
   `sumex_invoice` int(11) NOT NULL,
@@ -516,7 +519,6 @@ CREATE TABLE `ip_invoice_sumex` (
 -- Estructura de tabla para la tabla `ip_invoice_tax_rates`
 --
 
-DROP TABLE IF EXISTS `ip_invoice_tax_rates`;
 CREATE TABLE `ip_invoice_tax_rates` (
   `invoice_tax_rate_id` int(11) NOT NULL,
   `invoice_id` int(11) NOT NULL,
@@ -543,7 +545,6 @@ INSERT INTO `ip_invoice_tax_rates` (`invoice_tax_rate_id`, `invoice_id`, `tax_ra
 -- Estructura de tabla para la tabla `ip_item_lookups`
 --
 
-DROP TABLE IF EXISTS `ip_item_lookups`;
 CREATE TABLE `ip_item_lookups` (
   `item_lookup_id` int(11) NOT NULL,
   `item_name` varchar(100) NOT NULL DEFAULT '',
@@ -557,7 +558,6 @@ CREATE TABLE `ip_item_lookups` (
 -- Estructura de tabla para la tabla `ip_merchant_responses`
 --
 
-DROP TABLE IF EXISTS `ip_merchant_responses`;
 CREATE TABLE `ip_merchant_responses` (
   `merchant_response_id` int(11) NOT NULL,
   `invoice_id` int(11) NOT NULL,
@@ -574,7 +574,6 @@ CREATE TABLE `ip_merchant_responses` (
 -- Estructura de tabla para la tabla `ip_payments`
 --
 
-DROP TABLE IF EXISTS `ip_payments`;
 CREATE TABLE `ip_payments` (
   `payment_id` int(11) NOT NULL,
   `invoice_id` int(11) NOT NULL,
@@ -598,7 +597,6 @@ INSERT INTO `ip_payments` (`payment_id`, `invoice_id`, `payment_method_id`, `pay
 -- Estructura de tabla para la tabla `ip_payments_provider`
 --
 
-DROP TABLE IF EXISTS `ip_payments_provider`;
 CREATE TABLE `ip_payments_provider` (
   `payment_id` int(11) NOT NULL,
   `invoice_id` int(11) NOT NULL,
@@ -614,7 +612,6 @@ CREATE TABLE `ip_payments_provider` (
 -- Estructura de tabla para la tabla `ip_payment_custom`
 --
 
-DROP TABLE IF EXISTS `ip_payment_custom`;
 CREATE TABLE `ip_payment_custom` (
   `payment_custom_id` int(11) NOT NULL,
   `payment_id` int(11) NOT NULL,
@@ -628,7 +625,6 @@ CREATE TABLE `ip_payment_custom` (
 -- Estructura de tabla para la tabla `ip_payment_methods`
 --
 
-DROP TABLE IF EXISTS `ip_payment_methods`;
 CREATE TABLE `ip_payment_methods` (
   `payment_method_id` int(11) NOT NULL,
   `payment_method_name` text
@@ -648,7 +644,6 @@ INSERT INTO `ip_payment_methods` (`payment_method_id`, `payment_method_name`) VA
 -- Estructura de tabla para la tabla `ip_products`
 --
 
-DROP TABLE IF EXISTS `ip_products`;
 CREATE TABLE `ip_products` (
   `product_id` int(11) NOT NULL,
   `family_id` int(11) DEFAULT NULL,
@@ -679,7 +674,6 @@ INSERT INTO `ip_products` (`product_id`, `family_id`, `product_sku`, `product_na
 -- Estructura de tabla para la tabla `ip_projects`
 --
 
-DROP TABLE IF EXISTS `ip_projects`;
 CREATE TABLE `ip_projects` (
   `project_id` int(11) NOT NULL,
   `client_id` int(11) NOT NULL,
@@ -692,7 +686,6 @@ CREATE TABLE `ip_projects` (
 -- Estructura de tabla para la tabla `ip_providers`
 --
 
-DROP TABLE IF EXISTS `ip_providers`;
 CREATE TABLE `ip_providers` (
   `provider_id` int(11) NOT NULL,
   `provider_date_created` datetime NOT NULL,
@@ -719,7 +712,8 @@ CREATE TABLE `ip_providers` (
 --
 
 INSERT INTO `ip_providers` (`provider_id`, `provider_date_created`, `provider_date_modified`, `provider_name`, `provider_comercial_name`, `provider_address_1`, `provider_address_2`, `provider_city`, `provider_state`, `provider_zip`, `provider_country`, `provider_phone`, `provider_mobile`, `provider_email`, `provider_web`, `provider_vat_id`, `provider_language`, `provider_active`) VALUES
-(11, '2022-10-11 15:49:51', '2022-10-13 08:46:59', 'empresa', 'lalalala', 'sadsadsda', 'sadsadadsa', 'asdsad', 'adsadsa', '123123', 'DE', '4323243', '131231323', 'sdsadsa@gmail.com', 'sadsasad.com', '12321313', 'Arabic', 1);
+(11, '2022-10-11 15:49:51', '2022-10-13 08:46:59', 'empresa', 'lalalala', 'sadsadsda', 'sadsadadsa', 'asdsad', 'adsadsa', '123123', 'DE', '4323243', '131231323', 'sdsadsa@gmail.com', 'sadsasad.com', '12321313', 'Arabic', 1),
+(13, '2022-10-13 14:01:07', '2022-10-13 14:01:07', 'dfdssa', 'asdsadsadsa', '', '', '', '', '', '', '', '', '', '', '', 'system', 1);
 
 -- --------------------------------------------------------
 
@@ -727,7 +721,6 @@ INSERT INTO `ip_providers` (`provider_id`, `provider_date_created`, `provider_da
 -- Estructura de tabla para la tabla `ip_provider_custom`
 --
 
-DROP TABLE IF EXISTS `ip_provider_custom`;
 CREATE TABLE `ip_provider_custom` (
   `provider_custom_id` int(11) NOT NULL,
   `provider_id` int(11) NOT NULL,
@@ -741,7 +734,6 @@ CREATE TABLE `ip_provider_custom` (
 -- Estructura de tabla para la tabla `ip_provider_notes`
 --
 
-DROP TABLE IF EXISTS `ip_provider_notes`;
 CREATE TABLE `ip_provider_notes` (
   `provider_note_id` int(11) NOT NULL,
   `provider_id` int(11) NOT NULL,
@@ -762,7 +754,6 @@ INSERT INTO `ip_provider_notes` (`provider_note_id`, `provider_id`, `provider_no
 -- Estructura de tabla para la tabla `ip_quotes`
 --
 
-DROP TABLE IF EXISTS `ip_quotes`;
 CREATE TABLE `ip_quotes` (
   `quote_id` int(11) NOT NULL,
   `invoice_id` int(11) NOT NULL DEFAULT '0',
@@ -795,7 +786,6 @@ INSERT INTO `ip_quotes` (`quote_id`, `invoice_id`, `user_id`, `client_id`, `invo
 -- Estructura de tabla para la tabla `ip_quote_amounts`
 --
 
-DROP TABLE IF EXISTS `ip_quote_amounts`;
 CREATE TABLE `ip_quote_amounts` (
   `quote_amount_id` int(11) NOT NULL,
   `quote_id` int(11) NOT NULL,
@@ -819,7 +809,6 @@ INSERT INTO `ip_quote_amounts` (`quote_amount_id`, `quote_id`, `quote_item_subto
 -- Estructura de tabla para la tabla `ip_quote_custom`
 --
 
-DROP TABLE IF EXISTS `ip_quote_custom`;
 CREATE TABLE `ip_quote_custom` (
   `quote_custom_id` int(11) NOT NULL,
   `quote_id` int(11) NOT NULL,
@@ -833,7 +822,6 @@ CREATE TABLE `ip_quote_custom` (
 -- Estructura de tabla para la tabla `ip_quote_items`
 --
 
-DROP TABLE IF EXISTS `ip_quote_items`;
 CREATE TABLE `ip_quote_items` (
   `item_id` int(11) NOT NULL,
   `quote_id` int(11) NOT NULL,
@@ -864,7 +852,6 @@ INSERT INTO `ip_quote_items` (`item_id`, `quote_id`, `item_tax_rate_id`, `item_p
 -- Estructura de tabla para la tabla `ip_quote_item_amounts`
 --
 
-DROP TABLE IF EXISTS `ip_quote_item_amounts`;
 CREATE TABLE `ip_quote_item_amounts` (
   `item_amount_id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
@@ -888,7 +875,6 @@ INSERT INTO `ip_quote_item_amounts` (`item_amount_id`, `item_id`, `item_subtotal
 -- Estructura de tabla para la tabla `ip_quote_tax_rates`
 --
 
-DROP TABLE IF EXISTS `ip_quote_tax_rates`;
 CREATE TABLE `ip_quote_tax_rates` (
   `quote_tax_rate_id` int(11) NOT NULL,
   `quote_id` int(11) NOT NULL,
@@ -911,7 +897,6 @@ INSERT INTO `ip_quote_tax_rates` (`quote_tax_rate_id`, `quote_id`, `tax_rate_id`
 -- Estructura de tabla para la tabla `ip_sessions`
 --
 
-DROP TABLE IF EXISTS `ip_sessions`;
 CREATE TABLE `ip_sessions` (
   `id` varchar(128) NOT NULL,
   `ip_address` varchar(45) NOT NULL,
@@ -925,7 +910,6 @@ CREATE TABLE `ip_sessions` (
 -- Estructura de tabla para la tabla `ip_settings`
 --
 
-DROP TABLE IF EXISTS `ip_settings`;
 CREATE TABLE `ip_settings` (
   `setting_id` int(11) NOT NULL,
   `setting_key` varchar(50) NOT NULL,
@@ -1177,7 +1161,7 @@ INSERT INTO `ip_settings` (`setting_id`, `setting_key`, `setting_value`) VALUES
 (256, 'gateway_worldpay_payment_method', ''),
 (257, 'smtp_password', 'Lo6MkH4WuO57W1GH9sKxu0+hsV1gZXvcQR8vo8HxEbz3YHvRxfRCLErx'),
 (258, 'enable_permissive_search_clients', '0'),
-(259, 'enable_permissive_search_providers', '0');
+(259, 'enable_permissive_search_providers', '1');
 
 -- --------------------------------------------------------
 
@@ -1185,7 +1169,6 @@ INSERT INTO `ip_settings` (`setting_id`, `setting_key`, `setting_value`) VALUES
 -- Estructura de tabla para la tabla `ip_tasks`
 --
 
-DROP TABLE IF EXISTS `ip_tasks`;
 CREATE TABLE `ip_tasks` (
   `task_id` int(11) NOT NULL,
   `project_id` int(11) NOT NULL,
@@ -1203,7 +1186,6 @@ CREATE TABLE `ip_tasks` (
 -- Estructura de tabla para la tabla `ip_tax_rates`
 --
 
-DROP TABLE IF EXISTS `ip_tax_rates`;
 CREATE TABLE `ip_tax_rates` (
   `tax_rate_id` int(11) NOT NULL,
   `tax_rate_name` text,
@@ -1226,7 +1208,6 @@ INSERT INTO `ip_tax_rates` (`tax_rate_id`, `tax_rate_name`, `tax_rate_percent`) 
 -- Estructura de tabla para la tabla `ip_units`
 --
 
-DROP TABLE IF EXISTS `ip_units`;
 CREATE TABLE `ip_units` (
   `unit_id` int(11) NOT NULL,
   `unit_name` varchar(50) DEFAULT NULL,
@@ -1246,7 +1227,6 @@ INSERT INTO `ip_units` (`unit_id`, `unit_name`, `unit_name_plrl`) VALUES
 -- Estructura de tabla para la tabla `ip_uploads`
 --
 
-DROP TABLE IF EXISTS `ip_uploads`;
 CREATE TABLE `ip_uploads` (
   `upload_id` int(11) NOT NULL,
   `client_id` int(11) NOT NULL,
@@ -1262,7 +1242,6 @@ CREATE TABLE `ip_uploads` (
 -- Estructura de tabla para la tabla `ip_users`
 --
 
-DROP TABLE IF EXISTS `ip_users`;
 CREATE TABLE `ip_users` (
   `user_id` int(11) NOT NULL,
   `user_type` int(1) NOT NULL DEFAULT '0',
@@ -1310,7 +1289,6 @@ INSERT INTO `ip_users` (`user_id`, `user_type`, `user_active`, `user_date_create
 -- Estructura de tabla para la tabla `ip_user_clients`
 --
 
-DROP TABLE IF EXISTS `ip_user_clients`;
 CREATE TABLE `ip_user_clients` (
   `user_client_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -1323,7 +1301,6 @@ CREATE TABLE `ip_user_clients` (
 -- Estructura de tabla para la tabla `ip_user_custom`
 --
 
-DROP TABLE IF EXISTS `ip_user_custom`;
 CREATE TABLE `ip_user_custom` (
   `user_custom_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -1337,7 +1314,6 @@ CREATE TABLE `ip_user_custom` (
 -- Estructura de tabla para la tabla `ip_user_providers`
 --
 
-DROP TABLE IF EXISTS `ip_user_providers`;
 CREATE TABLE `ip_user_providers` (
   `user_provider_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -1350,7 +1326,6 @@ CREATE TABLE `ip_user_providers` (
 -- Estructura de tabla para la tabla `ip_versions`
 --
 
-DROP TABLE IF EXISTS `ip_versions`;
 CREATE TABLE `ip_versions` (
   `version_id` int(11) NOT NULL,
   `version_date_applied` varchar(14) NOT NULL,
@@ -1822,12 +1797,12 @@ ALTER TABLE `ip_import_details`
 -- AUTO_INCREMENT de la tabla `ip_invoices`
 --
 ALTER TABLE `ip_invoices`
-  MODIFY `invoice_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `invoice_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `ip_invoices_provider`
 --
 ALTER TABLE `ip_invoices_provider`
-  MODIFY `invoice_provider_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `invoice_provider_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `ip_invoices_recurring`
 --
@@ -1837,7 +1812,7 @@ ALTER TABLE `ip_invoices_recurring`
 -- AUTO_INCREMENT de la tabla `ip_invoice_amounts`
 --
 ALTER TABLE `ip_invoice_amounts`
-  MODIFY `invoice_amount_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `invoice_amount_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `ip_invoice_custom`
 --
@@ -1862,7 +1837,7 @@ ALTER TABLE `ip_invoice_item_amounts`
 -- AUTO_INCREMENT de la tabla `ip_invoice_provider_amounts`
 --
 ALTER TABLE `ip_invoice_provider_amounts`
-  MODIFY `invoice_provider_amount_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `invoice_provider_amount_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `ip_invoice_provider_custom`
 --
@@ -1937,7 +1912,7 @@ ALTER TABLE `ip_projects`
 -- AUTO_INCREMENT de la tabla `ip_providers`
 --
 ALTER TABLE `ip_providers`
-  MODIFY `provider_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `provider_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT de la tabla `ip_provider_custom`
 --
