@@ -19,10 +19,10 @@ class Ajax extends Admin_Controller
 
     public function add()
     {
-        $this->load->model('payments/mdl_payments');
+        $this->load->model('payments_provider/mdl_payments_provider');
 
-        if ($this->mdl_payments->run_validation()) {
-            $payment_id = $this->mdl_payments->save();
+        if ($this->mdl_payments_provider->run_validation()) {
+            $payment_id = $this->mdl_payments_provider->save();
 
             $response = array(
                 'success' => 1,
@@ -42,7 +42,7 @@ class Ajax extends Admin_Controller
     public function modal_add_payment()
     {
         $this->load->module('layout');
-        $this->load->model('payments/mdl_payments');
+        $this->load->model('payments_provider/mdl_payments_provider');
         $this->load->model('payment_methods/mdl_payment_methods');
         $this->load->model('custom_fields/mdl_payment_custom');
 
@@ -54,7 +54,7 @@ class Ajax extends Admin_Controller
             'payment_cf_exist' => $this->input->post('payment_cf_exist')
         );
 
-        $this->layout->load_view('payments/modal_add_payment', $data);
+        $this->layout->load_view('payments_provider/modal_add_payment', $data);
     }
 
 }

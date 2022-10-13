@@ -76,13 +76,16 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-caret-down"></i> &nbsp;
-                        <span class="hidden-md"><?php _trans('payments'); ?></span>
+                        <span class="hidden-md"><?php _trans('economy'); ?></span>
                         <i class="visible-md-inline fa fa-credit-card"></i>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><?php echo anchor('payments/form', trans('enter_payment')); ?></li>
-                        <li><?php echo anchor('payments/index', trans('view_payments')); ?></li>
-                        <li><?php echo anchor('payments/online_logs', trans('view_payment_logs')); ?></li>
+                        <li><?php echo anchor('payments/form', trans('enter_charge')); ?></li>
+                        <li><?php echo anchor('payments/index', trans('view_charges')); ?></li>
+                        <li><?php echo anchor('payments/online_logs', trans('view_charge_logs')); ?></li>
+                        <li><?php echo anchor('payments_provider/form', trans('enter_payment')); ?></li>
+                        <li><?php echo anchor('payments_provider/index', trans('view_payments')); ?></li>
+                        <li><?php echo anchor('payments_provider/online_logs', trans('view_payment_logs')); ?></li>
                     </ul>
                 </li>
 

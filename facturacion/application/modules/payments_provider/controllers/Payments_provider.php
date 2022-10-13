@@ -13,7 +13,7 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * Class Payments
  */
-class Payments extends Admin_Controller
+class Payments_provider extends Admin_Controller
 {
     /**
      * Payments constructor.
@@ -22,7 +22,7 @@ class Payments extends Admin_Controller
     {
         parent::__construct();
 
-        $this->load->model('mdl_payments');
+        $this->load->model('mdl_payments_provider');
     }
 
     /**
@@ -30,19 +30,19 @@ class Payments extends Admin_Controller
      */
     public function index($page = 0)
     {
-        $this->mdl_payments->paginate(site_url('payments/index'), $page);
-        $payments = $this->mdl_payments->result();
+        $this->mdl_payments_provider->paginate(site_url('payments_provider/index'), $page);
+        $payments = $this->mdl_payments_provider->result();
 
         $this->layout->set(
             array(
-                'payments' => $payments,
+                'payments_provider' => $payments,
                 'filter_display' => true,
                 'filter_placeholder' => trans('filter_payments'),
                 'filter_method' => 'filter_payments'
             )
         );
 
-        $this->layout->buffer('content', 'payments/index');
+        $this->layout->buffer('content', 'payments_provider/index');
         $this->layout->render();
     }
 
@@ -52,21 +52,21 @@ class Payments extends Admin_Controller
     public function form($id = null)
     {
         if ($this->input->post('btn_cancel')) {
-            redirect('payments');
+            redirect('payments_provider');
         }
 
-        if ($this->mdl_payments->run_validation()) {
-            $id = $this->mdl_payments->save($id);
+        if ($this->mdl_payments_provider->run_validation()) {
+            $id = $this->mdl_payments_provider->save($id);
 
             $this->load->model('custom_fields/mdl_payment_custom');
 
             $this->mdl_payment_custom->save_custom($id, $this->input->post('custom'));
 
-            redirect('payments');
+            redirect('payments_provider');
         }
 
         if (!$this->input->post('btn_submit')) {
-            $prep_form = $this->mdl_payments->prep_form($id);
+            $prep_form = $this->mdl_payments_provider->prep_form($id);
 
             if ($id and !$prep_form) {
                 show_404();
@@ -83,13 +83,13 @@ class Payments extends Admin_Controller
                 unset($payment_custom->payment_id, $payment_custom->payment_custom_id);
 
                 foreach ($payment_custom as $key => $val) {
-                    $this->mdl_payments->set_form_value('custom[' . $key . ']', $val);
+                    $this->mdl_payments_provider->set_form_value('custom[' . $key . ']', $val);
                 }
             }
         } else {
             if ($this->input->post('custom')) {
                 foreach ($this->input->post('custom') as $key => $val) {
-                    $this->mdl_payments->set_form_value('custom[' . $key . ']', $val);
+                    $this->mdl_payments_provider->set_form_value('custom[' . $key . ']', $val);
                 }
             }
         }
