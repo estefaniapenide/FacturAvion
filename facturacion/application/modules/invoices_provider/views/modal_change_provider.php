@@ -9,7 +9,7 @@
         $('#provider_change_confirm').click(function () {
             // Posts the data to validate and create the invoice;
             // will create the new client if necessary
-            $.post("<?php echo site_url('invoicesProvider/ajax/change_provider'); ?>", {
+            $.post("<?php echo site_url('invoices_provider/ajax/change_provider'); ?>", {
                     provider_id: $('#change_provider_id').val(),
                     invoice_provider_id: $('#invoice_provider_id').val()
                 },
@@ -18,7 +18,7 @@
                     var response = JSON.parse(data);
                     if (response.success === 1) {
                         // The validation was successful and invoice was created
-                        window.location = "<?php echo site_url('invoicesProvider/view'); ?>/" + response.invoice_provider_id;
+                        window.location = "<?php echo site_url('invoices_provider/view'); ?>/" + response.invoice_provider_id;
                     }
                     else {
                         // The validation was not successful

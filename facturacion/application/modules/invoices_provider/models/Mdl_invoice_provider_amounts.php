@@ -90,7 +90,7 @@ class Mdl_Invoice_Provider_Amounts extends CI_Model
         $this->calculate_invoice_taxes($invoice_id);
 
         // Get invoice status
-        $this->load->model('invoicesProvider/mdl_invoices_provider');
+        $this->load->model('invoices_provider/mdl_invoices_provider');
         $invoice = $this->mdl_invoices_provider->get_by_id($invoice_id);
         $invoice_is_credit = ($invoice->creditinvoice_parent_id > 0 ? true : false);
 
@@ -146,7 +146,7 @@ class Mdl_Invoice_Provider_Amounts extends CI_Model
     public function calculate_invoice_taxes($invoice_id)
     {
         // First check to see if there are any invoice taxes applied
-        $this->load->model('invoicesProvider/mdl_invoice_provider_tax_rates');
+        $this->load->model('invoices_provider/mdl_invoice_provider_tax_rates');
         $invoice_tax_rates = $this->mdl_invoice_provider_tax_rates->where('invoice_provider_id', $invoice_id)->get()->result();
 
         if ($invoice_tax_rates) {

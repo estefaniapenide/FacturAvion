@@ -12,7 +12,7 @@
         </div>
         <div class="modal-footer">
 
-            <form action="<?php echo site_url('invoicesProvider/delete/' . $invoice->invoice_provider_id); ?>"
+            <form action="<?php echo site_url('invoices_provider/delete/' . $invoice->invoice_provider_id); ?>"
                   method="POST">
                 <?php _csrf_field(); ?>
 

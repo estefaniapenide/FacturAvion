@@ -28,22 +28,22 @@ class Mdl_Invoices_Provider extends Response_Model
             '1' => array(
                 'label' => trans('draft'),
                 'class' => 'draft',
-                'href' => 'invoicesProvider/status/draft'
+                'href' => 'invoices_provider/status/draft'
             ),
             '2' => array(
                 'label' => trans('sent'),
                 'class' => 'sent',
-                'href' => 'invoicesProvider/status/sent'
+                'href' => 'invoices_provider/status/sent'
             ),
             '3' => array(
                 'label' => trans('viewed'),
                 'class' => 'viewed',
-                'href' => 'invoicesProvider/status/viewed'
+                'href' => 'invoices_provider/status/viewed'
             ),
             '4' => array(
                 'label' => trans('paid'),
                 'class' => 'paid',
-                'href' => 'invoicesProvider/status/paid'
+                'href' => 'invoices_provider/status/paid'
             )
         );
     }
@@ -190,8 +190,8 @@ class Mdl_Invoices_Provider extends Response_Model
      */
     public function copy_invoice($source_id, $target_id, $copy_recurring_items_only = false)
     {
-        $this->load->model('invoicesProvider/mdl_invoice_provider_items');
-        $this->load->model('invoicesProvider/mdl_invoice_provider_tax_rates');
+        $this->load->model('invoices_provider/mdl_invoice_provider_items');
+        $this->load->model('invoices_provider/mdl_invoice_provider_tax_rates');
 
         // Copy the items
         $invoice_items = $this->mdl_invoice_provider_items->where('invoices_provider_id', $source_id)->get()->result();
@@ -250,8 +250,8 @@ class Mdl_Invoices_Provider extends Response_Model
      */
     public function copy_credit_invoice($source_id, $target_id)
     {
-        $this->load->model('invoicesProvider/mdl_invoice_provider_items');
-        $this->load->model('invoicesProvider/mdl_invoice_provider_tax_rates');
+        $this->load->model('invoices_provider/mdl_invoice_provider_items');
+        $this->load->model('invoices_provider/mdl_invoice_provider_tax_rates');
 
         $invoice_items = $this->mdl_invoice_provider_items->where('invoices_provider_id', $source_id)->get()->result();
 

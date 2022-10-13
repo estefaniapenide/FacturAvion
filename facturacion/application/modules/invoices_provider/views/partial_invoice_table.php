@@ -41,7 +41,7 @@
                 </td>
 
                 <td>
-                    <a href="<?php echo site_url('invoicesProvider/view/' . $invoice->invoice_provider_id); ?>"
+                    <a href="<?php echo site_url('invoices_provider/view/' . $invoice->invoice_provider_id); ?>"
                        title="<?php _trans('edit'); ?>">
                         <?php echo($invoice->invoice_provider_number ? $invoice->invoice_provider_number : $invoice->invoice_id); ?>
                     </a>
@@ -58,7 +58,7 @@
                 </td>
 
                 <td>
-                    <a href="<?php echo site_url('providersProvider/view/' . $invoice->invoice_provider_id); ?>"
+                    <a href="<?php echo site_url('providers/view/' . $invoice->provider_id); ?>"
                        title="<?php _trans('view_provider'); ?>">
                         <?php _htmlsc(format_client($invoice)); ?>
                     </a>
@@ -82,13 +82,13 @@
                         <ul class="dropdown-menu">
                             <?php if ($invoice->is_read_only != 1) { ?>
                                 <li>
-                                    <a href="<?php echo site_url('invoicesProvider/view/' . $invoice->invoice_provider_id); ?>">
+                                    <a href="<?php echo site_url('invoices_provider/view/' . $invoice->invoice_provider_id); ?>">
                                         <i class="fa fa-edit fa-margin"></i> <?php _trans('edit'); ?>
                                     </a>
                                 </li>
                             <?php } ?>
                             <li>
-                                <a href="<?php echo site_url('invoicesProvider/generate_pdf/' . $invoice->invoice_provider_id); ?>"
+                                <a href="<?php echo site_url('invoices_provider/generate_pdf/' . $invoice->invoice_provider_id); ?>"
                                    target="_blank">
                                     <i class="fa fa-print fa-margin"></i> <?php _trans('download_pdf'); ?>
                                 </a>

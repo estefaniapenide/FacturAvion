@@ -13,7 +13,7 @@
             ?>
             <tr>
                 <td>
-                    <a href="<?php echo site_url('invoicesProvider/download/' . basename($invoice)); ?>"
+                    <a href="<?php echo site_url('invoices_provider/download/' . basename($invoice)); ?>"
                        title="<?php _trans('invoice_provider'); ?>">
                         <?php echo basename($invoice); ?>
                     </a>

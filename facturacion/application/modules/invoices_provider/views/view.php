@@ -43,7 +43,7 @@ $cv = $this->controller->view_data["custom_values"];
         });
 
         $('#invoice_change_provider').click(function () {
-            $('#modal-placeholder').load("<?php echo site_url('invoicesProvider/ajax/modal_change_provider'); ?>", {
+            $('#modal-placeholder').load("<?php echo site_url('invoices_provider/ajax/modal_change_provider'); ?>", {
                 invoice_provider_id: <?php echo $invoice_id; ?>,
                 provider_id: "<?php echo $this->db->escape_str($invoice->provider_id); ?>",
             });
@@ -65,7 +65,7 @@ $cv = $this->controller->view_data["custom_values"];
                 item_order++;
                 items.push(row);
             });
-            $.post("<?php echo site_url('invoicesProvider/ajax/save'); ?>", {
+            $.post("<?php echo site_url('invoices_provider/ajax/save'); ?>", {
                     invoice_provider_id: <?php echo $invoice_id; ?>,
                     invoice_provider_number: $('#invoice_provider_number').val(),
                     invoice_provider_date_created: $('#invoice_provider_date_created').val(),
@@ -83,7 +83,7 @@ $cv = $this->controller->view_data["custom_values"];
                     <?php echo(IP_DEBUG ? 'console.log(data);' : ''); ?>
                     var response = JSON.parse(data);
                     if (response.success === 1) {
-                        window.location = "<?php echo site_url('invoicesProvider/view'); ?>/" + <?php echo $invoice_id; ?>;
+                        window.location = "<?php echo site_url('invoices_provider/view'); ?>/" + <?php echo $invoice_id; ?>;
                     } else {
                         $('#fullpage-loader').hide();
                         $('.control-group').removeClass('has-error');
@@ -317,7 +317,7 @@ if ($this->config->item('disable_read_only') == true) {
                                         <?php
                                         echo trans('credit_invoice_for_invoice') . ' ';
                                         $parent_invoice_number = $this->mdl_invoices->get_parent_invoice_number($invoice->creditinvoice_parent_id);
-                                        echo anchor('/invoicesProvider/view/' . $invoice->creditinvoice_parent_id, $parent_invoice_number);
+                                        echo anchor('/invoices_provider/view/' . $invoice->creditinvoice_parent_id, $parent_invoice_number);
                                         ?>
                                     </div>
                                 </div>
@@ -431,7 +431,7 @@ if ($this->config->item('disable_read_only') == true) {
 
             <br>
 
-            <?php $this->layout->load_view('invoicesProvider/partial_item_table'); ?>
+            <?php $this->layout->load_view('invoices_provider/partial_item_table'); ?>
 
             <hr/>
 

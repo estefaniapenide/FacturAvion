@@ -303,7 +303,7 @@
                     <?php if ($invoice_tax_rates) {
                         foreach ($invoice_tax_rates as $invoice_tax_rate) { ?>
                             <form method="post"
-                                action="<?php echo site_url('invoicesProvider/delete_invoice_tax/' . $invoice->invoice_provider_id . '/' . $invoice_tax_rate->invoice_provider_tax_rate_id) ?>">
+                                action="<?php echo site_url('invoices_provider/delete_invoice_tax/' . $invoice->invoice_provider_id . '/' . $invoice_tax_rate->invoice_provider_tax_rate_id) ?>">
                                 <?php _csrf_field(); ?>
                                 <button type="submit" class="btn btn-xs btn-link"
                                         onclick="return confirm('<?php _trans('delete_tax_warning'); ?>');">

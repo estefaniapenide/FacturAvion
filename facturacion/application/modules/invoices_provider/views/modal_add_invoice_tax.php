@@ -4,7 +4,7 @@
         $(".simple-select").select2();
 
         $('#invoice_tax_submit').click(function () {
-            $.post("<?php echo site_url('invoicesProvider/ajax/save_invoice_tax_rate'); ?>", {
+            $.post("<?php echo site_url('invoices_provider/ajax/save_invoice_tax_rate'); ?>", {
                     invoice_provider_id: <?php echo $invoice_id; ?>,
                     tax_rate_id: $('#tax_rate_id').val(),
                     include_item_tax: $('#include_item_tax').val()
@@ -13,7 +13,7 @@
                     <?php echo(IP_DEBUG ? 'console.log(data);' : ''); ?>
                     var response = JSON.parse(data);
                     if (response.success === 1) {
-                        window.location = "<?php echo site_url('invoicesProvider/view'); ?>/" + <?php echo $invoice_id; ?>;
+                        window.location = "<?php echo site_url('invoices_provider/view'); ?>/" + <?php echo $invoice_id; ?>;
                     }
                 });
         });

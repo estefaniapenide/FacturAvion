@@ -2,7 +2,7 @@
     $(function () {
         $('#modal-create-credit-invoice').modal('show');
         $('#create-credit-confirm').click(function () {
-            $.post("<?php echo site_url('invoicesProvider/ajax/create_credit'); ?>", {
+            $.post("<?php echo site_url('invoices_provider/ajax/create_credit'); ?>", {
                     invoice_provider_id: <?php echo $invoice_id; ?>,
                     provider_id: $('#provider_id').val(),
                     invoice_provider_date_created: $('#invoice_provider_date_created').val(),
@@ -14,7 +14,7 @@
                     <?php echo(IP_DEBUG ? 'console.log(data);' : ''); ?>
                     var response = JSON.parse(data);
                     if (response.success === 1) {
-                        window.location = "<?php echo site_url('invoicesProvider/view'); ?>/" + response.invoice_provider_id;
+                        window.location = "<?php echo site_url('invoices_provider/view'); ?>/" + response.invoice_provider_id;
                     }
                     else {
                         // The validation was not successful

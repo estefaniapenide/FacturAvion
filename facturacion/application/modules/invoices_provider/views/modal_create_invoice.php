@@ -44,7 +44,7 @@
                     var response = JSON.parse(data);
                     if (response.success === 1) {
                         // The validation was successful and invoice was created
-                        window.location = "<?php echo site_url('invoicesProvider/view'); ?>/" + response.invoice_provider_id;
+                        window.location = "<?php echo site_url('invoices_provider/view'); ?>/" + response.invoice_provider_id;
                     }
                     else {
                         // The validation was not successful

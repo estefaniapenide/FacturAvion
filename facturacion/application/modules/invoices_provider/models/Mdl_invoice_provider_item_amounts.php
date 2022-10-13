@@ -26,7 +26,7 @@ class Mdl_Invoice_Provider_Item_Amounts extends CI_Model
      */
     public function calculate($item_id)
     {
-        $this->load->model('invoicesProvider/mdl_invoice_provider_items');
+        $this->load->model('invoices_provider/mdl_invoice_provider_items');
         $item = $this->mdl_invoice_provider_items->get_by_id($item_id);
 
         $item_subtotal = $item->item_quantity * $item->item_price;

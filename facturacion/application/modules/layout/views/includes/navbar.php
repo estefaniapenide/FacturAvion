@@ -69,7 +69,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="#" class="create-invoice-provider"><?php _trans('create_invoice_provider'); ?></a></li>
-                        <li><?php echo anchor('invoicesProvider/index', trans('view_invoices_provider')); ?></li>
+                        <li><?php echo anchor('invoices_provider/index', trans('view_invoices_provider')); ?></li>
                     </ul>
                 </li>
 

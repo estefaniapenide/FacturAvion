@@ -13,32 +13,32 @@
     </div>
 
     <div class="headerbar-item pull-right visible-lg">
-        <?php echo pager(site_url('invoicesProvider/status/' . $this->uri->segment(3)), 'mdl_invoices'); ?>
+        <?php echo pager(site_url('invoices_provider/status/' . $this->uri->segment(3)), 'mdl_invoices'); ?>
     </div>
 
     <div class="headerbar-item pull-right visible-lg">
         <div class="btn-group btn-group-sm index-options">
-            <a href="<?php echo site_url('invoicesProvider/status/all'); ?>"
+            <a href="<?php echo site_url('invoices_provider/status/all'); ?>"
                class="btn <?php echo $status == 'all' ? 'btn-primary' : 'btn-default' ?>">
                 <?php _trans('all'); ?>
             </a>
-            <a href="<?php echo site_url('invoicesProvider/status/draft'); ?>"
+            <a href="<?php echo site_url('invoices_provider/status/draft'); ?>"
                class="btn  <?php echo $status == 'draft' ? 'btn-primary' : 'btn-default' ?>">
                 <?php _trans('draft'); ?>
             </a>
-            <a href="<?php echo site_url('invoicesProvider/status/sent'); ?>"
+            <a href="<?php echo site_url('invoices_provider/status/sent'); ?>"
                class="btn  <?php echo $status == 'sent' ? 'btn-primary' : 'btn-default' ?>">
                 <?php _trans('sent'); ?>
             </a>
-            <a href="<?php echo site_url('invoicesProvider/status/viewed'); ?>"
+            <a href="<?php echo site_url('invoices_provider/status/viewed'); ?>"
                class="btn  <?php echo $status == 'viewed' ? 'btn-primary' : 'btn-default' ?>">
                 <?php _trans('viewed'); ?>
             </a>
-            <a href="<?php echo site_url('invoicesProvider/status/paid'); ?>"
+            <a href="<?php echo site_url('invoices_provider/status/paid'); ?>"
                class="btn  <?php echo $status == 'paid' ? 'btn-primary' : 'btn-default' ?>">
                 <?php _trans('paid'); ?>
             </a>
-            <a href="<?php echo site_url('invoicesProvider/status/overdue'); ?>"
+            <a href="<?php echo site_url('invoices_provider/status/overdue'); ?>"
                class="btn  <?php echo $status == 'overdue' ? 'btn-primary' : 'btn-default' ?>">
                 <?php _trans('overdue'); ?>
             </a>
@@ -51,32 +51,32 @@
     <div class="collapse clearfix" id="ip-submenu-collapse">
 
         <div class="submenu-row">
-            <?php echo pager(site_url('invoicesProvider/status/' . $this->uri->segment(3)), 'mdl_invoices'); ?>
+            <?php echo pager(site_url('invoices_provider/status/' . $this->uri->segment(3)), 'mdl_invoices'); ?>
         </div>
 
         <div class="submenu-row">
             <div class="btn-group btn-group-sm index-options">
-                <a href="<?php echo site_url('invoicesProvider/status/all'); ?>"
+                <a href="<?php echo site_url('invoices_provider/status/all'); ?>"
                    class="btn <?php echo $status == 'all' ? 'btn-primary' : 'btn-default' ?>">
                     <?php _trans('all'); ?>
                 </a>
-                <a href="<?php echo site_url('invoicesProvider/status/draft'); ?>"
+                <a href="<?php echo site_url('invoices_provider/status/draft'); ?>"
                    class="btn  <?php echo $status == 'draft' ? 'btn-primary' : 'btn-default' ?>">
                     <?php _trans('draft'); ?>
                 </a>
-                <a href="<?php echo site_url('invoicesProvider/status/sent'); ?>"
+                <a href="<?php echo site_url('invoices_provider/status/sent'); ?>"
                    class="btn  <?php echo $status == 'sent' ? 'btn-primary' : 'btn-default' ?>">
                     <?php _trans('sent'); ?>
                 </a>
-                <a href="<?php echo site_url('invoicesProvider/status/viewed'); ?>"
+                <a href="<?php echo site_url('invoices_provider/status/viewed'); ?>"
                    class="btn  <?php echo $status == 'viewed' ? 'btn-primary' : 'btn-default' ?>">
                     <?php _trans('viewed'); ?>
                 </a>
-                <a href="<?php echo site_url('invoicesProvider/status/paid'); ?>"
+                <a href="<?php echo site_url('invoices_provider/status/paid'); ?>"
                    class="btn  <?php echo $status == 'paid' ? 'btn-primary' : 'btn-default' ?>">
                     <?php _trans('paid'); ?>
                 </a>
-                <a href="<?php echo site_url('invoicesProvider/status/overdue'); ?>"
+                <a href="<?php echo site_url('invoices_provider/status/overdue'); ?>"
                    class="btn  <?php echo $status == 'overdue' ? 'btn-primary' : 'btn-default' ?>">
                     <?php _trans('overdue'); ?>
                 </a>
@@ -88,6 +88,6 @@
 
 <div id="content" class="table-content">
     <div id="filter_results">
-        <?php $this->layout->load_view('invoicesProvider/partial_invoice_table', array('invoicesProvider' => $invoices)); ?>
+        <?php $this->layout->load_view('invoices_provider/partial_invoice_table', array('invoices' => $invoices)); ?>
     </div>
 </div>

@@ -39,7 +39,7 @@ class Mdl_Invoice_Provider_Tax_Rates extends Response_Model
     {
         parent::save($id, $db_array);
 
-        $this->load->model('invoicesProvider/mdl_invoice_provider_amounts');
+        $this->load->model('invoices_provider/mdl_invoice_provider_amounts');
 
         if (isset($db_array['invoice_provider_id'])) {
             $invoice_id = $db_array['invoice_provider_id'];
