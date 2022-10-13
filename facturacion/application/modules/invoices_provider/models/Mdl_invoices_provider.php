@@ -62,9 +62,9 @@ class Mdl_Invoices_Provider extends Response_Model
             IFnull(ip_invoice_provider_amounts.invoice_provider_paid, '0.00') AS invoice_paid,
             IFnull(ip_invoice_provider_amounts.invoice_provider_balance, '0.00') AS invoice_balance,
             ip_invoice_provider_amounts.invoice_provider_sign AS invoice_sign,
-            (CASE WHEN ip_invoices_provider.invoice_provider_status_id NOT IN (1,4) AND DATEDIFF(NOW(), invoice_date_due) > 0 THEN 1 ELSE 0 END) is_overdue,
+            (CASE WHEN ip_invoices_provider.invoice_provider_status_id NOT IN (1,4) AND DATEDIFF(NOW(), invoice_provider_date_due) > 0 THEN 1 ELSE 0 END) is_overdue,
             DATEDIFF(NOW(), invoice_provider_date_due) AS days_overdue,
-            ip_invoices.*", false);
+            ip_invoices_provider.*", false);
     }
 
     public function default_order_by()
@@ -74,7 +74,7 @@ class Mdl_Invoices_Provider extends Response_Model
 
     public function default_join()
     {
-        $this->db->join('ip_providers_provider', 'ip_providers_provider.provider_id = ip_invoices_provider.provider_id');
+        $this->db->join('ip_providers', 'ip_providers.provider_id = ip_invoices_provider.provider_id');
         $this->db->join('ip_users', 'ip_users.user_id = ip_invoices_provider.user_id');
         $this->db->join('ip_invoice_provider_amounts', 'ip_invoice_provider_amounts.invoice_provider_id = ip_invoices_provider.invoice_provider_id', 'left');
     }

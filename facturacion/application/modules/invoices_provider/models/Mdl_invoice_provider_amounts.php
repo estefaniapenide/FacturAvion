@@ -344,7 +344,7 @@ class Mdl_Invoice_Provider_Amounts extends CI_Model
 					SELECT invoice_provider_status_id, (CASE ip_invoices_provider.invoice_provider_status_id WHEN 4 THEN SUM(invoice_paid) ELSE SUM(invoice_provider_balance) END) AS sum_total, COUNT(*) AS num_total
 					FROM ip_invoice_provider_amounts
 					JOIN ip_invoices_provider ON ip_invoices_provider.invoice_provider_id = ip_invoice_provider_amounts.invoice_provider_id
-                        AND MONTH(ip_invoices.invoice_date_created) = MONTH(NOW() - INTERVAL 1 MONTH)
+                        AND MONTH(ip_invoices_provider.invoice_date_created) = MONTH(NOW() - INTERVAL 1 MONTH)
                         AND YEAR(ip_invoices_provider.invoice_provider_date_created) = YEAR(NOW())
 					GROUP BY ip_invoices_provider.invoice_provider_status_id")->result_array();
                 break;

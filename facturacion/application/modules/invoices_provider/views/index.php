@@ -13,7 +13,7 @@
     </div>
 
     <div class="headerbar-item pull-right visible-lg">
-        <?php echo pager(site_url('invoices_provider/status/' . $this->uri->segment(3)), 'mdl_invoices'); ?>
+        <?php echo pager(site_url('invoices_provider/status/' . $this->uri->segment(3)), 'mdl_invoices_provider'); ?>
     </div>
 
     <div class="headerbar-item pull-right visible-lg">
