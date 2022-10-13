@@ -212,7 +212,7 @@ class Invoices_provider extends Admin_Controller
                 [
                     ['modal_delete_invoice', 'invoices_provider/modal_delete_invoice'],
                     ['modal_add_invoice_tax', 'invoices_provider/modal_add_invoice_tax'],
-                    ['modal_add_payment', 'payments/modal_add_payment'],
+                    ['modal_add_payment', 'payments_provider/modal_add_payment'],
                     ['content', 'invoices_provider/view'],
                 ]
             );

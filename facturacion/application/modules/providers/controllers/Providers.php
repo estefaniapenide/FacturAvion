@@ -221,7 +221,7 @@ class Providers extends Admin_Controller
                 ),
                 array(
                     'payment_table',
-                    'payments/partial_payment_table'
+                    'payments_provider/partial_payment_table'
                 ),
                 array(
                     'partial_notes',

@@ -42,7 +42,7 @@
                                 </a>
                             </li>
                             <li>
-                                <form action="<?php echo site_url('payments_provider/delete/' . $payment_provider->payment_id); ?>"
+                                <form action="<?php echo site_url('payments_provider    /delete/' . $payment_provider->payment_id); ?>"
                                       method="POST">
                                     <?php _csrf_field(); ?>
                                     <button type="submit" class="dropdown-button"
