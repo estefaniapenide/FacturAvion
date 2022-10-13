@@ -6,7 +6,7 @@
             <th><?php _trans('payment_date'); ?></th>
             <th><?php _trans('invoice_date'); ?></th>
             <th><?php _trans('invoice'); ?></th>
-            <th><?php _trans('client'); ?></th>
+            <th><?php _trans('provider'); ?></th>
             <th><?php _trans('amount'); ?></th>
             <th><?php _trans('payment_method'); ?></th>
             <th><?php _trans('note'); ?></th>
@@ -19,11 +19,11 @@
             <tr>
                 <td><?php echo date_from_mysql($payment_provider->payment_date); ?></td>
                 <td><?php echo date_from_mysql($payment_provider->invoice_date_created); ?></td>
-                <td><?php echo anchor('invoices/view/' . $payment_provider->invoice_id, $payment_provider->invoice_number); ?></td>
+                <td><?php echo anchor('invoices_provider/view/' . $payment_provider->invoice_id, $payment_provider->invoice_number); ?></td>
                 <td>
-                    <a href="<?php echo site_url('clients/view/' . $payment_provider->client_id); ?>"
-                       title="<?php _trans('view_client'); ?>">
-                        <?php _htmlsc(format_client($payment_provider)); ?>
+                    <a href="<?php echo site_url('provider/view/' . $payment_provider->provider_id); ?>"
+                       title="<?php _trans('view_provider'); ?>">
+                        <?php _htmlsc($payment_provider->provider_id); ?>
                     </a>
                 </td>
                 <td class="amount"><?php echo format_currency($payment_provider->payment_amount); ?></td>
@@ -36,13 +36,13 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="<?php echo site_url('payments/form/' . $payment_provider->payment_id); ?>">
+                                <a href="<?php echo site_url('payments_provider/form/' . $payment_provider->payment_id); ?>">
                                     <i class="fa fa-edit fa-margin"></i>
                                     <?php _trans('edit'); ?>
                                 </a>
                             </li>
                             <li>
-                                <form action="<?php echo site_url('payments/delete/' . $payment_provider->payment_id); ?>"
+                                <form action="<?php echo site_url('payments_provider/delete/' . $payment_provider->payment_id); ?>"
                                       method="POST">
                                     <?php _csrf_field(); ?>
                                     <button type="submit" class="dropdown-button"

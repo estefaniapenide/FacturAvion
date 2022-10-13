@@ -183,7 +183,7 @@ class Providers extends Admin_Controller
     public function view($provider_id)
     {
         $this->load->model('providers/mdl_provider_notes');
-        $this->load->model('invoices/mdl_invoices');
+        $this->load->model('invoices_provider/mdl_invoices_provider');
         $this->load->model('payments_provider/mdl_payments_provider');
         $this->load->model('custom_fields/mdl_custom_fields');
         $this->load->model('custom_fields/mdl_provider_custom');
@@ -209,7 +209,7 @@ class Providers extends Admin_Controller
                 'provider_notes' => $this->mdl_provider_notes->where('provider_id', $provider_id)->get()->result(),
                 'payments' => $this->mdl_payments_provider->by_provider($provider_id)->limit(20)->get()->result(),
                 'custom_fields' => $custom_fields,
-                'invoice_statuses' => $this->mdl_invoices->statuses()
+                'invoice_statuses' => $this->mdl_invoices_provider->statuses()
             )
         );
 
@@ -217,7 +217,7 @@ class Providers extends Admin_Controller
             array(
                 array(
                     'invoice_table',
-                    'invoices/partial_invoice_table'
+                    'invoices_provider/partial_invoice_table'
                 ),
                 array(
                     'payment_table',

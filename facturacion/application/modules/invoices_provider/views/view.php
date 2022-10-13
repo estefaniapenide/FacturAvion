@@ -109,7 +109,7 @@ $cv = $this->controller->view_data["custom_values"];
                 $(this).parents('.item').remove();
             }
 
-            $.post("<?php echo site_url('invoicesPovider/ajax/delete_item/' . $invoice->invoice_provider_id); ?>", {
+            $.post("<?php echo site_url('invoices_provider/ajax/delete_item/' . $invoice->invoice_provider_id); ?>", {
                     'item_id': item_id,
                 },
                 function (data) {
