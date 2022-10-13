@@ -248,34 +248,34 @@ class Ajax extends Admin_Controller
         echo increment_user_date($invoice_date, $recur_frequency);
     }
 
-    public function modal_change_client()
+    public function modal_change_provider()
     {
         $this->load->module('layout');
         $this->load->model('providers/mdl_providers');
 
         $data = [
-            'provider_id' => $this->input->post('client_id'),
+            'provider_id' => $this->input->post('provider_id'),
             'invoice_provider_id' => $this->input->post('invoice_provider_id'),
             'providers' => $this->mdl_providers->get_latest(),
         ];
 
-        $this->layout->load_view('invoicesProvider/modal_change_client', $data);
+        $this->layout->load_view('invoicesProvider/modal_change_provider', $data);
     }
 
-    public function change_client()
+    public function change_provider()
     {
         $this->load->model('invoicesProvider/mdl_invoices');
         $this->load->model('cproviders/mdl_providers');
 
         // Get the client ID
-        $client_id = $this->input->post('provider_id');
-        $client = $this->mdl_clients->where('ip_providers.provider_id', $client_id)->get()->row();
+        $provider_id = $this->input->post('provider_id');
+        $provider = $this->mdl_providers->where('ip_providers.provider_id', $provider_id)->get()->row();
 
-        if (!empty($client)) {
+        if (!empty($provider)) {
             $invoice_id = $this->input->post('invoice_provider_id');
 
             $db_array = [
-                'provider_id' => $client_id,
+                'provider_id' => $provider_id,
             ];
             $this->db->where('invoice_provider_id', $invoice_id);
             $this->db->update('ip_invoices_provider', $db_array);

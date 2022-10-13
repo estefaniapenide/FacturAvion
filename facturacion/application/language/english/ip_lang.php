@@ -44,6 +44,7 @@ $lang = array(
     'bill_to'                                      => 'Bill To',
     'body'                                         => 'Body',
     'change_client'                                => 'Change Client',
+    'change_provider'                              => 'Change Provider',
     'calculate_discounts'                          => 'Calculate Discounts',
     'calendar_day_1'                               => '1 Day',
     'calendar_day_2'                               => '2 Days',

@@ -16,29 +16,29 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
 class Mdl_Items extends Response_Model
 {
 
-    public $table = 'ip_invoice_items';
+    public $table = 'ip_invoice_provider_items';
 
-    public $primary_key = 'ip_invoice_items.item_id';
+    public $primary_key = 'ip_invoice_provider_items.item_id';
 
     public $date_created_field = 'item_date_added';
 
     public function default_select()
     {
-        $this->db->select('ip_invoice_item_amounts.*, ip_products.*, ip_invoice_items.*,
+        $this->db->select('ip_invoice_provider_item_amounts.*, ip_products.*, ip_invoice_provider_items.*,
             item_tax_rates.tax_rate_percent AS item_tax_rate_percent,
             item_tax_rates.tax_rate_name AS item_tax_rate_name');
     }
 
     public function default_order_by()
     {
-        $this->db->order_by('ip_invoice_items.item_order');
+        $this->db->order_by('ip_invoice_provider_items.item_order');
     }
 
     public function default_join()
     {
-        $this->db->join('ip_invoice_item_amounts', 'ip_invoice_item_amounts.item_id = ip_invoice_items.item_id', 'left');
-        $this->db->join('ip_tax_rates AS item_tax_rates', 'item_tax_rates.tax_rate_id = ip_invoice_items.item_tax_rate_id', 'left');
-        $this->db->join('ip_products', 'ip_products.product_id = ip_invoice_items.item_product_id', 'left');
+        $this->db->join('ip_invoice_provider_item_amounts', 'ip_invoice_provider_item_amounts.item_id = ip_invoice_provider_items.item_id', 'left');
+        $this->db->join('ip_tax_rates AS item_tax_rates', 'item_tax_rates.tax_rate_id = ip_invoice_provider_items.item_tax_rate_id', 'left');
+        $this->db->join('ip_products', 'ip_products.product_id = ip_invoice_provider_items.item_product_id', 'left');
     }
 
     /**
@@ -47,8 +47,8 @@ class Mdl_Items extends Response_Model
     public function validation_rules()
     {
         return [
-            'invoice_id' => [
-                'field' => 'invoice_id',
+            'invoice_provider_id' => [
+                'field' => 'invoice_provider_id',
                 'label' => trans('invoice_provider'),
                 'rules' => 'required',
             ],

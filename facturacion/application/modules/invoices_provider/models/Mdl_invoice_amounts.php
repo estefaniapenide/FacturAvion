@@ -341,46 +341,46 @@ class Mdl_Invoice_Amounts extends CI_Model
                 break;
             case 'last-month':
                 $results = $this->db->query("
-					SELECT invoice_provider_status_id, (CASE ip_invoices_provider.invoice_provider_status_id WHEN 4 THEN SUM(invoice_paid) ELSE SUM(invoice_balance) END) AS sum_total, COUNT(*) AS num_total
-					FROM ip_invoice_amounts
-					JOIN ip_invoices ON ip_invoices.invoice_id = ip_invoice_amounts.invoice_id
+					SELECT invoice_provider_status_id, (CASE ip_invoices_provider.invoice_provider_status_id WHEN 4 THEN SUM(invoice_paid) ELSE SUM(invoice_provider_balance) END) AS sum_total, COUNT(*) AS num_total
+					FROM ip_invoice_provider_amounts
+					JOIN ip_invoices_provider ON ip_invoices_provider.invoice_provider_id = ip_invoice_provider_amounts.invoice_provider_id
                         AND MONTH(ip_invoices.invoice_date_created) = MONTH(NOW() - INTERVAL 1 MONTH)
-                        AND YEAR(ip_invoices.invoice_date_created) = YEAR(NOW())
-					GROUP BY ip_invoices.invoice_status_id")->result_array();
+                        AND YEAR(ip_invoices_provider.invoice_provider_date_created) = YEAR(NOW())
+					GROUP BY ip_invoices_provider.invoice_provider_status_id")->result_array();
                 break;
             case 'this-quarter':
                 $results = $this->db->query("
-					SELECT invoice_status_id, (CASE ip_invoices.invoice_status_id WHEN 4 THEN SUM(ip_invoice_amounts.invoice_paid) ELSE SUM(ip_invoice_amounts.invoice_balance) END) AS sum_total, COUNT(*) AS num_total
-					FROM ip_invoice_amounts
-					JOIN ip_invoices ON ip_invoices.invoice_id = ip_invoice_amounts.invoice_id
-                        AND QUARTER(ip_invoices.invoice_date_created) = QUARTER(NOW())
-                        AND YEAR(ip_invoices.invoice_date_created) = YEAR(NOW())
-					GROUP BY ip_invoices.invoice_status_id")->result_array();
+					SELECT invoice_provider_status_id, (CASE ip_invoices_provider.invoice_provider_status_id WHEN 4 THEN SUM(ip_invoice_provider_amounts.invoice_provider_paid) ELSE SUM(ip_invoice_provider_amounts.invoice_provider_balance) END) AS sum_total, COUNT(*) AS num_total
+					FROM ip_invoice_provider_amounts
+					JOIN ip_invoices_provider ON ip_invoices_provider.invoice_provider_id = ip_invoice_provider_amounts.invoice_id
+                        AND QUARTER(ip_invoices_provider.invoice_provider_date_created) = QUARTER(NOW())
+                        AND YEAR(ip_invoices_provider.invoice_provider_date_created) = YEAR(NOW())
+					GROUP BY ip_invoices_provider.invoice_provider_status_id")->result_array();
                 break;
             case 'last-quarter':
                 $results = $this->db->query("
-					SELECT invoice_status_id, (CASE ip_invoices.invoice_status_id WHEN 4 THEN SUM(invoice_paid) ELSE SUM(invoice_balance) END) AS sum_total, COUNT(*) AS num_total
-					FROM ip_invoice_amounts
-					JOIN ip_invoices ON ip_invoices.invoice_id = ip_invoice_amounts.invoice_id
-                        AND QUARTER(ip_invoices.invoice_date_created) = QUARTER(NOW() - INTERVAL 1 QUARTER)
-                        AND YEAR(ip_invoices.invoice_date_created) = YEAR(NOW())
-					GROUP BY ip_invoices.invoice_status_id")->result_array();
+					SELECT invoice_provider_status_id, (CASE ip_invoices_provider.invoice_provider_status_id WHEN 4 THEN SUM(invoice_provider_paid) ELSE SUM(invoice_provider_balance) END) AS sum_total, COUNT(*) AS num_total
+					FROM ip_invoice_provider_amounts
+					JOIN ip_invoices_provider ON ip_invoices_provider.invoice_provider_id = ip_invoice_provider_amounts.invoice_provider_id
+                        AND QUARTER(ip_invoices_provider.invoice_provider_date_created) = QUARTER(NOW() - INTERVAL 1 QUARTER)
+                        AND YEAR(ip_invoices_provider.invoice_provider_date_created) = YEAR(NOW())
+					GROUP BY ip_invoices_provider.invoice_provider_status_id")->result_array();
                 break;
             case 'this-year':
                 $results = $this->db->query("
-					SELECT invoice_status_id, (CASE ip_invoices.invoice_status_id WHEN 4 THEN SUM(ip_invoice_amounts.invoice_paid) ELSE SUM(ip_invoice_amounts.invoice_balance) END) AS sum_total, COUNT(*) AS num_total
-					FROM ip_invoice_amounts
-					JOIN ip_invoices ON ip_invoices.invoice_id = ip_invoice_amounts.invoice_id
-                        AND YEAR(ip_invoices.invoice_date_created) = YEAR(NOW())
-					GROUP BY ip_invoices.invoice_status_id")->result_array();
+					SELECT invoice_provider_status_id, (CASE ip_invoices_provider.invoice_provider_status_id WHEN 4 THEN SUM(ip_invoice_provider_amounts.invoice_provider_paid) ELSE SUM(ip_invoice_provider_amounts.invoice_provider_balance) END) AS sum_total, COUNT(*) AS num_total
+					FROM ip_invoice_provider_amounts
+					JOIN ip_invoices_provider ON ip_invoices_provider.invoice_provider_id = ip_invoice_provider_amounts.invoice_provider_id
+                        AND YEAR(ip_invoices_provider.invoice_provider_date_created) = YEAR(NOW())
+					GROUP BY ip_invoices_provider.invoice_provider_status_id")->result_array();
                 break;
             case 'last-year':
                 $results = $this->db->query("
-					SELECT invoice_status_id, (CASE ip_invoices.invoice_status_id WHEN 4 THEN SUM(invoice_paid) ELSE SUM(invoice_balance) END) AS sum_total, COUNT(*) AS num_total
-					FROM ip_invoice_amounts
-					JOIN ip_invoices ON ip_invoices.invoice_id = ip_invoice_amounts.invoice_id
-                        AND YEAR(ip_invoices.invoice_date_created) = YEAR(NOW() - INTERVAL 1 YEAR)
-					GROUP BY ip_invoices.invoice_status_id")->result_array();
+					SELECT invoice_provider_status_id, (CASE ip_invoices_provider.invoice_provider_status_id WHEN 4 THEN SUM(invoice_provider_paid) ELSE SUM(invoice_provider_balance) END) AS sum_total, COUNT(*) AS num_total
+					FROM ip_invoice_provider_amounts
+					JOIN ip_invoices_provider ON ip_invoices_provider.invoice_provider_id = ip_invoice_provider_amounts.invoice_provider_id
+                        AND YEAR(ip_invoices_provider.invoice_provider_date_created) = YEAR(NOW() - INTERVAL 1 YEAR)
+					GROUP BY ip_invoices_provider.invoice_provider_status_id")->result_array();
                 break;
         }
 
@@ -388,7 +388,7 @@ class Mdl_Invoice_Amounts extends CI_Model
 
         foreach ($this->mdl_invoices->statuses() as $key => $status) {
             $return[$key] = array(
-                'invoice_status_id' => $key,
+                'invoice_provider_status_id' => $key,
                 'class' => $status['class'],
                 'label' => $status['label'],
                 'href' => $status['href'],
@@ -398,7 +398,7 @@ class Mdl_Invoice_Amounts extends CI_Model
         }
 
         foreach ($results as $result) {
-            $return[$result['invoice_status_id']] = array_merge($return[$result['invoice_status_id']], $result);
+            $return[$result['invoice_provider_status_id']] = array_merge($return[$result['invoice_provider_status_id']], $result);
         }
 
         return $return;

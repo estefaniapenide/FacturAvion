@@ -9,20 +9,20 @@
     </div>
 
     <div class="headerbar-item pull-right">
-        <?php echo pager(site_url('invoices/client/' . $client_id . '/' . $status), 'mdl_invoices'); ?>
+        <?php echo pager(site_url('invoicesProvider/provider/' . $provider_id . '/' . $status), 'mdl_invoices'); ?>
     </div>
 
     <div class="headerbar-item pull-right">
         <div class="btn-group btn-group-sm index-options">
-            <a href="<?php echo site_url('invoices/client/' . $client_id . '/open'); ?>"
+            <a href="<?php echo site_url('invoicesProvider/provider/' . $provider_id . '/open'); ?>"
                class="btn <?php echo $status == 'open' ? 'btn-primary' : 'btn-default' ?>">
                 <?php _trans('open'); ?>
             </a>
-            <a href="<?php echo site_url('invoices/client/' . $client_id . '/closed'); ?>"
+            <a href="<?php echo site_url('invoices/provider/' . $provider_id . '/closed'); ?>"
                class="btn  <?php echo $status == 'closed' ? 'btn-primary' : 'btn-default' ?>">
                 <?php _trans('closed'); ?>
             </a>
-            <a href="<?php echo site_url('invoices/client/' . $client_id . '/overdue'); ?>"
+            <a href="<?php echo site_url('invoicesProvider/provider/' . $provider_id . '/overdue'); ?>"
                class="btn  <?php echo $status == 'overdue' ? 'btn-primary' : 'btn-default' ?>">
                 <?php _trans('overdue'); ?>
             </a>

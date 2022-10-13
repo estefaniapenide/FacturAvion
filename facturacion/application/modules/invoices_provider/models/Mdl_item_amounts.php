@@ -26,7 +26,7 @@ class Mdl_Item_Amounts extends CI_Model
      */
     public function calculate($item_id)
     {
-        $this->load->model('invoices/mdl_items');
+        $this->load->model('invoicesProvider/mdl_items');
         $item = $this->mdl_items->get_by_id($item_id);
 
         $item_subtotal = $item->item_quantity * $item->item_price;
@@ -43,11 +43,11 @@ class Mdl_Item_Amounts extends CI_Model
         );
 
         $this->db->where('item_id', $item_id);
-        if ($this->db->get('ip_invoice_item_amounts')->num_rows()) {
+        if ($this->db->get('ip_invoice_provider_item_amounts')->num_rows()) {
             $this->db->where('item_id', $item_id);
-            $this->db->update('ip_invoice_item_amounts', $db_array);
+            $this->db->update('ip_invoice_provider_item_amounts', $db_array);
         } else {
-            $this->db->insert('ip_invoice_item_amounts', $db_array);
+            $this->db->insert('ip_invoice_provider_item_amounts', $db_array);
         }
     }
 
