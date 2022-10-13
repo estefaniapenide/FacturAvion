@@ -120,7 +120,7 @@ class Mdl_Payments_provider extends Response_Model
     public function save($id = null, $db_array = null)
     {
         $db_array = ($db_array) ? $db_array : $this->db_array();
-        $this->load->model('invoicesProvider/mdl_invoice_provider_amounts');
+        $this->load->model('invoices_provider/mdl_invoice_provider_amounts');
 
         // Save the payment
         $id = parent::save($id, $db_array);

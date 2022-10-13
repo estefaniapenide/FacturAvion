@@ -95,12 +95,13 @@ class Payments_provider extends Admin_Controller
         }
 
         $this->load->helper('custom_values');
-        $this->load->model('invoices/mdl_invoices');
+        $this->load->model('invoices_provider/mdl_invoices_provider');
         $this->load->model('payment_methods/mdl_payment_methods');
         $this->load->model('custom_fields/mdl_custom_fields');
-        $this->load->model('custom_values/mdl_custom_values');
+        $this->load->model('custom
+        _values/mdl_custom_values');
 
-        $open_invoices = $this->mdl_invoices->is_open()->get()->result();
+        $open_invoices = $this->mdl_invoices_provider->is_open()->get()->result();
 
         $custom_fields = $this->mdl_custom_fields->by_table('ip_payment_custom')->get()->result();
         $custom_values = [];
