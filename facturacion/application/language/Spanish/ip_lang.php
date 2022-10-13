@@ -502,6 +502,7 @@ $lang = array(
     'save'                                         => 'Guardar',
     'save_item_as_lookup'                          => 'Guardar objeto como búsqueda',
     'select_family'                                => 'Seleccionar familia',
+    'select_provider'                                => 'Seleccionar proveedor',
     'select_unit'                                  => 'Elija una unidad',
     'select_payment_method'                        => 'Seleccione el método de pago',
     'send'                                         => 'Enviar',

@@ -26,11 +26,13 @@ class Mdl_Products extends Response_Model
     public function default_order_by()
     {
         $this->db->order_by('ip_families.family_name, ip_products.product_name');
+        $this->db->order_by('ip_providers.provider_name, ip_products.product_name');
     }
 
     public function default_join()
     {
         $this->db->join('ip_families', 'ip_families.family_id = ip_products.family_id', 'left');
+        $this->db->join('ip_providers', 'ip_providers.provider_id = ip_products.provider_id', 'left');
         $this->db->join('ip_units', 'ip_units.unit_id = ip_products.unit_id', 'left');
         $this->db->join('ip_tax_rates', 'ip_tax_rates.tax_rate_id = ip_products.tax_rate_id', 'left');
     }
@@ -47,6 +49,11 @@ class Mdl_Products extends Response_Model
     public function by_family($match)
     {
         $this->db->where('ip_products.family_id', $match);
+    }
+
+    public function by_provider($match)
+    {
+        $this->db->where('ip_products.provider_id', $match);
     }
 
     /**
@@ -80,14 +87,19 @@ class Mdl_Products extends Response_Model
                 'label' => trans('purchase_price'),
                 'rules' => ''
             ),
-            'provider_name' => array(
+            /* 'provider_name' => array(
                 'field' => 'provider_name',
                 'label' => trans('provider_name'),
                 'rules' => ''
-            ),
+            ), */
             'family_id' => array(
                 'field' => 'family_id',
                 'label' => trans('family'),
+                'rules' => 'numeric'
+            ),
+            'provider_name' => array(
+                'field' => 'provider_name',
+                'label' => trans('provider'),
                 'rules' => 'numeric'
             ),
             'unit_id' => array(
@@ -119,6 +131,7 @@ class Mdl_Products extends Response_Model
         $db_array['product_price'] = (empty($db_array['product_price']) ? null : standardize_amount($db_array['product_price']));
         $db_array['purchase_price'] = (empty($db_array['purchase_price']) ? null : standardize_amount($db_array['purchase_price']));
         $db_array['family_id'] = (empty($db_array['family_id']) ? null : $db_array['family_id']);
+        $db_array['provider_id'] = (empty($db_array['provider_id']) ? null : $db_array['provider_id']);
         $db_array['unit_id'] = (empty($db_array['unit_id']) ? null : $db_array['unit_id']);
         $db_array['tax_rate_id'] = (empty($db_array['tax_rate_id']) ? null : $db_array['tax_rate_id']);
 

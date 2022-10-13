@@ -61,12 +61,14 @@ class Products extends Admin_Controller
         }
 
         $this->load->model('families/mdl_families');
+        $this->load->model('providers/mdl_providers');
         $this->load->model('units/mdl_units');
         $this->load->model('tax_rates/mdl_tax_rates');
 
         $this->layout->set(
             array(
                 'families' => $this->mdl_families->get()->result(),
+                'providers' => $this->mdl_providers->get()->result(),
                 'units' => $this->mdl_units->get()->result(),
                 'tax_rates' => $this->mdl_tax_rates->get()->result(),
             )

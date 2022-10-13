@@ -25,6 +25,7 @@ class Ajax extends Admin_Controller
 
         $this->load->model('mdl_products');
         $this->load->model('families/mdl_families');
+        $this->load->model('providers/mdl_providers');
 
         if (!empty($filter_family)) {
             $this->mdl_products->by_family($filter_family);
@@ -36,13 +37,14 @@ class Ajax extends Admin_Controller
 
         $products = $this->mdl_products->get()->result();
         $families = $this->mdl_families->get()->result();
-
+        $providers = $this->mdl_providers->get()->result();
         $default_item_tax_rate = get_setting('default_item_tax_rate');
         $default_item_tax_rate = $default_item_tax_rate !== '' ?: 0;
 
         $data = array(
             'products' => $products,
             'families' => $families,
+            'providers' => $providers,
             'filter_product' => $filter_product,
             'filter_family' => $filter_family,
             'default_item_tax_rate' => $default_item_tax_rate,

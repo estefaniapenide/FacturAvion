@@ -116,7 +116,7 @@
                 <label for="archivo_id"><?php _trans('archive'); ?>: </label>
                 <input type="file" name="archivo_id" id="archivo_id">
             </div>
-            <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
+            <?php _csrf_field(); ?>
         </div>
 
         <div class="modal-footer">
