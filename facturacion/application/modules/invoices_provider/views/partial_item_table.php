@@ -17,17 +17,8 @@
 
         <tbody id="new_row" style="display: none;">
         <tr>
-            <td rowspan="2" class="td-icon">
-                <i class="fa fa-arrows cursor-move"></i>
-                <?php if ($invoice->invoice_is_recurring) : ?>
-                    <br/>
-                    <i title="<?php echo trans('recurring') ?>"
-                       class="js-item-recurrence-toggler cursor-pointer fa fa-calendar-o text-muted"></i>
-                    <input type="hidden" name="item_is_recurring" value=""/>
-                <?php endif; ?>
-            </td>
             <td class="td-text">
-                <input type="hidden" name="invoice_id" value="<?php echo $invoice_id; ?>">
+                <input type="hidden" name="invoice_provider_id" value="<?php echo $invoice_id; ?>">
                 <input type="hidden" name="item_id" value="">
                 <input type="hidden" name="item_product_id" value="">
                 <input type="hidden" name="item_task_id" class="item-task-id" value="">
@@ -78,14 +69,6 @@
             </td>
         </tr>
         <tr>
-            <?php if ($invoice->sumex_id == ""): ?>
-                <td class="td-textarea">
-                    <div class="input-group">
-                        <span class="input-group-addon"><?php _trans('description'); ?></span>
-                        <textarea name="item_description" class="input-sm form-control"></textarea>
-                    </div>
-                </td>
-            <?php else: ?>
                 <td class="td-date">
                     <div class="input-group">
                         <span class="input-group-addon"><?php _trans('date'); ?></span>
@@ -96,7 +79,6 @@
                             } ?>>
                     </div>
                 </td>
-            <?php endif; ?>
             <td class="td-amount">
                 <div class="input-group">
                     <span class="input-group-addon"><?php _trans('product_unit'); ?></span>
@@ -132,27 +114,8 @@
         <?php foreach ($items as $item) { ?>
             <tbody class="item">
             <tr>
-                <td rowspan="2" class="td-icon">
-                    <i class="fa fa-arrows cursor-move"></i>
-                    <?php
-                    if ($invoice->invoice_is_recurring) :
-                        if ($item->item_is_recurring == 1 || is_null($item->item_is_recurring)) {
-                            $item_recurrence_state = '1';
-                            $item_recurrence_class = 'fa-calendar-check-o text-success';
-                        } else {
-                            $item_recurrence_state = '0';
-                            $item_recurrence_class = 'fa-calendar-o text-muted';
-                        }
-                        ?>
-                        <br/>
-                        <i title="<?php echo trans('recurring') ?>"
-                           class="js-item-recurrence-toggler cursor-pointer fa <?php echo $item_recurrence_class ?>"></i>
-                        <input type="hidden" name="item_is_recurring" value="<?php echo $item_recurrence_state ?>"/>
-                    <?php endif; ?>
-                </td>
-
                 <td class="td-text">
-                    <input type="hidden" name="invoice_id" value="<?php echo $invoice_id; ?>">
+                    <input type="hidden" name="invoice_provider_id" value="<?php echo $invoice_id; ?>">
                     <input type="hidden" name="item_id" value="<?php echo $item->item_id; ?>"
                         <?php if ($invoice->is_read_only == 1) {
                             echo 'disabled="disabled"';
@@ -340,17 +303,17 @@
                     <?php if ($invoice_tax_rates) {
                         foreach ($invoice_tax_rates as $invoice_tax_rate) { ?>
                             <form method="post"
-                                action="<?php echo site_url('invoices/delete_invoice_tax/' . $invoice->invoice_id . '/' . $invoice_tax_rate->invoice_tax_rate_id) ?>">
+                                action="<?php echo site_url('invoicesProvider/delete_invoice_tax/' . $invoice->invoice_provider_id . '/' . $invoice_tax_rate->invoice_provider_tax_rate_id) ?>">
                                 <?php _csrf_field(); ?>
                                 <button type="submit" class="btn btn-xs btn-link"
                                         onclick="return confirm('<?php _trans('delete_tax_warning'); ?>');">
                                     <i class="fa fa-trash-o"></i>
                                 </button>
                                 <span class="text-muted">
-                                    <?php echo htmlsc($invoice_tax_rate->invoice_tax_rate_name) . ' ' . format_amount($invoice_tax_rate->invoice_tax_rate_percent) . '%' ?>
+                                    <?php echo htmlsc($invoice_tax_rate->invoice_provider_tax_rate_name) . ' ' . format_amount($invoice_tax_rate->invoice_provider_tax_rate_percent) . '%' ?>
                                 </span>
                                 <span class="amount">
-                                    <?php echo format_currency($invoice_tax_rate->invoice_tax_rate_amount); ?>
+                                    <?php echo format_currency($invoice_tax_rate->invoice_provider_tax_rate_amount); ?>
                                 </span>
                             </form>
                         <?php }
@@ -364,9 +327,9 @@
                 <td class="clearfix">
                     <div class="discount-field">
                         <div class="input-group input-group-sm">
-                            <input id="invoice_discount_amount" name="invoice_discount_amount"
+                            <input id="invoice_provider_discount_amount" name="invoice_provider_discount_amount"
                                    class="discount-option form-control input-sm amount"
-                                   value="<?php echo format_amount($invoice->invoice_discount_amount != 0 ? $invoice->invoice_discount_amount : ''); ?>"
+                                   value="<?php echo format_amount($invoice->invoice_provider_discount_amount != 0 ? $invoice->invoice_provider_discount_amount : ''); ?>"
                                 <?php if ($invoice->is_read_only == 1) {
                                     echo 'disabled="disabled"';
                                 } ?>>
@@ -375,8 +338,8 @@
                     </div>
                     <div class="discount-field">
                         <div class="input-group input-group-sm">
-                            <input id="invoice_discount_percent" name="invoice_discount_percent"
-                                   value="<?php echo format_amount($invoice->invoice_discount_percent != 0 ? $invoice->invoice_discount_percent : ''); ?>"
+                            <input id="invoice_provider_discount_percent" name="invoice_provider_discount_percent"
+                                   value="<?php echo format_amount($invoice->invoice_provider_discount_percent != 0 ? $invoice->invoice_provider_discount_percent : ''); ?>"
                                    class="discount-option form-control input-sm amount"
                                 <?php if ($invoice->is_read_only == 1) {
                                     echo 'disabled="disabled"';
@@ -388,15 +351,15 @@
             </tr>
             <tr>
                 <td><?php _trans('total'); ?></td>
-                <td class="amount"><b><?php echo format_currency($invoice->invoice_total); ?></b></td>
+                <td class="amount"><b><?php echo format_currency($invoice->invoice_provider_total); ?></b></td>
             </tr>
             <tr>
                 <td><?php _trans('paid'); ?></td>
-                <td class="amount"><b><?php echo format_currency($invoice->invoice_paid); ?></b></td>
+                <td class="amount"><b><?php echo format_currency($invoice->invoice_provider_paid); ?></b></td>
             </tr>
             <tr>
                 <td><b><?php _trans('balance'); ?></b></td>
-                <td class="amount"><b><?php echo format_currency($invoice->invoice_balance); ?></b></td>
+                <td class="amount"><b><?php echo format_currency($invoice->invoice_provider_balance); ?></b></td>
             </tr>
         </table>
     </div>

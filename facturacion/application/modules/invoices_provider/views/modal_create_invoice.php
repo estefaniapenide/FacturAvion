@@ -6,24 +6,24 @@
         // Enable select2 for all selects
         $('.simple-select').select2();
 
-        <?php $this->layout->load_view('clients/script_select2_client_id.js'); ?>
+        <?php $this->layout->load_view('providers/script_select2_provider_id.js'); ?>
 
         // Toggle on/off permissive search on clients names
-        $('#toggle_permissive_search_clients').click(function () {
-            if ($('input#input_permissive_search_clients').val() == ('1')) {
-                $.get("<?php echo site_url('clients/ajax/save_preference_permissive_search_clients'); ?>", {
-                    permissive_search_clients: '0'
+        $('#toggle_permissive_search_providers').click(function () {
+            if ($('input#input_permissive_search_providers').val() == ('1')) {
+                $.get("<?php echo site_url('providers/ajax/save_preference_permissive_search_providers'); ?>", {
+                    permissive_search_providers: '0'
                 });
-                $('input#input_permissive_search_clients').val('0');
-                $('span#toggle_permissive_search_clients i').removeClass('fa-toggle-on');
-                $('span#toggle_permissive_search_clients i').addClass('fa-toggle-off');
+                $('input#input_permissive_search_providers').val('0');
+                $('span#toggle_permissive_search_providers i').removeClass('fa-toggle-on');
+                $('span#toggle_permissive_search_providers i').addClass('fa-toggle-off');
             } else {
-                $.get("<?php echo site_url('clients/ajax/save_preference_permissive_search_clients'); ?>", {
-                    permissive_search_clients: '1'
+                $.get("<?php echo site_url('providers/ajax/save_preference_permissive_search_providers'); ?>", {
+                    permissive_search_providers: '1'
                 });
-                $('input#input_permissive_search_clients').val('1');
-                $('span#toggle_permissive_search_clients i').removeClass('fa-toggle-off');
-                $('span#toggle_permissive_search_clients i').addClass('fa-toggle-on');
+                $('input#input_permissive_search_providers').val('1');
+                $('span#toggle_permissive_search_providers i').removeClass('fa-toggle-off');
+                $('span#toggle_permissive_search_providers i').addClass('fa-toggle-on');
             }
         });
 
@@ -31,12 +31,11 @@
         $('#invoice_create_confirm').click(function () {
             // Posts the data to validate and create the invoice;
             // will create the new client if necessar
-            $.post("<?php echo site_url('invoices/ajax/create'); ?>", {
-                    client_id: $('#create_invoice_client_id').val(),
-                    invoice_date_created: $('#invoice_date_created').val(),
-                    invoice_group_id: $('#invoice_group_id').val(),
-                    invoice_time_created: '<?php echo date('H:i:s') ?>',
-                    invoice_password: $('#invoice_password').val(),
+            $.post("<?php echo site_url('invoicesProvider/ajax/create'); ?>", {
+                    provider_id: $('#create_invoice_provider_id').val(),
+                    invoice_provider_date_created: $('#invoice_provider_date_created').val(),
+                    invoice_provider_time_created: '<?php echo date('H:i:s') ?>',
+                    invoice_provider_password: $('#invoice_provider_password').val(),
                     user_id: '<?php echo $this->session->userdata('user_id'); ?>',
                     payment_method: $('#payment_method_id').val()
                 },
@@ -45,7 +44,7 @@
                     var response = JSON.parse(data);
                     if (response.success === 1) {
                         // The validation was successful and invoice was created
-                        window.location = "<?php echo site_url('invoices/view'); ?>/" + response.invoice_id;
+                        window.location = "<?php echo site_url('invoicesProvider/view'); ?>/" + response.invoice_provider_id;
                     }
                     else {
                         // The validation was not successful
@@ -76,17 +75,17 @@
                    value="<?php echo get_setting('enable_permissive_search_clients'); ?>">
 
             <div class="form-group has-feedback">
-                <label for="create_invoice_client_id"><?php _trans('client'); ?></label>
+                <label for="create_invoice_provider_id"><?php _trans('provider'); ?></label>
                 <div class="input-group">
-                    <select name="client_id" id="create_invoice_client_id" class="client-id-select form-control"
+                    <select name="provider_id" id="create_invoice_provider_id" class="provider-id-select form-control"
                             autofocus="autofocus">
                         <?php if (!empty($client)) : ?>
-                            <option value="<?php echo $client->client_id; ?>"><?php _htmlsc(format_client($client)); ?></option>
+                            <option value="<?php echo $provider->provider_id; ?>"></option>
                         <?php endif; ?>
                     </select>
-                    <span id="toggle_permissive_search_clients" class="input-group-addon"
-                          title="<?php _trans('enable_permissive_search_clients'); ?>" style="cursor:pointer;">
-                        <i class="fa fa-toggle-<?php echo get_setting('enable_permissive_search_clients') ? 'on' : 'off' ?> fa-fw"></i>
+                    <span id="toggle_permissive_search_providers" class="input-group-addon"
+                          title="<?php _trans('enable_permissive_search_providers'); ?>" style="cursor:pointer;">
+                        <i class="fa fa-toggle-<?php echo get_setting('enable_permissive_search_providers') ? 'on' : 'off' ?> fa-fw"></i>
                     </span>
                 </div>
             </div>
@@ -95,7 +94,7 @@
                 <label for="invoice_date_created"><?php _trans('invoice_date'); ?></label>
 
                 <div class="input-group">
-                    <input name="invoice_date_created" id="invoice_date_created"
+                    <input name="invoice_provider_date_created" id="invoice_provider_date_created"
                            class="form-control datepicker"
                            value="<?php echo date(date_format_setting()); ?>">
                     <span class="input-group-addon">
@@ -105,24 +104,13 @@
             </div>
 
             <div class="form-group">
-                <label for="invoice_password"><?php _trans('invoice_password'); ?></label>
-                <input type="text" name="invoice_password" id="invoice_password" class="form-control"
-                       value="<?php echo get_setting('invoice_pre_password') == '' ? '' : get_setting('invoice_pre_password'); ?>"
+                <label for="invoice_provider_password"><?php _trans('invoice_password'); ?></label>
+                <input type="text" name="invoice_provider_password" id="invoice_provider_password" class="form-control"
+                       value="<?php echo get_setting('invoice_provider_pre_password') == '' ? '' : get_setting('invoice_provider_pre_password'); ?>"
                        style="margin: 0 auto;" autocomplete="off">
             </div>
 
-            <div class="form-group">
-                <label for="invoice_group_id"><?php _trans('invoice_group'); ?></label>
-                <select name="invoice_group_id" id="invoice_group_id"
-                	class="form-control simple-select" data-minimum-results-for-search="Infinity">
-                    <?php foreach ($invoice_groups as $invoice_group) { ?>
-                        <option value="<?php echo $invoice_group->invoice_group_id; ?>"
-                                <?php if (get_setting('default_invoice_group') == $invoice_group->invoice_group_id) { ?>selected="selected"<?php } ?>>
-                            <?php _htmlsc($invoice_group->invoice_group_name); ?>
-                        </option>
-                    <?php } ?>
-                </select>
-            </div>
+
 
         </div>
 

@@ -13,7 +13,7 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * Class Mdl_Invoice_Tax_Rates
  */
-class Mdl_Invoice_Tax_Rates extends Response_Model
+class Mdl_Invoice_Provider_Tax_Rates extends Response_Model
 {
     public $table = 'ip_invoice_provider_tax_rates';
     public $primary_key = 'ip_invoice_provider_tax_rates.invoice_provider_tax_rate_id';
@@ -39,7 +39,7 @@ class Mdl_Invoice_Tax_Rates extends Response_Model
     {
         parent::save($id, $db_array);
 
-        $this->load->model('invoicesProvider/mdl_invoice_amounts');
+        $this->load->model('invoicesProvider/mdl_invoice_provider_amounts');
 
         if (isset($db_array['invoice_provider_id'])) {
             $invoice_id = $db_array['invoice_provider_id'];
@@ -48,8 +48,8 @@ class Mdl_Invoice_Tax_Rates extends Response_Model
         }
 
         if ($invoice_id) {
-            $this->mdl_invoice_amounts->calculate_invoice_taxes($invoice_id);
-            $this->mdl_invoice_amounts->calculate($invoice_id);
+            $this->mdl_invoice_provider_amounts->calculate_invoice_taxes($invoice_id);
+            $this->mdl_invoice_provider_amounts->calculate($invoice_id);
         }
 
     }

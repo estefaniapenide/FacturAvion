@@ -22,16 +22,16 @@ class Ajax extends Admin_Controller
 
     public function save()
     {
-        $this->load->model('invoicesProvider/mdl_items');
-        $this->load->model('invoicesProvider/mdl_invoices');
+        $this->load->model('invoicesProvider/mdl_invoice_provider_items');
+        $this->load->model('invoicesProvider/mdl_invoices_provider');
         $this->load->model('units/mdl_units');
 
 
         $invoice_id = $this->input->post('invoice_provider_id');
 
-        $this->mdl_invoices->set_id($invoice_id);
+        $this->mdl_invoices_provider->set_id($invoice_id);
 
-        if ($this->mdl_invoices->run_validation('validation_rules_save_invoice')) {
+        if ($this->mdl_invoices_provider->run_validation('validation_rules_save_invoice')) {
             $items = json_decode($this->input->post('items'));
 
             foreach ($items as $item) {
@@ -56,7 +56,7 @@ class Ajax extends Admin_Controller
                         $this->mdl_tasks->update_status(4, $item->item_task_id);
                     }
 
-                    $this->mdl_items->save($item_id, $item);
+                    $this->mdl_invoice_provider_items->save($item_id, $item);
                 } elseif (empty($item->item_name) && (!empty($item->item_quantity) || !empty($item->item_price))) {
                     // Throw an error message and use the form validation for that
                     $this->load->library('form_validation');
@@ -93,8 +93,8 @@ class Ajax extends Admin_Controller
             $invoice_number = $this->input->post('invoice_provider_number');
 
             if (empty($invoice_number) && $invoice_status != 1) {
-                $invoice_group_id = $this->mdl_invoices->get_invoice_group_id($invoice_id);
-                $invoice_number = $this->mdl_invoices->get_invoice_number($invoice_group_id);
+                $invoice_group_id = $this->mdl_invoices_provider->get_invoice_group_id($invoice_id);
+                $invoice_number = $this->mdl_invoices_provider->get_invoice_number($invoice_group_id);
             }
 
             $db_array = [
@@ -116,11 +116,11 @@ class Ajax extends Admin_Controller
                 }
             }
 
-            $this->mdl_invoices->save($invoice_id, $db_array);
+            $this->mdl_invoices_provider->save($invoice_id, $db_array);
 
             // Recalculate for discounts
-            $this->load->model('invoicesProvider/mdl_invoice_amounts');
-            $this->mdl_invoice_amounts->calculate($invoice_id);
+            $this->load->model('invoicesProvider/mdl_invoice_povider_amounts');
+            $this->mdl_invoice__provider_amounts->calculate($invoice_id);
 
             $response = [
                 'success' => 1,
@@ -172,10 +172,10 @@ class Ajax extends Admin_Controller
 
     public function save_invoice_tax_rate()
     {
-        $this->load->model('invoicesProvider/mdl_invoice_tax_rates');
+        $this->load->model('invoicesProvider/mdl_invoice_provider_tax_rates');
 
-        if ($this->mdl_invoice_tax_rates->run_validation()) {
-            $this->mdl_invoice_tax_rates->save();
+        if ($this->mdl_invoice_provider_tax_rates->run_validation()) {
+            $this->mdl_invoice_provider_tax_rates->save();
 
             $response = [
                 'success' => 1,
@@ -183,7 +183,7 @@ class Ajax extends Admin_Controller
         } else {
             $response = [
                 'success' => 0,
-                'validation_errors' => $this->mdl_invoice_tax_rates->validation_errors,
+                'validation_errors' => $this->mdl_invoice_provider_tax_rates->validation_errors,
             ];
         }
 
@@ -192,10 +192,10 @@ class Ajax extends Admin_Controller
 
     public function create()
     {
-        $this->load->model('invoicesProvider/mdl_invoices');
+        $this->load->model('invoicesProvider/mdl_invoices_provider');
 
-        if ($this->mdl_invoices->run_validation()) {
-            $invoice_id = $this->mdl_invoices->create();
+        if ($this->mdl_invoices_provider->run_validation()) {
+            $invoice_id = $this->mdl_invoices_provider->create();
 
             $response = [
                 'success' => 1,
@@ -214,9 +214,9 @@ class Ajax extends Admin_Controller
 
     public function get_item()
     {
-        $this->load->model('invoicesProvider/mdl_items');
+        $this->load->model('invoicesProvider/mdl_invoice_provider_items');
 
-        $item = $this->mdl_items->get_by_id($this->input->post('item_id'));
+        $item = $this->mdl_invoice_provider_items->get_by_id($this->input->post('item_id'));
 
         echo json_encode($item);
     }
@@ -264,8 +264,8 @@ class Ajax extends Admin_Controller
 
     public function change_provider()
     {
-        $this->load->model('invoicesProvider/mdl_invoices');
-        $this->load->model('cproviders/mdl_providers');
+        $this->load->model('invoicesProvider/mdl_invoices_provider');
+        $this->load->model('providers/mdl_providers');
 
         // Get the client ID
         $provider_id = $this->input->post('provider_id');
@@ -299,15 +299,14 @@ class Ajax extends Admin_Controller
     {
         $this->load->module('layout');
 
-        $this->load->model('invoicesProvider/mdl_invoices');
+        $this->load->model('invoicesProvider/mdl_invoices_provider');
         $this->load->model('invoice_groups/mdl_invoice_groups');
         $this->load->model('tax_rates/mdl_tax_rates');
 
         $data = [
-            'invoice_groups' => $this->mdl_invoice_groups->get()->result(),
             'tax_rates' => $this->mdl_tax_rates->get()->result(),
             'invoice_provider_id' => $this->input->post('invoice_provider_id'),
-            'invoice_provider' => $this->mdl_invoices->where('ip_invoices_provider.invoice_provider_id', $this->input->post('invoice_provider_id'))
+            'invoice_provider' => $this->mdl_invoices_provider->where('ip_invoices_provider.invoice_provider_id', $this->input->post('invoice_provider_id'))
                 ->get()
                 ->row(),
         ];
@@ -317,15 +316,15 @@ class Ajax extends Admin_Controller
 
     public function copy_invoice()
     {
-        $this->load->model('invoicesProvider/mdl_invoices');
-        $this->load->model('invoicesProvider/mdl_items');
-        $this->load->model('invoicesProvider/mdl_invoice_tax_rates');
+        $this->load->model('invoicesProvider/mdl_invoices_provider');
+        $this->load->model('invoicesProvider/mdl_invoice_provider_items');
+        $this->load->model('invoicesProvider/mdl_invoice_provider_tax_rates');
 
-        if ($this->mdl_invoices->run_validation()) {
-            $target_id = $this->mdl_invoices->save();
+        if ($this->mdl_invoices_provider->run_validation()) {
+            $target_id = $this->mdl_invoices_provider->save();
             $source_id = $this->input->post('invoice_provider_id');
 
-            $this->mdl_invoices->copy_invoice($source_id, $target_id);
+            $this->mdl_invoices_provider->copy_invoice($source_id, $target_id);
 
             $response = [
                 'success' => 1,
@@ -346,7 +345,7 @@ class Ajax extends Admin_Controller
     {
         $this->load->module('layout');
 
-        $this->load->model('invoicesProvider/mdl_invoices');
+        $this->load->model('invoicesProvider/mdl_invoices_provider');
         $this->load->model('invoice_groups/mdl_invoice_groups');
         $this->load->model('tax_rates/mdl_tax_rates');
 
@@ -354,7 +353,7 @@ class Ajax extends Admin_Controller
             'invoice_groups' => $this->mdl_invoice_groups->get()->result(),
             'tax_rates' => $this->mdl_tax_rates->get()->result(),
             'invoice_provider_id' => $this->input->post('invoice_provider_id'),
-            'invoice_provider' => $this->mdl_invoices->where('ip_invoices_provider.invoice_provider_id', $this->input->post('invoice_provider_id'))
+            'invoice_provider' => $this->mdl_invoices_provider->where('ip_invoices_provider.invoice_provider_id', $this->input->post('invoice_provider_id'))
                 ->get()
                 ->row(),
         ];
@@ -364,28 +363,28 @@ class Ajax extends Admin_Controller
 
     public function create_credit()
     {
-        $this->load->model('invoicesProvider/mdl_invoices');
-        $this->load->model('invoicesProvider/mdl_items');
-        $this->load->model('invoicesProvider/mdl_invoice_tax_rates');
+        $this->load->model('invoicesProvider/mdl_invoices_provider');
+        $this->load->model('invoicesProvider/mdl_invoice_provider_items');
+        $this->load->model('invoicesProvider/mdl_invoice_provider_tax_rates');
 
-        if ($this->mdl_invoices->run_validation()) {
-            $target_id = $this->mdl_invoices->save();
+        if ($this->mdl_invoices_provider->run_validation()) {
+            $target_id = $this->mdl_invoices_provider->save();
             $source_id = $this->input->post('invoice_provider_id');
 
-            $this->mdl_invoices->copy_credit_invoice($source_id, $target_id);
+            $this->mdl_invoices_provider->copy_credit_invoice($source_id, $target_id);
 
             // Set source invoice to read-only
             if ($this->config->item('disable_read_only') == false) {
-                $this->mdl_invoices->where('invoice_provider_id', $source_id);
-                $this->mdl_invoices->update('ip_invoices_provider', ['is_read_only' => '1']);
+                $this->mdl_invoices_provider->where('invoice_provider_id', $source_id);
+                $this->mdl_invoices_provider->update('ip_invoices_provider', ['is_read_only' => '1']);
             }
 
             // Set target invoice to credit invoice
-            $this->mdl_invoices->where('invoice_provider_id', $target_id);
-            $this->mdl_invoices->update('ip_invoices_provider', ['creditinvoice_parent_id' => $source_id]);
+            $this->mdl_invoices_provider->where('invoice_provider_id', $target_id);
+            $this->mdl_invoices_provider->update('ip_invoices_provider', ['creditinvoice_parent_id' => $source_id]);
 
-            $this->mdl_invoices->where('invoice_provider_id', $target_id);
-            $this->mdl_invoices->update('ip_invoice_provider_amounts', ['invoice_provider_sign' => '-1']);
+            $this->mdl_invoices_provider->where('invoice_provider_id', $target_id);
+            $this->mdl_invoices_provider->update('ip_invoice_provider_amounts', ['invoice_provider_sign' => '-1']);
 
             $response = [
                 'success' => 1,
@@ -409,14 +408,14 @@ class Ajax extends Admin_Controller
     {
         $success = 0;
         $item_id = $this->input->post('item_id');
-        $this->load->model('mdl_invoices');
+        $this->load->model('mdl_invoices_provider');
 
         // Only continue if the invoice exists or no item id was provided
-        if ($this->mdl_invoices->get_by_id($invoice_id) || empty($item_id)) {
+        if ($this->mdl_invoices_provider->get_by_id($invoice_id) || empty($item_id)) {
 
             // Delete invoice item
-            $this->load->model('mdl_items');
-            $item = $this->mdl_items->delete($item_id);
+            $this->load->model('mdl_invoice_provider_items');
+            $item = $this->mdl_invoice_provider_items->delete($item_id);
 
             // Check if deletion was successful
             if ($item) {

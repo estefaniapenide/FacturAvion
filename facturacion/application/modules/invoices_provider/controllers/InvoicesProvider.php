@@ -25,7 +25,7 @@ class InvoicesProvider extends Admin_Controller
     {
         parent::__construct();
 
-        $this->load->model('mdl_invoices');
+        $this->load->model('mdl_invoices_provider');
     }
 
     public function index()
@@ -43,24 +43,24 @@ class InvoicesProvider extends Admin_Controller
         // Determine which group of invoices to load
         switch ($status) {
             case 'draft':
-                $this->mdl_invoices->is_draft();
+                $this->mdl_invoices_provider->is_draft();
                 break;
             case 'sent':
-                $this->mdl_invoices->is_sent();
+                $this->mdl_invoices_provider->is_sent();
                 break;
             case 'viewed':
-                $this->mdl_invoices->is_viewed();
+                $this->mdl_invoices_provider->is_viewed();
                 break;
             case 'paid':
-                $this->mdl_invoices->is_paid();
+                $this->mdl_invoices_provider->is_paid();
                 break;
             case 'overdue':
-                $this->mdl_invoices->is_overdue();
+                $this->mdl_invoices_provider->is_overdue();
                 break;
         }
 
-        $this->mdl_invoices->paginate(site_url('invoicesProvider/status/' . $status), $page);
-        $invoices = $this->mdl_invoices->result();
+        $this->mdl_invoices_provider->paginate(site_url('invoicesProvider/status/' . $status), $page);
+        $invoices = $this->mdl_invoices_provider->result();
 
         $this->layout->set(
             [
@@ -69,7 +69,7 @@ class InvoicesProvider extends Admin_Controller
                 'filter_display' => true,
                 'filter_placeholder' => trans('filter_invoices_provider'),
                 'filter_method' => 'filter_invoices',
-                'invoice_provider_statuses' => $this->mdl_invoices->statuses(),
+                'invoice_provider_statuses' => $this->mdl_invoices_provider->statuses(),
             ]
         );
 
@@ -123,10 +123,10 @@ class InvoicesProvider extends Admin_Controller
     {
         $this->load->model(
             [
-                'mdl_items',
+                'mdl_invoice_provider_items',
                 'tax_rates/mdl_tax_rates',
                 'payment_methods/mdl_payment_methods',
-                'mdl_invoice_tax_rates',
+                'mdl_invoice_provider_tax_rates',
                 'custom_fields/mdl_custom_fields',
             ]
         );
@@ -154,7 +154,7 @@ class InvoicesProvider extends Admin_Controller
         }*/
 
         $fields = $this->mdl_invoice_custom->by_id($invoice_id)->get()->result();
-        $invoice = $this->mdl_invoices->get_by_id($invoice_id);
+        $invoice = $this->mdl_invoices_provider->get_by_id($invoice_id);
 
         if (!$invoice) {
             show_404();
@@ -173,7 +173,7 @@ class InvoicesProvider extends Admin_Controller
             foreach ($fields as $fvalue) {
                 if ($fvalue->invoice_custom_fieldid == $cfield->custom_field_id) {
                     // TODO: Hackish, may need a better optimization
-                    $this->mdl_invoices->set_form_value(
+                    $this->mdl_invoices_provider->set_form_value(
                         'custom[' . $cfield->custom_field_id . ']',
                         $fvalue->invoice_custom_fieldvalue
                     );
@@ -189,10 +189,10 @@ class InvoicesProvider extends Admin_Controller
         $this->layout->set(
             [
                 'invoice_provider' => $invoice,
-                'items' => $this->mdl_items->where('invoice_provider_id', $invoice_id)->get()->result(),
+                'items' => $this->mdl_invoice_provider_items->where('invoice_provider_id', $invoice_id)->get()->result(),
                 'invoice_provider_id' => $invoice_id,
                 'tax_rates' => $this->mdl_tax_rates->get()->result(),
-                'invoice_tax_rates' => $this->mdl_invoice_tax_rates->where('invoice_provider_id', $invoice_id)->get()->result(),
+                'invoice_provider_tax_rates' => $this->mdl_invoice_provider_tax_rates->where('invoice_provider_id', $invoice_id)->get()->result(),
                 'units' => $this->mdl_units->get()->result(),
                 'payment_methods' => $this->mdl_payment_methods->get()->result(),
                 'custom_fields' => $custom_fields,
@@ -202,7 +202,7 @@ class InvoicesProvider extends Admin_Controller
                     'currency_symbol_placement' => get_setting('currency_symbol_placement'),
                     'decimal_point' => get_setting('decimal_point'),
                 ],
-                'invoice_statuses' => $this->mdl_invoices->statuses(),
+                'invoice_statuses' => $this->mdl_invoices_provider->statuses(),
                 'payment_cf_exist' => $payment_cf_exist,
             ]
         );
@@ -227,7 +227,7 @@ class InvoicesProvider extends Admin_Controller
     public function delete($invoice_id)
     {
         // Get the status of the invoice
-        $invoice = $this->mdl_invoices->get_by_id($invoice_id);
+        $invoice = $this->mdl_invoices_provider->get_by_id($invoice_id);
         $invoice_status = $invoice->invoice_status_id;
 
         if ($invoice_status == 1 || $this->config->item('enable_invoice_deletion') === true) {
@@ -236,7 +236,7 @@ class InvoicesProvider extends Admin_Controller
             $tasks = $this->mdl_tasks->update_on_invoice_delete($invoice_id);
 
             // Delete the invoice
-            $this->mdl_invoices->delete($invoice_id);
+            $this->mdl_invoices_provider->delete($invoice_id);
         } else {
             // Add alert that invoices can't be deleted
             $this->session->set_flashdata('alert_error', trans('invoice_deletion_forbidden'));
@@ -251,7 +251,7 @@ class InvoicesProvider extends Admin_Controller
      * @param bool $stream
      * @param null $invoice_template
      */
-    public function generate_pdf($invoice_id, $stream = true, $invoice_template = null)
+/*     public function generate_pdf($invoice_id, $stream = true, $invoice_template = null)
     {
         $this->load->helper('pdf');
 
@@ -261,17 +261,17 @@ class InvoicesProvider extends Admin_Controller
         }
 
         generate_invoice_pdf($invoice_id, $stream, $invoice_template, null);
-    }
+    } */
 
     /**
      * @param $invoice_id
      */
     public function generate_zugferd_xml($invoice_id)
     {
-        $this->load->model('invoicesProvider/mdl_items');
+        $this->load->model('invoicesProvider/mdl_invoice_provider_items');
         $this->load->library('ZugferdXml', [
-            'invoice_provider' => $this->mdl_invoices->get_by_id($invoice_id),
-            'items' => $this->mdl_items->where('invoice_provider_id', $invoice_id)->get()->result(),
+            'invoice_provider' => $this->mdl_invoices_provider->get_by_id($invoice_id),
+            'items' => $this->mdl_invoice_provider_items->where('invoice_provider_id', $invoice_id)->get()->result(),
         ]);
 
         $this->output->set_content_type('text/xml');
@@ -285,11 +285,11 @@ class InvoicesProvider extends Admin_Controller
      */
     public function delete_invoice_tax($invoice_id, $invoice_tax_rate_id)
     {
-        $this->load->model('mdl_invoice_tax_rates');
-        $this->mdl_invoice_tax_rates->delete($invoice_tax_rate_id);
+        $this->load->model('mdl_invoice_provider_tax_rates');
+        $this->mdl_invoice_provider_tax_rates->delete($invoice_tax_rate_id);
 
-        $this->load->model('mdl_invoice_amounts');
-        $this->mdl_invoice_amounts->calculate($invoice_id);
+        $this->load->model('mdl_invoice_provider_amounts');
+        $this->mdl_invoice_provider_amounts->calculate($invoice_id);
 
         redirect('invoicesProvider/view/' . $invoice_id);
     }
@@ -299,10 +299,10 @@ class InvoicesProvider extends Admin_Controller
         $this->db->select('invoice_provider_id');
         $invoice_ids = $this->db->get('ip_invoices_provider')->result();
 
-        $this->load->model('mdl_invoice_amounts');
+        $this->load->model('mdl_invoice_provider_amounts');
 
         foreach ($invoice_ids as $invoice_id) {
-            $this->mdl_invoice_amounts->calculate($invoice_id->invoice_id);
+            $this->mdl_invoice_provider_amounts->calculate($invoice_id->invoice_provider_id);
         }
     }
 

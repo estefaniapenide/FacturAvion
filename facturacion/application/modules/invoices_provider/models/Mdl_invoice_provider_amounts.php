@@ -13,7 +13,7 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * Class Mdl_Invoice_Amounts
  */
-class Mdl_Invoice_Amounts extends CI_Model
+class Mdl_Invoice_Provider_Amounts extends CI_Model
 {
     /**
      * IP_INVOICE_AMOUNTS
@@ -90,8 +90,8 @@ class Mdl_Invoice_Amounts extends CI_Model
         $this->calculate_invoice_taxes($invoice_id);
 
         // Get invoice status
-        $this->load->model('invoicesProvider/mdl_invoices');
-        $invoice = $this->mdl_invoices->get_by_id($invoice_id);
+        $this->load->model('invoicesProvider/mdl_invoices_provider');
+        $invoice = $this->mdl_invoices_provider->get_by_id($invoice_id);
         $invoice_is_credit = ($invoice->creditinvoice_parent_id > 0 ? true : false);
 
         // Set to paid if balance is zero
@@ -146,8 +146,8 @@ class Mdl_Invoice_Amounts extends CI_Model
     public function calculate_invoice_taxes($invoice_id)
     {
         // First check to see if there are any invoice taxes applied
-        $this->load->model('invoicesProvider/mdl_invoice_tax_rates');
-        $invoice_tax_rates = $this->mdl_invoice_tax_rates->where('invoice_provider_id', $invoice_id)->get()->result();
+        $this->load->model('invoicesProvider/mdl_invoice_provider_tax_rates');
+        $invoice_tax_rates = $this->mdl_invoice_provider_tax_rates->where('invoice_provider_id', $invoice_id)->get()->result();
 
         if ($invoice_tax_rates) {
             // There are invoice taxes applied
@@ -386,7 +386,7 @@ class Mdl_Invoice_Amounts extends CI_Model
 
         $return = array();
 
-        foreach ($this->mdl_invoices->statuses() as $key => $status) {
+        foreach ($this->mdl_invoices_provider->statuses() as $key => $status) {
             $return[$key] = array(
                 'invoice_provider_status_id' => $key,
                 'class' => $status['class'],

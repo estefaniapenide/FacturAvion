@@ -5,7 +5,7 @@
 
         $('#invoice_tax_submit').click(function () {
             $.post("<?php echo site_url('invoicesProvider/ajax/save_invoice_tax_rate'); ?>", {
-                    invoice_id: <?php echo $invoice_id; ?>,
+                    invoice_provider_id: <?php echo $invoice_id; ?>,
                     tax_rate_id: $('#tax_rate_id').val(),
                     include_item_tax: $('#include_item_tax').val()
                 },

@@ -2,20 +2,19 @@
     $(function () {
         $('#modal-create-credit-invoice').modal('show');
         $('#create-credit-confirm').click(function () {
-            $.post("<?php echo site_url('invoices/ajax/create_credit'); ?>", {
-                    invoice_id: <?php echo $invoice_id; ?>,
-                    client_id: $('#client_id').val(),
-                    invoice_date_created: $('#invoice_date_created').val(),
-                    invoice_group_id: $('#invoice_group_id').val(),
-                    invoice_time_created: '<?php echo date('H:i:s') ?>',
-                    invoice_password: $('#invoice_password').val(),
+            $.post("<?php echo site_url('invoicesProvider/ajax/create_credit'); ?>", {
+                    invoice_provider_id: <?php echo $invoice_id; ?>,
+                    provider_id: $('#provider_id').val(),
+                    invoice_provider_date_created: $('#invoice_provider_date_created').val(),
+                    invoice_provider_time_created: '<?php echo date('H:i:s') ?>',
+                    invoice_provider_password: $('#invoice_provider_password').val(),
                     user_id: $('#user_id').val()
                 },
                 function (data) {
                     <?php echo(IP_DEBUG ? 'console.log(data);' : ''); ?>
                     var response = JSON.parse(data);
                     if (response.success === 1) {
-                        window.location = "<?php echo site_url('invoices/view'); ?>/" + response.invoice_id;
+                        window.location = "<?php echo site_url('invoicesProvider/view'); ?>/" + response.invoice_provider_id;
                     }
                     else {
                         // The validation was not successful
@@ -42,42 +41,27 @@
                    value="<?php echo $invoice->user_id; ?>">
 
             <input type="hidden" name="parent_id" id="parent_id"
-                   value="<?php echo $invoice->invoice_id; ?>">
+                   value="<?php echo $invoice->invoice_provider_id; ?>">
 
-            <input type="hidden" name="client_id" id="client_id" class="hidden"
-                   value="<?php echo $invoice->client_id; ?>">
+            <input type="hidden" name="provider_id" id="provider_id" class="hidden"
+                   value="<?php echo $invoice->provider_id; ?>">
 
-            <input type="hidden" name="invoice_date_created" id="invoice_date_created"
+            <input type="hidden" name="invoice_provider_date_created" id="invoice_provider_date_created"
                    value="<?php $credit_date = date_from_mysql(date('Y-m-d', time()), true);
                    echo $credit_date; ?>">
 
             <div class="form-group">
-                <label for="invoice_password"><?php _trans('invoice_password'); ?></label>
-                <input type="text" name="invoice_password" id="invoice_password" class="form-control"
-                       value="<?php echo get_setting('invoice_pre_password') == '' ? '' : get_setting('invoice_pre_password'); ?>"
+                <label for="invoice_provider_password"><?php _trans('invoice_password'); ?></label>
+                <input type="text" name="invoice_provider_password" id="invoice_provider_password" class="form-control"
+                       value="<?php echo get_setting('invoice_provider_pre_password') == '' ? '' : get_setting('invoice_provider_pre_password'); ?>"
                        style="margin: 0 auto;" autocomplete="off">
-            </div>
-
-            <div>
-                <select name="invoice_group_id" id="invoice_group_id" class="hidden">
-                    <?php foreach ($invoice_groups as $invoice_group) { ?>
-                        <option value="<?php echo $invoice_group->invoice_group_id; ?>"
-                            <?php if (get_setting('default_invoice_group') == $invoice_group->invoice_group_id) {
-                                echo 'selected="selected"';
-                                $credit_invoice_group = htmlsc($invoice_group->invoice_group_name);
-                            } ?>>
-                            <?php echo $credit_invoice_group; ?>
-                        </option>
-                    <?php } ?>
-                </select>
             </div>
 
             <p><strong><?php _trans('credit_invoice_details'); ?></strong></p>
 
             <ul>
-                <li><?php _trans('client') . ': ' . htmlsc($invoice->client_name); ?></li>
+                <li><?php _trans('provider') . ': ' . htmlsc($invoice->provider_name); ?></li>
                 <li><?php echo trans('credit_invoice_date') . ': ' . $credit_date; ?></li>
-                <li><?php echo trans('invoice_group') . ': ' . $credit_invoice_group; ?></li>
             </ul>
 
             <div class="alert alert-danger no-margin">

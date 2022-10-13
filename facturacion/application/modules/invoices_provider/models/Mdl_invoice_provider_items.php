@@ -13,7 +13,7 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * Class Mdl_Items
  */
-class Mdl_Items extends Response_Model
+class Mdl_Invoice_Provider_Items extends Response_Model
 {
 
     public $table = 'ip_invoice_provider_items';
@@ -105,15 +105,15 @@ class Mdl_Items extends Response_Model
     {
         $id = parent::save($id, $db_array);
 
-        $this->load->model('invoices/mdl_item_amounts');
-        $this->mdl_item_amounts->calculate($id);
+        $this->load->model('invoices/mdl_invoice_provider_item_amounts');
+        $this->mdl_invoice_provider_item_amounts->calculate($id);
 
-        $this->load->model('invoices/mdl_invoice_amounts');
+        $this->load->model('invoices/mdl_invoice_provider_amounts');
 
         if (is_object($db_array) && isset($db_array->invoice_id)) {
-            $this->mdl_invoice_amounts->calculate($db_array->invoice_id);
-        } elseif (is_array($db_array) && isset($db_array['invoice_id'])) {
-            $this->mdl_invoice_amounts->calculate($db_array['invoice_id']);
+            $this->mdl_invoice_provider_amounts->calculate($db_array->invoice_provider_id);
+        } elseif (is_array($db_array) && isset($db_array['invoice_provider_id'])) {
+            $this->mdl_invoice_provider_amounts->calculate($db_array['invoice_provider_id']);
         }
 
         return $id;
@@ -146,8 +146,8 @@ class Mdl_Items extends Response_Model
         $this->db->delete('ip_invoice_item_amounts');
 
         // Recalculate invoice amounts
-        $this->load->model('invoices/mdl_invoice_amounts');
-        $this->mdl_invoice_amounts->calculate($invoice_id);
+        $this->load->model('invoices/mdl_invoice_provider_amounts');
+        $this->mdl_invoice_provider_amounts->calculate($invoice_id);
 
         return true;
     }

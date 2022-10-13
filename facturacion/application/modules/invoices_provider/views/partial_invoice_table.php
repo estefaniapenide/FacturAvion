@@ -58,7 +58,7 @@
                 </td>
 
                 <td>
-                    <a href="<?php echo site_url('providers/view/' . $invoice->provider_id); ?>"
+                    <a href="<?php echo site_url('providersProvider/view/' . $invoice->invoice_provider_id); ?>"
                        title="<?php _trans('view_provider'); ?>">
                         <?php _htmlsc(format_client($invoice)); ?>
                     </a>

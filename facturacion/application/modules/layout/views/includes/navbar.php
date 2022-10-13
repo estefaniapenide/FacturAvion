@@ -68,7 +68,7 @@
                         <i class="visible-md-inline fa fa-file-text"></i>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="#" class="create-invoice"><?php _trans('create_invoice'); ?></a></li>
+                        <li><a href="#" class="create-invoice-provider"><?php _trans('create_invoice_provider'); ?></a></li>
                         <li><?php echo anchor('invoicesProvider/index', trans('view_invoices')); ?></li>
                     </ul>
                 </li>

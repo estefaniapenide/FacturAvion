@@ -13,7 +13,7 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * Class Mdl_Item_Amounts
  */
-class Mdl_Item_Amounts extends CI_Model
+class Mdl_Invoice_Provider_Item_Amounts extends CI_Model
 {
     /**
      * item_amount_id
@@ -26,8 +26,8 @@ class Mdl_Item_Amounts extends CI_Model
      */
     public function calculate($item_id)
     {
-        $this->load->model('invoicesProvider/mdl_items');
-        $item = $this->mdl_items->get_by_id($item_id);
+        $this->load->model('invoicesProvider/mdl_invoice_provider_items');
+        $item = $this->mdl_invoice_provider_items->get_by_id($item_id);
 
         $item_subtotal = $item->item_quantity * $item->item_price;
         $item_tax_total = $item_subtotal * ($item->item_tax_rate_percent / 100);

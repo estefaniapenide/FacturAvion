@@ -13,7 +13,7 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * Class Mdl_Invoices
  */
-class Mdl_Invoices extends Response_Model
+class Mdl_Invoices_Provider extends Response_Model
 {
     public $table = 'ip_invoices_provider';
     public $primary_key = 'ip_invoices_provider.invoice_provider_id';
@@ -190,11 +190,11 @@ class Mdl_Invoices extends Response_Model
      */
     public function copy_invoice($source_id, $target_id, $copy_recurring_items_only = false)
     {
-        $this->load->model('invoicesProvider/mdl_items');
-        $this->load->model('invoicesProvider/mdl_invoice_tax_rates');
+        $this->load->model('invoicesProvider/mdl_invoice_provider_items');
+        $this->load->model('invoicesProvider/mdl_invoice_provider_tax_rates');
 
         // Copy the items
-        $invoice_items = $this->mdl_items->where('invoices_provider_id', $source_id)->get()->result();
+        $invoice_items = $this->mdl_invoice_provider_items->where('invoices_provider_id', $source_id)->get()->result();
 
         foreach ($invoice_items as $invoice_item) {
             $db_array = array(
@@ -213,13 +213,13 @@ class Mdl_Invoices extends Response_Model
                 'item_product_unit_id' => $invoice_item->item_product_unit_id,
             );
 
-            if (!$copy_recurring_items_only || $invoice_item->item_is_recurring) {
-                $this->mdl_items->save(null, $db_array);
+            if (!$copy_recurring_items_only) {
+                $this->mdl_invoice_provider_items->save(null, $db_array);
             }
         }
 
         // Copy the tax rates
-        $invoice_tax_rates = $this->mdl_invoice_tax_rates->where('invoices_provider_id', $source_id)->get()->result();
+        $invoice_tax_rates = $this->mdl_invoice_provider_tax_rates->where('invoices_provider_id', $source_id)->get()->result();
 
         foreach ($invoice_tax_rates as $invoice_tax_rate) {
             $db_array = array(
@@ -229,7 +229,7 @@ class Mdl_Invoices extends Response_Model
                 'invoices_provider_tax_rate_amount' => $invoice_tax_rate->invoice_tax_rate_amount
             );
 
-            $this->mdl_invoice_tax_rates->save(null, $db_array);
+            $this->mdl_invoice_provider_tax_rates->save(null, $db_array);
         }
 
         // Copy the custom fields
@@ -250,10 +250,10 @@ class Mdl_Invoices extends Response_Model
      */
     public function copy_credit_invoice($source_id, $target_id)
     {
-        $this->load->model('invoicesProvider/mdl_items');
-        $this->load->model('invoicesProvider/mdl_invoice_tax_rates');
+        $this->load->model('invoicesProvider/mdl_invoice_provider_items');
+        $this->load->model('invoicesProvider/mdl_invoice_provider_tax_rates');
 
-        $invoice_items = $this->mdl_items->where('invoices_provider_id', $source_id)->get()->result();
+        $invoice_items = $this->mdl_invoice_provider_items->where('invoices_provider_id', $source_id)->get()->result();
 
         foreach ($invoice_items as $invoice_item) {
             $db_array = array(
@@ -272,10 +272,10 @@ class Mdl_Invoices extends Response_Model
                 'item_product_unit_id' => $invoice_item->item_product_unit_id,
             );
 
-            $this->mdl_items->save(null, $db_array);
+            $this->mdl_invoice_provider_items->save(null, $db_array);
         }
 
-        $invoice_tax_rates = $this->mdl_invoice_tax_rates->where('invoices_provider_id', $source_id)->get()->result();
+        $invoice_tax_rates = $this->mdl_invoice_provider_tax_rates->where('invoices_provider_id', $source_id)->get()->result();
 
         foreach ($invoice_tax_rates as $invoice_tax_rate) {
             $db_array = array(
@@ -285,7 +285,7 @@ class Mdl_Invoices extends Response_Model
                 'invoices_provider_tax_rate_amount' => -$invoice_tax_rate->invoice_tax_rate_amount
             );
 
-            $this->mdl_invoice_tax_rates->save(null, $db_array);
+            $this->mdl_invoice_provider_tax_rates->save(null, $db_array);
         }
 
         // Copy the custom fields
@@ -490,7 +490,7 @@ class Mdl_Invoices extends Response_Model
      */
     public function mark_sent($invoice_id)
     {
-        $invoice = $this->mdl_invoices->get_by_id($invoice_id);
+        $invoice = $this->mdl_invoices_provider->get_by_id($invoice_id);
 
         if (!empty($invoice)) {
             if ($invoice->invoice_status_id == 1) {
