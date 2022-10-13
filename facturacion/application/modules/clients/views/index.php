@@ -67,7 +67,7 @@
     <?php $this->layout->load_view('layout/alerts'); ?>
 
     <div id="filter_results">
-        <?php $this->layout->load_view('clients/partial_client_table'); ?>
+        <?php $this->layout->load_view('clients/partial_client_table',array('clients' => $records)); ?>
     </div>
 
 </div>

@@ -104,6 +104,27 @@ class Ajax extends Admin_Controller
         $this->layout->load_view('clients/partial_client_table', $data);
     }
 
+    public function filter_providers()
+    {
+        $this->load->model('providers/mdl_providers');
+
+        $query = $this->input->post('filter_query');
+        $keywords = explode(' ', $query);
+
+        foreach ($keywords as $keyword) {
+            if ($keyword) {
+                $keyword = strtolower($keyword);
+                $this->mdl_clients->like("CONCAT_WS('^',LOWER(provider_name),LOWER(provider_comercial_name),LOWER(provider_email),provider_phone,provider_active)", $keyword);
+            }
+        }
+
+        $data = array(
+            'records' => $this->mdl_clients->with_total_balance()->get()->result()
+        );
+
+        $this->layout->load_view('providers/partial_provider_table', $data);
+    }
+
     public function filter_payments()
     {
         $this->load->model('payments/mdl_payments');

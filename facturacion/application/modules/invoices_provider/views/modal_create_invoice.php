@@ -71,15 +71,15 @@
             <input class="hidden" id="payment_method_id"
                    value="<?php echo get_setting('invoice_default_payment_method'); ?>">
 
-            <input class="hidden" id="input_permissive_search_clients"
-                   value="<?php echo get_setting('enable_permissive_search_clients'); ?>">
+            <input class="hidden" id="input_permissive_search_providers"
+                   value="<?php echo get_setting('enable_permissive_search_providers'); ?>">
 
             <div class="form-group has-feedback">
                 <label for="create_invoice_provider_id"><?php _trans('provider'); ?></label>
                 <div class="input-group">
                     <select name="provider_id" id="create_invoice_provider_id" class="provider-id-select form-control"
                             autofocus="autofocus">
-                        <?php if (!empty($client)) : ?>
+                        <?php if (!empty($provider)) : ?>
                             <option value="<?php echo $provider->provider_id; ?>"></option>
                         <?php endif; ?>
                     </select>
