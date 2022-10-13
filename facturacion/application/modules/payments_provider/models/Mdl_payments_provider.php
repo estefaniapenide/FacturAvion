@@ -52,26 +52,26 @@ class Mdl_Payments_provider extends Response_Model
     public function validation_rules()
     {
         return array(
-            'invoice_provider_id' => array(
+            'invoice_id' => array(
                 'field' => 'invoice_id',
                 'label' => trans('invoice'),
                 'rules' => 'required'
             ),
-            'payment_provider_date' => array(
+            'payment_date' => array(
                 'field' => 'payment_date',
                 'label' => trans('date'),
                 'rules' => 'required'
             ),
-            'payment_provider_amount' => array(
+            'payment_amount' => array(
                 'field' => 'payment_amount',
                 'label' => trans('payment'),
                 'rules' => 'required|callback_validate_payment_amount'
             ),
-            'payment_provider_method_id' => array(
+            'payment_method_id' => array(
                 'field' => 'payment_method_id',
                 'label' => trans('payment_method')
             ),
-            'payment_provider_note' => array(
+            'payment_note' => array(
                 'field' => 'payment_note',
                 'label' => trans('note')
             )
@@ -120,7 +120,7 @@ class Mdl_Payments_provider extends Response_Model
     public function save($id = null, $db_array = null)
     {
         $db_array = ($db_array) ? $db_array : $this->db_array();
-        $this->load->model('invoices/mdl_invoice_amounts');
+        $this->load->model('invoicesProvider/mdl_invoice_provider_amounts');
 
         // Save the payment
         $id = parent::save($id, $db_array);
@@ -136,8 +136,8 @@ class Mdl_Payments_provider extends Response_Model
             return false;
         }
 
-        $paid = (float)$invoice->invoice_paid;
-        $total = (float)$invoice->invoice_total;
+        $paid = (float)$invoice->invoice_provider_paid;
+        $total = (float)$invoice->invoice_provider_total;
 
         if ($paid >= $total) {
             $this->db->where('invoice_provider_id', $db_array['invoice_provider_id']);
@@ -158,8 +158,8 @@ class Mdl_Payments_provider extends Response_Model
     {
         $db_array = parent::db_array();
 
-        $db_array['payment_provider_date'] = date_to_mysql($db_array['payment_provider_date']);
-        $db_array['payment_provider_amount'] = standardize_amount($db_array['payment_provider_amount']);
+        $db_array['payment_date'] = date_to_mysql($db_array['payment_date']);
+        $db_array['payment_amount'] = standardize_amount($db_array['payment_amount']);
 
         return $db_array;
     }
@@ -207,7 +207,7 @@ class Mdl_Payments_provider extends Response_Model
         }
 
         if (!$id) {
-            parent::set_form_value('payment_provider_date', date('Y-m-d'));
+            parent::set_form_value('payment_date', date('Y-m-d'));
         }
 
         return true;
