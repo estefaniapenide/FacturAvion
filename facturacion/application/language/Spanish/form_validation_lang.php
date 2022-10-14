@@ -66,3 +66,4 @@ $lang['form_validation_greater_than']		= 'El campo {field} debe contener un núm
 $lang['form_validation_greater_than_equal_to']	= 'El campo {field} debe contener un número mayor o igual a {param}.';
 $lang['form_validation_error_message_not_set']	= 'Unable to access an error message corresponding to your field name {field}.';
 $lang['form_validation_in_list']		= 'El campo {field} debe ser uno de: {param}.';
+$lang['form_validation_validate_payment_amount'] = 'validar cantidad de pago';

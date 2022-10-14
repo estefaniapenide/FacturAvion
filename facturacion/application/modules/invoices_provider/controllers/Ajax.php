@@ -28,13 +28,11 @@ class Ajax extends Admin_Controller
 
 
         $invoice_id = $this->input->post('invoice_provider_id');
-
         $this->mdl_invoices_provider->set_id($invoice_id);
-
-        if ($this->mdl_invoices_provider->run_validation('validation_rules_save_invoice')) {
+/*         log_message('error',print_r($this->mdl_invoices_provider->run_validation('validation_rules_save_invoice'),true));
+ */         if ($this->mdl_invoices_provider->run_validation('validation_rules_save_invoice')) {
             $items = json_decode($this->input->post('items'));
-
-            foreach ($items as $item) {
+                foreach ($items as $item) {
                 // Check if an item has either a quantity + price or name or description
                 if (!empty($item->item_name)) {
                     $item->item_quantity = ($item->item_quantity ? standardize_amount($item->item_quantity) : floatval(0));
@@ -69,7 +67,6 @@ class Ajax extends Admin_Controller
                             'item_name' => form_error('item_name', '', ''),
                         ],
                     ];
-
                     echo json_encode($response);
                     exit;
                 }
@@ -91,9 +88,8 @@ class Ajax extends Admin_Controller
 
             // Generate new invoice number if needed
             $invoice_number = $this->input->post('invoice_provider_number');
-
             if (empty($invoice_number) && $invoice_status != 1) {
-                $invoice_group_id = $this->mdl_invoices_provider->get_invoice_group_id($invoice_id);
+                $invoice_group_id = $this->mdl_invoices_provider->get_invoice_provider_group_id($invoice_id);
                 $invoice_number = $this->mdl_invoices_provider->get_invoice_number($invoice_group_id);
             }
 
@@ -108,19 +104,16 @@ class Ajax extends Admin_Controller
                 'invoice_provider_discount_amount' => standardize_amount($invoice_discount_amount),
                 'invoice_provider_discount_percent' => standardize_amount($invoice_discount_percent),
             ];
-
             // check if status changed to sent, the feature is enabled and settings is set to sent
             if ($this->config->item('disable_read_only') === false) {
                 if ($invoice_status == get_setting('read_only_toggle')) {
                     $db_array['is_read_only'] = 1;
                 }
             }
-
             $this->mdl_invoices_provider->save($invoice_id, $db_array);
-
             // Recalculate for discounts
             $this->load->model('invoices_provider/mdl_invoice_provider_amounts');
-            $this->mdl_invoice__provider_amounts->calculate($invoice_id);
+            $this->mdl_invoice_provider_amounts->calculate($invoice_id);
 
             $response = [
                 'success' => 1,
@@ -199,7 +192,7 @@ class Ajax extends Admin_Controller
 
             $response = [
                 'success' => 1,
-                'invoice_provider_id' => $invoice_id,
+                'invoice_id' => $invoice_id,
             ];
         } else {
             $this->load->helper('json_error');
@@ -257,7 +250,9 @@ class Ajax extends Admin_Controller
             'invoice_provider_id' => $this->input->post('invoice_provider_id'),
             'providers' => $this->mdl_providers->get_latest(),
         ];
-
+        echo '<pre>';
+        print_r($data);
+        echo '</pre>';
         $this->layout->load_view('invoices_provider/modal_change_provider', $data);
     }
 
@@ -304,12 +299,11 @@ class Ajax extends Admin_Controller
 
         $data = [
             'tax_rates' => $this->mdl_tax_rates->get()->result(),
-            'invoice_provider_id' => $this->input->post('invoice_provider_id'),
-            'invoice_provider' => $this->mdl_invoices_provider->where('ip_invoices_provider.invoice_provider_id', $this->input->post('invoice_provider_id'))
+            'invoice_id' => $this->input->post('invoice_provider_id'),
+            'invoice' => $this->mdl_invoices_provider->where('ip_invoices_provider.invoice_provider_id', $this->input->post('invoice_provider_id'))
                 ->get()
                 ->row(),
         ];
-
         $this->layout->load_view('invoices_provider/modal_copy_invoice', $data);
     }
 
@@ -336,7 +330,6 @@ class Ajax extends Admin_Controller
                 'validation_errors' => json_errors(),
             ];
         }
-
         echo json_encode($response);
     }
 

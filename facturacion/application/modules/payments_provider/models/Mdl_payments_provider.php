@@ -85,16 +85,15 @@ class Mdl_Payments_provider extends Response_Model
     public function validate_payment_amount($amount)
     {
         $amount = (float)standardize_amount($amount);
-        $invoice_id = $this->input->post('invoice_provider_id');
+        $invoice_id = $this->input->post('invoice_id');
         $payment_id = $this->input->post('payment_id');
 
         $invoice = $this->db->where('invoice_provider_id', $invoice_id)->get('ip_invoice_provider_amounts')->row();
-
         if ($invoice == null) {
             return false;
         }
 
-        $invoice_balance = (float)$invoice->invoice_balance;
+        $invoice_balance = (float)$invoice->invoice_provider_balance;
 
         if ($payment_id) {
             $payment = $this->db->where('payment_id', $payment_id)->get('ip_payments_provider')->row();
@@ -126,10 +125,10 @@ class Mdl_Payments_provider extends Response_Model
         $id = parent::save($id, $db_array);
 
         // Recalculate invoice amounts
-        $this->mdl_invoice_provider_amounts->calculate($db_array['invoice_provider_id']);
+        $this->mdl_invoice_provider_amounts->calculate($db_array['invoice_id']);
 
         // Set proper status for the invoice
-        $invoice = $this->db->where('invoice_provider_id', $db_array['invoice_provider_id'])->get('ip_invoice_provider_amounts')->row();
+        $invoice = $this->db->where('invoice_provider_id', $db_array['invoice_id'])->get('ip_invoice_provider_amounts')->row();
 
         // Calculate sum for payments
         if ($invoice == null) {
@@ -140,13 +139,13 @@ class Mdl_Payments_provider extends Response_Model
         $total = (float)$invoice->invoice_provider_total;
 
         if ($paid >= $total) {
-            $this->db->where('invoice_provider_id', $db_array['invoice_provider_id']);
+            $this->db->where('invoice_provider_id', $db_array['invoice_id']);
             $this->db->set('invoice_status_id', 4);
             $this->db->update('ip_invoices_provider');
         }
 
         // Recalculate invoice amounts
-        $this->mdl_invoice_provider_amounts->calculate($db_array['invoice_provider_id']);
+        $this->mdl_invoice_provider_amounts->calculate($db_array['invoice_id']);
 
         return $id;
     }

@@ -51,16 +51,14 @@ class Mdl_Invoice_Provider_Amounts extends CI_Model
         ");
 
         $invoice_amounts = $query->row();
-
         $invoice_item_subtotal = $invoice_amounts->invoice_item_subtotal - $invoice_amounts->invoice_item_discount;
         $invoice_subtotal = $invoice_item_subtotal + $invoice_amounts->invoice_item_tax_total;
         $invoice_total = $this->calculate_discount($invoice_id, $invoice_subtotal);
-
         // Get the amount already paid
         $query = $this->db->query("
           SELECT SUM(payment_amount) AS invoice_provider_paid
           FROM ip_payments_provider
-          WHERE invoice_provider_id = " . $this->db->escape($invoice_id)
+          WHERE invoice_id = " . $this->db->escape($invoice_id)
         );
 
         $invoice_paid = $query->row()->invoice_provider_paid ? floatval($query->row()->invoice_provider_paid) : 0;
@@ -99,7 +97,7 @@ class Mdl_Invoice_Provider_Amounts extends CI_Model
             // Check if the invoice total is not zero or negative
             if ($invoice->invoice_total != 0 || $invoice_is_credit) {
                 $this->db->where('invoice_provider_id', $invoice_id);
-                $payment = $this->db->get('ip_payments')->row();
+                $payment = $this->db->get('ip_payments_provider')->row();
                 $payment_method_id = ($payment->payment_method_id ? $payment->payment_method_id : 0);
 
                 $this->db->where('invoice_provider_id', $invoice_id);

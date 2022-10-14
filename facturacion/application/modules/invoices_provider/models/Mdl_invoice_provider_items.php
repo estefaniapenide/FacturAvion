@@ -88,10 +88,6 @@ class Mdl_Invoice_Provider_Items extends Response_Model
                 'field' => 'item_date',
                 'label' => trans('item_date'),
             ],
-            'item_is_recurring' => [
-                'field' => 'item_is_recurring',
-                'label' => trans('recurring'),
-            ],
         ];
     }
 
@@ -105,10 +101,10 @@ class Mdl_Invoice_Provider_Items extends Response_Model
     {
         $id = parent::save($id, $db_array);
 
-        $this->load->model('invoices/mdl_invoice_provider_item_amounts');
+        $this->load->model('invoices_provider/mdl_invoice_provider_item_amounts');
         $this->mdl_invoice_provider_item_amounts->calculate($id);
 
-        $this->load->model('invoices/mdl_invoice_provider_amounts');
+        $this->load->model('invoices_provider/mdl_invoice_provider_amounts');
 
         if (is_object($db_array) && isset($db_array->invoice_id)) {
             $this->mdl_invoice_provider_amounts->calculate($db_array->invoice_provider_id);
@@ -146,7 +142,7 @@ class Mdl_Invoice_Provider_Items extends Response_Model
         $this->db->delete('ip_invoice_item_amounts');
 
         // Recalculate invoice amounts
-        $this->load->model('invoices/mdl_invoice_provider_amounts');
+        $this->load->model('invoices_providerxxº/mdl_invoice_provider_amounts');
         $this->mdl_invoice_provider_amounts->calculate($invoice_id);
 
         return true;

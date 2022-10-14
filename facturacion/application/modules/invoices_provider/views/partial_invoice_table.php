@@ -108,11 +108,11 @@
                                 </a>
                             </li>
                             <?php if (
-                                $invoice->invoice_status_id == 1 ||
+                                $invoice->invoice_provider_status_id == 1 ||
                                 ($this->config->item('enable_invoice_deletion') === true && $invoice->is_read_only != 1)
                             ) { ?>
                                 <li>
-                                    <form action="<?php echo site_url('invoices/delete/' . $invoice->invoice_provider_id); ?>"
+                                    <form action="<?php echo site_url('invoices_provider/delete/' . $invoice->invoice_provider_id); ?>"
                                           method="POST">
                                         <?php _csrf_field(); ?>
                                         <button type="submit" class="dropdown-button"

@@ -195,30 +195,6 @@
             </tr>
 
             <tr>
-                <?php if ($invoice->sumex_id == ""): ?>
-                    <td class="td-textarea">
-                        <div class="input-group">
-                            <span class="input-group-addon"><?php _trans('description'); ?></span>
-                            <textarea name="item_description"
-                                      class="input-sm form-control"
-                                <?php if ($invoice->is_read_only == 1) {
-                                    echo 'disabled="disabled"';
-                                } ?>><?php echo htmlsc($item->item_description); ?></textarea>
-                        </div>
-                    </td>
-                <?php else: ?>
-                    <td class="td-date">
-                        <div class="input-group">
-                            <span class="input-group-addon"><?php _trans('date'); ?></span>
-                            <input type="text" name="item_date" class="input-sm form-control datepicker"
-                                   value="<?php echo format_date($item->item_date); ?>"
-                                <?php if ($invoice->is_read_only == 1) {
-                                    echo 'disabled="disabled"';
-                                } ?>>
-                        </div>
-                    </td>
-                <?php endif; ?>
-
                 <td class="td-amount">
                     <div class="input-group">
                         <span class="input-group-addon"><?php _trans('product_unit'); ?></span>

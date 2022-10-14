@@ -20,7 +20,6 @@ class Ajax extends Admin_Controller
     public function add()
     {
         $this->load->model('payments_provider/mdl_payments_provider');
-
         if ($this->mdl_payments_provider->run_validation()) {
             $payment_id = $this->mdl_payments_provider->save();
 
@@ -53,7 +52,6 @@ class Ajax extends Admin_Controller
             'invoice_payment_method' => $this->input->post('invoice_payment_method'),
             'payment_cf_exist' => $this->input->post('payment_cf_exist')
         );
-
         $this->layout->load_view('payments_provider/modal_add_payment', $data);
     }
 

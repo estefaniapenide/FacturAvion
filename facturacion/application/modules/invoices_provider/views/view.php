@@ -20,7 +20,7 @@ $cv = $this->controller->view_data["custom_values"];
 
         $('.btn_add_task').click(function () {
             $('#modal-placeholder').load(
-                "<?php echo site_url('tasks/ajax/modal_task_lookups/' . $invoice_provider_id); ?>/" +
+                "<?php echo site_url('tasks/ajax/modal_task_lookups/' . $invoice_id); ?>/" +
                 Math.floor(Math.random() * 1000)
             );
         });
@@ -35,7 +35,7 @@ $cv = $this->controller->view_data["custom_values"];
 
         $('#invoice_change_provider').click(function () {
             $('#modal-placeholder').load("<?php echo site_url('invoices_provider/ajax/modal_change_provider'); ?>", {
-                invoice_provider_id: <?php echo $invoice_provider_id; ?>,
+                invoice_provider_id: <?php echo $invoice_id; ?>,
                 provider_id: "<?php echo $this->db->escape_str($invoice->provider_id); ?>",
             });
         });
@@ -55,8 +55,9 @@ $cv = $this->controller->view_data["custom_values"];
                 row['item_order'] = item_order;
                 item_order++;
                 items.push(row);
+                console.log("id",items);
             });
-            $.post("<?php echo site_url('invoices_provider/ajax/save'); ?>", {
+                    $.post("<?php echo site_url('invoices_provider/ajax/save'); ?>", {
                     invoice_provider_id: <?php echo $invoice_id; ?>,
                     invoice_provider_number: $('#invoice_provider_number').val(),
                     invoice_provider_date_created: $('#invoice_provider_date_created').val(),
@@ -70,16 +71,19 @@ $cv = $this->controller->view_data["custom_values"];
                     custom: $('input[name^=custom],select[name^=custom]').serializeArray(),
                     payment_method: $('#payment_method').val(),
                 },
+/*                 console.log("dato",$('#invoice_provider_discount_percent').val()),
+ */
                 function (data) {
-                    <?php echo(IP_DEBUG ? 'console.log(data);' : ''); ?>
-                    var response = JSON.parse(data);
-                    if (response.success === 1) {
+/*                     console.log('data', data);
+ */                    var response = JSON.parse(data);
+/*                     console.log('response', response);
+ */                    if (response.success === 1) {
                         window.location = "<?php echo site_url('invoices_provider/view'); ?>/" + <?php echo $invoice_id; ?>;
                     } else {
                         $('#fullpage-loader').hide();
                         $('.control-group').removeClass('has-error');
                         $('div.alert[class*="alert-"]').remove();
-                        var resp_errors = response.validation_errors,
+                        var resp_errors = response.validation_errors, 
                             all_resp_errors = '';
                         for (var key in resp_errors) {
                             $('#' + key).parent().addClass('has-error');
@@ -104,7 +108,6 @@ $cv = $this->controller->view_data["custom_values"];
                     'item_id': item_id,
                 },
                 function (data) {
-                    <?php echo(IP_DEBUG ? 'console.log(data);' : ''); ?>
                     var response = JSON.parse(data);
 
                     if (response.success === 1) {
@@ -187,16 +190,11 @@ if ($this->config->item('disable_read_only') == true) {
                         </a>
                     </li>
                 <?php } ?>
-                <li>
-                    <a href="#" id="btn_create_credit" data-invoice-id="<?php echo $invoice_id; ?>">
-                        <i class="fa fa-minus fa-margin"></i> <?php _trans('create_credit_invoice'); ?>
-                    </a>
-                </li>
                 <?php if ($invoice->invoice_balance != 0) : ?>
                     <li>
-                        <a href="#" class="invoice-add-payment"
+                        <a href="#" class="invoice-add-payment-provider"
                            data-invoice-id="<?php echo $invoice_id; ?>"
-                           data-invoice-balance="<?php echo $invoice->invoice_provider_balance; ?>"
+                           data-invoice-balance="<?php echo $invoice->invoice_balance; ?>"
                            data-invoice-payment-method="<?php echo $invoice->payment_method; ?>"
                            data-payment-cf-exist="<?php echo $payment_cf_exist; ?>">
                             <i class="fa fa-credit-card fa-margin"></i>
@@ -208,18 +206,12 @@ if ($this->config->item('disable_read_only') == true) {
                     <a href="#" id="btn_generate_pdf"
                        data-invoice-id="<?php echo $invoice_id; ?>">
                         <i class="fa fa-print fa-margin"></i>
-                        <?php _trans('download_pdf'); ?>
-                    </a>
-                </li>
-                <li>
-                    <a href="<?php echo site_url('mailer/invoice/' . $invoice->invoice_provider_id); ?>">
-                        <i class="fa fa-send fa-margin"></i>
-                        <?php _trans('send_email'); ?>
+                        <?php _trans('addpdf'); ?>
                     </a>
                 </li>
                 <li class="divider"></li>
                 <li>
-                    <a href="#" id="btn_copy_invoice"
+                    <a href="#" id="btn_copy_invoice_provider"
                        data-invoice-id="<?php echo $invoice_id; ?>">
                         <i class="fa fa-copy fa-margin"></i>
                         <?php _trans('copy_invoice'); ?>
@@ -447,7 +439,7 @@ if ($this->config->item('disable_read_only') == true) {
                 </div>
                 <div class="col-xs-12 col-md-6">
 
-                    <?php $this->layout->load_view('upload/dropzone-invoice-html'); ?>
+                    <?php $this->layout->load_view('upload_provider/dropzone-invoice-html'); ?>
 
                 </div>
             </div>
@@ -457,4 +449,4 @@ if ($this->config->item('disable_read_only') == true) {
     </div>
 </div>
 
-<?php $this->layout->load_view('upload/dropzone-invoice-scripts'); ?>
+<?php $this->layout->load_view('upload_provider/dropzone-invoice-scripts'); ?>

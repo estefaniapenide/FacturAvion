@@ -87,7 +87,7 @@ class Mdl_Invoices_Provider extends Response_Model
         return array(
             'provider_id' => array(
                 'field' => 'provider_id',
-                'label' => trans('client'),
+                'label' => trans('provider'),
                 'rules' => 'required'
             ),
             'invoice_provider_date_created' => array(
@@ -119,14 +119,14 @@ class Mdl_Invoices_Provider extends Response_Model
      */
     public function validation_rules_save_invoice()
     {
-        return array(
+        $array = array(
             'invoice_provider_number' => array(
                 'field' => 'invoice_provider_number',
                 'label' => trans('invoice_provider') . ' #',
                 'rules' => 'is_unique[ip_invoices_provider.invoice_provider_number' . (($this->id) ? '.invoice_provider_id.' . $this->id : '') . ']'
             ),
             'invoice_provider_date_created' => array(
-                'field' => 'invoices_provider_date_created',
+                'field' => 'invoice_provider_date_created',
                 'label' => trans('date'),
                 'rules' => 'required'
             ),
@@ -143,6 +143,7 @@ class Mdl_Invoices_Provider extends Response_Model
                 'label' => trans('invoice_password')
             )
         );
+        return $array;
     }
 
     /**
@@ -175,7 +176,6 @@ class Mdl_Invoices_Provider extends Response_Model
                 $this->db->insert('ip_invoice_provider_tax_rates', $db_array);
             }
         }
-
         return $invoice_id;
     }
 
@@ -191,8 +191,7 @@ class Mdl_Invoices_Provider extends Response_Model
         $this->load->model('invoices_provider/mdl_invoice_provider_tax_rates');
 
         // Copy the items
-        $invoice_items = $this->mdl_invoice_provider_items->where('invoices_provider_id', $source_id)->get()->result();
-
+        $invoice_items = $this->mdl_invoice_provider_items->where('invoice_provider_id', $source_id)->get()->result();
         foreach ($invoice_items as $invoice_item) {
             $db_array = array(
                 'invoice_provider_id' => $target_id,
@@ -205,11 +204,9 @@ class Mdl_Invoices_Provider extends Response_Model
                 'item_price' => $invoice_item->item_price,
                 'item_discount_amount' => $invoice_item->item_discount_amount,
                 'item_order' => $invoice_item->item_order,
-                'item_is_recurring' => $invoice_item->item_is_recurring,
                 'item_product_unit' => $invoice_item->item_product_unit,
                 'item_product_unit_id' => $invoice_item->item_product_unit_id,
             );
-
             if (!$copy_recurring_items_only) {
                 $this->mdl_invoice_provider_items->save(null, $db_array);
             }
@@ -231,7 +228,7 @@ class Mdl_Invoices_Provider extends Response_Model
 
         // Copy the custom fields
         $this->load->model('custom_fields/mdl_invoice_custom');
-        $custom_fields = $this->mdl_invoice_custom->where('invoice_provider_id', $source_id)->get()->result();
+        $custom_fields = $this->mdl_invoice_custom->where('invoice_id', $source_id)->get()->result();
 
         $form_data = array();
         foreach ($custom_fields as $field) {
@@ -264,7 +261,6 @@ class Mdl_Invoices_Provider extends Response_Model
                 'item_price' => $invoice_item->item_price,
                 'item_discount_amount' => $invoice_item->item_discount_amount,
                 'item_order' => $invoice_item->item_order,
-                'item_is_recurring' => $invoice_item->item_is_recurring,
                 'item_product_unit' => $invoice_item->item_product_unit,
                 'item_product_unit_id' => $invoice_item->item_product_unit_id,
             );
@@ -332,7 +328,7 @@ class Mdl_Invoices_Provider extends Response_Model
      */
     public function get_payments($invoice)
     {
-        $this->load->model('payments/mdl_payments');
+        $this->load->model('payments_provider/mdl_payments');
 
         $this->db->where('invoice_provider_id', $invoice->invoice_provider_id);
         $payment_results = $this->db->get('ip_payments');
@@ -375,7 +371,11 @@ class Mdl_Invoices_Provider extends Response_Model
         $this->load->helper('string');
         return random_string('alnum', 32);
     }
-
+    public function get_invoice_provider_group_id($invoice_id)
+    {
+        $invoice = $this->get_by_id($invoice_id);
+        return $invoice->invoice_group_id;
+    }
 
     /**
      * @param int $parent_invoice_id
@@ -513,7 +513,7 @@ class Mdl_Invoices_Provider extends Response_Model
      /**
      * @param $invoice_id
      */
-  /*  public function generate_invoice_number_if_applicable($invoice_id)
+   public function generate_invoice_number_if_applicable($invoice_id)
     {
         $invoice = $this->mdl_invoices->get_by_id($invoice_id);
 
@@ -530,6 +530,5 @@ class Mdl_Invoices_Provider extends Response_Model
                 }
             }
         }
-    } */
-
+    }
 }

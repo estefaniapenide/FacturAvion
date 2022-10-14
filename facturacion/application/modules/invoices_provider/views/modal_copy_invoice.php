@@ -23,8 +23,7 @@
                     <?php echo(IP_DEBUG ? 'console.log(data);' : ''); ?>
                     var response = JSON.parse(data);
                     if (response.success === 1) {
-                        window.location = "<?php echo site_url('invoices_provider/view'); ?>/" + response.invoice_provider_id;
-                    }
+                    window.location = "<?php echo site_url('invoices_provider/view'); ?>/" + response.invoice_id;                 }
                     else {
                         // The validation was not successful
                         $('.control-group').removeClass('has-error');
@@ -37,7 +36,6 @@
     });
 
 </script>
-
 <div id="modal_copy_invoice" class="modal modal-lg" role="dialog" aria-labelledby="modal_copy_invoice"
      aria-hidden="true">
     <form class="modal-content">
@@ -50,13 +48,12 @@
             <input type="hidden" name="user_id" id="user_id" class="form-control"
                    value="<?php echo $invoice->user_id; ?>">
             <input type="hidden" name="payment_method" id="payment_method" class="form-control"
-                   value="<?php echo $invoice->payment_method; ?>">
-
+            value="<?php echo $invoice->payment_method; ?>">
             <div class="form-group">
                 <label for="provider_id"><?php _trans('provider'); ?></label>
                 <select name="provider_id" id="provider_id" class="form-control" autofocus="autofocus">
                     <option value="<?php echo $invoice->provider_id; ?>">
-                        <?php echo format_client($invoice); ?>
+                        <?php echo $invoice->provider_name; ?>
                     </option>
                 </select>
             </div>
@@ -94,5 +91,4 @@
         </div>
 
     </form>
-
 </div>

@@ -10,17 +10,18 @@
         $(".simple-select").select2();
 
         $('#btn_modal_payment_submit').click(function () {
-            $.post("<?php echo site_url('payments_providers/ajax/add'); ?>", {
-                    invoice_provider_id: $('#invoice_id').val(),
-                    payment_provider_amount: $('#payment_amount').val(),
-                    payment_provider_method_id: $('#payment_method_id').val(),
-                    payment_provider_date: $('#payment_date').val(),
-                    payment_provider_note: $('#payment_note').val()
+            $.post("<?php echo site_url('payments_provider/ajax/add'); ?>", {
+                    invoice_id: $('#invoice_id').val(),
+                    payment_amount: $('#payment_amount').val(),
+                    payment_method_id: $('#payment_method_id').val(),
+                    payment_date: $('#payment_date').val(),
+                    payment_note: $('#payment_note').val()
                 },
                 function (data) {
                     <?php echo(IP_DEBUG ? 'console.log(data);' : ''); ?>
                     var response = JSON.parse(data);
-                    if (response.success === 1) {
+                    console.log("respuesta", response);
+                   if (response.success === 1) {
                         // The validation was successful and payment was added
                         if ($('#payment_cf_exist').val() === 'yes') {
                             // There are payment custom fields, display the payment form
@@ -29,7 +30,7 @@
 						}
 						else {
                             // There are no payment custom fields, return to invoice view
-							window.location = "<?php echo $_SERVER['HTTP_REFERER']; ?>";
+							window.location = "<?php echo site_url('invoices_provider/view'); ?>/" + invoice_id;
 						}
                     }
                     else {
@@ -45,6 +46,7 @@
         });
     });
 </script>
+
 <div id="enter-payment" class="modal col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2"
      role="dialog" aria-labelledby="modal_enter_payment" aria-hidden="true">
     <div class="modal-content">
