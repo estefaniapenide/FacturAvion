@@ -27,10 +27,10 @@ class Ajax extends Admin_Controller
         $this->load->model('units/mdl_units');
 
 
-        $invoice_id = $this->input->post('invoice_provider_id');
+        $invoice_id = $this->input->post('provider_id');
         $this->mdl_invoices_provider->set_id($invoice_id);
-/*         log_message('error',print_r($this->mdl_invoices_provider->run_validation('validation_rules_save_invoice'),true));
- */         if ($this->mdl_invoices_provider->run_validation('validation_rules_save_invoice')) {
+        log_message('error',print_r($this->mdl_invoices_provider->run_validation('validation_rules_save_invoice'),true));
+        if ($this->mdl_invoices_provider->run_validation('validation_rules_save_invoice')) {
             $items = json_decode($this->input->post('items'));
                 foreach ($items as $item) {
                 // Check if an item has either a quantity + price or name or description
@@ -88,8 +88,10 @@ class Ajax extends Admin_Controller
 
             // Generate new invoice number if needed
             $invoice_number = $this->input->post('invoice_provider_number');
+            log_message("error", "generate_invoice_number: ". $invoice_number);
             if (empty($invoice_number) && $invoice_status != 1) {
-                $invoice_group_id = $this->mdl_invoices_provider->get_invoice_provider_group_id($invoice_id);
+                $invoice_group_id = $this->mdl_invoices_provider->get_invoice_group_id($invoice_id);
+                log_message("error",print_r($invoice_group_id,true));
                 $invoice_number = $this->mdl_invoices_provider->get_invoice_number($invoice_group_id);
             }
 
@@ -189,7 +191,6 @@ class Ajax extends Admin_Controller
 
         if ($this->mdl_invoices_provider->run_validation()) {
             $invoice_id = $this->mdl_invoices_provider->create();
-
             $response = [
                 'success' => 1,
                 'invoice_id' => $invoice_id,
@@ -201,7 +202,6 @@ class Ajax extends Admin_Controller
                 'validation_errors' => json_errors(),
             ];
         }
-
         echo json_encode($response);
     }
 
@@ -217,10 +217,12 @@ class Ajax extends Admin_Controller
     public function modal_create_invoice()
     {
         $this->load->module('layout');
+        $this->load->model('invoice_groups/mdl_invoice_groups');
         $this->load->model('tax_rates/mdl_tax_rates');
         $this->load->model('providers/mdl_providers');
 
         $data = [
+            'invoice_groups' => $this->mdl_invoice_groups->get()->result(),
             'tax_rates' => $this->mdl_tax_rates->get()->result(),
             'provider' => $this->mdl_providers->get_by_id($this->input->post('provider_id')),
             'providers' => $this->mdl_providers->get_latest(),
@@ -250,9 +252,6 @@ class Ajax extends Admin_Controller
             'invoice_provider_id' => $this->input->post('invoice_provider_id'),
             'providers' => $this->mdl_providers->get_latest(),
         ];
-        echo '<pre>';
-        print_r($data);
-        echo '</pre>';
         $this->layout->load_view('invoices_provider/modal_change_provider', $data);
     }
 
@@ -298,6 +297,7 @@ class Ajax extends Admin_Controller
         $this->load->model('tax_rates/mdl_tax_rates');
 
         $data = [
+            'invoice_groups' => $this->mdl_invoice_groups->get()->result(),
             'tax_rates' => $this->mdl_tax_rates->get()->result(),
             'invoice_id' => $this->input->post('invoice_provider_id'),
             'invoice' => $this->mdl_invoices_provider->where('ip_invoices_provider.invoice_provider_id', $this->input->post('invoice_provider_id'))
@@ -345,7 +345,7 @@ class Ajax extends Admin_Controller
             'invoice_groups' => $this->mdl_invoice_groups->get()->result(),
             'tax_rates' => $this->mdl_tax_rates->get()->result(),
             'invoice_provider_id' => $this->input->post('invoice_provider_id'),
-            'invoice_provider' => $this->mdl_invoices_provider->where('ip_invoices_provider.invoice_provider_id', $this->input->post('invoice_provider_id'))
+            'invoice_provider' => $this->mdl_invoices_provider->where('ip_invoices_provider.invoice_provider_id', $this->input->post('invoice_id'))
                 ->get()
                 ->row(),
         ];

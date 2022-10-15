@@ -77,6 +77,18 @@
                        style="margin: 0 auto;" autocomplete="off">
             </div>
 
+            <div class="form-group">
+                <label for="invoice_group_id"><?php _trans('invoice_group'); ?>: </label>
+                <select name="invoice_group_id" id="invoice_group_id" class="form-control simple-select">
+                    <?php foreach ($invoice_groups as $invoice_group) { ?>
+                        <option value="<?php echo $invoice_group->invoice_group_id; ?>"
+                            <?php check_select(get_setting('default_invoice_group'), $invoice_group->invoice_group_id); ?>>
+                            <?php _htmlsc($invoice_group->invoice_group_name); ?>
+                        </option>
+                    <?php } ?>
+                </select>
+            </div>
+            
         </div>
 
         <div class="modal-footer">

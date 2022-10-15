@@ -140,7 +140,7 @@ class Mdl_Payments_provider extends Response_Model
 
         if ($paid >= $total) {
             $this->db->where('invoice_provider_id', $db_array['invoice_id']);
-            $this->db->set('invoice_status_id', 4);
+            $this->db->set('invoice_provider_status_id', 4);
             $this->db->update('ip_invoices_provider');
         }
 

@@ -312,6 +312,7 @@ if ($this->config->item('disable_read_only') == true) {
                                     <label><?php _trans('invoice_provider'); ?> #</label>
                                     <input type="text" id="invoice_provider_number" class="form-control input-sm"
                                         <?php if ($invoice->invoice_provider_number) : ?>
+                                            <?php log_message("error",print_r($invoice,true)); ?>
                                             value="<?php echo $invoice->invoice_provider_number; ?>"
                                         <?php else : ?>
                                             placeholder="<?php _trans('not_set'); ?>"

@@ -65,7 +65,7 @@ class Mdl_Invoice_Groups extends Response_Model
     public function generate_invoice_number($invoice_group_id, $set_next = true)
     {
         $invoice_group = $this->get_by_id($invoice_group_id);
-
+        log_message("error", "generate_invoice_number: ". $invoice_group);
         $invoice_identifier = $this->parse_identifier_format(
             $invoice_group->invoice_group_identifier_format,
             $invoice_group->invoice_group_next_id,

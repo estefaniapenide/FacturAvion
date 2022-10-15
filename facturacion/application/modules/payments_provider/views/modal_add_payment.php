@@ -30,7 +30,7 @@
 						}
 						else {
                             // There are no payment custom fields, return to invoice view
-							window.location = "<?php echo site_url('invoices_provider/view'); ?>/" + invoice_id;
+							window.location = "<?php echo site_url('invoices_provider/view'); ?>/" + $('#invoice_id').val();
 						}
                     }
                     else {

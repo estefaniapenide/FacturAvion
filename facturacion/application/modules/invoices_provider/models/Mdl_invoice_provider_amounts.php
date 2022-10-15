@@ -127,7 +127,7 @@ class Mdl_Invoice_Provider_Amounts extends CI_Model
     {
         $this->db->where('invoice_provider_id', $invoice_id);
         $invoice_data = $this->db->get('ip_invoices_provider')->row();
-
+        log_message("error","calcular descuento: " . print_r($invoice_data,true));
         $total = (float)number_format($invoice_total, 2, '.', '');
         $discount_amount = (float)number_format($invoice_data->invoice_provider_discount_amount, 2, '.', '');
         $discount_percent = (float)number_format($invoice_data->invoice_provider_discount_percent, 2, '.', '');

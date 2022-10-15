@@ -56,7 +56,19 @@
                        value="<?php echo get_setting('invoice_provider_pre_password') == '' ? '' : get_setting('invoice_provider_pre_password'); ?>"
                        style="margin: 0 auto;" autocomplete="off">
             </div>
-
+            <div>
+                <select name="invoice_group_id" id="invoice_group_id" class="hidden">
+                    <?php foreach ($invoice_groups as $invoice_group) { ?>
+                        <option value="<?php echo $invoice_group->invoice_group_id; ?>"
+                            <?php if (get_setting('default_invoice_group') == $invoice_group->invoice_group_id) {
+                                echo 'selected="selected"';
+                                $credit_invoice_group = htmlsc($invoice_group->invoice_group_name);
+                            } ?>>
+                            <?php echo $credit_invoice_group; ?>
+                        </option>
+                    <?php } ?>
+                </select>
+            </div>
             <p><strong><?php _trans('credit_invoice_details'); ?></strong></p>
 
             <ul>
