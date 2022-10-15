@@ -55,10 +55,9 @@ $cv = $this->controller->view_data["custom_values"];
                 row['item_order'] = item_order;
                 item_order++;
                 items.push(row);
-                console.log("id",items);
-            });
+                });
                     $.post("<?php echo site_url('invoices_provider/ajax/save'); ?>", {
-                    invoice_provider_id: <?php echo $invoice_id; ?>,
+                    provider_id: <?php echo $invoice_id; ?>,
                     invoice_provider_number: $('#invoice_provider_number').val(),
                     invoice_provider_date_created: $('#invoice_provider_date_created').val(),
                     invoice_provider_date_due: $('#invoice_provider_date_due').val(),
@@ -71,13 +70,9 @@ $cv = $this->controller->view_data["custom_values"];
                     custom: $('input[name^=custom],select[name^=custom]').serializeArray(),
                     payment_method: $('#payment_method').val(),
                 },
-/*                 console.log("dato",$('#invoice_provider_discount_percent').val()),
- */
                 function (data) {
-/*                     console.log('data', data);
- */                    var response = JSON.parse(data);
-/*                     console.log('response', response);
- */                    if (response.success === 1) {
+                    var response = JSON.parse(data);
+                    if (response.success === 1) {
                         window.location = "<?php echo site_url('invoices_provider/view'); ?>/" + <?php echo $invoice_id; ?>;
                     } else {
                         $('#fullpage-loader').hide();
@@ -312,7 +307,6 @@ if ($this->config->item('disable_read_only') == true) {
                                     <label><?php _trans('invoice_provider'); ?> #</label>
                                     <input type="text" id="invoice_provider_number" class="form-control input-sm"
                                         <?php if ($invoice->invoice_provider_number) : ?>
-                                            <?php log_message("error",print_r($invoice,true)); ?>
                                             value="<?php echo $invoice->invoice_provider_number; ?>"
                                         <?php else : ?>
                                             placeholder="<?php _trans('not_set'); ?>"

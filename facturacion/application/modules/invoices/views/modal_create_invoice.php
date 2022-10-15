@@ -45,7 +45,7 @@
                     var response = JSON.parse(data);
                     if (response.success === 1) {
                         // The validation was successful and invoice was created
-                        window.location = "<?php echo site_url('invoices/view'); ?>/" + response.invoice_id;
+                       window.location = "<?php echo site_url('invoices/view'); ?>/" + response.invoice_id;
                     }
                     else {
                         // The validation was not successful
@@ -116,7 +116,7 @@
                 <select name="invoice_group_id" id="invoice_group_id"
                 	class="form-control simple-select" data-minimum-results-for-search="Infinity">
                     <?php foreach ($invoice_groups as $invoice_group) { ?>
-                        <option value="<?php echo $invoice_group->invoice_group_id;?>"
+                        <option value="<?php echo $invoice_group->invoice_group_id; ?>"
                                 <?php if (get_setting('default_invoice_group') == $invoice_group->invoice_group_id) { ?>selected="selected"<?php } ?>>
                             <?php _htmlsc($invoice_group->invoice_group_name); ?>
                         </option>

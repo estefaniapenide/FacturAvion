@@ -228,7 +228,7 @@ class Invoices_provider extends Admin_Controller
     {
         // Get the status of the invoice
         $invoice = $this->mdl_invoices_provider->get_by_id($invoice_id);
-        $invoice_status = $invoice->invoice_status_id;
+        $invoice_status = $invoice->invoice_provider_status_id;
 
         if ($invoice_status == 1 || $this->config->item('enable_invoice_deletion') === true) {
             // If invoice refers to tasks, mark those tasks back to 'Complete'

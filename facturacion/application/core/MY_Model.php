@@ -281,7 +281,6 @@ class MY_Model extends CI_Model
             }
 
             $this->db->insert($this->table, $db_array);
-
             return $this->db->insert_id();
 
         } else {
@@ -317,7 +316,6 @@ class MY_Model extends CI_Model
                 $db_array[$key] = $value;
             }
         }
-
         return $db_array;
     }
 

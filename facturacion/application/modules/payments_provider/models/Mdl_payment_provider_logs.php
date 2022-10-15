@@ -17,14 +17,12 @@ class Mdl_Payment_provider_Logs extends Response_Model
 {
     public $table = 'ip_merchant_responses';
     public $primary_key = 'ip_merchant_responses.merchant_response_id';
-
     public function default_select()
     {
         $this->db->select("
             ip_invoices_provider.invoice_provider_number,
             ip_merchant_responses.*", false);
     }
-
     public function default_order_by()
     {
         $this->db->order_by('ip_merchant_responses.merchant_response_id DESC');

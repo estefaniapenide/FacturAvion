@@ -169,7 +169,7 @@ class Mdl_Payments_provider extends Response_Model
     public function delete($id = null)
     {
         // Get the invoice id before deleting payment
-        $this->db->select('invoice_provider_id');
+        $this->db->select('invoice_id');
         $this->db->where('payment_provider_id', $id);
         $invoice_id = $this->db->get('ip_payments_provider')->row()->invoice_id;
 

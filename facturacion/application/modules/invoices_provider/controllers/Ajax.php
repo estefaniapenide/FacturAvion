@@ -29,7 +29,6 @@ class Ajax extends Admin_Controller
 
         $invoice_id = $this->input->post('provider_id');
         $this->mdl_invoices_provider->set_id($invoice_id);
-        log_message('error',print_r($this->mdl_invoices_provider->run_validation('validation_rules_save_invoice'),true));
         if ($this->mdl_invoices_provider->run_validation('validation_rules_save_invoice')) {
             $items = json_decode($this->input->post('items'));
                 foreach ($items as $item) {
@@ -73,7 +72,6 @@ class Ajax extends Admin_Controller
             }
 
             $invoice_status = $this->input->post('invoice_provider_status_id');
-
             if ($this->input->post('invoice_provider_discount_amount') === '') {
                 $invoice_discount_amount = floatval(0);
             } else {
@@ -88,10 +86,8 @@ class Ajax extends Admin_Controller
 
             // Generate new invoice number if needed
             $invoice_number = $this->input->post('invoice_provider_number');
-            log_message("error", "generate_invoice_number: ". $invoice_number);
             if (empty($invoice_number) && $invoice_status != 1) {
                 $invoice_group_id = $this->mdl_invoices_provider->get_invoice_group_id($invoice_id);
-                log_message("error",print_r($invoice_group_id,true));
                 $invoice_number = $this->mdl_invoices_provider->get_invoice_number($invoice_group_id);
             }
 
@@ -116,7 +112,6 @@ class Ajax extends Admin_Controller
             // Recalculate for discounts
             $this->load->model('invoices_provider/mdl_invoice_provider_amounts');
             $this->mdl_invoice_provider_amounts->calculate($invoice_id);
-
             $response = [
                 'success' => 1,
             ];
@@ -161,7 +156,6 @@ class Ajax extends Admin_Controller
                 exit;
             }
         }
-
         echo json_encode($response);
     }
 
@@ -202,7 +196,6 @@ class Ajax extends Admin_Controller
                 'validation_errors' => json_errors(),
             ];
         }
-        //log_message("error", print_r($response,true));
         echo json_encode($response);
     }
 

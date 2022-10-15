@@ -35,22 +35,19 @@
             $.post("<?php echo site_url('invoices_provider/ajax/create'); ?>", {
                     provider_id: $('#create_invoice_provider_id').val(),
                     invoice_provider_date_created: $('#invoice_provider_date_created').val(),
-                    invoice_group_id: $('#invoice_group_id').val(),
+                    invoice_group_id: $('#id_grupo_facturas_proveedor').val(),
                     invoice_provider_time_created: '<?php echo date('H:i:s') ?>',
                     invoice_provider_password: $('#invoice_provider_password').val(),
                     user_id: '<?php echo $this->session->userdata('user_id'); ?>',
                     payment_method: $('#payment_method_id').val()
                 },
-
-
-                //console.log("aqui en javascript",provider_id),
-
                 function (data) {
                     <?php echo(IP_DEBUG ? 'console.log(data);' : ''); ?>
                     var response = JSON.parse(data);
                     if (response.success === 1) {
                         // The validation was successful and invoice was created
-                        //window.location = "<?php echo site_url('invoices_provider/view'); ?>/" + response.invoice_id;
+                        window.location = "<?php echo site_url('invoices_provider/view'); ?>/" + response.invoice_id;
+
                     }
                     else {
                         // The validation was not successful
@@ -76,6 +73,8 @@
 
             <input class="hidden" id="payment_method_id"
                    value="<?php echo get_setting('invoice_default_payment_method'); ?>">
+            <input class="hidden" id="id_grupo_facturas_proveedor"
+                   value="2">
 
             <input class="hidden" id="input_permissive_search_providers"
                    value="<?php echo get_setting('enable_permissive_search_providers'); ?>">
@@ -115,18 +114,6 @@
                        value="<?php echo get_setting('invoice_provider_pre_password') == '' ? '' : get_setting('invoice_provider_pre_password'); ?>"
                        style="margin: 0 auto;" autocomplete="off">
             </div>
-
-            <div class="form-group">
-                <label for="invoice_group_id"><?php _trans('invoice_group'); ?></label>
-                <select name="invoice_group_id" id="invoice_group_id"
-                	class="form-control simple-select" data-minimum-results-for-search="Infinity">
-                        <option value="2">
-                            <?php echo "Invoice Provider"; ?>
-                        </option>
-                </select>
-            </div>
-
-
         </div>
 
         <div class="modal-footer">

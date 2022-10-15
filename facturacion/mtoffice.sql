@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 15-10-2022 a las 09:56:28
+-- Tiempo de generación: 15-10-2022 a las 19:38:39
 -- Versión del servidor: 5.7.33-0ubuntu0.16.04.1
 -- Versión de PHP: 7.0.33-0ubuntu0.16.04.16
 
@@ -241,7 +241,12 @@ INSERT INTO `ip_invoices` (`invoice_id`, `user_id`, `client_id`, `invoice_group_
 (7, 3, 2, 3, 1, NULL, '', '2022-10-14', '12:03:29', '2022-10-14 12:03:39', '2022-11-13', '7', NULL, NULL, '', 'TFB2J8Khlm0t1Rcbk3s7MLVWGrwaAPeX', 2, NULL),
 (8, 3, 2, 3, 1, NULL, '', '2022-10-14', '13:51:06', '2022-10-14 13:51:09', '2022-11-13', '8', NULL, NULL, '', 'EquJvPFai19re7nUCNKxpTlVLDAyzZjS', 2, NULL),
 (9, 3, 2, 3, 1, NULL, '', '2022-10-14', '14:20:43', '2022-10-14 19:23:17', '2022-11-13', '10', '0.00', '0.00', '', 'ZLQzIelywj20Xmhiqc1DruJpoC3UNRsx', 2, NULL),
-(10, 2, 2, 0, 1, NULL, '', '2022-10-15', '00:39:32', '2022-10-15 00:39:51', '2022-11-14', '10', NULL, NULL, '', 'wiI53L1uRhWdYrQT7JUtEm0aMDxXeZsj', 0, NULL);
+(10, 2, 2, 0, 1, NULL, '', '2022-10-15', '00:39:32', '2022-10-15 00:39:51', '2022-11-14', '10', NULL, NULL, '', 'wiI53L1uRhWdYrQT7JUtEm0aMDxXeZsj', 0, NULL),
+(11, 2, 2, 0, 1, NULL, '', '2022-10-15', '17:08:51', '2022-10-15 17:08:59', '2022-11-14', '11', NULL, NULL, '', 'ZibTEGVMkao2j9g6xuNs7BdLlvnOtc5A', 0, NULL),
+(12, 2, 2, 0, 1, NULL, '', '2022-10-15', '17:27:01', '2022-10-15 17:27:19', '2022-11-14', '12', NULL, NULL, '', 'oLWOjD4uEyis6pS2JGQzY3K8tXed7g5U', 0, NULL),
+(13, 2, 2, 2, 1, NULL, '', '2022-10-15', '17:30:15', '2022-10-15 17:30:21', '2022-11-14', '35', NULL, NULL, '', 'E9ZNgb5OQXu60d1wpmJAV8vjRHGnFLlr', 0, NULL),
+(14, 2, 2, 2, 1, NULL, '', '2022-10-15', '17:31:05', '2022-10-15 17:31:10', '2022-11-14', '36', NULL, NULL, '', '9OVF701kU83iLstCRnNmzcDrvdpShqHx', 0, NULL),
+(15, 2, 2, 0, 1, NULL, '', '2022-10-15', '18:28:28', '2022-10-15 18:28:40', '2022-11-14', '1311', '0.00', '0.00', '', 'ApRuFq4DXZIGMjks6TelWCJcow0iOdEt', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -276,8 +281,8 @@ CREATE TABLE `ip_invoices_provider` (
 --
 
 INSERT INTO `ip_invoices_provider` (`invoice_provider_id`, `user_id`, `provider_id`, `invoice_group_id`, `invoice_provider_status_id`, `is_read_only`, `invoice_provider_password`, `invoice_provider_date_created`, `invoice_provider_date_modified`, `invoice_provider_date_due`, `invoice_provider_number`, `invoice_provider_discount_amount`, `invoice_provider_discount_percent`, `invoice_provider_terms`, `invoice_provider_url_key`, `payment_method`, `creditinvoice_parent_id`, `invoice_provider_pdf`) VALUES
-(1, 2, 11, 0, 1, NULL, NULL, '2022-10-15', '2022-10-15 01:59:51', '2022-11-14', '1', NULL, NULL, '', 'PRgfZaSCdkYvtK7jMGQio81r4N0TxOuX', 0, NULL, NULL),
-(3, 2, 11, 0, 1, NULL, NULL, '2022-10-15', '2022-10-15 09:53:48', '2022-11-14', '1', NULL, NULL, '', 'cpAKlTizq0LhnMvykuGP7IRf6mt8UadO', 0, NULL, NULL);
+(54, 2, 11, 2, 4, 1, '', '2022-10-15', '2022-10-15 19:38:11', '2022-11-14', '49', '0.00', '0.00', '', 'YmOHcGET1jpZQk8fqvKzLBNdo6PM72a9', 0, NULL, NULL),
+(53, 2, 11, 2, 4, 1, '', '2022-10-15', '2022-10-15 19:36:58', '2022-11-14', '48', '0.00', '0.00', '', 'QK6Bkp1SficUDoNeMZPG4gCr7wqvIElx', 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -325,7 +330,12 @@ INSERT INTO `ip_invoice_amounts` (`invoice_amount_id`, `invoice_id`, `invoice_si
 (7, 7, '1', '50.00', '10.50', '-11.50', '49.00', '0.00', '49.00'),
 (8, 8, '1', '50.00', '10.50', '-11.50', '49.00', '0.00', '49.00'),
 (9, 9, '1', '50.00', '10.50', '-11.50', '49.00', '0.00', '49.00'),
-(10, 10, '1', NULL, NULL, NULL, NULL, NULL, NULL);
+(10, 10, '1', NULL, NULL, NULL, NULL, NULL, NULL),
+(11, 11, '1', NULL, NULL, NULL, NULL, NULL, NULL),
+(12, 12, '1', NULL, NULL, NULL, NULL, NULL, NULL),
+(13, 13, '1', NULL, NULL, NULL, NULL, NULL, NULL),
+(14, 14, '1', NULL, NULL, NULL, NULL, NULL, NULL),
+(15, 15, '1', '0.00', NULL, '0.00', '0.00', '0.00', '0.00');
 
 -- --------------------------------------------------------
 
@@ -361,8 +371,9 @@ CREATE TABLE `ip_invoice_groups` (
 --
 
 INSERT INTO `ip_invoice_groups` (`invoice_group_id`, `invoice_group_name`, `invoice_group_identifier_format`, `invoice_group_next_id`, `invoice_group_left_pad`) VALUES
-(0, 'Invoice Default', '{{{id}}}', 11, 0),
-(1, 'Quote Default', 'QUO{{{id}}}', 3, 0);
+(0, 'Invoice Default', '{{{id}}}', 14, 0),
+(1, 'Quote Default', 'QUO{{{id}}}', 3, 0),
+(2, 'facturas proveedor', '{{{id}}}', 50, 0);
 
 -- --------------------------------------------------------
 
@@ -456,8 +467,8 @@ CREATE TABLE `ip_invoice_provider_amounts` (
 --
 
 INSERT INTO `ip_invoice_provider_amounts` (`invoice_provider_amount_id`, `invoice_provider_id`, `invoice_provider_sign`, `invoice_provider_item_subtotal`, `invoice_provider_item_tax_total`, `invoice_provider_tax_total`, `invoice_provider_total`, `invoice_provider_paid`, `invoice_provider_balance`) VALUES
-(65, 3, '1', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00'),
-(64, 1, '1', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00');
+(110, 54, '1', '2.00', '0.42', '0.00', '2.42', '2.42', '0.00'),
+(109, 53, '1', '470.00', '98.70', '0.00', '568.70', '568.70', '0.00');
 
 -- --------------------------------------------------------
 
@@ -498,6 +509,18 @@ CREATE TABLE `ip_invoice_provider_items` (
   `item_date` date DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `ip_invoice_provider_items`
+--
+
+INSERT INTO `ip_invoice_provider_items` (`item_id`, `invoice_provider_id`, `item_tax_rate_id`, `item_product_id`, `item_date_added`, `item_task_id`, `item_name`, `item_description`, `item_quantity`, `item_price`, `item_discount_amount`, `item_order`, `item_product_unit`, `item_product_unit_id`, `item_date`) VALUES
+(5, 53, 1, 3, '2022-10-15', NULL, 'Garaje', NULL, '1.00', '100.00', NULL, 2, 'mensual', 1, NULL),
+(4, 53, 1, 1, '2022-10-15', NULL, 'boligrafo BIC', NULL, '5.00', '23.00', NULL, 1, NULL, NULL, NULL),
+(6, 53, 1, 2, '2022-10-15', NULL, '100 folios DIN-A4', NULL, '1.00', '1.00', NULL, 3, NULL, NULL, NULL),
+(7, 53, 1, 1, '2022-10-15', NULL, 'boligrafo BIC', NULL, '122.00', '2.00', NULL, 4, NULL, NULL, NULL),
+(8, 53, 1, 2, '2022-10-15', NULL, '100 folios DIN-A4', NULL, '10.00', '1.00', NULL, 5, NULL, NULL, NULL),
+(9, 54, 1, 1, '2022-10-15', NULL, 'boligrafo BIC', NULL, '1.00', '2.00', NULL, 1, NULL, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -513,6 +536,18 @@ CREATE TABLE `ip_invoice_provider_item_amounts` (
   `item_discount` decimal(20,2) DEFAULT NULL,
   `item_total` decimal(20,2) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `ip_invoice_provider_item_amounts`
+--
+
+INSERT INTO `ip_invoice_provider_item_amounts` (`item_amount_id`, `item_id`, `item_subtotal`, `item_tax_total`, `item_discount`, `item_total`) VALUES
+(6, 6, '1.00', '0.21', '0.00', '1.21'),
+(5, 5, '100.00', '21.00', '0.00', '121.00'),
+(4, 4, '115.00', '24.15', '0.00', '139.15'),
+(7, 7, '244.00', '51.24', '0.00', '295.24'),
+(8, 8, '10.00', '2.10', '0.00', '12.10'),
+(9, 9, '2.00', '0.42', '0.00', '2.42');
 
 -- --------------------------------------------------------
 
@@ -651,16 +686,15 @@ CREATE TABLE `ip_payments_provider` (
 --
 
 INSERT INTO `ip_payments_provider` (`payment_id`, `invoice_id`, `payment_method_id`, `payment_date`, `payment_amount`, `payment_note`) VALUES
-(3, 1, 1, '2022-10-14', '21.84', 'ASDSADSADSA'),
-(4, 1, 1, '2022-10-14', '21.84', 'sadsadsadsadsa'),
-(5, 1, 1, '2022-10-14', '-21.84', 'sdsadsa'),
-(6, 1, 1, '2022-10-14', '21.84', 'asdsadsadas'),
-(7, 1, 1, '2022-10-14', '21.84', 'sadsadsadsad'),
-(8, 1, 1, '2022-10-14', '1.00', 'asd'),
-(9, 1, 1, '2022-10-14', '21.84', 'asdasdsadsada'),
-(10, 1, 1, '2022-10-14', '21.84', 'asdasdasda'),
-(11, 1, 1, '2022-10-14', '-88.36', 'asdsadsa'),
-(12, 41, 1, '2022-10-14', '23.65', 'sadsadsada');
+(20, 53, 1, '2022-10-15', '121.00', 'asdsadas'),
+(19, 53, 1, '2022-10-15', '66.55', 'adsdsadasd'),
+(18, 53, 0, '2022-10-15', '7.26', ''),
+(17, 53, 0, '2022-10-15', '2.42', 'asdsadsa'),
+(16, 53, 0, '2022-10-15', '292.82', 'asdsada'),
+(15, 53, 0, '2022-10-15', '12.10', 'pagado ota vez'),
+(14, 53, 0, '2022-10-15', '2.42', 'pagado de nuevo'),
+(13, 53, 1, '2022-10-15', '64.13', 'pagado'),
+(21, 54, 0, '2022-10-15', '2.42', '');
 
 -- --------------------------------------------------------
 
@@ -1231,7 +1265,7 @@ INSERT INTO `ip_settings` (`setting_id`, `setting_key`, `setting_value`) VALUES
 (255, 'gateway_worldpay_currency', 'AUD'),
 (256, 'gateway_worldpay_payment_method', ''),
 (257, 'smtp_password', 'Lo6MkH4WuO57W1GH9sKxu0+hsV1gZXvcQR8vo8HxEbz3YHvRxfRCLErx'),
-(258, 'enable_permissive_search_clients', '0'),
+(258, 'enable_permissive_search_clients', '1'),
 (259, 'enable_permissive_search_providers', '1');
 
 -- --------------------------------------------------------
@@ -1333,6 +1367,13 @@ CREATE TABLE `ip_uploads_provider` (
   `file_name_new` longtext NOT NULL,
   `uploaded_date` date NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `ip_uploads_provider`
+--
+
+INSERT INTO `ip_uploads_provider` (`upload_id`, `provider_id`, `url_key`, `file_name_original`, `file_name_new`, `uploaded_date`) VALUES
+(6, 11, 'QK6Bkp1SficUDoNeMZPG4gCr7wqvIElx', 'aaxc.txt', 'QK6Bkp1SficUDoNeMZPG4gCr7wqvIElx_aaxc.txt', '2022-10-15');
 
 -- --------------------------------------------------------
 
@@ -1906,12 +1947,12 @@ ALTER TABLE `ip_import_details`
 -- AUTO_INCREMENT de la tabla `ip_invoices`
 --
 ALTER TABLE `ip_invoices`
-  MODIFY `invoice_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `invoice_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT de la tabla `ip_invoices_provider`
 --
 ALTER TABLE `ip_invoices_provider`
-  MODIFY `invoice_provider_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `invoice_provider_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 --
 -- AUTO_INCREMENT de la tabla `ip_invoices_recurring`
 --
@@ -1921,7 +1962,7 @@ ALTER TABLE `ip_invoices_recurring`
 -- AUTO_INCREMENT de la tabla `ip_invoice_amounts`
 --
 ALTER TABLE `ip_invoice_amounts`
-  MODIFY `invoice_amount_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `invoice_amount_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT de la tabla `ip_invoice_custom`
 --
@@ -1931,7 +1972,7 @@ ALTER TABLE `ip_invoice_custom`
 -- AUTO_INCREMENT de la tabla `ip_invoice_groups`
 --
 ALTER TABLE `ip_invoice_groups`
-  MODIFY `invoice_group_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `invoice_group_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `ip_invoice_items`
 --
@@ -1946,7 +1987,7 @@ ALTER TABLE `ip_invoice_item_amounts`
 -- AUTO_INCREMENT de la tabla `ip_invoice_provider_amounts`
 --
 ALTER TABLE `ip_invoice_provider_amounts`
-  MODIFY `invoice_provider_amount_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `invoice_provider_amount_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
 --
 -- AUTO_INCREMENT de la tabla `ip_invoice_provider_custom`
 --
@@ -1956,12 +1997,12 @@ ALTER TABLE `ip_invoice_provider_custom`
 -- AUTO_INCREMENT de la tabla `ip_invoice_provider_items`
 --
 ALTER TABLE `ip_invoice_provider_items`
-  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT de la tabla `ip_invoice_provider_item_amounts`
 --
 ALTER TABLE `ip_invoice_provider_item_amounts`
-  MODIFY `item_amount_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `item_amount_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT de la tabla `ip_invoice_provider_tax_rates`
 --
@@ -1996,7 +2037,7 @@ ALTER TABLE `ip_payments`
 -- AUTO_INCREMENT de la tabla `ip_payments_provider`
 --
 ALTER TABLE `ip_payments_provider`
-  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT de la tabla `ip_payment_custom`
 --
@@ -2091,7 +2132,7 @@ ALTER TABLE `ip_uploads`
 -- AUTO_INCREMENT de la tabla `ip_uploads_provider`
 --
 ALTER TABLE `ip_uploads_provider`
-  MODIFY `upload_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `upload_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `ip_users`
 --

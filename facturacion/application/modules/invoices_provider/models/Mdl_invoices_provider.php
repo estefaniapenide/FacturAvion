@@ -158,7 +158,6 @@ class Mdl_Invoices_Provider extends Response_Model
      */
     public function create($db_array = null, $include_invoice_tax_rates = true)
     {
-
         $invoice_id = parent::save(null, $db_array);
         $inv = $this->where('ip_invoices_provider.invoice_provider_id', $invoice_id)->get()->row();
         $invoice_group = $inv->invoice_group_id;
@@ -192,7 +191,6 @@ class Mdl_Invoices_Provider extends Response_Model
                 $this->db->insert('ip_invoice_sumex', $db_array);
             }
         } */
-
         return $invoice_id;
     }
 
@@ -336,9 +334,9 @@ class Mdl_Invoices_Provider extends Response_Model
         if ($db_array['invoice_provider_status_id'] === 1 && $generate_invoice_number == 1) {
             $db_array['invoice_provider_number'] = $this->get_invoice_number($db_array['invoice_group_id']);
         } elseif ($db_array['invoice_provider_status_id'] != 1) {
-            $db_array['invoice_number'] = $this->get_invoice_number($db_array['invoice_group_id']);
+            $db_array['invoice_provider_number'] = $this->get_invoice_number($db_array['invoice_group_id']);
         } else {
-            $db_array['invoice_number'] = '';
+            $db_array['invoice_provider_number'] = '';
         }
 
         // Set default values
@@ -346,7 +344,6 @@ class Mdl_Invoices_Provider extends Response_Model
 
         // Generate the unique url key
         $db_array['invoice_provider_url_key'] = $this->get_url_key();
-
 
         return $db_array;
     }
@@ -395,7 +392,6 @@ class Mdl_Invoices_Provider extends Response_Model
      */
     public function get_invoice_number($invoice_group_id)
     {
-        log_message("error", "entró en mdl_invoices_provider/get_invoice_number");
         $this->load->model('invoice_groups/mdl_invoice_groups');
         return $this->mdl_invoice_groups->generate_invoice_number($invoice_group_id);
     }

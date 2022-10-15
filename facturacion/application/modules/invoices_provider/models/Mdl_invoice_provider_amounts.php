@@ -96,7 +96,7 @@ class Mdl_Invoice_Provider_Amounts extends CI_Model
         if ($invoice->invoice_balance == 0) {
             // Check if the invoice total is not zero or negative
             if ($invoice->invoice_total != 0 || $invoice_is_credit) {
-                $this->db->where('invoice_provider_id', $invoice_id);
+                $this->db->where('invoice_id', $invoice_id);
                 $payment = $this->db->get('ip_payments_provider')->row();
                 $payment_method_id = ($payment->payment_method_id ? $payment->payment_method_id : 0);
 
@@ -108,7 +108,7 @@ class Mdl_Invoice_Provider_Amounts extends CI_Model
                 // Set to read-only if applicable
                 if (
                     $this->config->item('disable_read_only') == false
-                    && $invoice->invoice_status_id == get_setting('read_only_toggle')
+                    && $invoice->invoice_provider_status_id == get_setting('read_only_toggle')
                 ) {
                     $this->db->where('invoice_provider_id', $invoice_id);
                     $this->db->set('is_read_only', 1);
@@ -127,7 +127,6 @@ class Mdl_Invoice_Provider_Amounts extends CI_Model
     {
         $this->db->where('invoice_provider_id', $invoice_id);
         $invoice_data = $this->db->get('ip_invoices_provider')->row();
-        log_message("error","calcular descuento: " . print_r($invoice_data,true));
         $total = (float)number_format($invoice_total, 2, '.', '');
         $discount_amount = (float)number_format($invoice_data->invoice_provider_discount_amount, 2, '.', '');
         $discount_percent = (float)number_format($invoice_data->invoice_provider_discount_percent, 2, '.', '');

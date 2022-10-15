@@ -33,7 +33,6 @@ class Response_Model extends Form_Validation_Model
             $this->session->set_flashdata('alert_success', trans('record_successfully_created'));
             $id = parent::save(null, $db_array);
         }
-
         return $id;
     }
 
