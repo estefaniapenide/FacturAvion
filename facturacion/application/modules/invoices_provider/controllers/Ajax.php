@@ -202,6 +202,7 @@ class Ajax extends Admin_Controller
                 'validation_errors' => json_errors(),
             ];
         }
+        //log_message("error", print_r($response,true));
         echo json_encode($response);
     }
 

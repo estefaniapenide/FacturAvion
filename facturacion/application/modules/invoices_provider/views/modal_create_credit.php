@@ -6,6 +6,7 @@
                     invoice_provider_id: <?php echo $invoice_id; ?>,
                     provider_id: $('#provider_id').val(),
                     invoice_provider_date_created: $('#invoice_provider_date_created').val(),
+                    invoice_group_id: $('#invoice_group_id').val(),
                     invoice_provider_time_created: '<?php echo date('H:i:s') ?>',
                     invoice_provider_password: $('#invoice_provider_password').val(),
                     user_id: $('#user_id').val()
@@ -59,12 +60,8 @@
             <div>
                 <select name="invoice_group_id" id="invoice_group_id" class="hidden">
                     <?php foreach ($invoice_groups as $invoice_group) { ?>
-                        <option value="<?php echo $invoice_group->invoice_group_id; ?>"
-                            <?php if (get_setting('default_invoice_group') == $invoice_group->invoice_group_id) {
-                                echo 'selected="selected"';
-                                $credit_invoice_group = htmlsc($invoice_group->invoice_group_name);
-                            } ?>>
-                            <?php echo $credit_invoice_group; ?>
+                        <option value="2">
+                            <?php echo "Invoice Provider"; ?>
                         </option>
                     <?php } ?>
                 </select>

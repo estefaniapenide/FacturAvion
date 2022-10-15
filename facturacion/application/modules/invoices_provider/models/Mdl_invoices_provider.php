@@ -34,7 +34,7 @@ class Mdl_Invoices_Provider extends Response_Model
                 'label' => trans('sent'),
                 'class' => 'sent',
                 'href' => 'invoices_provider/status/sent'
-            ),  
+            ),
             '3' => array(
                 'label' => trans('viewed'),
                 'class' => 'viewed',
@@ -180,7 +180,8 @@ class Mdl_Invoices_Provider extends Response_Model
                 $this->db->insert('ip_invoice_provider_tax_rates', $db_array);
             }
         }
-        if($invoice_group !== '0') {
+
+/*         if($invoice_group !== '0') {
             $this->load->model('invoice_groups/mdl_invoice_groups');
             $invgroup = $this->mdl_invoice_groups->where('invoice_group_id', $invoice_group)->get()->row();
             if (preg_match("/sumex/i", $invgroup->invoice_group_name)) {
@@ -190,7 +191,8 @@ class Mdl_Invoices_Provider extends Response_Model
                 );
                 $this->db->insert('ip_invoice_sumex', $db_array);
             }
-        }
+        } */
+
         return $invoice_id;
     }
 
@@ -314,8 +316,11 @@ class Mdl_Invoices_Provider extends Response_Model
     {
         $db_array = parent::db_array();
 
-        // Get the client id for the submitted invoice
+        // Get the provider id for the submitted invoice
         $this->load->model('providers/mdl_providers');
+
+         // Check if is SUMEX
+         $this->load->model('invoice_groups/mdl_invoice_groups');
 
 
         $db_array['invoice_provider_date_created'] = date_to_mysql($db_array['invoice_provider_date_created']);
@@ -326,13 +331,22 @@ class Mdl_Invoices_Provider extends Response_Model
             $db_array['invoice_provider_status_id'] = 1;
         }
 
-        $db_array['invoice_provider_number']=get_setting('generate_invoice_number_for_draft');
+        $generate_invoice_number = get_setting('generate_invoice_number_for_draft');
+
+        if ($db_array['invoice_provider_status_id'] === 1 && $generate_invoice_number == 1) {
+            $db_array['invoice_provider_number'] = $this->get_invoice_number($db_array['invoice_group_id']);
+        } elseif ($db_array['invoice_provider_status_id'] != 1) {
+            $db_array['invoice_number'] = $this->get_invoice_number($db_array['invoice_group_id']);
+        } else {
+            $db_array['invoice_number'] = '';
+        }
 
         // Set default values
         $db_array['payment_method'] = (empty($db_array['payment_method']) ? 0 : $db_array['payment_method']);
 
         // Generate the unique url key
         $db_array['invoice_provider_url_key'] = $this->get_url_key();
+
 
         return $db_array;
     }
@@ -368,14 +382,20 @@ class Mdl_Invoices_Provider extends Response_Model
         return $invoice_date_due->format('Y-m-d');
     }
 
+    public function set_next_invoice_number($invoice_group_id)
+    {
+        $this->db->where($this->primary_key, $invoice_group_id);
+        $this->db->set('invoice_group_next_id', 'invoice_group_next_id+1', false);
+        $this->db->update($this->table);
+    }
+
     /**
      * @param $invoice_group_id
      * @return mixed
      */
     public function get_invoice_number($invoice_group_id)
     {
-        log_message("error", "entró");
-
+        log_message("error", "entró en mdl_invoices_provider/get_invoice_number");
         $this->load->model('invoice_groups/mdl_invoice_groups');
         return $this->mdl_invoice_groups->generate_invoice_number($invoice_group_id);
     }
@@ -388,6 +408,7 @@ class Mdl_Invoices_Provider extends Response_Model
         $this->load->helper('string');
         return random_string('alnum', 32);
     }
+
     public function get_invoice_group_id($invoice_id)
     {
         $invoice = $this->get_by_id($invoice_id);

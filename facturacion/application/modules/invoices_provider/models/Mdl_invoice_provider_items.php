@@ -142,7 +142,7 @@ class Mdl_Invoice_Provider_Items extends Response_Model
         $this->db->delete('ip_invoice_item_amounts');
 
         // Recalculate invoice amounts
-        $this->load->model('invoices_providerxxº/mdl_invoice_provider_amounts');
+        $this->load->model('invoices_provider/mdl_invoice_provider_amounts');
         $this->mdl_invoice_provider_amounts->calculate($invoice_id);
 
         return true;
