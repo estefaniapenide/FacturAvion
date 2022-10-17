@@ -231,7 +231,7 @@ class Invoices_provider extends Admin_Controller
 
 
         if ($this->config->item('enable_invoice_provider_deletion') === true) {
-            log_message("error",print_r($invoice_id,true));
+
             // If invoice refers to tasks, mark those tasks back to 'Complete'
             $this->load->model('tasks/mdl_tasks');
             $tasks = $this->mdl_tasks->update_on_invoice_delete($invoice_id);

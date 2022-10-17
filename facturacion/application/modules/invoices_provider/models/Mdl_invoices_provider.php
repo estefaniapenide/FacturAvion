@@ -37,13 +37,18 @@ class Mdl_Invoices_Provider extends Response_Model
             ), */
             '2' => array(
                 'label' => trans('invoiced'),
-                'class' => 'invoiced',
+                'class' => 'viewed', //De donde sale esta clase para darle color!?
                 'href' => 'invoices_provider/status/invoiced'
             ),
             '3' => array(
                 'label' => trans('paid'),
                 'class' => 'paid',
                 'href' => 'invoices_provider/status/paid'
+            ),
+            '4' => array(
+                'label' => trans('overdue'),
+                'class' => 'overdue',
+                'href' => 'invoices_provider/status/overdue'
             )
         );
     }
@@ -62,7 +67,7 @@ class Mdl_Invoices_Provider extends Response_Model
             IFnull(ip_invoice_provider_amounts.invoice_provider_paid, '0.00') AS invoice_paid,
             IFnull(ip_invoice_provider_amounts.invoice_provider_balance, '0.00') AS invoice_balance,
             ip_invoice_provider_amounts.invoice_provider_sign AS invoice_provider_sign,
-            (CASE WHEN ip_invoices_provider.invoice_provider_status_id NOT IN (1,4) AND DATEDIFF(NOW(), invoice_provider_date_due) > 0 THEN 1 ELSE 0 END) is_overdue,
+            (CASE WHEN ip_invoices_provider.invoice_provider_status_id NOT IN (1,3) AND DATEDIFF(NOW(), invoice_provider_date_due) > 0 THEN 1 ELSE 0 END) is_overdue,
             DATEDIFF(NOW(), invoice_provider_date_due) AS days_overdue,
             ip_invoices_provider.*", false);
     }
@@ -438,7 +443,7 @@ class Mdl_Invoices_Provider extends Response_Model
     {
         parent::delete($invoice_id);
 
-        //$this->load->helper('orphan_provider');
+        //$this->load->helper('orphan_provider');//Hacer orphan a medida
         //delete_orphans();
     }
 

@@ -88,17 +88,21 @@
                                     </a>
                                 </li>
                             <?php } ?>
+                            <?php if (($invoice->invoice_provider_status_id == 1 && $invoice->is_read_only != 1)) { ?>
+                                <li>
+                                <a href="<?php echo site_url('invoices_provider/add_pdf/' . $invoice->invoice_provider_id); ?>"
+                                   target="_blank">
+                                    <i class="fa fa-print fa-margin"></i> <?php _trans('addpdf'); ?>
+                                </a>
+                            </li>
+                            <?php }else if($invoice->invoice_provider_status_id != 1){?>
                             <li>
-                                <a href="<?php echo site_url('invoices_provider/generate_pdf/' . $invoice->invoice_provider_id); ?>"
+                                <a href="<?php echo site_url('invoices_provider/download_pdf/' . $invoice->invoice_provider_id); ?>"
                                    target="_blank">
                                     <i class="fa fa-print fa-margin"></i> <?php _trans('download_pdf'); ?>
                                 </a>
                             </li>
-                            <li>
-                                <a href="<?php echo site_url('mailer/invoice/' . $invoice->invoice_provider_id); ?>">
-                                    <i class="fa fa-send fa-margin"></i> <?php _trans('send_email'); ?>
-                                </a>
-                            </li>
+                            <?php } ?>
                             <li>
                                 <a href="#" class="invoice-add-payment-provider"
                                    data-invoice-id="<?php echo $invoice->invoice_provider_id; ?>"
@@ -108,10 +112,7 @@
                                     <?php _trans('enter_payment'); ?>
                                 </a>
                             </li>
-                            <?php if (
-                                $invoice->invoice_provider_status_id == 1 ||
-                                ($this->config->item('enable_invoice_deletion') === true && $invoice->is_read_only != 1)
-                            ) { ?>
+                            <?php if (($this->config->item('enable_invoice_provider_deletion') === true && $invoice->is_read_only != 1)) { ?>
                                 <li>
                                     <form action="<?php echo site_url('invoices_provider/delete/' . $invoice->invoice_provider_id); ?>"
                                           method="POST">
