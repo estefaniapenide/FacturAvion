@@ -57,7 +57,7 @@ $cv = $this->controller->view_data["custom_values"];
                 items.push(row);
                 });
                     $.post("<?php echo site_url('invoices_provider/ajax/save'); ?>", {
-                    provider_id: <?php echo $invoice_id; ?>,
+                    invoice_id: <?php echo $invoice_id; ?>,
                     invoice_provider_number: $('#invoice_provider_number').val(),
                     invoice_provider_date_created: $('#invoice_provider_date_created').val(),
                     invoice_provider_date_due: $('#invoice_provider_date_due').val(),
@@ -78,7 +78,7 @@ $cv = $this->controller->view_data["custom_values"];
                         $('#fullpage-loader').hide();
                         $('.control-group').removeClass('has-error');
                         $('div.alert[class*="alert-"]').remove();
-                        var resp_errors = response.validation_errors, 
+                        var resp_errors = response.validation_errors,
                             all_resp_errors = '';
                         for (var key in resp_errors) {
                             $('#' + key).parent().addClass('has-error');

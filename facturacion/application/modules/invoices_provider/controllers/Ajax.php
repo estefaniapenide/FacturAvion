@@ -27,7 +27,7 @@ class Ajax extends Admin_Controller
         $this->load->model('units/mdl_units');
 
 
-        $invoice_id = $this->input->post('provider_id');
+        $invoice_id = $this->input->post('invoice_id');
         $this->mdl_invoices_provider->set_id($invoice_id);
         if ($this->mdl_invoices_provider->run_validation('validation_rules_save_invoice')) {
             $items = json_decode($this->input->post('items'));
@@ -251,7 +251,7 @@ class Ajax extends Admin_Controller
 
     public function change_provider()
     {
-        $this->load->model('invoices-provider/mdl_invoices_provider');
+        $this->load->model('invoices_provider/mdl_invoices_provider');
         $this->load->model('providers/mdl_providers');
 
         // Get the client ID
