@@ -131,6 +131,9 @@
                         <li><?php echo anchor('reports/sales_by_year', trans('sales_by_date')); ?></li>
                     </ul>
                 </li>
+                <li><?php echo anchor('modelo303', trans('modelo303'), 'class="hidden-md"') ?>
+                    <?php echo anchor('modelo303', '<i class="fa fa-dashboard"></i>', 'class="visible-md-inline-block"') ?>
+                </li>
 
             </ul>
 

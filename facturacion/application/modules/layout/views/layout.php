@@ -47,6 +47,5 @@ $this->layout->load_view('layout/includes/navbar');
 <?php if (trans('cldr') != 'en') { ?>
     <script src="<?php echo base_url(); ?>assets/core/js/locales/bootstrap-datepicker.<?php _trans('cldr'); ?>.js"></script>
 <?php } ?>
-
 </body>
 </html>

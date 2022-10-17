@@ -13,5 +13,11 @@
  */
 
 $lang = array(
-
+'modelo303' => 'Modelo 303',
+'baseimponible' => 'Base imponible',
+'totalbaseemitidas' => 'Facturas emitidas',
+'totalbaserecibidas' => 'Facturas recibidas',
+'cantidad' => 'Cantidad',
+'totalivarecibidas' => 'Totales IVA facturas recibidas',
+'totalivaemitidas' => 'Totales IVA facturas emitidas',
 );
