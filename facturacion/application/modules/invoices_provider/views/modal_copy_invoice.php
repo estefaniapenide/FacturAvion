@@ -14,7 +14,7 @@
                     invoice_provider_id: <?php echo $invoice_id; ?>,
                     provider_id: $('#provider_id').val(),
                     invoice_provider_date_created: $('#invoice_provider_date_created_modal').val(),
-                    invoice_group_id: $('#invoice_group_id').val(),
+                    invoice_group_id: $('#id_grupo_facturas_proveedor').val(),
                     invoice_provider_password: $('#invoice_provider_password').val(),
                     invoice_provider_time_created: '<?php echo date('H:i:s') ?>',
                     user_id: $('#user_id').val(),
@@ -78,14 +78,8 @@
                        style="margin: 0 auto;" autocomplete="off">
             </div>
 
-            <div class="form-group">
-                <label for="invoice_group_id"><?php _trans('invoice_group'); ?>: </label>
-                <select name="invoice_group_id" id="invoice_group_id" class="form-control simple-select">
-                        <option value="2">
-                            <?php echo "Invoice provider"; ?>
-                        </option>
-                </select>
-            </div>
+            <input class="hidden" id="id_grupo_facturas_proveedor"
+                   value="2">
 
         </div>
 
