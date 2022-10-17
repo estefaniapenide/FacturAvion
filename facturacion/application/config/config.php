@@ -19,6 +19,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 $config['enable_invoice_deletion'] = env_bool('ENABLE_INVOICE_DELETION');
+$config['enable_invoice_provider_deletion'] = true;
 
 /*
 |--------------------------------------------------------------------------

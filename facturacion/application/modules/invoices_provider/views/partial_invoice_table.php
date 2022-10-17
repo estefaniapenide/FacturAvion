@@ -20,7 +20,7 @@
         $invoice_count = count($invoices);
         $invoice_list_split = $invoice_count > 3 ? $invoice_count / 2 : 9999;
         foreach ($invoices as $invoice) {
-            log_message("error",print_r($invoices,true));
+
             // Disable read-only if not applicable
             if ($this->config->item('disable_read_only') == true) {
                 $invoice->is_read_only = 0;

@@ -171,7 +171,7 @@ if ($this->config->item('disable_read_only') == true) {
         ?>
     </h1>
 
-    <div class="headerbar-item pull-right <?php if ($invoice->is_read_only != 1 || $invoice->invoice_provider_status_id != 4) { ?>btn-group<?php } ?>">
+    <div class="headerbar-item pull-right <?php if ($invoice->is_read_only != 1 || $invoice->invoice_provider_status_id != 3) { ?>btn-group<?php } ?>">
 
         <div class="options btn-group btn-group-sm">
             <a class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" href="#">
@@ -212,18 +212,18 @@ if ($this->config->item('disable_read_only') == true) {
                         <?php _trans('copy_invoice'); ?>
                     </a>
                 </li>
-                <?php if ($invoice->invoice_provider_status_id == 1 || ($this->config->item('enable_invoice_deletion') === true && $invoice->is_read_only != 1)) { ?>
+                <?php //if ( ($this->config->item('enable_invoice_deletion') === true && $invoice->is_read_only != 1)) { ?>
                     <li>
-                        <a href="#delete-invoice" data-toggle="modal">
+                        <a href="#delete-invoice-provider" data-toggle="modal">
                             <i class="fa fa-trash-o fa-margin"></i>
                             <?php _trans('delete'); ?>
                         </a>
                     </li>
-                <?php } ?>
+                <?php// } ?>
             </ul>
         </div>
 
-        <?php if ($invoice->is_read_only != 1 || $invoice->invoice_provider_status_id != 4) { ?>
+        <?php if ($invoice->is_read_only != 1 || $invoice->invoice_provider_status_id != 3) { ?>
             <a href="#" class="btn btn-sm btn-success ajax-loader" id="btn_save_invoice">
                 <i class="fa fa-check"></i> <?php _trans('save'); ?>
             </a>
@@ -355,13 +355,13 @@ if ($this->config->item('disable_read_only') == true) {
                                 <div class="invoice-properties">
                                     <label>
                                         <?php _trans('status');
-                                        if ($invoice->is_read_only != 1 || $invoice->invoice_provider_status_id != 4) {
+                                        if ($invoice->is_read_only != 1 || $invoice->invoice_provider_status_id != 3) {
                                             echo ' <span class="small">(' . trans('can_be_changed') . ')</span>';
                                         } ?>
                                     </label>
                                     <select name="invoice_provider_status_id" id="invoice_provider_status_id"
                                             class="form-control input-sm simple-select" data-minimum-results-for-search="Infinity"
-                                        <?php if ($invoice->is_read_only == 1 && $invoice->invoice_provider_status_id == 4) {
+                                        <?php if ($invoice->is_read_only == 1 && $invoice->invoice_provider_status_id == 3) {
                                             echo 'disabled="disabled"';
                                         } ?>>
                                         <?php foreach ($invoice_statuses as $key => $status) { ?>
@@ -377,7 +377,7 @@ if ($this->config->item('disable_read_only') == true) {
                                     <label><?php _trans('payment_method'); ?></label>
                                     <select name="payment_method" id="payment_method"
                                             class="form-control input-sm simple-select"
-                                        <?php if ($invoice->is_read_only == 1 && $invoice->invoice_provider_status_id == 4) {
+                                        <?php if ($invoice->is_read_only == 1 && $invoice->invoice_provider_status_id == 3) {
                                             echo 'disabled="disabled"';
                                         } ?>>
                                         <option value="0"><?php _trans('select_payment_method'); ?></option>

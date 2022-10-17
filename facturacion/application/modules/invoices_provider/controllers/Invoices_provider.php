@@ -227,10 +227,11 @@ class Invoices_provider extends Admin_Controller
     public function delete($invoice_id)
     {
         // Get the status of the invoice
-        $invoice = $this->mdl_invoices_provider->get_by_id($invoice_id);
-        $invoice_status = $invoice->invoice_provider_status_id;
+       // $invoice = $this->mdl_invoices_provider->get_by_id($invoice_id);
 
-        if ($invoice_status == 1 || $this->config->item('enable_invoice_deletion') === true) {
+
+        if ($this->config->item('enable_invoice_provider_deletion') === true) {
+            log_message("error",print_r($invoice_id,true));
             // If invoice refers to tasks, mark those tasks back to 'Complete'
             $this->load->model('tasks/mdl_tasks');
             $tasks = $this->mdl_tasks->update_on_invoice_delete($invoice_id);

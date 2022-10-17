@@ -438,8 +438,8 @@ class Mdl_Invoices_Provider extends Response_Model
     {
         parent::delete($invoice_id);
 
-        $this->load->helper('orphan_provider');
-        delete_orphans();
+        //$this->load->helper('orphan_provider');
+        //delete_orphans();
     }
 
     // Excludes draft and paid invoices, i.e. keeps unpaid invoices.

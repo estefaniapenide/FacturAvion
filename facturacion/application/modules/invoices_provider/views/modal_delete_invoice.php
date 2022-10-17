@@ -1,4 +1,4 @@
-<div id="delete-invoice" class="modal modal-lg" role="dialog" aria-labelledby="delete-invoice" aria-hidden="true">
+<div id="delete-invoice-provider" class="modal modal-lg" role="dialog" aria-labelledby="delete-invoice-provider" aria-hidden="true">
 
     <div class="modal-content">
         <div class="modal-header">
@@ -12,7 +12,7 @@
         </div>
         <div class="modal-footer">
 
-            <form action="<?php echo site_url('invoices_provider/delete/' . $invoice->invoice_provider_id); ?>"
+            <form action="<?php echo site_url('invoices_provider/delete/' . $invoice->invoice_provider_id);?>"
                   method="POST">
                 <?php _csrf_field(); ?>
 
