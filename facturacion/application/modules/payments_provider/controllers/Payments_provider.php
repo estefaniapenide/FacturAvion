@@ -131,8 +131,9 @@ class Payments_provider extends Admin_Controller
         $amounts = array();
         $invoice_payment_methods = array();
         foreach ($open_invoices as $open_invoice) {
-            $amounts['invoice' . $open_invoice->invoice_id] = format_amount($open_invoice->invoice_balance);
-            $invoice_payment_methods['invoice' . $open_invoice->invoice_id] = $open_invoice->payment_method;
+            log_message("error",print_r($open_invoice),true);
+            $amounts['invoice' . $open_invoice->invoice_provider_id] = format_amount($open_invoice->invoice_balance);
+            $invoice_payment_methods['invoice' . $open_invoice->invoice_provider_id] = $open_invoice->payment_method;
         }
 
         $this->layout->set(

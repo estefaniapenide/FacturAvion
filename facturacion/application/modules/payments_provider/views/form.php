@@ -48,14 +48,14 @@
                 <select name="invoice_id" id="invoice_id" class="form-control simple-select">
                     <?php if (!$payment_id) { ?>
                         <?php foreach ($open_invoices as $invoice) { ?>
-                            <option value="<?php echo $invoice->invoice_id; ?>"
-                                <?php check_select($this->mdl_payments_provider->form_value('invoice_id'), $invoice->invoice_id); ?>>
-                                <?php echo $invoice->invoice_number . ' - ' . format_client($invoice) . ' - ' . format_currency($invoice->invoice_balance); ?>
+                            <option value="<?php echo $invoice->invoice_provider_id; ?>"
+                                <?php check_select($this->mdl_payments_provider->form_value('invoice_id'), $invoice->invoice_provider_id); ?>>
+                                <?php echo $invoice->invoice_provider_number . ' - ' . $invoice->provider_name . ' - ' . format_currency($invoice->invoice_balance); ?>
                             </option>
                         <?php } ?>
                     <?php } else { ?>
                         <option value="<?php echo $payment->invoice_id; ?>">
-                            <?php echo $payment->invoice_number . ' - ' . format_client($payment) . ' - ' . format_currency($payment->invoice_balance); ?>
+                            <?php echo $payment->invoice_provider_number . ' -  - ' . format_currency($payment->invoice_balance); ?>
                         </option>
                     <?php } ?>
                 </select>
