@@ -11,7 +11,7 @@
 
         $('#btn_modal_payment_submit').click(function () {
             $.post("<?php echo site_url('payments_provider/ajax/add'); ?>", {
-                    invoice_provider_id: $('#invoice_id').val(),
+                    invoice_id: $('#invoice_id').val(),
                     payment_amount: $('#payment_amount').val(),
                     payment_method_id: $('#payment_method_id').val(),
                     payment_date: $('#payment_date').val(),
@@ -65,6 +65,7 @@
 
                     <div class="controls">
                         <input type="text" name="payment_amount" id="payment_amount" class="form-control"
+
                                value="<?php echo(isset($invoice_balance) ? format_amount($invoice_balance) : ''); ?>">
                     </div>
                 </div>
