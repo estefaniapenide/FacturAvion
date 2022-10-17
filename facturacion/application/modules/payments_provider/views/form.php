@@ -55,7 +55,8 @@
                         <?php } ?>
                     <?php } else { ?>
                         <option value="<?php echo $payment->invoice_id; ?>">
-                            <?php echo $payment->invoice_provider_number . ' -  - ' . format_currency($payment->invoice_balance); ?>
+                            <?php echo $payment->invoice_provider_number . ' - '.$payment->provider_name.' - ' . format_currency($payment->invoice_provider_balance);
+                            ?>
                         </option>
                     <?php } ?>
                 </select>
