@@ -36,7 +36,7 @@
                     foreach ($ivaemitidas as $row) {
                         echo '<tr>
                         <td style="font-size:1vw;">' . $row->tipoiva . '</td>
-                        <td style="font-size:1vw;"class="text-right">' . $row->totaltipoiva . '</td>
+                        <td style="font-size:1vw;"class="text-right">' . $row->totaltipoiva . ' €</td>
                     </tr>';
                     }
                 ?>
@@ -56,7 +56,7 @@
                     foreach ($ivarecibidas as $row) {
                         echo '<tr>
                         <td style="font-size:1vw;">' . $row->tipoiva . '</td>
-                        <td style="font-size:1vw;"class="text-right">' . $row->totaltipoiva . '</td>
+                        <td style="font-size:1vw;"class="text-right">' . $row->totaltipoiva . ' €</td>
                     </tr>';
                     }
                 ?>
