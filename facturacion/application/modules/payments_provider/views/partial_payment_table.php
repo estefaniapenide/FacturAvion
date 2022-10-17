@@ -18,8 +18,8 @@
         <?php foreach ($payments_provider as $payment_provider) { ?>
             <tr>
                 <td><?php echo date_from_mysql($payment_provider->payment_date); ?></td>
-                <td><?php echo date_from_mysql($payment_provider->invoice_date_created); ?></td>
-                <td><?php echo anchor('invoices_provider/view/' . $payment_provider->invoice_id, $payment_provider->invoice_number); ?></td>
+                <td><?php echo date_from_mysql($payment_provider->invoice_provider_date_created); ?></td>
+                <td><?php echo anchor('invoices_provider/view/' . $payment_provider->invoice_provider_id, $payment_provider->invoice_provider_number); ?></td>
                 <td>
                     <a href="<?php echo site_url('provider/view/' . $payment_provider->provider_id); ?>"
                        title="<?php _trans('view_provider'); ?>">

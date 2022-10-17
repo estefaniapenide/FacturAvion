@@ -210,7 +210,7 @@ class Providers extends Admin_Controller
                 'invoices' => $this->mdl_invoices_provider->by_provider($provider_id)->limit(20)->get()->result(),
                 'payments_provider' => $this->mdl_payments_provider->by_provider($provider_id)->limit(20)->get()->result(),
                 'custom_fields' => $custom_fields,
-                'invoice_statuses' => $this->mdl_invoices_provider->statuses()
+                'invoice_provider_statuses' => $this->mdl_invoices_provider->statuses()
             )
         );
 
