@@ -16,6 +16,7 @@
 
         <tbody>
         <?php foreach ($payments_provider as $payment_provider) { ?>
+
             <tr>
                 <td><?php echo date_from_mysql($payment_provider->payment_date); ?></td>
                 <td><?php echo date_from_mysql($payment_provider->invoice_provider_date_created); ?></td>

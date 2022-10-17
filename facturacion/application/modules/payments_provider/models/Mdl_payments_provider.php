@@ -29,6 +29,7 @@ class Mdl_Payments_provider extends Response_Model
             ip_providers.provider_comercial_name,
         	ip_providers.provider_id,
             ip_invoices_provider.invoice_provider_id,
+            ip_invoices_provider.invoice_provider_number,
             ip_invoices_provider.invoice_provider_date_created,
             ip_payments_provider.*", false);
     }
