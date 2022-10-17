@@ -453,7 +453,6 @@ class MY_Model extends CI_Model
             $run = $this->form_validation->run();
 
             $this->validation_errors = validation_errors();
-
             return $run;
         }
     }
