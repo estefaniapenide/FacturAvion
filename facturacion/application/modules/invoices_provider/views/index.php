@@ -26,13 +26,13 @@
                class="btn  <?php echo $status == 'draft' ? 'btn-primary' : 'btn-default' ?>">
                 <?php _trans('draft'); ?>
             </a>
-            <a href="<?php echo site_url('invoices_provider/status/sent'); ?>"
+<!--             <a href="<?php echo site_url('invoices_provider/status/sent'); ?>"
                class="btn  <?php echo $status == 'sent' ? 'btn-primary' : 'btn-default' ?>">
                 <?php _trans('sent'); ?>
-            </a>
-            <a href="<?php echo site_url('invoices_provider/status/viewed'); ?>"
-               class="btn  <?php echo $status == 'viewed' ? 'btn-primary' : 'btn-default' ?>">
-                <?php _trans('viewed'); ?>
+            </a> -->
+            <a href="<?php echo site_url('invoices_provider/status/invoiced'); ?>"
+               class="btn  <?php echo $status == 'invoiced' ? 'btn-primary' : 'btn-default' ?>">
+                <?php _trans('invoiced'); ?>
             </a>
             <a href="<?php echo site_url('invoices_provider/status/paid'); ?>"
                class="btn  <?php echo $status == 'paid' ? 'btn-primary' : 'btn-default' ?>">
@@ -64,13 +64,13 @@
                    class="btn  <?php echo $status == 'draft' ? 'btn-primary' : 'btn-default' ?>">
                     <?php _trans('draft'); ?>
                 </a>
-                <a href="<?php echo site_url('invoices_provider/status/sent'); ?>"
-                   class="btn  <?php echo $status == 'sent' ? 'btn-primary' : 'btn-default' ?>">
-                    <?php _trans('sent'); ?>
-                </a>
-                <a href="<?php echo site_url('invoices_provider/status/viewed'); ?>"
-                   class="btn  <?php echo $status == 'viewed' ? 'btn-primary' : 'btn-default' ?>">
-                    <?php _trans('viewed'); ?>
+<!--                 <a href="<?php //echo site_url('invoices_provider/status/sent'); ?>"
+                   class="btn  <?php //echo $status == 'sent' ? 'btn-primary' : 'btn-default' ?>">
+                    <?php //_trans('sent'); ?>
+                </a> -->
+                <a href="<?php echo site_url('invoices_provider/status/invoiced'); ?>"
+                   class="btn  <?php echo $status == 'invoiced' ? 'btn-primary' : 'btn-default' ?>">
+                    <?php _trans('invoiced'); ?>
                 </a>
                 <a href="<?php echo site_url('invoices_provider/status/paid'); ?>"
                    class="btn  <?php echo $status == 'paid' ? 'btn-primary' : 'btn-default' ?>">

@@ -30,17 +30,17 @@ class Mdl_Invoices_Provider extends Response_Model
                 'class' => 'draft',
                 'href' => 'invoices_provider/status/draft'
             ),
-            '2' => array(
+/*             '2' => array(
                 'label' => trans('sent'),
                 'class' => 'sent',
                 'href' => 'invoices_provider/status/sent'
+            ), */
+            '2' => array(
+                'label' => trans('invoiced'),
+                'class' => 'invoiced',
+                'href' => 'invoices_provider/status/invoiced'
             ),
             '3' => array(
-                'label' => trans('viewed'),
-                'class' => 'viewed',
-                'href' => 'invoices_provider/status/viewed'
-            ),
-            '4' => array(
                 'label' => trans('paid'),
                 'class' => 'paid',
                 'href' => 'invoices_provider/status/paid'
@@ -445,14 +445,16 @@ class Mdl_Invoices_Provider extends Response_Model
     // Excludes draft and paid invoices, i.e. keeps unpaid invoices.
     public function is_open()
     {
-        $this->filter_where_in('invoice_provider_status_id', array(2, 3));
+        //$this->filter_where_in('invoice_provider_status_id', array(2, 3));
+        $this->filter_where_in('invoice_provider_status_id', array(2));
         return $this;
     }
 
 
     public function guest_visible()
     {
-        $this->filter_where_in('invoice_provider_status_id', array(2, 3, 4));
+        //$this->filter_where_in('invoice_provider_status_id', array(2, 3, 4));
+        $this->filter_where_in('invoice_provider_status_id', array(2, 3));
         return $this;
     }
 
@@ -462,21 +464,23 @@ class Mdl_Invoices_Provider extends Response_Model
         return $this;
     }
 
-    public function is_sent()
+  /*   public function is_sent()
     {
         $this->filter_where('invoice_provider_status_id', 2);
         return $this;
-    }
+    } */
 
-    public function is_viewed()
+    public function is_invoiced()
     {
-        $this->filter_where('invoice_provider_status_id', 3);
+        //$this->filter_where('invoice_provider_status_id', 3);
+        $this->filter_where('invoice_provider_status_id', 2);
         return $this;
     }
 
     public function is_paid()
     {
-        $this->filter_where('invoice_provider_status_id', 4);
+        //$this->filter_where('invoice_provider_status_id', 4);
+        $this->filter_where('invoice_provider_status_id', 3);
         return $this;
     }
 
@@ -495,7 +499,7 @@ class Mdl_Invoices_Provider extends Response_Model
     /**
      * @param $invoice_id
      */
-    public function mark_viewed($invoice_id)
+    public function mark_invoiced($invoice_id)
     {
         $invoice = $this->get_by_id($invoice_id);
 
@@ -503,12 +507,12 @@ class Mdl_Invoices_Provider extends Response_Model
             if ($invoice->invoice_status_id == 2) {
                 $this->db->where('invoice_provider_id', $invoice_id);
                 $this->db->where('invoice_provider_id', $invoice_id);
-                $this->db->set('invoice_provider_status_id', 3);
+                $this->db->set('invoice_provider_status_id', 2);
                 $this->db->update('ip_invoices_provider');
             }
 
             // Set the invoice to read-only if feature is not disabled and setting is view
-            if ($this->config->item('disable_read_only') == false && get_setting('read_only_toggle') == 3) {
+            if ($this->config->item('disable_read_only') == false && get_setting('read_only_toggle') == 2) {
                 $this->db->where('invoice_provider_id', $invoice_id);
                 $this->db->set('is_read_only', 1);
                 $this->db->update('ip_invoices_provider');
@@ -519,7 +523,7 @@ class Mdl_Invoices_Provider extends Response_Model
     /**
      * @param $invoice_id
      */
-    public function mark_sent($invoice_id)
+/*     public function mark_sent($invoice_id)
     {
         $invoice = $this->mdl_invoices_provider->get_by_id($invoice_id);
 
@@ -542,7 +546,7 @@ class Mdl_Invoices_Provider extends Response_Model
                 $this->db->update('ip_invoices_provider');
             }
         }
-    }
+    } */
 
      /**
      * @param $invoice_id

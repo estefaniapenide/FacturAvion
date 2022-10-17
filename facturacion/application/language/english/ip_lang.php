@@ -681,6 +681,7 @@ $lang = array(
     'case_date'                                    => 'Case Date',
     'case_number'                                  => 'Case Number',
     'generate_copy'                                => 'Generate Copy',
+    'invoiced'                                     => 'Invoiced',
     'invoice_sumex_sliptype'                       => 'Sumex Slip Type',
     'invoice_sumex_sliptype-esr9'                  => 'ESR 9 (Orange Slip)',
     'invoice_sumex_sliptype-esrRed'                => 'Red Slip',

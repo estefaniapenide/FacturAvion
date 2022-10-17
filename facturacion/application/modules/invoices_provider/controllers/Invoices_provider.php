@@ -45,11 +45,11 @@ class Invoices_provider extends Admin_Controller
             case 'draft':
                 $this->mdl_invoices_provider->is_draft();
                 break;
-            case 'sent':
+          /*   case 'sent':
                 $this->mdl_invoices_provider->is_sent();
-                break;
-            case 'viewed':
-                $this->mdl_invoices_provider->is_viewed();
+                break; */
+            case 'invoiced':
+                $this->mdl_invoices_provider->is_invoiced();
                 break;
             case 'paid':
                 $this->mdl_invoices_provider->is_paid();

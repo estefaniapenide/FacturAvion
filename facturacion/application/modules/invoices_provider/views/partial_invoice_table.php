@@ -100,7 +100,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#" class="invoice-add-payment"
+                                <a href="#" class="invoice-add-payment-provider"
                                    data-invoice-id="<?php echo $invoice->invoice_provider_id; ?>"
                                    data-invoice-balance="<?php echo $invoice->invoice_balance; ?>"
                                    data-invoice-payment-method="<?php echo $invoice->payment_method; ?>">
