@@ -204,9 +204,11 @@ class Invoices_provider extends Admin_Controller
         $payment_cf = $this->mdl_custom_fields->by_table('ip_payment_custom')->get();
         $payment_cf_exist = ($payment_cf->num_rows() > 0) ? "yes" : "no";
 
+        $this->load->model('modelo303/mdl_modelo303');
         $this->layout->set(
             [
                 'invoice' => $invoice,
+                'impuestos' => $this->mdl_modelo303->ivasfactura($invoice->invoice_provider_number),
                 'items' => $this->mdl_invoice_provider_items->where('invoice_provider_id', $invoice_id)->get()->result(),
                 'invoice_id' => $invoice_id,
                 'tax_rates' => $this->mdl_tax_rates->get()->result(),
@@ -324,5 +326,4 @@ class Invoices_provider extends Admin_Controller
             $this->mdl_invoice_provider_amounts->calculate($invoice_id->invoice_provider_id);
         }
     }
-
 }

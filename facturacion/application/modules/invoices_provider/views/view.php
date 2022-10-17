@@ -172,7 +172,6 @@ if ($this->config->item('disable_read_only') == true) {
     </h1>
 
     <div class="headerbar-item pull-right <?php if ($invoice->is_read_only != 1 || $invoice->invoice_provider_status_id != 3) { ?>btn-group<?php } ?>">
-
         <div class="options btn-group btn-group-sm">
             <a class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" href="#">
                 <i class="fa fa-caret-down no-margin"></i> <?php _trans('options'); ?>
@@ -231,10 +230,9 @@ if ($this->config->item('disable_read_only') == true) {
                             <?php _trans('delete'); ?>
                         </a>
                     </li>
-                <?php// } ?>
+                <?php // } ?>
             </ul>
         </div>
-
         <?php if ($invoice->is_read_only != 1 || $invoice->invoice_provider_status_id != 3) { ?>
             <a href="#" class="btn btn-sm btn-success ajax-loader" id="btn_save_invoice">
                 <i class="fa fa-check"></i> <?php _trans('save'); ?>

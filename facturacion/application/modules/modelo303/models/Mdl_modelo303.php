@@ -53,4 +53,32 @@ class Mdl_modelo303 extends Response_Model
         return $query;
     }
 
+    public function ivasfactura($id)
+    {
+        $this->db->select('ip_tax_rates.tax_rate_name AS tipoiva, SUM(ip_invoice_provider_item_amounts.item_tax_total) AS totaltipoiva');
+        $this->db->from('ip_invoice_provider_item_amounts');
+        $this->db->join('ip_invoice_provider_items','ip_invoice_provider_items.item_id = ip_invoice_provider_item_amounts.item_id');
+        $this->db->join('ip_tax_rates','ip_tax_rates.tax_rate_id = ip_invoice_provider_items.item_tax_rate_id');
+        $this->db->join('ip_invoices_provider','ip_invoice_provider_items.invoice_provider_id = ip_invoices_provider.invoice_provider_id');
+        $this->db->where('ip_invoices_provider.invoice_provider_number',$id);
+        $this->db->group_by('ip_invoice_provider_items.item_tax_rate_id');
+        $query = $this->db->get()->result();
+        return $query;
+
+    }
+
+    public function ivasfacturacliente($id)
+    {
+        $this->db->select('ip_tax_rates.tax_rate_name AS tipoiva, SUM(ip_invoice_item_amounts.item_tax_total) AS totaltipoiva');
+        $this->db->from('ip_invoice_item_amounts');
+        $this->db->join('ip_invoice_items','ip_invoice_items.item_id = ip_invoice_item_amounts.item_id');
+        $this->db->join('ip_tax_rates','ip_tax_rates.tax_rate_id = ip_invoice_items.item_tax_rate_id');
+        $this->db->join('ip_invoices','ip_invoice_items.invoice_id = ip_invoices.invoice_id');
+        $this->db->where('ip_invoices.invoice_number',$id);
+        $this->db->group_by('ip_invoice_items.item_tax_rate_id');
+        $query = $this->db->get()->result();
+        return $query;
+
+    }
+
 }
