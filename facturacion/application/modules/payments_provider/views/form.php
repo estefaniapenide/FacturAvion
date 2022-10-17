@@ -85,16 +85,16 @@
             </div>
             <div class="col-xs-12 col-sm-6">
             <input type="text" name="payment_amount" id="payment_amount" class="form-control"
-                       value="<?php echo format_amount($this->mdl_payments_provider->form_value('payment_amount')); ?>">
+                       value="<?php format_amount($this->mdl_payments_provider->form_value('payment_amount'))?>">
 
                        <!--Hacer lo que está a continución(sustituyendo lo de antes) con alguna restricción más en caso de que de no se haya pagado todavía y no existan facturas pendientes de pago-->
-           <!--  <?php //if (!$payment_id) { ?>
-                        <?php //foreach ($open_invoices as $invoice) { ?>
-                            <input type="text" name="payment_amount" id="payment_amount" class="form-control" value="<?php //echo format_currency($invoice->invoice_balance); ?> ">
-                        <?php //} ?>
-                    <?php //} else { ?>
-                        <input type="text" name="payment_amount" id="payment_amount" class="form-control" value="<?php //echo format_currency($payment->invoice_provider_balance);?>">
-                    <?php// } ?> -->
+            <!--<?php if (!$payment_id) { ?>
+                        <?php foreach ($open_invoices as $invoice) { ?>
+                            <input type="text" name="payment_amount" id="payment_amount" class="form-control" value="<?php echo format_currency($invoice->invoice_balance); ?> ">
+                        <?php } ?>
+                    <?php } else { ?>
+                        <input type="text" name="payment_amount" id="payment_amount" class="form-control" value="<?php echo format_currency($payment->invoice_provider_balance);?>">
+                    <?php } ?>-->
             </div>
         </div>
 

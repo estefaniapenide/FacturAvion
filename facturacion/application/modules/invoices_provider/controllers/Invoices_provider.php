@@ -116,6 +116,24 @@ class Invoices_provider extends Admin_Controller
         readfile(UPLOADS_ARCHIVE_FOLDER . urldecode($invoice));
     }
 
+
+    /**
+     * @param $invoice
+     */
+    public function download_pdf($invoice) //Pendiente!!
+    {
+
+    }
+
+
+    /**
+     * @param $invoice
+     */
+    public function add_pdf($invoice) //Pendiente!!
+    {
+
+    }
+
     /**
      * @param $invoice_id
      */

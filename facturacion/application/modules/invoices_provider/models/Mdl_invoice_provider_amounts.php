@@ -96,20 +96,21 @@ class Mdl_Invoice_Provider_Amounts extends CI_Model
         if ($invoice->invoice_balance == 0) {
             // Check if the invoice total is not zero or negative
             if ($invoice->invoice_total != 0 || $invoice_is_credit) {
+
                 $this->db->where('invoice_id', $invoice_id);
                 $payment = $this->db->get('ip_payments_provider')->row();
                 $payment_method_id = ($payment->payment_method_id ? $payment->payment_method_id : 0);
 
                 $this->db->where('invoice_provider_id', $invoice_id);
-                $this->db->set('invoice_provider_status_id', 4);
+                $this->db->set('invoice_provider_status_id', 3);
                 $this->db->set('payment_method', $payment_method_id);
                 $this->db->update('ip_invoices_provider');
 
+                log_message("error",print_r($this->config->item('disable_read_only'),true));
+                log_message("error",print_r(get_setting('read_only_toggle'),true));
+
                 // Set to read-only if applicable
-                if (
-                    $this->config->item('disable_read_only') == false
-                    && $invoice->invoice_provider_status_id == get_setting('read_only_toggle')
-                ) {
+                if ( $this->config->item('disable_read_only') == false && $invoice->invoice_provider_status_id == get_setting('read_only_toggle_provider')) {
                     $this->db->where('invoice_provider_id', $invoice_id);
                     $this->db->set('is_read_only', 1);
                     $this->db->update('ip_invoices_provider');
@@ -329,7 +330,7 @@ class Mdl_Invoice_Provider_Amounts extends CI_Model
             default:
             case 'this-month':
                 $results = $this->db->query("
-					SELECT ip_invoices_provider.invoice_provider_status_id, (CASE ip_invoices_provider.invoice_provider_status_id WHEN 4 THEN SUM(ip_invoice_provider_amounts.invoice_provider_paid) ELSE SUM(ip_invoice_provider_amounts.invoice_provider_balance) END) AS sum_total, COUNT(*) AS num_total
+					SELECT ip_invoices_provider.invoice_provider_status_id, (CASE ip_invoices_provider.invoice_provider_status_id WHEN 3 THEN SUM(ip_invoice_provider_amounts.invoice_provider_paid) ELSE SUM(ip_invoice_provider_amounts.invoice_provider_balance) END) AS sum_total, COUNT(*) AS num_total
 					FROM ip_invoice_provider_amounts
 					JOIN ip_invoices_provider ON ip_invoices_provider.invoice_provider_id = ip_invoice_provider_amounts.invoice_provider_id
                         AND MONTH(ip_invoices_provider.invoice_provider_date_created) = MONTH(NOW())
@@ -338,7 +339,7 @@ class Mdl_Invoice_Provider_Amounts extends CI_Model
                 break;
             case 'last-month':
                 $results = $this->db->query("
-					SELECT invoice_provider_status_id, (CASE ip_invoices_provider.invoice_provider_status_id WHEN 4 THEN SUM(invoice_paid) ELSE SUM(invoice_provider_balance) END) AS sum_total, COUNT(*) AS num_total
+					SELECT invoice_provider_status_id, (CASE ip_invoices_provider.invoice_provider_status_id WHEN 3 THEN SUM(invoice_paid) ELSE SUM(invoice_provider_balance) END) AS sum_total, COUNT(*) AS num_total
 					FROM ip_invoice_provider_amounts
 					JOIN ip_invoices_provider ON ip_invoices_provider.invoice_provider_id = ip_invoice_provider_amounts.invoice_provider_id
                         AND MONTH(ip_invoices_provider.invoice_date_created) = MONTH(NOW() - INTERVAL 1 MONTH)
@@ -347,7 +348,7 @@ class Mdl_Invoice_Provider_Amounts extends CI_Model
                 break;
             case 'this-quarter':
                 $results = $this->db->query("
-					SELECT invoice_provider_status_id, (CASE ip_invoices_provider.invoice_provider_status_id WHEN 4 THEN SUM(ip_invoice_provider_amounts.invoice_provider_paid) ELSE SUM(ip_invoice_provider_amounts.invoice_provider_balance) END) AS sum_total, COUNT(*) AS num_total
+					SELECT invoice_provider_status_id, (CASE ip_invoices_provider.invoice_provider_status_id WHEN 3 THEN SUM(ip_invoice_provider_amounts.invoice_provider_paid) ELSE SUM(ip_invoice_provider_amounts.invoice_provider_balance) END) AS sum_total, COUNT(*) AS num_total
 					FROM ip_invoice_provider_amounts
 					JOIN ip_invoices_provider ON ip_invoices_provider.invoice_provider_id = ip_invoice_provider_amounts.invoice_id
                         AND QUARTER(ip_invoices_provider.invoice_provider_date_created) = QUARTER(NOW())
@@ -356,7 +357,7 @@ class Mdl_Invoice_Provider_Amounts extends CI_Model
                 break;
             case 'last-quarter':
                 $results = $this->db->query("
-					SELECT invoice_provider_status_id, (CASE ip_invoices_provider.invoice_provider_status_id WHEN 4 THEN SUM(invoice_provider_paid) ELSE SUM(invoice_provider_balance) END) AS sum_total, COUNT(*) AS num_total
+					SELECT invoice_provider_status_id, (CASE ip_invoices_provider.invoice_provider_status_id WHEN 3 THEN SUM(invoice_provider_paid) ELSE SUM(invoice_provider_balance) END) AS sum_total, COUNT(*) AS num_total
 					FROM ip_invoice_provider_amounts
 					JOIN ip_invoices_provider ON ip_invoices_provider.invoice_provider_id = ip_invoice_provider_amounts.invoice_provider_id
                         AND QUARTER(ip_invoices_provider.invoice_provider_date_created) = QUARTER(NOW() - INTERVAL 1 QUARTER)
@@ -365,7 +366,7 @@ class Mdl_Invoice_Provider_Amounts extends CI_Model
                 break;
             case 'this-year':
                 $results = $this->db->query("
-					SELECT invoice_provider_status_id, (CASE ip_invoices_provider.invoice_provider_status_id WHEN 4 THEN SUM(ip_invoice_provider_amounts.invoice_provider_paid) ELSE SUM(ip_invoice_provider_amounts.invoice_provider_balance) END) AS sum_total, COUNT(*) AS num_total
+					SELECT invoice_provider_status_id, (CASE ip_invoices_provider.invoice_provider_status_id WHEN 3 THEN SUM(ip_invoice_provider_amounts.invoice_provider_paid) ELSE SUM(ip_invoice_provider_amounts.invoice_provider_balance) END) AS sum_total, COUNT(*) AS num_total
 					FROM ip_invoice_provider_amounts
 					JOIN ip_invoices_provider ON ip_invoices_provider.invoice_provider_id = ip_invoice_provider_amounts.invoice_provider_id
                         AND YEAR(ip_invoices_provider.invoice_provider_date_created) = YEAR(NOW())
@@ -373,7 +374,7 @@ class Mdl_Invoice_Provider_Amounts extends CI_Model
                 break;
             case 'last-year':
                 $results = $this->db->query("
-					SELECT invoice_provider_status_id, (CASE ip_invoices_provider.invoice_provider_status_id WHEN 4 THEN SUM(invoice_provider_paid) ELSE SUM(invoice_provider_balance) END) AS sum_total, COUNT(*) AS num_total
+					SELECT invoice_provider_status_id, (CASE ip_invoices_provider.invoice_provider_status_id WHEN 3 THEN SUM(invoice_provider_paid) ELSE SUM(invoice_provider_balance) END) AS sum_total, COUNT(*) AS num_total
 					FROM ip_invoice_provider_amounts
 					JOIN ip_invoices_provider ON ip_invoices_provider.invoice_provider_id = ip_invoice_provider_amounts.invoice_provider_id
                         AND YEAR(ip_invoices_provider.invoice_provider_date_created) = YEAR(NOW() - INTERVAL 1 YEAR)

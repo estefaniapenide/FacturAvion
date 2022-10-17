@@ -119,6 +119,7 @@ class Mdl_Payments_provider extends Response_Model
      */
     public function save($id = null, $db_array = null)
     {
+
         $db_array = ($db_array) ? $db_array : $this->db_array();
         $this->load->model('invoices_provider/mdl_invoice_provider_amounts');
 
@@ -131,6 +132,7 @@ class Mdl_Payments_provider extends Response_Model
         // Set proper status for the invoice
         $invoice = $this->db->where('invoice_provider_id', $db_array['invoice_id'])->get('ip_invoice_provider_amounts')->row();
 
+
         // Calculate sum for payments
         if ($invoice == null) {
             return false;
@@ -139,9 +141,15 @@ class Mdl_Payments_provider extends Response_Model
         $paid = (float)$invoice->invoice_provider_paid;
         $total = (float)$invoice->invoice_provider_total;
 
+        log_message("error","entró");
+        log_message("error",print_r($paid,true));
+        log_message("error",print_r($total,true));
+
         if ($paid >= $total) {
+            log_message("error","entró en el if");
+
             $this->db->where('invoice_provider_id', $db_array['invoice_id']);
-            $this->db->set('invoice_provider_status_id', 4);
+            $this->db->set('invoice_provider_status_id',3);
             $this->db->update('ip_invoices_provider');
         }
 
@@ -186,7 +194,7 @@ class Mdl_Payments_provider extends Response_Model
         $this->db->where('invoice_provider_id', $invoice_id);
         $invoice = $this->db->get('ip_invoices_provider')->row();
 
-        if ($invoice->invoice_status_id == 4) {
+        if ($invoice->invoice_status_id == 3) {
             $this->db->where('invoice_provider_id', $invoice_id);
             $this->db->set('invoice_provider_status_id', 2);
             $this->db->update('ip_invoices_provider');

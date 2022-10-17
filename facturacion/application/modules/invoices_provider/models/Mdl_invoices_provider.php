@@ -44,11 +44,6 @@ class Mdl_Invoices_Provider extends Response_Model
                 'label' => trans('paid'),
                 'class' => 'paid',
                 'href' => 'invoices_provider/status/paid'
-            ),
-            '4' => array(
-                'label' => trans('overdue'),
-                'class' => 'overdue',
-                'href' => 'invoices_provider/status/overdue'
             )
         );
     }
@@ -443,15 +438,15 @@ class Mdl_Invoices_Provider extends Response_Model
     {
         parent::delete($invoice_id);
 
-        //$this->load->helper('orphan_provider');//Hacer orphan a medida
-        //delete_orphans();
+        $this->load->helper('orphan_invoices_provider');
+        delete_orphans();
     }
 
     // Excludes draft and paid invoices, i.e. keeps unpaid invoices.
     public function is_open()
     {
         //$this->filter_where_in('invoice_provider_status_id', array(2, 3));
-        $this->filter_where_in('invoice_provider_status_id', array(2));
+        $this->filter_where_in('invoice_provider_status_id', array(1,2));
         return $this;
     }
 

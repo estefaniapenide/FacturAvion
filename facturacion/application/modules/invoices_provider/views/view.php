@@ -185,7 +185,7 @@ if ($this->config->item('disable_read_only') == true) {
                         </a>
                     </li>
                 <?php } ?>
-                <?php if ($invoice->invoice_balance != 0) : ?>
+                <?php if ($invoice->invoice_balance != 0 && $invoice->is_read_only != 1 && $invoice->invoice_provider_status_id != 3) : ?>
                     <li>
                         <a href="#" class="invoice-add-payment-provider"
                            data-invoice-id="<?php echo $invoice_id; ?>"
@@ -197,14 +197,26 @@ if ($this->config->item('disable_read_only') == true) {
                         </a>
                     </li>
                 <?php endif; ?>
+                <?php if ($invoice->invoice_provider_status_id == 1) : ?>
                 <li>
                     <a href="#" id="btn_generate_pdf"
                        data-invoice-id="<?php echo $invoice_id; ?>">
                         <i class="fa fa-print fa-margin"></i>
-                        <?php _trans('addpdf'); ?>
+                        <?php _trans('addpdf');  //site_url('invoices_provider/add_pdf/'?>
                     </a>
                 </li>
                 <li class="divider"></li>
+                <?php endif; ?>
+                <?php if ($invoice->invoice_provider_status_id == 2) : ?>
+                <li>
+                    <a href="#" id="btn_download_pdf"
+                       data-invoice-id="<?php echo $invoice_id; ?>">
+                        <i class="fa fa-print fa-margin"></i>
+                        <?php _trans('download_pdf'); //site_url('invoices_provider/download_pdf/'?>
+                    </a>
+                </li>
+                <li class="divider"></li>
+                <?php endif; ?>
                 <li>
                     <a href="#" id="btn_copy_invoice_provider"
                        data-invoice-id="<?php echo $invoice_id; ?>">
