@@ -31,7 +31,7 @@
         // Creates the invoice
         $('#invoice_provider_create_confirm').click(function () {
             // Posts the data to validate and create the invoice;
-            // will create the new client if necessar
+            // will create the new client if necessar            
             $.post("<?php echo site_url('invoices_provider/ajax/create'); ?>", {
                     provider_id: $('#create_invoice_provider_id').val(),
                     invoice_provider_date_created: $('#invoice_provider_date_created').val(),
@@ -61,7 +61,6 @@
     });
 
 </script>
-
 <div id="create-invoice-provider" class="modal modal-lg"
      role="dialog" aria-labelledby="modal_create_invoice_provider" aria-hidden="true">
     <form class="modal-content">
