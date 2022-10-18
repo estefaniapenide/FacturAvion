@@ -89,7 +89,7 @@
                                 </li>
                             <?php } ?>
                             <li>
-                            <?php if ($invoice->is_read_only != 1 && $invoice->invoice_provider_status_id!=3) { ?>
+                            <?php if ($invoice->invoice_balance != 0 && $invoice->is_read_only != 1 && $invoice->invoice_provider_status_id != 3) { ?>
                                 <a href="#" class="invoice-add-payment-provider"
                                    data-invoice-id="<?php echo $invoice->invoice_provider_id; ?>"
                                    data-invoice-balance="<?php echo $invoice->invoice_balance; ?>"
