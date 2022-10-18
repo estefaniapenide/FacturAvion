@@ -66,16 +66,15 @@
             $('#modal-placeholder').load("<?php echo site_url('invoices/ajax/modal_copy_invoice'); ?>", {invoice_id: invoice_id});
         });
 
-        $(document).on('click', '#btn_copy_invoice', function () {
-            var invoice_id = $(this).data('invoice-id');
-            $('#modal-placeholder').load("<?php echo site_url('invoices/ajax/modal_copy_invoice'); ?>", {invoice_id: invoice_id});
-        });
-
         $(document).on('click', '#btn_create_credit', function () {
             var invoice_id = $(this).data('invoice-id');
             $('#modal-placeholder').load("<?php echo site_url('invoices/ajax/modal_create_credit'); ?>", {invoice_id: invoice_id});
         });
-
+        
+        $(document).on('click', '#btn_copy_invoice_provider', function () {
+            var invoice_id = $(this).data('invoice-id');
+            $('#modal-placeholder').load("<?php echo site_url('invoices_provider/ajax/modal_copy_invoice'); ?>", {invoice_provider_id: invoice_id});
+        });
         $(document).on('click', '#btn_copy_quote', function () {
             var quote_id = $(this).data('quote-id');
             var client_id = $(this).data('client-id');
