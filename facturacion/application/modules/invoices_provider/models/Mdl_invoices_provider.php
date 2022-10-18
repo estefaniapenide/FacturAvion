@@ -62,7 +62,7 @@ class Mdl_Invoices_Provider extends Response_Model
             IFnull(ip_invoice_provider_amounts.invoice_provider_paid, '0.00') AS invoice_paid,
             IFnull(ip_invoice_provider_amounts.invoice_provider_balance, '0.00') AS invoice_balance,
             ip_invoice_provider_amounts.invoice_provider_sign AS invoice_provider_sign,
-            (CASE WHEN ip_invoices_provider.invoice_provider_status_id NOT IN (1,3) AND DATEDIFF(NOW(), invoice_provider_date_due) > 0 THEN 1 ELSE 0 END) is_overdue,
+            (CASE WHEN ip_invoices_provider.invoice_provider_status_id NOT IN (3) AND DATEDIFF(NOW(), invoice_provider_date_due) > 0 THEN 1 ELSE 0 END) is_overdue,
             DATEDIFF(NOW(), invoice_provider_date_due) AS days_overdue,
             ip_invoices_provider.*", false);
     }
