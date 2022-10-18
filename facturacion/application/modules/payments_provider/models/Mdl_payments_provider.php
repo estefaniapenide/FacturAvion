@@ -144,12 +144,7 @@ class Mdl_Payments_provider extends Response_Model
         $paid = (float)$invoice->invoice_provider_paid;
         $total = (float)$invoice->invoice_provider_total;
 
-        log_message("error","entró");
-        log_message("error",print_r($paid,true));
-        log_message("error",print_r($total,true));
-
         if ($paid >= $total) {
-            log_message("error","entró en el if");
 
             $this->db->where('invoice_provider_id', $db_array['invoice_id']);
             $this->db->set('invoice_provider_status_id',3);
@@ -170,8 +165,8 @@ class Mdl_Payments_provider extends Response_Model
         $db_array = parent::db_array();
 
         $db_array['payment_date'] = date_to_mysql($db_array['payment_date']);
+        $db_array['payment_amount'] = str_replace('.',',',$db_array['payment_amount']);
         $db_array['payment_amount'] = standardize_amount($db_array['payment_amount']);
-
         return $db_array;
     }
 
