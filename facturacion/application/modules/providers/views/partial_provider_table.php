@@ -37,12 +37,6 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#" class="add_pdf"
-                                   data-provider-id="<?php echo $provider->provider_id; ?>">
-                                    <i class="fa fa-file-text fa-margin"></i> <?php _trans('add_invoice'); ?>
-                                </a>
-                            </li>
-                            <li>
                                 <form action="<?php echo site_url('providers/delete/' . $provider->provider_id); ?>"
                                       method="POST">
                                     <?php _csrf_field(); ?>
@@ -89,7 +83,7 @@
                 $('span#toggle_permissive_search_providers i').addClass('fa-toggle-on');
             }
         });
-    });        
+    });
     })
 </script>
 
@@ -100,7 +94,7 @@
             <h4 class="panel-title"><?php _trans('addpdf'); ?></h4>
         </div>
         <div class="modal-body">
-        
+
             <input class="hidden" id="input_permissive_search_providers"
                    value="<?php echo get_setting('enable_permissive_search_providers'); ?>">
 
@@ -108,7 +102,7 @@
                 <label for="addpdf_provider_id"><?php _trans('provider'); ?></label>
                 <div class="input-group">
                             <p value="<?php echo $provider->provider_id; ?>"><?php _htmlsc($provider->provider_name); ?></p>
-                
+
                 </div>
             </div>
 

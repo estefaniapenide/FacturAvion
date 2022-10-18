@@ -85,7 +85,7 @@
                         <ul class="dropdown-menu">
                                 <li>
                                     <a href="<?php echo site_url('invoices_provider/view/' . $invoice->invoice_provider_id); ?>">
-                                        <i class="fa fa-edit fa-margin"></i> <?php if ($invoice->is_read_only != 1) {  _trans('edit'); }else{
+                                        <i class="fa fa-eye fa-margin"></i> <?php if ($invoice->is_read_only != 1) {  _trans('edit'); }else{
                                             _trans('view');
                                         }?>
                                     </a>
