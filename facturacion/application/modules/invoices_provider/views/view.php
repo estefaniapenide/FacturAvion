@@ -441,13 +441,13 @@ if ($this->config->item('disable_read_only') == true) {
 
                 <div class="col-xs-12 visible-xs visible-sm"><br></div>
             </div>
-            <?php if($invoice->invoice_provider_status_id == 1):?>
+            <?php //if($invoice->invoice_provider_status_id == 1):?>
             <div class="col-xs-12 col-md-6">
 
                     <?php $this->layout->load_view('upload_provider/dropzone-invoice-html'); ?>
 
             </div>
-            <?php endif; ?>
+            <?php //endif; ?>
             </div>
 
         </div>
