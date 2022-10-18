@@ -160,7 +160,7 @@ class Upload_provider extends Admin_Controller
      */
     public function get_file($filename)
     {
-        $base_path = UPLOADS_CFILES_FOLDER;
+        $base_path = UPLOADS_PFILES_FOLDER;
         $file_path = $base_path . $filename;
 
         if (strpos(realpath($base_path), realpath($file_path)) != 0) {
