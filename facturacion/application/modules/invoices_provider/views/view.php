@@ -198,8 +198,8 @@ if ($this->config->item('disable_read_only') == true) {
                 <?php endif; ?>
                 <?php if ($invoice->invoice_provider_status_id == 1) : ?>
                 <li>
-                    <a href="#" id="btn_generate_pdf"
-                       data-invoice-id="<?php echo $invoice_id; ?>">
+                    <a href="#" id="add-file-provider"
+                       data-invoice-id="<?php echo $invoice_id;  log_message("error","pulsa el boton"); log_message("error",print_r($invoice_id,true));?>">
                         <i class="fa fa-print fa-margin"></i>
                         <?php _trans('addpdf');  //site_url('invoices_provider/add_pdf/'?>
                     </a>
@@ -439,14 +439,15 @@ if ($this->config->item('disable_read_only') == true) {
                         </div>
                     </div>
 
-                    <div class="col-xs-12 visible-xs visible-sm"><br></div>
-
-                </div>
-                <div class="col-xs-12 col-md-6">
+                <div class="col-xs-12 visible-xs visible-sm"><br></div>
+            </div>
+            <?php if($invoice->invoice_provider_status_id == 1):?>
+            <div class="col-xs-12 col-md-6">
 
                     <?php $this->layout->load_view('upload_provider/dropzone-invoice-html'); ?>
 
-                </div>
+            </div>
+            <?php endif; ?>
             </div>
 
         </div>

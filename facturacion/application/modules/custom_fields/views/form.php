@@ -59,6 +59,7 @@
                     'client' => Mdl_client_custom::$positions,
                     'invoice' => Mdl_invoice_custom::$positions,
                     'payment' => Mdl_payment_custom::$positions,
+                    'payment_provider' => Mdl_payment_custom_provider::$positions,
                     'quote' => Mdl_quote_custom::$positions,
                     'user' => Mdl_user_custom::$positions,
                 );

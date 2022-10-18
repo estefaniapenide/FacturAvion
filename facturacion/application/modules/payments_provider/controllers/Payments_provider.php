@@ -58,9 +58,9 @@ class Payments_provider extends Admin_Controller
         if ($this->mdl_payments_provider->run_validation()) {
             $id = $this->mdl_payments_provider->save($id);
 
-            $this->load->model('custom_fields/mdl_payment_custom');
+            $this->load->model('custom_fields/mdl_payment_custom_provider');
 
-            $this->mdl_payment_custom->save_custom($id, $this->input->post('custom'));
+            $this->mdl_payment_custom_provider->save_custom($id, $this->input->post('custom'));
 
             redirect('payments_provider');
         }
@@ -72,10 +72,10 @@ class Payments_provider extends Admin_Controller
                 show_404();
             }
 
-            $this->load->model('custom_fields/mdl_payment_custom');
+            $this->load->model('custom_fields/mdl_payment_custom_provider');
             $this->load->model('custom_values/mdl_custom_values');
 
-            $payment_custom = $this->mdl_payment_custom->where('payment_id', $id)->get();
+            $payment_custom = $this->mdl_payment_custom_provider->where('payment_id', $id)->get();
 
             if ($payment_custom->num_rows()) {
                 $payment_custom = $payment_custom->row();
@@ -98,22 +98,21 @@ class Payments_provider extends Admin_Controller
         $this->load->model('invoices_provider/mdl_invoices_provider');
         $this->load->model('payment_methods/mdl_payment_methods');
         $this->load->model('custom_fields/mdl_custom_fields');
-        $this->load->model('custom
-        _values/mdl_custom_values');
+        $this->load->model('custom_values/mdl_custom_values');
 
         $open_invoices = $this->mdl_invoices_provider->is_open()->get()->result();
 
-        $custom_fields = $this->mdl_custom_fields->by_table('ip_payment_custom')->get()->result();
-        $custom_values = [];
+        $custom_fields = $this->mdl_custom_fields->by_table('ip_payment_custom_provider')->get()->result();
+       $custom_values = [];
 
-        foreach ($custom_fields as $custom_field) {
+         foreach ($custom_fields as $custom_field) {
             if (in_array($custom_field->custom_field_type, $this->mdl_custom_values->custom_value_fields())) {
                 $values = $this->mdl_custom_values->get_by_fid($custom_field->custom_field_id)->result();
                 $custom_values[$custom_field->custom_field_id] = $values;
             }
         }
 
-        $fields = $this->mdl_payment_custom->get_by_payid($id);
+        $fields = $this->mdl_payment_custom_provider->get_by_payid($id);
 
         foreach ($custom_fields as $cfield) {
             foreach ($fields as $fvalue) {

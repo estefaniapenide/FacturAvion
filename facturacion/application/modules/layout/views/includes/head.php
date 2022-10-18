@@ -65,10 +65,10 @@
             var invoice_id = $(this).data('invoice-id');
             $('#modal-placeholder').load("<?php echo site_url('invoices/ajax/modal_copy_invoice'); ?>", {invoice_id: invoice_id});
         });
-        
-        $(document).on('click', '#btn_copy_invoice_provider', function () {
+
+        $(document).on('click', '#btn_copy_invoice', function () {
             var invoice_id = $(this).data('invoice-id');
-            $('#modal-placeholder').load("<?php echo site_url('invoices_provider/ajax/modal_copy_invoice'); ?>", {invoice_provider_id: invoice_id});
+            $('#modal-placeholder').load("<?php echo site_url('invoices/ajax/modal_copy_invoice'); ?>", {invoice_id: invoice_id});
         });
 
         $(document).on('click', '#btn_create_credit', function () {
@@ -93,6 +93,13 @@
         $(document).on('click', '.provider-create-invoice', function () {
             var provider_id = $(this).data('provider-id');
             $('#modal-placeholder').load("<?php echo site_url('invoices_provider/ajax/modal_create_invoice_provider'); ?>", {provider_id: provider_id});
+        });
+
+
+        $(document).on('click', 'add-file-provider', function () {
+            var invoice_id = $(this).data('invoice-id');
+            <?php log_message("error","entra en javascript");?>
+            $('#modal-placeholder').load("<?php echo site_url('invoices_provider/ajax/modal_add_file'); ?>");
         });
 
 

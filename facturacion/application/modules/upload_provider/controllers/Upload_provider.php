@@ -35,7 +35,7 @@ class Upload_provider extends Admin_Controller
     {
         parent::__construct();
         $this->load->model('upload_provider/mdl_uploads');
-        $this->targetPath = UPLOADS_FOLDER . '/customer_files';
+        $this->targetPath = UPLOADS_FOLDER . '/provider_files';
     }
 
     /**
