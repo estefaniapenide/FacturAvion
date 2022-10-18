@@ -83,6 +83,7 @@
                         <li><?php echo anchor('payments/form', trans('enter_charge')); ?></li>
                         <li><?php echo anchor('payments/index', trans('view_charges')); ?></li>
                         <li><?php echo anchor('payments/online_logs', trans('view_charge_logs')); ?></li>
+                        <li class="divider"></li>
                         <li><?php echo anchor('payments_provider/form', trans('enter_payment')); ?></li>
                         <li><?php echo anchor('payments_provider/index', trans('view_payments')); ?></li>
                         <li><?php echo anchor('payments_provider/online_logs', trans('view_payment_logs')); ?></li>

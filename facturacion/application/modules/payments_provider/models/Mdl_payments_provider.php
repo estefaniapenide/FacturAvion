@@ -172,6 +172,7 @@ class Mdl_Payments_provider extends Response_Model
      */
     public function delete($id = null)
     {
+        log_message("error",$id);
         // Get the invoice id before deleting payment
         $this->db->select('invoice_id');
         $this->db->where('payment_id', $id);
@@ -182,7 +183,7 @@ class Mdl_Payments_provider extends Response_Model
 
         // Recalculate invoice amounts
         $this->load->model('invoices_provider/mdl_invoice_provider_amounts');
-        $this->mdl_invoice_amounts->calculate($invoice_id);
+        $this->mdl_invoice_provider_amounts->calculate($invoice_id);
 
         // Change invoice status back to sent
         $this->db->select('invoice_provider_status_id');
@@ -195,7 +196,7 @@ class Mdl_Payments_provider extends Response_Model
             $this->db->update('ip_invoices_provider');
         }
 
-        $this->load->helper('orphan_provider');
+        $this->load->helper('orphan_invoices_provider');
         delete_orphans();
     }
 
