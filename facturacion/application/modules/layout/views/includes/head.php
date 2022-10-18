@@ -97,7 +97,6 @@
 
         $(document).on('click', 'add-file-provider', function () {
             var invoice_id = $(this).data('invoice-id');
-            <?php log_message("error","entra en javascript");?>
             $('#modal-placeholder').load("<?php echo site_url('invoices_provider/ajax/modal_add_file'); ?>");
         });
 

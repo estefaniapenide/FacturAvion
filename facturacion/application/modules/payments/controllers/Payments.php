@@ -56,7 +56,6 @@ class Payments extends Admin_Controller
         }
 
         if ($this->mdl_payments->run_validation()) {
-            log_message("error","este es el id que buscamos");
             $id = $this->mdl_payments->save($id);
             $this->load->model('custom_fields/mdl_payment_custom');
 

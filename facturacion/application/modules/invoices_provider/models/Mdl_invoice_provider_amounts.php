@@ -106,9 +106,6 @@ class Mdl_Invoice_Provider_Amounts extends CI_Model
                 $this->db->set('payment_method', $payment_method_id);
                 $this->db->update('ip_invoices_provider');
 
-                log_message("error",print_r($this->config->item('disable_read_only'),true));
-                log_message("error",print_r(get_setting('read_only_toggle'),true));
-
                 // Set to read-only if applicable
                 if ( $this->config->item('disable_read_only') == false && $invoice->invoice_provider_status_id == get_setting('read_only_toggle_provider')) {
                     $this->db->where('invoice_provider_id', $invoice_id);

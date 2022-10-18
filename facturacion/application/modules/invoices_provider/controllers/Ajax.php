@@ -230,7 +230,6 @@ class Ajax extends Admin_Controller
     public function modal_add_invoice()
     {
         $this->load->module('layout');
-        log_message("error","llega al ajax");
 
 
         $this->layout->load_view('invoices_provider/modal_add_file');

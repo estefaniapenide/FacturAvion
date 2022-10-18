@@ -256,7 +256,7 @@ $config['allow_get_array'] = TRUE;
 | your log files will fill up very fast.
 |
 */
-$config['log_threshold'] = 1;
+$config['log_threshold'] = 4;
 
 /*
 |--------------------------------------------------------------------------
@@ -495,7 +495,7 @@ $config['global_xss_filtering'] = FALSE;
 | 'csrf_regenerate' = Regenerate token on every submission
 | 'csrf_exclude_uris' = Array of URIs which ignore CSRF checks
 */
-$config['csrf_protection'] = env('CSRF_PROTECTION', true);
+$config['csrf_protection'] = false;
 $config['csrf_token_name'] = '_ip_csrf';
 $config['csrf_cookie_name'] = 'ip_csrf_cookie';
 $config['csrf_expire'] = 3600;

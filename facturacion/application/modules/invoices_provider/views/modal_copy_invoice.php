@@ -71,13 +71,6 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <label for="invoice_provider_password"><?php _trans('invoice_password'); ?></label>
-                <input type="text" name="invoice_provider_password" id="invoice_provider_password" class="form-control"
-                       value="<?php echo get_setting('invoice_provider_pre_password') == '' ? '' : get_setting('invoice_provider_pre_password') ?>"
-                       style="margin: 0 auto;" autocomplete="off">
-            </div>
-
             <input class="hidden" id="id_grupo_facturas_proveedor"
                    value="2">
 

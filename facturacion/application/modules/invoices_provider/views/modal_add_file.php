@@ -1,6 +1,4 @@
 <div id="add-file-provider" class="modal modal-lg" role="dialog" aria-labelledby="add-file-provider" aria-hidden="true">
-    <?php log_message("error","entra en el modal"); ?>
-
     <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
