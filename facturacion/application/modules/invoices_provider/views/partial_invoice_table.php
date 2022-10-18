@@ -43,7 +43,9 @@
 
                 <td>
                     <a href="<?php echo site_url('invoices_provider/view/' . $invoice->invoice_provider_id); ?>"
-                       title="<?php _trans('edit'); ?>">
+                       title="<?php if ($invoice->is_read_only != 1) {  _trans('edit'); }else{
+                                            _trans('view');
+                                        }?>">
                         <?php echo($invoice->invoice_provider_number ? $invoice->invoice_provider_number : $invoice->invoice_id); ?>
                     </a>
                 </td>
@@ -81,13 +83,13 @@
                             <i class="fa fa-cog"></i> <?php _trans('options'); ?>
                         </a>
                         <ul class="dropdown-menu">
-                            <?php if ($invoice->is_read_only != 1) { ?>
                                 <li>
                                     <a href="<?php echo site_url('invoices_provider/view/' . $invoice->invoice_provider_id); ?>">
-                                        <i class="fa fa-edit fa-margin"></i> <?php _trans('edit'); ?>
+                                        <i class="fa fa-edit fa-margin"></i> <?php if ($invoice->is_read_only != 1) {  _trans('edit'); }else{
+                                            _trans('view');
+                                        }?>
                                     </a>
                                 </li>
-                            <?php } ?>
                             <li>
                             <?php if ($invoice->invoice_balance != 0 && $invoice->is_read_only != 1 && $invoice->invoice_provider_status_id != 3) { ?>
                                 <a href="#" class="invoice-add-payment-provider"

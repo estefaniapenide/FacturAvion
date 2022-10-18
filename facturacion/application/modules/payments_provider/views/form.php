@@ -46,7 +46,7 @@
             </div>
             <div class="col-xs-12 col-sm-6">
                 <select name="invoice_id" id="invoice_id" class="form-control simple-select">
-                    <?php if (!$payment_id) { ?>
+                    <?php if (!$payment_id && $payment->invoice_provider_balance!=0) { ?>
                         <?php foreach ($open_invoices as $invoice) { ?>
                             <option value="<?php echo $invoice->invoice_provider_id; ?>"
                                 <?php check_select($this->mdl_payments_provider->form_value('invoice_id'), $invoice->invoice_provider_id); ?>>
