@@ -118,7 +118,7 @@
                         <li><?php echo anchor('projects/index', trans('view_projects')); ?></li>
                     </ul>
                 </li>
-
+<!-- 
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-caret-down"></i> &nbsp;
@@ -134,7 +134,7 @@
                 </li>
                 <li><?php echo anchor('modelo303', trans('modelo303'), 'class="hidden-md"') ?>
                     <?php echo anchor('modelo303', '<i class="fa fa-dashboard"></i>', 'class="visible-md-inline-block"') ?>
-                </li>
+                </li> -->
 
             </ul>
 
