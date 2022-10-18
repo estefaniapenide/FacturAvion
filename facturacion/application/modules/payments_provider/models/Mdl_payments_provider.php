@@ -85,9 +85,7 @@ class Mdl_Payments_provider extends Response_Model
      */
     public function validate_payment_amount($amount)
     {
-        log_message("error",$amount);
         $amount=str_replace('.',',',$amount);
-        log_message("error",$amount);
         $amount = (float)standardize_amount($amount);
         $invoice_id = $this->input->post('invoice_id');
         $payment_id = $this->input->post('payment_id');
@@ -106,12 +104,11 @@ class Mdl_Payments_provider extends Response_Model
         }
 
         $invoice_balance = (float)$invoice_balance;
-
+        log_message("error",$amount);
         if ($amount > $invoice_balance || $amount == 0) {
             $this->form_validation->set_message('validate_payment_amount', trans('payment_cannot_exceed_balance'));
             return false;
         }
-
         return true;
     }
 
@@ -177,7 +174,7 @@ class Mdl_Payments_provider extends Response_Model
     {
         // Get the invoice id before deleting payment
         $this->db->select('invoice_id');
-        $this->db->where('payment_provider_id', $id);
+        $this->db->where('payment_id', $id);
         $invoice_id = $this->db->get('ip_payments_provider')->row()->invoice_id;
 
         // Delete the payment

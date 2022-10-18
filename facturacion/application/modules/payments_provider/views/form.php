@@ -46,6 +46,7 @@
             </div>
             <div class="col-xs-12 col-sm-6">
                 <select name="invoice_id" id="invoice_id" class="form-control simple-select">
+                    <?php  if (isset($open_invoices[0])) { ?>
                     <?php if (!$payment_id) { ?>
                         <?php foreach ($open_invoices as $invoice) { ?>
                             <option value="<?php echo $invoice->invoice_provider_id; ?>"
@@ -58,6 +59,7 @@
                             <?php echo $payment->invoice_provider_number . ' - '.$payment->provider_name.' - ' . format_currency($payment->invoice_provider_balance);
                             ?>
                         </option>
+                    <?php } ?>
                     <?php } ?>
                 </select>
             </div>
@@ -84,10 +86,10 @@
                 <label for="payment_amount" class="control-label"><?php _trans('amount'); ?></label>
             </div>
             <div class="col-xs-12 col-sm-6">
-            <?php if ($payment_id === null) { ?>
+            <?php if ($payment_id === null && isset($open_invoices[0])) { ?>
                     <input type="text" name="payment_amount" id="payment_amount" class="form-control" value="<?php echo format_currency($open_invoices[0]->invoice_balance); ?> ">
                     <?php } else { ?>
-                        <input type="text" name="payment_amount" id="payment_amount" class="form-control" value="<?php echo 0,00;?>">
+                        <input type="text" name="payment_amount" id="payment_amount" class="form-control" value="<?php echo "0,00";?>">
                     <?php } ?>
             </div>
         </div>

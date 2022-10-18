@@ -135,7 +135,6 @@ class Payments_provider extends Admin_Controller
             $amounts['invoice' . $open_invoice->invoice_provider_id] = format_amount($open_invoice->invoice_balance);
             $invoice_payment_methods['invoice' . $open_invoice->invoice_provider_id] = $open_invoice->payment_method;
         }
-
         $this->layout->set(
             array(
                 'payment_id' => $id,
@@ -144,7 +143,8 @@ class Payments_provider extends Admin_Controller
                 'custom_fields' => $custom_fields,
                 'custom_values' => $custom_values,
                 'amounts' => json_encode($amounts),
-                'invoice_payment_methods' => json_encode($invoice_payment_methods)
+                'invoice_payment_methods' => json_encode($invoice_payment_methods),
+                //'hide_submit_button' => $ocultarguardar
             )
         );
 
