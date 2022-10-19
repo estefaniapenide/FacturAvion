@@ -65,5 +65,5 @@ $lang = array(
 'vat_id_long'                                    => 'NIF/CIF',
 'form_validation_validate_payment_amount'        => 'validar cantidad de pago',
 'transaction_successful'                         => 'Transacción correcta',
-'provider_response'                              => 'Respuesta proveedor',
+'provider_response'                              => 'Respuesta proveedor'
 );

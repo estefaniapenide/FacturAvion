@@ -4,7 +4,6 @@
 <nav class="navbar navbar-default text-center">
 
 <form method="post" action="<?php print site_url("modelo303/form"); ?>" class="navbar-form" role="search">
-<?php print form_error("year"); ?>
     <input style="width:100px; font-size:30px;" name="year" id="year" type="text" class="form-control" placeholder="2022"  value="<?php print set_value("year"); ?>">
     <input onChange="this.form.submit();" name="trimestre" style="height:35px; width:35px; padding-left: 20px;" type="radio" class="btn btn-default navbar-btn" value="1"/>
     <input onChange="this.form.submit();" name="trimestre" style="height:35px; width:35px;" type="radio" class="btn btn-default navbar-btn" value="2"/>
