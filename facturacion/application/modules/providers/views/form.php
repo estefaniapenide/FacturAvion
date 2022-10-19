@@ -105,7 +105,7 @@ $cv = $this->controller->view_data['custom_values'];
 
                     <div class="panel-body">
                         <div class="form-group">
-                            <label for="provider_vat_id"><?php _trans('vat_id'); ?></label>
+                            <label for="provider_vat_id"><?php _trans('vat_id_long'); ?></label>
 
                             <div class="controls">
                                 <input type="text" name="provider_vat_id" id="provider_vat_id" class="form-control"

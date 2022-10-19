@@ -51,7 +51,36 @@
         $(document).on('click', '.create-invoice-provider', function () {
             $('#modal-placeholder').load("<?php echo site_url('invoices_provider/ajax/modal_create_invoice'); ?>");
         });
+        
+        $(document).on('click', '#btn_copy_invoice_provider', function () {
+            var invoice_id = $(this).data('invoice-id');
+            $('#modal-placeholder').load("<?php echo site_url('invoices_provider/ajax/modal_copy_invoice'); ?>", {invoice_provider_id: invoice_id});
+        });
+        
+        $(document).on('click', '.provider-create-invoice', function () {
+            var provider_id = $(this).data('provider-id');
+            $('#modal-placeholder').load("<?php echo site_url('invoices_provider/ajax/modal_create_invoice_provider'); ?>", {provider_id: provider_id});
+        });
 
+        $(document).on('click', 'add-file-provider', function () {
+            var invoice_id = $(this).data('invoice-id');
+            $('#modal-placeholder').load("<?php echo site_url('invoices_provider/ajax/modal_add_file'); ?>");
+        });
+        
+        $(document).on('click', '.invoice-add-payment-provider', function () {
+            var invoice_id = $(this).data('invoice-id');
+            var invoice_balance = $(this).data('invoice-balance');
+            var invoice_payment_method = $(this).data('invoice-payment-method');
+            var payment_cf_exist =  $(this).data('payment-cf-exist');
+            $('#modal-placeholder').load("<?php echo site_url('payments_provider/ajax/modal_add_payment'); ?>", {
+                invoice_id: invoice_id,
+                invoice_balance: invoice_balance,
+                invoice_payment_method: invoice_payment_method,
+                payment_cf_exist: payment_cf_exist
+            });
+        });
+        
+        
         $(document).on('click', '.create-quote', function () {
             $('#modal-placeholder').load("<?php echo site_url('quotes/ajax/modal_create_quote'); ?>");
         });
@@ -71,10 +100,7 @@
             $('#modal-placeholder').load("<?php echo site_url('invoices/ajax/modal_create_credit'); ?>", {invoice_id: invoice_id});
         });
         
-        $(document).on('click', '#btn_copy_invoice_provider', function () {
-            var invoice_id = $(this).data('invoice-id');
-            $('#modal-placeholder').load("<?php echo site_url('invoices_provider/ajax/modal_copy_invoice'); ?>", {invoice_provider_id: invoice_id});
-        });
+        
         $(document).on('click', '#btn_copy_quote', function () {
             var quote_id = $(this).data('quote-id');
             var client_id = $(this).data('client-id');
@@ -89,16 +115,7 @@
             $('#modal-placeholder').load("<?php echo site_url('invoices/ajax/modal_create_invoice'); ?>", {client_id: client_id});
         });
 
-        $(document).on('click', '.provider-create-invoice', function () {
-            var provider_id = $(this).data('provider-id');
-            $('#modal-placeholder').load("<?php echo site_url('invoices_provider/ajax/modal_create_invoice_provider'); ?>", {provider_id: provider_id});
-        });
-
-
-        $(document).on('click', 'add-file-provider', function () {
-            var invoice_id = $(this).data('invoice-id');
-            $('#modal-placeholder').load("<?php echo site_url('invoices_provider/ajax/modal_add_file'); ?>");
-        });
+        
 
 
         $(document).on('click', '.client-create-quote', function () {
@@ -118,19 +135,5 @@
                 payment_cf_exist: payment_cf_exist
             });
         });
-
-        $(document).on('click', '.invoice-add-payment-provider', function () {
-            var invoice_id = $(this).data('invoice-id');
-            var invoice_balance = $(this).data('invoice-balance');
-            var invoice_payment_method = $(this).data('invoice-payment-method');
-            var payment_cf_exist =  $(this).data('payment-cf-exist');
-            $('#modal-placeholder').load("<?php echo site_url('payments_provider/ajax/modal_add_payment'); ?>", {
-                invoice_id: invoice_id,
-                invoice_balance: invoice_balance,
-                invoice_payment_method: invoice_payment_method,
-                payment_cf_exist: payment_cf_exist
-            });
-        });
-
     });
 </script>
