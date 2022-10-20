@@ -50,7 +50,7 @@ Facturavion consiste en un conjunto de m√≥dulos para complementar una instalaci√
     
   - #application/modules/custom_fields/controllers/Custom_fields.php
      - En la funci√≥n ```form()```
-       - A√±adir la linea ```$this->load->model('mdl_payment_custom_provider```  
+       - A√±adir la linea ```$this->load->model('mdl_payment_custom_provider');```  
           despues de ```$this->load->model('mdl_user_custom');```
 
   - #application/modules/custom_fields/views/form.php:  
@@ -223,6 +223,7 @@ Facturavion consiste en un conjunto de m√≥dulos para complementar una instalaci√
                     </ul>
                 </li>
       ```
+        
       - Despues de:  
    
       ```
@@ -254,6 +255,12 @@ Facturavion consiste en un conjunto de m√≥dulos para complementar una instalaci√
                     </ul>
                 </li>
       ```
+      
+      
+      
+      
+      
+      
       - Despues de:  
    
       ```
@@ -269,6 +276,11 @@ Facturavion consiste en un conjunto de m√≥dulos para complementar una instalaci√
                         <li><?php echo anchor('payments_provider/index', trans('view_payments_provider')); ?></li>
                         <li><?php echo anchor('payments_provider/online_logs', trans('view_payment_provider_logs')); ?></li>
       ```
+      
+      
+      
+      
+      
       - Despues de:  
    
       ```
