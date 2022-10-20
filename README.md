@@ -54,7 +54,7 @@ Facturavion consiste en un conjunto de módulos para complementar una instalaci�
           despues de ```$this->load->model('mdl_user_custom');```
 
   - #application/modules/custom_fields/views/form.php:  
-     - En el array ```$positions```
+     - En el array ```$positions```  
         añadir el campo: ```'payment_provider' => Mdl_payment_custom_provider::$positions```
 
   - #application/modules/filters/controllers/Ajax.php:
