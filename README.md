@@ -8,7 +8,7 @@ Facturavion consiste en un conjunto de módulos para complementar una instalaci�
 
 - La carpeta instalacion
   - Carpeta de autoinstalación/facturacion con el arbol completo de directorios y ficheros para una instalación rápida. 
-  - Carpeta de instalación básica (facturacion) con solo archivos nuevos.
+  - Carpeta de instalación básica (/instalacion/facturacion) con solo archivos nuevos.
     - #facturacion/application/helper
       - 2 helpers extra en la carpeta usados en los módulos de provider e invoices_provider.
 
