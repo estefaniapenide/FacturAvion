@@ -285,7 +285,7 @@ Facturavion consiste en un conjunto de m√≥dulos para complementar una instalaci√
               ```
                          <li role="separator" class="divider"></li>
                           <li><?php echo anchor('modelo303', trans('modelo303'), 'class="hidden-md"') ?>
-                      <?php echo anchor('modelo303', '<i class="fa fa-dashboard"></i>', 'class="visible-md-inline-block"') ?></li>
+                            <?php echo anchor('modelo303', '<i class="fa fa-dashboard"></i>', 'class="visible-md-inline-block"') ?></li>
               ```
         
     
