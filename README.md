@@ -57,7 +57,7 @@ Facturavion consiste en un conjunto de m√≥dulos para complementar una instalaci√
      - En el array ```$positions```  
         a√±adir el campo: ```'payment_provider' => Mdl_payment_custom_provider::$positions```
 
-  - #application/modules/filters/controllers/Ajax.php:
+  - #application/modules/filter/controllers/Ajax.php:
     - Inserta las siguientes funciones:  
         <details>
             <summary>filter_invoices_provider</summary>
@@ -223,6 +223,8 @@ Facturavion consiste en un conjunto de m√≥dulos para complementar una instalaci√
                     </ul>
                 </li>
       ```
+        
+        
         
       - Despues de:  
    
