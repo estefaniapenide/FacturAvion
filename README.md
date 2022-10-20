@@ -7,7 +7,7 @@ Facturavion consiste en un conjunto de módulos para complementar una instalaci�
 ## El paquete de migración, contiene:
 
 - La carpeta instalacion
-  - Carpeta de autoinstalación/facturacion con el arbol completo de directorios y ficheros para una instalación rápida. 
+  - Carpeta de instalacion/autoinstalación/facturacion con el arbol completo de directorios y ficheros para una instalación rápida. 
   - Carpeta de instalación básica (/instalacion/facturacion) con solo archivos nuevos.
     - #facturacion/application/helper
       - 2 helpers extra en la carpeta usados en los módulos de provider e invoices_provider.
@@ -23,7 +23,7 @@ Facturavion consiste en un conjunto de módulos para complementar una instalaci�
 
     - #facturacion/uploads/
       - Carpeta provider_files en uploads/ para los archivos adjuntos de proveedores.
-- Script SQL
+   - Script SQL
 
 ## Características
 
