@@ -373,7 +373,7 @@ Facturavion consiste en un conjunto de módulos para complementar una instalaci�
         ```
       
  - Idiomas
-    - Añade las siguientes lineas en ```languages/english/custom_lang.php```
+    - Añade las siguientes lineas en ```application/language/english/custom_lang.php```
     
         <details>
                 <summary>$lang = array()</summary>
@@ -434,7 +434,7 @@ Facturavion consiste en un conjunto de módulos para complementar una instalaci�
 
 
         </details>
-    - Añade las siguientes lineas en ```languages/Spanish/custom_lang.php```
+    - Añade las siguientes lineas en ```application/language/Spanish/custom_lang.php```
     
         <details>
                 <summary>$lang = array()</summary>
