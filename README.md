@@ -208,7 +208,7 @@ Facturavion consiste en un conjunto de módulos para complementar una instalaci�
                         </ul>
                     </li>
           ```
-      - Añadir:  
+        - Añadir:  
 
           ```
                      <li class="dropdown">
@@ -242,7 +242,7 @@ Facturavion consiste en un conjunto de módulos para complementar una instalaci�
                         </ul>
                     </li>
           ```
-      - Añadir:  
+        - Añadir:  
 
           ```
                   <li class="dropdown">
@@ -264,7 +264,7 @@ Facturavion consiste en un conjunto de módulos para complementar una instalaci�
                         <li><?php echo anchor('payments/index', trans('view_payments')); ?></li>
                         <li><?php echo anchor('payments/online_logs', trans('view_payment_logs')); ?></li>
           ```
-      - Añadir:  
+        - Añadir:  
 
           ```
                      <li class="divider"></li>
@@ -280,13 +280,13 @@ Facturavion consiste en un conjunto de módulos para complementar una instalaci�
                         <li><?php echo anchor('reports/sales_by_client', trans('sales_by_client')); ?></li>
                         <li><?php echo anchor('reports/sales_by_year', trans('sales_by_date')); ?></li>
           ```
-      - Añadir:  
+          - Añadir:  
 
-          ```
-                     <li role="separator" class="divider"></li>
-                      <li><?php echo anchor('modelo303', trans('modelo303'), 'class="hidden-md"') ?>
-                  <?php echo anchor('modelo303', '<i class="fa fa-dashboard"></i>', 'class="visible-md-inline-block"') ?></li>
-          ```
+              ```
+                         <li role="separator" class="divider"></li>
+                          <li><?php echo anchor('modelo303', trans('modelo303'), 'class="hidden-md"') ?>
+                      <?php echo anchor('modelo303', '<i class="fa fa-dashboard"></i>', 'class="visible-md-inline-block"') ?></li>
+              ```
         
     
      
