@@ -208,21 +208,21 @@ Facturavion consiste en un conjunto de módulos para complementar una instalaci�
                     </ul>
                 </li>
       ```
-          - Añadir:  
+      - Añadir:  
 
-          ```
-                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-caret-down"></i> &nbsp;
-                            <span class="hidden-md"><?php _trans('providers'); ?></span>
-                            <i class="visible-md-inline fa fa-users"></i>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><?php echo anchor('providers/form', trans('add_provider')); ?></li>
-                            <li><?php echo anchor('providers/index', trans('view_providers')); ?></li>
-                        </ul>
-                    </li>
-          ```
+      ```
+                 <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-caret-down"></i> &nbsp;
+                        <span class="hidden-md"><?php _trans('providers'); ?></span>
+                        <i class="visible-md-inline fa fa-users"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><?php echo anchor('providers/form', trans('add_provider')); ?></li>
+                        <li><?php echo anchor('providers/index', trans('view_providers')); ?></li>
+                    </ul>
+                </li>
+      ```
         
         
         
@@ -242,20 +242,20 @@ Facturavion consiste en un conjunto de módulos para complementar una instalaci�
                     </ul>
                 </li>
       ```
-          - Añadir:  
+      - Añadir:  
 
-          ```
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-caret-down"></i> &nbsp;
-                            <span class="hidden-md"><?php _trans('invoices_provider'); ?></span>
-                            <i class="visible-md-inline fa fa-file-text"></i>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#" class="create-invoice-provider"><?php _trans('create_invoice_provider'); ?></a></li>
-                            <li><?php echo anchor('invoices_provider/index', trans('view_invoices_provider')); ?></li>
-                        </ul>
-                    </li>
+      ```
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-caret-down"></i> &nbsp;
+                        <span class="hidden-md"><?php _trans('invoices_provider'); ?></span>
+                        <i class="visible-md-inline fa fa-file-text"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" class="create-invoice-provider"><?php _trans('create_invoice_provider'); ?></a></li>
+                        <li><?php echo anchor('invoices_provider/index', trans('view_invoices_provider')); ?></li>
+                    </ul>
+                </li>
           ```
       
       
@@ -270,14 +270,14 @@ Facturavion consiste en un conjunto de módulos para complementar una instalaci�
                         <li><?php echo anchor('payments/index', trans('view_payments')); ?></li>
                         <li><?php echo anchor('payments/online_logs', trans('view_payment_logs')); ?></li>
       ```
-          - Añadir:  
+      - Añadir:  
 
-          ```
-                    <li class="divider"></li>
-                            <li><?php echo anchor('payments_provider/form', trans('enter_payment_provider')); ?></li>
-                            <li><?php echo anchor('payments_provider/index', trans('view_payments_provider')); ?></li>
-                            <li><?php echo anchor('payments_provider/online_logs', trans('view_payment_provider_logs')); ?></li>
-          ```
+      ```
+                <li class="divider"></li>
+                        <li><?php echo anchor('payments_provider/form', trans('enter_payment_provider')); ?></li>
+                        <li><?php echo anchor('payments_provider/index', trans('view_payments_provider')); ?></li>
+                        <li><?php echo anchor('payments_provider/online_logs', trans('view_payment_provider_logs')); ?></li>
+      ```
 
       
       
@@ -292,13 +292,13 @@ Facturavion consiste en un conjunto de módulos para complementar una instalaci�
                         <li><?php echo anchor('reports/sales_by_year', trans('sales_by_date')); ?></li>
       ```
       
-         - Añadir:  
+     - Añadir:  
 
-        ```
-                  <li role="separator" class="divider"></li>
-                          <li><?php echo anchor('modelo303', trans('modelo303'), 'class="hidden-md"') ?>
-                      <?php echo anchor('modelo303', '<i class="fa fa-dashboard"></i>', 'class="visible-md-inline-block"') ?></li>
-        ```
+    ```
+              <li role="separator" class="divider"></li>
+                      <li><?php echo anchor('modelo303', trans('modelo303'), 'class="hidden-md"') ?>
+                  <?php echo anchor('modelo303', '<i class="fa fa-dashboard"></i>', 'class="visible-md-inline-block"') ?></li>
+    ```
         
      
   - #application/modules/products/controllers/Ajax.php  
