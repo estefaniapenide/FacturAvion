@@ -42,7 +42,7 @@ Facturavion consiste en un conjunto de módulos para complementar una instalaci�
 ### Instalación con ediciones, recomenda para migraciones de IP con módulos modificados y/o añadidos previamente
 
 - Importa la base de datos en tu servidor mysql.
-- Copia la carpeta facturación en tu IP
+- Copia la carpeta /instalacion/facturación en tu IP
 - Edición de archivos:
   - #application/config/config.php
     - Añade la linea: ```$config['enable_invoice_provider_deletion'] = true;```  
