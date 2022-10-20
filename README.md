@@ -195,56 +195,56 @@ Facturavion consiste en un conjunto de módulos para complementar una instalaci�
    - #application/modules/layout/views/includes/navbar.php  
       - Despues de:  
    
-      ```
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-caret-down"></i> &nbsp;
-                        <span class="hidden-md"><?php _trans('clients'); ?></span>
-                        <i class="visible-md-inline fa fa-users"></i>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><?php echo anchor('clients/form', trans('add_client')); ?></li>
-                        <li><?php echo anchor('clients/index', trans('view_clients')); ?></li>
-                    </ul>
-                </li>
-      ```
+          ```
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-caret-down"></i> &nbsp;
+                            <span class="hidden-md"><?php _trans('clients'); ?></span>
+                            <i class="visible-md-inline fa fa-users"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><?php echo anchor('clients/form', trans('add_client')); ?></li>
+                            <li><?php echo anchor('clients/index', trans('view_clients')); ?></li>
+                        </ul>
+                    </li>
+          ```
       - Añadir:  
 
-      ```
-                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-caret-down"></i> &nbsp;
-                        <span class="hidden-md"><?php _trans('providers'); ?></span>
-                        <i class="visible-md-inline fa fa-users"></i>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><?php echo anchor('providers/form', trans('add_provider')); ?></li>
-                        <li><?php echo anchor('providers/index', trans('view_providers')); ?></li>
-                    </ul>
-                </li>
-      ```
+          ```
+                     <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-caret-down"></i> &nbsp;
+                            <span class="hidden-md"><?php _trans('providers'); ?></span>
+                            <i class="visible-md-inline fa fa-users"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><?php echo anchor('providers/form', trans('add_provider')); ?></li>
+                            <li><?php echo anchor('providers/index', trans('view_providers')); ?></li>
+                        </ul>
+                    </li>
+          ```
         
         
         
       - Despues de:  
    
-      ```
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-caret-down"></i> &nbsp;
-                        <span class="hidden-md"><?php _trans('invoices'); ?></span>
-                        <i class="visible-md-inline fa fa-file-text"></i>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#" class="create-invoice"><?php _trans('create_invoice'); ?></a></li>
-                        <li><?php echo anchor('invoices/index', trans('view_invoices')); ?></li>
-                        <li><?php echo anchor('invoices/recurring/index', trans('view_recurring_invoices')); ?></li>
-                    </ul>
-                </li>
-      ```
+          ```
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-caret-down"></i> &nbsp;
+                            <span class="hidden-md"><?php _trans('invoices'); ?></span>
+                            <i class="visible-md-inline fa fa-file-text"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" class="create-invoice"><?php _trans('create_invoice'); ?></a></li>
+                            <li><?php echo anchor('invoices/index', trans('view_invoices')); ?></li>
+                            <li><?php echo anchor('invoices/recurring/index', trans('view_recurring_invoices')); ?></li>
+                        </ul>
+                    </li>
+          ```
       - Añadir:  
 
-      ```
+          ```
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-caret-down"></i> &nbsp;
@@ -261,23 +261,23 @@ Facturavion consiste en un conjunto de módulos para complementar una instalaci�
       
       
       
-      
+     
       
       - Despues de:  
    
-      ```
-                <li><?php echo anchor('payments/form', trans('enter_payment')); ?></li>
-                        <li><?php echo anchor('payments/index', trans('view_payments')); ?></li>
-                        <li><?php echo anchor('payments/online_logs', trans('view_payment_logs')); ?></li>
-      ```
+              ```
+                        <li><?php echo anchor('payments/form', trans('enter_payment')); ?></li>
+                                <li><?php echo anchor('payments/index', trans('view_payments')); ?></li>
+                                <li><?php echo anchor('payments/online_logs', trans('view_payment_logs')); ?></li>
+              ```  
       - Añadir:  
 
-      ```
-                <li class="divider"></li>
-                        <li><?php echo anchor('payments_provider/form', trans('enter_payment_provider')); ?></li>
-                        <li><?php echo anchor('payments_provider/index', trans('view_payments_provider')); ?></li>
-                        <li><?php echo anchor('payments_provider/online_logs', trans('view_payment_provider_logs')); ?></li>
-      ```
+              ```
+                        <li class="divider"></li>
+                                <li><?php echo anchor('payments_provider/form', trans('enter_payment_provider')); ?></li>
+                                <li><?php echo anchor('payments_provider/index', trans('view_payments_provider')); ?></li>
+                                <li><?php echo anchor('payments_provider/online_logs', trans('view_payment_provider_logs')); ?></li>
+              ```
 
       
       
@@ -285,20 +285,20 @@ Facturavion consiste en un conjunto de módulos para complementar una instalaci�
       
       - Despues de:  
    
-      ```
-                <li><?php echo anchor('reports/invoice_aging', trans('invoice_aging')); ?></li>
-                        <li><?php echo anchor('reports/payment_history', trans('payment_history')); ?></li>
-                        <li><?php echo anchor('reports/sales_by_client', trans('sales_by_client')); ?></li>
-                        <li><?php echo anchor('reports/sales_by_year', trans('sales_by_date')); ?></li>
-      ```
+              ```
+                        <li><?php echo anchor('reports/invoice_aging', trans('invoice_aging')); ?></li>
+                                <li><?php echo anchor('reports/payment_history', trans('payment_history')); ?></li>
+                                <li><?php echo anchor('reports/sales_by_client', trans('sales_by_client')); ?></li>
+                                <li><?php echo anchor('reports/sales_by_year', trans('sales_by_date')); ?></li>
+              ```
       
      - Añadir:  
 
-    ```
-              <li role="separator" class="divider"></li>
-                      <li><?php echo anchor('modelo303', trans('modelo303'), 'class="hidden-md"') ?>
-                  <?php echo anchor('modelo303', '<i class="fa fa-dashboard"></i>', 'class="visible-md-inline-block"') ?></li>
-    ```
+              ```
+                        <li role="separator" class="divider"></li>
+                                <li><?php echo anchor('modelo303', trans('modelo303'), 'class="hidden-md"') ?>
+                            <?php echo anchor('modelo303', '<i class="fa fa-dashboard"></i>', 'class="visible-md-inline-block"') ?></li>
+              ```
         
      
   - #application/modules/products/controllers/Ajax.php  
