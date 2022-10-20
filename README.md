@@ -36,12 +36,12 @@ Facturavion consiste en un conjunto de módulos para complementar una instalaci�
 
 ### Instalación rápida o automática, recomendada para instalaciones de IP 1.5.11 nuevas en las que no se ha modificado y/o añadido módulos extra previamente
 
-- Importa la base de datos en tu servidor mysql.
+- Importar el archivo de base de datos /instalacion/BBDD.sql en la base de datos de ip de tu servidor mysql/mariadb
 - Copia la carpeta instalacionautomatica/facturacion en tu IP
 
 ### Instalación con ediciones, recomenda para migraciones de IP con módulos modificados y/o añadidos previamente
 
-- Importa la base de datos en tu servidor mysql.
+- Importar el archivo de base de datos /instalacion/BBDD.sql en la base de datos de ip de tu servidor mysql/mariadb
 - Copia la carpeta /instalacion/facturación en tu IP
 - Edición de archivos:
   - #application/config/config.php
@@ -73,7 +73,7 @@ Facturavion consiste en un conjunto de módulos para complementar una instalaci�
                       foreach ($keywords as $keyword) {
                           if ($keyword) {
                               $keyword = strtolower($keyword);
-                              $this->mdl_invoices_provider->like("CONCAT_WS('^',LOWER(invoice_provider_number),invoice_provider_date_created,invoice_provider_date_due,LOWER(provider_name),invoice_provider_total,invoice_provider_balance)", $keyword);
+                              $this->mdl_invoices_provider-   >like("CONCAT_WS('^',LOWER(invoice_provider_number),invoice_provider_date_created,invoice_provider_date_due,LOWER(provider_name),invoice_provider_total,invoice_provider_balance)", $keyword);
                           }
                       }
 
