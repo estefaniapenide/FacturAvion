@@ -484,7 +484,7 @@ Facturavion consiste en un conjunto de módulos para complementar una instalaci�
                 'view_provider'                                  => 'Ver proveedor',
                 'view_providers'                                 => 'Ver proveedores',
                 'view_invoices_provider'                         => 'Ver facturas de proveedores',
-                'view_payment_privder_logs'                      => 'Ver registros de pagos a proveedores en línea',
+                'view_payment_provider_logs'                      => 'Ver registros de pagos a proveedores en línea',
                 'view_payments_provider'                         => 'Ver los pagos a proveedores',
                 'no_provider'                                    => 'Ningún proveedor',
                 'alert_no_provider_assigned'                     => 'No hay proveedores asignados a este proyecto.',
